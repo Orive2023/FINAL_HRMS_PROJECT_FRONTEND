@@ -23,6 +23,9 @@ import TransferFile from "../components/sidebarComponent/TransferFile";
 import PoliciesFile from  "../components/sidebarComponent/PoliciesFile";
 import AnnouncementFile from "../components/sidebarComponent/AnnouncementFile";
 import ExperienceLetter from "./sidebarComponent/ExperienceLetter";
+import ResignationFile from './sidebarComponent/ResignationFile';
+import ComplaintFile from './sidebarComponent/ComplaintFile';
+import ProfileFile from './sidebarComponent/ProfileFile';
 
 import { useNavigate } from "react-router-dom/dist";
 import useAuth from "../../Hr/hooks/useAuth";
@@ -74,6 +77,9 @@ const SideBar = ({ menu }) => {
           <PoliciesFile/>
           <TransferFile/>
           <ExperienceLetter/>
+          <ResignationFile />
+          <ComplaintFile />
+          <ProfileFile />
           
           
 

@@ -30,6 +30,9 @@ import TransferProfile from "../pages/transfer/TransferProfile"
 import ExpJoiningLetter from "../pages/experienceletter/ExpJoiningLetter";
 import Expletter from "../pages/experienceletter/Expletter";
 import IntJoiningLetter from "../pages/experienceletter/IntJoiningLetter";
+import Profile from "../pages/profile/Profile";
+import Resignation from "../pages/resignation/mainfile/ResignationView";
+import Complaint from "../pages/complaint/mainfile/Complaint";
 
 
 
@@ -64,6 +67,9 @@ const routesData = [
   { path: "/employee/joining-letter", element: <ExpJoiningLetter /> },
   { path: "/employee/int-letter", element: <IntJoiningLetter /> },
   { path: "/employee/transfer-profile/:id", element: <TransferProfile /> },
+  { path: "/employee/profile", element: <Profile /> },
+  { path: "/employee/resignation", element: <Resignation /> },
+  { path: "/employee/complaint", element: <Complaint /> },
 
 ];
 

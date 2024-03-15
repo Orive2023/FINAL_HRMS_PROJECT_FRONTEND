@@ -12,7 +12,7 @@ export const saveBalance = async (formData) => {
 
 export const loadBalance = async () => {
   try {
-    const result = await axios.get(`${url}/openingBalance/get/openingBalance`, {
+    const result = await axios.get(`${url}/openingbalance/get/openingBalance`, {
       validateStatus: () => {
         return true;
       },

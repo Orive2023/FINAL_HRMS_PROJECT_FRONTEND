@@ -1,53 +1,53 @@
-import React, { useEffect } from "react";
-import Header from "../../../../components/Header";
-import SideBar from "../../../../components/SideBar";
+import React, { useEffect, useState } from "react";
+
+import SideBar from "../../../components/SideBar";
+import Header from "../../../components/Header";
+
 import Button from "@mui/material/Button";
 import DialogContent from "@mui/material/DialogContent";
 import { MdAdd } from "react-icons/md";
-import { BiSolidHide } from "react-icons/bi";
 import Collapse from "@mui/material/Collapse";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CompanyLogoFile from "../../../../components/CompanyLogoFile";
+import { BiSolidHide } from "react-icons/bi";
+import { Card } from "@mui/material";
+import CompanyLogoFile from "../../../components/CompanyLogoFile";
 
-import BalanceForm from "../BalanceForm";
-import BalanceTable from "../BalanceTable";
-
-import * as BalanceApi from "../BalanceApi";
-import StateBalance from "../StateBalance";
+import * as api from "../api";
+import ResignationForm from "../ResignationForm";
+import ResignationTable from "../ResignationTable";
+import StateResignation from "../StateResignation";
 import { Link } from "react-router-dom";
 
-const BalanceView = () => {
+const ResignationView = () => {
   const {
-    balance,
-    genId,
-    setGenId,
-    file,
-    toggle,
-    setToggle,
-    formVisible,
-    setFormVisible,
-    setBalance,
-    open,
-    setOpen,
     formData,
     setFormData,
+    formVisible,
+    formErrors,
+    setFormerrors,
+    open,
+    setOpen,
+    setFormVisible,
+    toggle,
+    setToggle,
+    resignation,
+    setResignation,
     recDelete,
     setRecDelete,
-  } = StateBalance();
-
-  const handleButtonClick = () => {
-    setFormVisible((prev) => !prev);
-  };
+  } = StateResignation();
 
   useEffect(() => {
-    loadBalance();
+    loadResignation();
   }, []);
 
-  const loadBalance = async () => {
-    const result = await BalanceApi.loadBalance();
+  const loadResignation = async () => {
+    const result = await api.loadResignation();
     console.log("rec", result);
-    setBalance(result);
+    setResignation(result);
+  };
+
+  const handleDelete = async () => {
+    await api.deleteResignation(recDelete);
+    loadResignation();
   };
 
   useEffect(() => {
@@ -57,19 +57,16 @@ const BalanceView = () => {
     }
   });
 
-  const handleDelete = async () => {
-    await BalanceApi.deleteBalance(recDelete);
-    loadBalance();
-  };
+  const [menu, setMenu] = useState(false);
 
   return (
     <div>
       <div id="header-container" className="header-container">
         <CompanyLogoFile />
-        <Header />
+        <Header menu={menu} setMenu={setMenu} />
       </div>
       <div className="dashboard-container">
-        <SideBar />
+        <SideBar menu={menu} setMenu={setMenu} />
         <div className="head-foot-part">
           <section>
             <div
@@ -98,54 +95,37 @@ const BalanceView = () => {
                       >
                         Dashboard{" "}
                       </Link>{" "}
-                      / Account /
+                      / Employees /
                     </span>
-                    <span style={{ color: "black" }}> Opening Balance</span>
+                    <span style={{ color: "grey" }}> Resignation</span>
                   </div>
                 </div>
-                <Button
-                  variant="outlined"
-                  onClick={() => {
-                    setToggle(!toggle);
-                    handleButtonClick();
-                  }}
-                  id="add-btn"
-                >
-                  {toggle ? (
-                    <div className="hide">
-                      <BiSolidHide />
-                      HIDE
-                    </div>
-                  ) : (
-                    <div className="add">
-                      <MdAdd />
-                      ADD Balance
-                    </div>
-                  )}
-                </Button>
               </div>
             </div>
-            <Collapse in={formVisible}>
+            <Collapse className="mt-3" in={formVisible}>
               <Card variant="outlined">
                 <div style={{ marginTop: "20px" }}>
-                  <h3 className="form-header">Add Balance</h3>
+                  <h3 className="form-header">
+                    <h3> RESIGNATION FORM</h3>
+                  </h3>
                   <DialogContent>
-                    <Card style={{ margin: "20px" }}>
-                      <CardContent>
-                        <BalanceForm
-                          formData={formData}
-                          setFormData={setFormData}
-                          setFormVisible={setFormVisible}
-                          setToggle={setToggle}
-                        />
-                      </CardContent>
-                    </Card>
+                    <ResignationForm
+                      formData={formData}
+                      setFormData={setFormData}
+                      setFormVisible={setFormVisible}
+                      setToggle={setToggle}
+                    />
                   </DialogContent>
                 </div>
               </Card>
             </Collapse>
-            <BalanceTable balance={balance} setRecDelete={setRecDelete} />
-            <div></div>
+            <ResignationTable
+              resignation={resignation}
+              setFormVisible={setFormVisible}
+              toggle={toggle}
+              setToggle={setToggle}
+              setRecDelete={setRecDelete}
+            />
           </section>
         </div>
       </div>
@@ -153,4 +133,4 @@ const BalanceView = () => {
   );
 };
 
-export default BalanceView;
+export default ResignationView;
