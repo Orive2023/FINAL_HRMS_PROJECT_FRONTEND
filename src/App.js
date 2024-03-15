@@ -15,11 +15,11 @@ function App() {
   // var bytes = CryptoJS.AES.decrypt(ciphertext, 'my-secret-key@123');
   // var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
   return (
-    <div className="App">
-    {(token && Role=="client_HR")?<MainHrRouting />:<LoginSignup/>}
-    {(token && Role=="client_Employee")?<MainEmpRouting />:<LoginSignup/>}
-      {/* <MainHrRouting />
-      <MainEmpRouting /> */}
+    <div className="App">s
+    {/* {(token && Role=="client_HR")?<MainHrRouting />:<LoginSignup/>}
+    {(token && Role=="client_Employee")?<MainEmpRouting />:<LoginSignup/>} */}
+      <MainHrRouting />
+      <MainEmpRouting />
     </div>
   );
 }

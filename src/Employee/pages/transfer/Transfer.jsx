@@ -23,10 +23,12 @@ import {
 import { styled } from "@mui/system";
 
 const Transfer = () => {
-  const username = localStorage.getItem("UserName")
-
+  const token = localStorage.getItem("AuthToken");
+  const decoded = jwtDecode(String(token));
+  const usernameRec = decoded.preferred_username;
+  const username = usernameRec.toUpperCase();
   const [transfer, setTransfer] = useState([]);
-
+ 
   useEffect(() => {
     loadTransfer();
   }, []);

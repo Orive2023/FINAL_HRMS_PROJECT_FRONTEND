@@ -136,6 +136,8 @@ const PromotionForm = ({
       promotionTitle: "",
       promotionDate: "",
       description: "",
+      salaryHike:"",
+      hrName:"",
     });
   };
 
@@ -185,14 +187,17 @@ const PromotionForm = ({
       promotionTitle: "",
       promotionDate: "",
       description: "",
+      salaryHike:"",
+      hrName:"",
+
     });
   };
 
-  let buttonClick =
+  let buttonClick =true
     // formData.employeeName.length > 0 &&
-    formData.promotionTitle.length > 0 &&
-    formData.promotionDate.length > 0 &&
-    formData.promotionDate.length > 0;
+    // formData.promotionTitle.length > 0 &&
+    // formData.promotionDate.length > 0 &&
+    // formData.promotionDate.length > 0;
 
     console.log(formData);
 
@@ -266,7 +271,7 @@ const PromotionForm = ({
         />
       </div>
       <div className="data-input-fields">
-        <TextField
+      <TextField
           margin="dense"
           label="Promotion Date"
           type="date"
@@ -274,6 +279,34 @@ const PromotionForm = ({
           name="promotionDate"
           id="promotionDate"
           value={formData.promotionDate}
+          onChange={(e) => handleInputChange(e)}
+          required
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+         <TextField
+          margin="dense"
+          label="Salary Hike"
+          type="number"
+          fullWidth
+          name="salaryHike"
+          id="salaryHike"
+          value={formData.salaryHike}
+          onChange={(e) => handleInputChange(e)}
+          required
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+        <TextField
+          margin="dense"
+          label="HR Name"
+          type="text"
+          fullWidth
+          name="hrName"
+          id="hrName"
+          value={formData.hrName}
           onChange={(e) => handleInputChange(e)}
           required
           InputLabelProps={{

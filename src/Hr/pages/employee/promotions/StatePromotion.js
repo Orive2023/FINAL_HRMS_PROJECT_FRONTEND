@@ -22,6 +22,8 @@ const StatePromotion = () => {
     promotionTitle: "",
     promotionDate: "",
     description: "",
+    salaryHike:"",
+    hrName:"",
   });
   return {
     location,setLocation,setEmployee,

@@ -23,27 +23,19 @@ import {
 import { styled } from "@mui/system";
 
 const Travel = () => {
-    // const token = localStorage.getItem("AuthToken");
-    // const decoded = jwtDecode(String(token));
-    // const usernameRec = decoded.preferred_username;
-    // const username = usernameRec.toUpperCase();
-  
+    const token = localStorage.getItem("AuthToken");
+    const decoded = jwtDecode(String(token));
+    const usernameRec = decoded.preferred_username;
+    const username = usernameRec.toUpperCase();
     const [travel, setTravel] = useState([]);
-    const username = localStorage.getItem("UserName")
+    // const username = localStorage.getItem("UserName")
   
 
     const loadTravel = async () => {
-      try {
-        const result = await axios.get(`http://localhost:8092/travels/findtravels/${username}`, {
-          validateStatus: () => {
-            return true;
-          },
-        });
-        setTravel(result.data);
-      } catch (error) {
-        console.error("Error load project", error);
-      }
+      const response = await axios.get("http://localhost:8082/travels/get/travels");
+      setTravel(response.data);
     };
+
     useEffect(() => {
       loadTravel();
     }, []);

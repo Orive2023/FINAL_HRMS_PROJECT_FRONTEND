@@ -12,10 +12,15 @@ import { useState, useEffect } from "react";
 import TextField from "@mui/material/TextField";
 import { Chart } from "primereact/chart";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+
 
 // import useAuth from "../hooks/useAuth"
 const MainFile = ({name}) => {
-  const userName = localStorage.getItem("UserName");
+  const token = localStorage.getItem("AuthToken");
+  const decoded = jwtDecode(String(token));
+  const usernameRec = decoded.preferred_username;
+  const userName = usernameRec.toUpperCase();
   const navigation = useNavigate();
   console.log(name);
   const revenueData = {

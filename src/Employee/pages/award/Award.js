@@ -27,7 +27,6 @@ const Award = () => {
   const decoded = jwtDecode(String(token));
   const usernameRec = decoded.preferred_username;
   const username = usernameRec.toUpperCase();
-
   const [award, setAward] = useState([]);
 
   useEffect(() => {
@@ -268,6 +267,7 @@ const Award = () => {
     const result = await axios.get(
       `http://localhost:8082/awards/employee/get/${username}`
     );
+    console.log(result)
     setAward(result.data);
   };
 

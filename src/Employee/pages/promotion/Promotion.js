@@ -24,11 +24,10 @@ import { styled } from "@mui/system";
 
 
 const Promotion = () => {
-    // const token = localStorage.getItem("AuthToken");
-    // const decoded = jwtDecode(String(token));
-    // const usernameRec = decoded.preferred_username;
-    // const username = usernameRec.toUpperCase();
-    const username = localStorage.getItem("UserName")
+    const token = localStorage.getItem("AuthToken");
+    const decoded = jwtDecode(String(token));
+    const usernameRec = decoded.preferred_username;
+    const username = usernameRec.toUpperCase();
     const [promotion, setPromotion] = useState([]);
   
     useEffect(() => {
@@ -37,7 +36,7 @@ const Promotion = () => {
 
 
     const loadPromotion = async () => {
-        const response = await axios.get(`http://localhost:8082/promotions/findpromotions/${username}`);
+        const response = await axios.get(`http://localhost:8082/promotions/get/promotions`);
         setPromotion(response.data);
       };
     

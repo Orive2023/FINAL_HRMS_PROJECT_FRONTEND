@@ -12,8 +12,11 @@ import bars from "../../asset/40px/bars.png";
 import axios from "axios";import { jwtDecode } from "jwt-decode";
 
 const Worksheets = () => {
-
-  const username = localStorage.getItem("UserName")
+  const token = localStorage.getItem("AuthToken");
+  const decoded = jwtDecode(String(token));
+  const usernameRec = decoded.preferred_username;
+  const username = usernameRec.toUpperCase();
+  // const username = localStorage.getItem("UserName")
   const [menu, setMenu] = useState(false);
 
   const [getWorksheet, setGetWorksheet] = useState([]);
@@ -21,7 +24,7 @@ const Worksheets = () => {
   const loadWorksheet = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:8092/worksheet/getdetails/${username}`,
+        `http://localhost:8092/worksheet/get/worksheet`,
         {
           validateStatus: () => {
             return true;

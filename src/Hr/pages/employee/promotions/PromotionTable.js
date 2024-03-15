@@ -113,6 +113,7 @@ const PromotionTable = ({
             "PROMOTION TITLE",
             "PROMOTION TITLE",
             "DECRIPTION",
+            
           ],
         ],
         body: promotion.map((row, index) => [

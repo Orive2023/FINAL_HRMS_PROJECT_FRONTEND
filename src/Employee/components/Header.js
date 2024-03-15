@@ -7,6 +7,8 @@ import ApproveLogo from "../asset/40px/Approve.png";
 import date from "date-and-time";
 import { Watch } from "react-loader-spinner";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
+
 
 import EmployeeDetails from "./sidebarComponent/EmployeeDetails";
 import Modal from "react-modal";
@@ -40,7 +42,10 @@ const Header = ({ menu, setMenu }) => {
     }
   };
 
-  const username = localStorage.getItem("UserName")
+  const token = localStorage.getItem("AuthToken");
+  const decoded = jwtDecode(String(token));
+  const usernameRec = decoded.preferred_username;
+  const username = usernameRec.toUpperCase();
 
   const now = new Date();
   let todayDate = date.format(now, "YYYY-MM-DD");
