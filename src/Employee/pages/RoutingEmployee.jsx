@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import Dashboard from "../components/Dashboard";
 import Tickets from "../pages/tickets/Ticket";
 import Attendance from "../pages/attendance/Attendance";
-import Worksheets from "../pages/worksheets/Worksheets";
 import Performance from "./performance/Performance";
 import LeaveView from "../../Hr/pages/timesheets/leave/Mainfile/LeaveView";
 import EventCalender from "./cardCode/events/EventCalender";
@@ -23,19 +22,27 @@ import Holiday from "../pages/holiday/Holiday";
 import PaySlipGenerator from "../pages/payslip/PaySlipGenerator";
 import PayslipGeneratorProfile from "../pages/payslip/PayslipGeneratorProfile";
 import Announcement from "./announcement/Announcement";
+import AnnouncementProfile from "./announcement/AnnouncementProfile";
+import Profile from "./profile/Profile";
 import Policies from "../pages/policies/Policies";
-import PoliciesProfile from "../pages/policies/policyProfile";
+import PolicyProfile from "./policies/PolicyProfile";
 import Transfer from "../pages/transfer/Transfer";
 import TransferProfile from "../pages/transfer/TransferProfile"
 import ExpJoiningLetter from "../pages/experienceletter/ExpJoiningLetter";
 import Expletter from "../pages/experienceletter/Expletter";
 import IntJoiningLetter from "../pages/experienceletter/IntJoiningLetter";
-
-
+import ResignationView from './resignation/mainfile/ResignationView'
+import ResignationEdit from './resignation/mainfile/ResignationEdit'
+import ResignationProfile from './resignation/mainfile/ResignationProfile'
+import ComplaintEdit from './complaint/mainfile/ComplaintEdit'
+import Complaint from './complaint/mainfile/Complaint'
+import LeaveProfile from './leave/mainfile/LeaveProfile'
+import LeaveEdit from './leave/mainfile/LeaveEdit'
+import Leave from './leave/mainfile/Leave'
+import Worksheets from "../pages/worksheets/Worksheets";
 
 const routesData = [
   { path: "/Employee-Dashboard", element: <Dashboard /> },
-  { path: "/employee/worksheets", element: <Worksheets /> },
   { path: "/employee/tickets", element: <Tickets /> },
   { path: "/employee/attendance-log", element: <Attendance /> },
   { path: "/employee/performance", element: <Performance /> },
@@ -55,16 +62,27 @@ const routesData = [
   { path: "/employee/officeshift", element: <Officeshift /> },
   { path: "/employee/holiday", element: <Holiday /> },
   { path: "/employee/announcement", element: <Announcement /> },
+  { path: "/employee/announcement-profile/:id", element: <AnnouncementProfile /> },
+  { path: "/employee/profile", element: <Profile /> },
   { path: "/employee/policies", element: <Policies /> },
-  { path: "/employee/policies-profile/:id", element: <policyProfile /> },
+  { path: "/employee/policies-profile/:id", element: <PolicyProfile /> },
   { path: "/employee/payslip", element: <PaySlipGenerator /> },
   { path: "/employee/payslip-profile/:id", element: <PayslipGeneratorProfile /> },
   { path: "/employee/transfer", element: <Transfer /> },
+  { path: "/employee/transfer-profile/:id", element: <TransferProfile /> },
   { path: "/employee/experience-letter", element: <Expletter /> },
   { path: "/employee/joining-letter", element: <ExpJoiningLetter /> },
   { path: "/employee/int-letter", element: <IntJoiningLetter /> },
-  { path: "/employee/transfer-profile/:id", element: <TransferProfile /> },
-
+  { path: "/transfer-profile/:id", element: <TransferProfile /> },
+  { path: "/employee/resignation", element: <ResignationView /> },
+  { path: "/edit-resignation/:id", element: <ResignationEdit /> },
+  { path: "/resignation-profile/:id", element: <ResignationProfile /> },
+  { path: "/employee/complaint", element: <Complaint /> },
+  { path: "/complaint-edit/:id", element: <ComplaintEdit /> },
+  { path: "/leave", element: <Leave /> },
+  { path: "/leave-edit/:id", element: <LeaveEdit /> },
+  { path: "/leaves-profile/:id", element: <LeaveProfile /> },
+  { path: "/employee/worksheets", element: <Worksheets /> },
 ];
 
 const RoutingEmployee = () => {

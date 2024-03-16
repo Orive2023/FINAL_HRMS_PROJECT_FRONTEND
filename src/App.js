@@ -16,10 +16,10 @@ function App() {
   // var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
   return (
     <div className="App">
-    {(token && Role=="client_HR")?<MainHrRouting />:<LoginSignup/>}
-    {(token && Role=="client_Employee")?<MainEmpRouting />:<LoginSignup/>}
-      {/* <MainHrRouting />
-      <MainEmpRouting /> */}
+    {/* {(token && Role=="client_HR")?<MainHrRouting />:<LoginSignup/>}
+    {(token && Role=="client_Employee")?<MainEmpRouting />:<LoginSignup/>} */}
+      <MainHrRouting />
+      <MainEmpRouting />
     </div>
   );
 }

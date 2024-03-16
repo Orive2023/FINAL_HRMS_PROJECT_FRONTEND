@@ -1,5 +1,4 @@
-
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import SideBar from "../../components/SideBar";
@@ -24,11 +23,8 @@ import {
 } from "@mui/base/TablePagination";
 import axios from "axios";
 
-const ExpLetterTable = ({
-  setRecDelete,
- 
-}) => {
-    const [menu, setMenu] = useState(false);
+const ExpLetterTable = ({ setRecDelete }) => {
+  const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState("");
   const token = localStorage.getItem("AuthToken");
   const decoded = jwtDecode(String(token));
@@ -108,13 +104,10 @@ const ExpLetterTable = ({
     setShowDeleteConfirmation(false);
   };
 
-
-
   const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
 
   // const createPdf = () => {
   //   try {
@@ -239,11 +232,11 @@ const ExpLetterTable = ({
   // };
 
   const handleDelete = async (id) => {
-    try{
-      await axios.delete(`http://localhost:8082/experienceletter/delete/${id}`)
-  } catch(error) {
-      console.error("Error deleting data",error)
-  }
+    try {
+      await axios.delete(`http://localhost:8082/experienceletter/delete/${id}`);
+    } catch (error) {
+      console.error("Error deleting data", error);
+    }
   };
 
   const renderCertificateTable = () => {
@@ -262,128 +255,162 @@ const ExpLetterTable = ({
   };
 
   return (
-
     <div>
-    <div id="header-container" className="header-container">
-      <CompanyLogoFile />
-      <Header menu={menu} setMenu={setMenu} />
-    </div>
-    <div className="dashboard-container">
-    <SideBar menu={menu} setMenu={setMenu}/>
-      <div className="head-foot-part">
-      <div
-      className="d-flex"
-      style={{ display: "flex", flexDirection: "column" ,marginTop:"70px" }}
-    >
-
-
-      <div className="table-start-container">
-        <table id="table" className="table table-bordered table-hover shadow">
-          <thead>
-            <tr className="text-center">
-              <th>Sl No</th>
-              <th>Employee Name</th>
-              <th>Reference No.</th>
-             <th>Registration No</th>
-              <th>Releasing Date</th>
-              <th>Employee Id</th>
-              <th>Employee Designation</th>
-              <th>Joining Date</th>
-              <th>Leave Date</th>
-             
-            </tr>
-          </thead>
-
-          <tbody className="text-center">
-            {getTable?.length === 0
-              ? renderCertificateTable()
-              : (rowsPerPage > 0
-                  ? getTable?.slice(
-                      page * rowsPerPage,
-                      page * rowsPerPage + rowsPerPage
-                    )
-                  : getTable
-                )
-                  .filter((elem) => {
-                    if (search.length === 0) return elem;
-                    else
-                      return (
-                        elem.employeeName
-                          .toLowerCase()
-                          .includes(search.toLocaleLowerCase()) ||
-                        elem.referrenceNumber
-                          .toLowerCase()
-                          .includes(search.toLocaleLowerCase()) ||
-                        elem.date
-                          .toLowerCase()
-                          .includes(search.toLocaleLowerCase()) ||
-                        elem.formReleaseDate
-                          .toLowerCase()
-                          .includes(search.toLocaleLowerCase())||
-                          elem.employeeId
-                          .toLowerCase()
-                          .includes(search.toLocaleLowerCase()) ||
-                        elem.designation
-                          .toLowerCase()
-                          .includes(search.toLocaleLowerCase()) ||
-                        elem.joiningDate
-                          .toLowerCase()
-                          .includes(search.toLocaleLowerCase()) ||
-                        elem.leavesDate
-                          .toLowerCase()
-                          .includes(search.toLocaleLowerCase())
-                      );
-                  })
-                  .map((item, index) => (
-                    <tr key={index}>
-                      <th scope="row" key={index}>
-                        {index + 1}
-                      </th>
-                      <td>{item.employeeName}</td>
-                      <td>{item.referrenceNumber}</td>
-                      <td>{item.date}</td>
-                      <td>{item.formReleaseDate}</td>
-                      <td>{item.employeeId}</td>
-                      <td>{item.designation}</td>
-                      <td>{item.joiningDate}</td>
-                      <td>{item.leavesDate}</td>
-
-                    
-                    
-                    </tr>
-                  ))}
-          </tbody>
-          <tfoot>
-            <tr>
-              <CustomTablePagination
-                className="pagingg"
-                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                colSpan={12}
-                count={getTable.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                slotProps={{
-                  select: {
-                    "aria-label": "rows per page",
-                  },
-                  actions: {
-                    // showFirstButton: true,
-                    // showLastButton: true,
-                  },
-                }}
-                onPageChange={handleChangePage}
-                onRowsPerPageChange={handleChangeRowsPerPage}
-              />
-            </tr>
-          </tfoot>
-        </table>
+      <div id="header-container" className="header-container">
+        <CompanyLogoFile />
+        <Header menu={menu} setMenu={setMenu} />
       </div>
-    
-    </div>
+      <div className="dashboard-container">
+        <SideBar menu={menu} setMenu={setMenu} />
+        <div className="head-foot-part">
+        <div
+            className="mx-3"
+            style={{ marginTop: "70px", marginBottom: "-50px", width: "150px" }}
+          >
+            <div
+              style={{
+                fontSize: "1.4rem",
+                width: "500px",
+                display: "flex",
+              }}
+            >
+              <div style={{ paddingRight: "10px" }}>
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAM7SURBVHgB3VVNaBNREJ55b3ezQYrRg9Sf2m3poTeriLQquBWrvQjtSTy1god6aoIXb9aTXqS99CCC9qoHE0GKYCEpolToIYKiojXJQaziYYNISpLdcXY3Nbv9iWlv+sJmed/OvG/mm5ldgP9lYbOGFw4OjTsEcSKIIUKq8hMSKStlNePbFMmIcf6+DTi6xjEvodw/k3+a/5t/Q5K4YcZ+qTuSHL3JppZDmHBsOyslJjkbg6+8ViVzOjdb2BZJvHvQcADTDkA7ARSqUg7defvktftsjJ8pJJKAdIi3lmJXT099fJbd7Cy5EXit2zSEpqQlR6siFYCgf/rd7IfV54s/PlnH2/Y/0FDsVQX0SgXHTrZ2FV98W1poimSi54yJikgrSK1SUHZFlvum3swtr7VbWM6vvPy+lDL3dYAmwGT7c2ZrJ8wvf55vSHLzqGlKAWlFkK4gzABVL97KZhp20HM+dOBAJ0aEc4qD6j/b1mnNfcm9CtqEajLZa6ZZf5OviasLmRuwhXW71xwVAPcIoYgR6Ehk6sGJoKGukqErDuwU5RnY4uKgZti/oEs71lIu7ww+U0IksuqmRlUB21oR9hcb+IdJVBaKCFu0cGc/HOgbdxDi3oaHxlcZM6WKlrgUkCWqOu4NW2xsQKLwXPNPDZTq8eCxEUJnimp7JG5o14icEV0pxRgarvt7JKCp4aYNJRZlI5dI1+tYRKO46xwRdgIi2EE6dqpoH+asLcaH0mZPLOjvnaFDg0yk7SmhQjWIxVxQRSd54tHin9dHZvhIkW+71N3oFtmq+7tKlBqQsKaeXHYAU9ZjPk6eqEE8GmEtHQe0RjVxU3W1D2oaremsrtE5qninUxDXJdsKWmcbJvG6yyHFrgSy8zqOI66EM6l1oqpVwiQcZhBbRxLxa4KaTgZvPf29juPzFA3CJNKvm1rb50a7DYFu/Qgcu1QM2obE+3q5e4LfvNe5PzlGn4QJ2sm3LAj+8wX1AMObGf6muDh7xDiPGMeY2XP3ff+mJO4qXumaFCjibkT+Gf5crM6g61DHkXHy5wY8pTKqqI5Gp3OFhiSrqzRmGBvhukQvlRWbQr48GxZO5Zv65v+76zfuAjbSpiR+NAAAAABJRU5ErkJggg=="
+                  alt="Dashboard"
+                />
+              </div>
+              <div style={{ padding: "2px" }}>
+                <span style={{ color: "black", fontWeight: "bold" }}>
+                  <Link
+                    to="/HRDashboard"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    Dashboard{" "}
+                  </Link>{" "}
+                  / Employee /{" "}
+                </span>
+                <span style={{ color: "black" }}> Experience Letter</span>
+              </div>
+            </div>
+          </div>
+          <div
+            className="d-flex"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginTop: "70px",
+            }}
+          >
+            <div className="table-start-container">
+              <table
+                id="table"
+                className="table table-bordered table-hover shadow"
+              >
+                <thead>
+                  <tr className="text-center">
+                    <th>Sl No</th>
+                    <th>Employee Name</th>
+                    <th>Reference No.</th>
+                    <th>Registration No</th>
+                    <th>Releasing Date</th>
+                    <th>Employee Id</th>
+                    <th>Employee Designation</th>
+                    <th>Joining Date</th>
+                    <th>Leave Date</th>
+                  </tr>
+                </thead>
+
+                <tbody className="text-center">
+                  {getTable?.length === 0
+                    ? renderCertificateTable()
+                    : (rowsPerPage > 0
+                        ? getTable?.slice(
+                            page * rowsPerPage,
+                            page * rowsPerPage + rowsPerPage
+                          )
+                        : getTable
+                      )
+                        .filter((elem) => {
+                          if (search.length === 0) return elem;
+                          else
+                            return (
+                              elem.employeeName
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase()) ||
+                              elem.referrenceNumber
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase()) ||
+                              elem.date
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase()) ||
+                              elem.formReleaseDate
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase()) ||
+                              elem.employeeId
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase()) ||
+                              elem.designation
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase()) ||
+                              elem.joiningDate
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase()) ||
+                              elem.leavesDate
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase())
+                            );
+                        })
+                        .map((item, index) => (
+                          <tr key={index}>
+                            <th scope="row" key={index}>
+                              {index + 1}
+                            </th>
+                            <td>{item.employeeName}</td>
+                            <td>{item.referrenceNumber}</td>
+                            <td>{item.date}</td>
+                            <td>{item.formReleaseDate}</td>
+                            <td>{item.employeeId}</td>
+                            <td>{item.designation}</td>
+                            <td>{item.joiningDate}</td>
+                            <td>{item.leavesDate}</td>
+                          </tr>
+                        ))}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <CustomTablePagination
+                      className="pagingg"
+                      rowsPerPageOptions={[
+                        5,
+                        10,
+                        25,
+                        { label: "All", value: -1 },
+                      ]}
+                      colSpan={12}
+                      count={getTable.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      slotProps={{
+                        select: {
+                          "aria-label": "rows per page",
+                        },
+                        actions: {
+                          // showFirstButton: true,
+                          // showLastButton: true,
+                        },
+                      }}
+                      onPageChange={handleChangePage}
+                      onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-    
   );
 };
 
