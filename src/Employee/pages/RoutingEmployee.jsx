@@ -42,7 +42,7 @@ import LeaveEdit from './leave/mainfile/LeaveEdit'
 import Leave from './leave/mainfile/Leave'
 import Worksheets from "../pages/worksheets/Worksheets";
 
-import Profile from "../pages/profile/Profile";
+
 
 
 
