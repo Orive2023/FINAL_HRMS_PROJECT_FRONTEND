@@ -46,7 +46,7 @@ const Header = ({ menu, setMenu }) => {
   };
 
 
-  const username = localStorage.getItem("UserName");
+
 
   const token = localStorage.getItem("AuthToken");
   const decoded = jwtDecode(String(token));
