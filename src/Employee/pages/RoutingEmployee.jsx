@@ -25,7 +25,7 @@ import Announcement from "./announcement/Announcement";
 import AnnouncementProfile from "./announcement/AnnouncementProfile";
 import Profile from "./profile/Profile";
 import Policies from "../pages/policies/Policies";
-import PolicyProfile from "./policies/PolicyProfile";
+import PolicyProfile from "./policies/policyProfile";
 import Transfer from "../pages/transfer/Transfer";
 import TransferProfile from "../pages/transfer/TransferProfile"
 import ExpJoiningLetter from "../pages/experienceletter/ExpJoiningLetter";
