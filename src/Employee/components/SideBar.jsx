@@ -29,9 +29,8 @@ import ComplaintFile from './sidebarComponent/ComplaintFile'
 import LeaveFile from './sidebarComponent/LeaveFile'
 import WorksheetsFile from "./sidebarComponent/WorksheetsFile";
 
-import ResignationFile from './sidebarComponent/ResignationFile';
-import ComplaintFile from './sidebarComponent/ComplaintFile';
-import ProfileFile from './sidebarComponent/ProfileFile';
+
+
 
 
 import { useNavigate } from "react-router-dom/dist";
