@@ -18,13 +18,13 @@ import {
 } from "@mui/base/TablePagination";
 import Button from "@mui/material/Button";
 
-const CareerTable = ({ 
- career, 
-  setRecDelete, 
+const CareerTable = ({
+  career,
+  setRecDelete,
   setFormVisible,
   setToggle,
   toggle,
- }) => {
+}) => {
   const [search, setSearch] = useState("");
   const CustomTablePagination = styled(TablePagination)`
     & .${classes.toolbar} {
@@ -63,7 +63,7 @@ const CareerTable = ({
   `;
 
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
-const [deleteItemId, setDeleteItemId] = useState(null);
+  const [deleteItemId, setDeleteItemId] = useState(null);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -79,7 +79,6 @@ const [deleteItemId, setDeleteItemId] = useState(null);
     setPage(0);
   };
 
-
   const deleteCareer = (id) => {
     setDeleteItemId(id);
     setShowDeleteConfirmation(true);
@@ -94,7 +93,6 @@ const [deleteItemId, setDeleteItemId] = useState(null);
     setDeleteItemId(null);
     setShowDeleteConfirmation(false);
   };
-
 
   let doc;
   const convertToPdf = () => {
@@ -128,11 +126,10 @@ const [deleteItemId, setDeleteItemId] = useState(null);
           ],
         ],
         body: career.map((row, index) => [
-          index+1,
+          index + 1,
           row.name,
           row.email,
           row.jobRole,
-         
         ]),
         styles: { fontSize: 5, fontStyle: "normal" },
         headStyles: {
@@ -167,17 +164,9 @@ const [deleteItemId, setDeleteItemId] = useState(null);
       const tableMargin = 20;
       const tableStartY = 15 + tableMargin;
       doc.autoTable({
-        head: [
-          [
-            "SL NO",
-            "NAME",
-            "EMAIL",
-            "JOB ROLE",
-           
-          ],
-        ],
+        head: [["SL NO", "NAME", "EMAIL", "JOB ROLE"]],
         body: career.map((row, index) => [
-          index+1,
+          index + 1,
           row.name,
           row.email,
           row.jobRole,
@@ -229,7 +218,7 @@ const [deleteItemId, setDeleteItemId] = useState(null);
   const handleDelete = (id) => {
     setRecDelete(id);
   };
-  console.log("data",career);
+  console.log("data", career);
 
   const handleButtonClick = () => {
     setFormVisible((prev) => !prev);
@@ -295,95 +284,117 @@ const [deleteItemId, setDeleteItemId] = useState(null);
 
   return (
     <div
-    className="d-flex"
-    style={{ display: "flex", flexDirection: "column" }}>
-      <div  className=" table-ka-top-btns"
-      >
-      
-   
-
-        {
-        <div className="search-print">
-        <input
-        type="text"
-        className="search-beside-btn"
-        placeholder="Search"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={{
-          width: "20rem",
-          borderRadius: "5px",
-          height: "40px",
-          padding: "10px",
-          border: "1px solid rgba(247, 108, 36, 1)",
-          marginTop:"-14px",
-          marginLeft: "800px",
-        }}
-/>
-            <div className="d-flex four-btn" style={{ gap: "10px",marginLeft:"1.7rem"  }} y>
-        <button
-          className=""
-          style={{
-            height: "40px",
-            display: "flex",
-            alignItems: "center",
-            width: "100px",
-            justifyContent: "center",
-          }}
-          onClick={handlePrint}
-        >
-          PRINT
-        </button>
-        <button
-          onClick={convertToPdf}
-          className=""
-          style={{
-            height: "40px",
-            display: "flex",
-            alignItems: "center",
-            width: "100px",
-            justifyContent: "center",
-          }}
-        >
-          PDF
-        </button>
-        <button
-          onClick={convertToExcel}
-          className=""
-          style={{
-            height: "40px",
-            display: "flex",
-            alignItems: "center",
-            width: "100px",
-            justifyContent: "center",
-          }}
-        >
-          EXCEL
-        </button>
-        <CSVLink
-          data={career}
-          filename="career.csv"
-          style={{ textDecoration: "none" }}
-        >
-          <button
-            className=""
+      className="d-flex"
+      style={{ display: "flex", flexDirection: "column" }}
+    >
+      <div className=" table-ka-top-btns">
+        <div style={{ marginTop: "60px", width: "150px" }}>
+          <div
             style={{
-              height: "40px",
+              fontSize: "1.4rem",
+              width: "500px",
               display: "flex",
-              alignItems: "center",
-              width: "100px",
-              justifyContent: "center",
             }}
           >
-            CSV
-          </button>
-        </CSVLink>
-      </div>
-      </div>
-          }
+            <div style={{ paddingRight: "10px" }}>
+              <img
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAM7SURBVHgB3VVNaBNREJ55b3ezQYrRg9Sf2m3poTeriLQquBWrvQjtSTy1god6aoIXb9aTXqS99CCC9qoHE0GKYCEpolToIYKiojXJQaziYYNISpLdcXY3Nbv9iWlv+sJmed/OvG/mm5ldgP9lYbOGFw4OjTsEcSKIIUKq8hMSKStlNePbFMmIcf6+DTi6xjEvodw/k3+a/5t/Q5K4YcZ+qTuSHL3JppZDmHBsOyslJjkbg6+8ViVzOjdb2BZJvHvQcADTDkA7ARSqUg7defvktftsjJ8pJJKAdIi3lmJXT099fJbd7Cy5EXit2zSEpqQlR6siFYCgf/rd7IfV54s/PlnH2/Y/0FDsVQX0SgXHTrZ2FV98W1poimSi54yJikgrSK1SUHZFlvum3swtr7VbWM6vvPy+lDL3dYAmwGT7c2ZrJ8wvf55vSHLzqGlKAWlFkK4gzABVL97KZhp20HM+dOBAJ0aEc4qD6j/b1mnNfcm9CtqEajLZa6ZZf5OviasLmRuwhXW71xwVAPcIoYgR6Ehk6sGJoKGukqErDuwU5RnY4uKgZti/oEs71lIu7ww+U0IksuqmRlUB21oR9hcb+IdJVBaKCFu0cGc/HOgbdxDi3oaHxlcZM6WKlrgUkCWqOu4NW2xsQKLwXPNPDZTq8eCxEUJnimp7JG5o14icEV0pxRgarvt7JKCp4aYNJRZlI5dI1+tYRKO46xwRdgIi2EE6dqpoH+asLcaH0mZPLOjvnaFDg0yk7SmhQjWIxVxQRSd54tHin9dHZvhIkW+71N3oFtmq+7tKlBqQsKaeXHYAU9ZjPk6eqEE8GmEtHQe0RjVxU3W1D2oaremsrtE5qninUxDXJdsKWmcbJvG6yyHFrgSy8zqOI66EM6l1oqpVwiQcZhBbRxLxa4KaTgZvPf29juPzFA3CJNKvm1rb50a7DYFu/Qgcu1QM2obE+3q5e4LfvNe5PzlGn4QJ2sm3LAj+8wX1AMObGf6muDh7xDiPGMeY2XP3ff+mJO4qXumaFCjibkT+Gf5crM6g61DHkXHy5wY8pTKqqI5Gp3OFhiSrqzRmGBvhukQvlRWbQr48GxZO5Zv65v+76zfuAjbSpiR+NAAAAABJRU5ErkJggg=="
+                alt="Dashboard"
+              />
+            </div>
+            <div style={{ padding: "2px" }}>
+              <span style={{ color: "black", fontWeight: "bold" }}>
+                <Link
+                  to="/HRDashboard"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  Dashboard{" "}
+                </Link>{" "}
+                / Website /
+              </span>
+              <span style={{ color: "black" }}>Career</span>
+            </div>
           </div>
-
-     
+        </div>
+        {
+          <div className="search-print" style={{ marginTop: "70px" }}>
+            <input
+              type="text"
+              className="search-beside-btn"
+              placeholder="Search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={{
+                width: "20rem",
+                borderRadius: "5px",
+                height: "40px",
+                padding: "10px",
+                border: "1px solid rgba(247, 108, 36, 1)",
+                marginRight: "30px",
+              }}
+            />
+            <div div className="d-flex mt-4 four-btn" style={{ gap: "10px" }}>
+              <button
+                className=""
+                style={{
+                  height: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100px",
+                  justifyContent: "center",
+                }}
+                onClick={handlePrint}
+              >
+                PRINT
+              </button>
+              <button
+                onClick={convertToPdf}
+                className=""
+                style={{
+                  height: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100px",
+                  justifyContent: "center",
+                }}
+              >
+                PDF
+              </button>
+              <button
+                onClick={convertToExcel}
+                className=""
+                style={{
+                  height: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100px",
+                  justifyContent: "center",
+                }}
+              >
+                EXCEL
+              </button>
+              <CSVLink
+                data={career}
+                filename="location.csv"
+                style={{ textDecoration: "none" }}
+              >
+                <button
+                  className=""
+                  style={{
+                    height: "40px",
+                    display: "flex",
+                    alignItems: "center",
+                    width: "100px",
+                    justifyContent: "center",
+                  }}
+                >
+                  CSV
+                </button>
+              </CSVLink>
+            </div>
+          </div>
+        }
+      </div>
 
       <div className="table-start-container">
         <table id="table" className="table table-bordered table-hover shadow">
@@ -418,12 +429,10 @@ const [deleteItemId, setDeleteItemId] = useState(null);
                         elem.email
                           .toLowerCase()
                           .includes(search.toLocaleLowerCase()) ||
-                       
                         elem.jobRole
                           .toString()
                           .toLowerCase()
-                          .includes(search.toLocaleLowerCase()) 
-                      
+                          .includes(search.toLocaleLowerCase())
                       );
                   })
                   .map((item, index) => (
@@ -434,15 +443,15 @@ const [deleteItemId, setDeleteItemId] = useState(null);
                       <td>{item.name}</td>
                       <td>{item.email}</td>
                       <td>{item.jobRole}</td>
-                     
 
-                      
-                       <td className="mx-2">
+                      <td className="mx-2">
                         <FaTrashAlt
-                           className="action-delete"
-                           onClick={() => deleteCareer(item.careersGetJobAlertsId)}
+                          className="action-delete"
+                          onClick={() =>
+                            deleteCareer(item.careersGetJobAlertsId)
+                          }
                         />
-                       </td> 
+                      </td>
                     </tr>
                   ))}
           </tbody>
@@ -459,9 +468,7 @@ const [deleteItemId, setDeleteItemId] = useState(null);
                   select: {
                     "aria-label": "rows per page",
                   },
-                  actions: {
-                  
-                  },
+                  actions: {},
                 }}
                 onPageChange={handleChangePage}
                 onRowsPerPageChange={handleChangeRowsPerPage}
@@ -474,12 +481,24 @@ const [deleteItemId, setDeleteItemId] = useState(null);
         <div className="confirmation">
           <div className="confirmation-popup d-flex align-items-center justify-content-center">
             <div>
-              <p className="fs-4 fw-bold">Are you sure you want to delete this item?</p>
+              <p className="fs-4 fw-bold">
+                Are you sure you want to delete this item?
+              </p>
               <div className="d-flex" style={{ gap: "10px" }}>
-                <Button id="input-btn-submit" style={{width:'100%'}} onClick={confirmDelete} variant="contained">
+                <Button
+                  id="input-btn-submit"
+                  style={{ width: "100%" }}
+                  onClick={confirmDelete}
+                  variant="contained"
+                >
                   Yes
                 </Button>
-                <Button id="input-btn-cancel" style={{width:'100%'}} onClick={cancelDelete} variant="outlined">
+                <Button
+                  id="input-btn-cancel"
+                  style={{ width: "100%" }}
+                  onClick={cancelDelete}
+                  variant="outlined"
+                >
                   No
                 </Button>
               </div>

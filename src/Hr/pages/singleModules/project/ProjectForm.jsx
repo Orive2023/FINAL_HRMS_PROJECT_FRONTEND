@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -66,45 +64,11 @@ const ProjectForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       const isValidDate = value === getCurrentDate();
       setDateError(!isValidDate);
     }
-    if (name === "companyName" && value === "addNewCompany") {
-      // Redirect to the company form in the company module
-      navigate("/hr/organisation/company");
-      return;
-    }
-    if (name === "employeeName" && value === "addNewEmployee") {
-      // Redirect to the company form in the company module
-      navigate("/hr/employee/employee");
-      return;
-    }
-    // const selectedCompany = company.find((comp) => comp.companyName === value);
-    // if (selectedCompany) {
-    //   setFormData({
-    //     ...formData,
-    //     [e.target.name]: e.target.value,
-    //     state: selectedCompany.state || "",
-    //     country: selectedCompany.country || "",
-    //   });
-    // } else {
-    //   setFormData({
-    //     ...formData,
-    //     [e.target.name]: e.target.value,
-    //   });
-    // }
-    const selectedEmployee = employee.find((emp) => emp.employeeName === value);
-    if (selectedEmployee) {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
-        employeeId: selectedEmployee.employeeId || "",
-       
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
-      });
-    }
-
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+      [name]: value,
+    });
   };
 
   const Type = [
@@ -133,6 +97,7 @@ const ProjectForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       projectsId: "",
       projectTitle: "",
       clientName: "",
+      projectName: "",
       companyName: "",
       startDate: "",
       endDate: "",
@@ -157,7 +122,6 @@ const ProjectForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
   useEffect(() => {
     fetchCompany();
     fetchEmployee();
-   
   }, []);
 
   const handleSubmit = (e) => {
@@ -200,6 +164,7 @@ const ProjectForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     setToggle(false);
     setFormData({
       projectTitle: "",
+      projectName: "",
       clientName: "",
       companyName: "",
       startDate: "",
@@ -218,7 +183,7 @@ const ProjectForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
   const addItems = () => {
     const addItem = {
       id: new Date().getTime().toString(),
-      employeeId: "",
+      username: "",
       employeeName: "",
       projectName: "",
       taskAssignedFor: "",
@@ -245,11 +210,13 @@ const ProjectForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     if (e.target.name === "employeeName") {
       employee.map((elem) => {
         if (e.target.value === elem.employeeName) {
-          eID = elem.employeeId;
+          eID = elem.username;
         }
       });
       const updateDataItem = items.map((item) => {
-        return item.id === id ? { ...item, ["employeeId"]: eID } : item;
+        return item.id === id
+          ? { ...item, ["username"]: eID, ["employeeName"]: e.target.value }
+          : item;
       });
       setItems(updateDataItem);
     }
@@ -274,25 +241,6 @@ const ProjectForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     <div>
       <form onSubmit={handleSubmit}>
         <div className="data-input-fields">
-        <TextField
-            margin="dense"
-            label="Project Name"
-            type="text"
-            fullWidth
-            name="projectName"
-            id="projectName"
-            value={formData.projectName}
-            onChange={(e) => handleInputChange(e)}
-            required
-            InputProps={{
-              minLength: 2,
-              maxLength: 200,
-            }}
-            onInput={(e) => {
-              e.target.value = enforceMaxLength(e.target.value, 200);
-              handleProjChange(e);
-            }}
-          />
           <TextField
             margin="dense"
             label="Project Title"
@@ -312,7 +260,17 @@ const ProjectForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
               handleProjChange(e);
             }}
           />
-
+          <TextField
+            margin="dense"
+            label="project Name"
+            type="text"
+            fullWidt
+            name="projectName"
+            id="projectName"
+            value={formData.projectName}
+            onChange={(e) => handleInputChange(e)}
+            required
+          />
           <TextField
             margin="dense"
             label="Client Name"
@@ -342,28 +300,16 @@ const ProjectForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
               id="selectedCompany"
               value={formData.companyName}
               name="companyName"
-              label="companyName"
+              label="Company Name"
               onChange={(e) => handleInputChange(e)}
-              required
             >
-              {company &&
-                company.map((item, index) => {
-                  return (
-                    <MenuItem key={index} value={item.companyName}>
-                      {item.companyName}
-                    </MenuItem>
-                  );
-                })}
-              <MenuItem className="linkStyle" value="addNewCompany">
-                <a href="#">
-                  <FontAwesomeIcon
-                    icon={faCirclePlus}
-                    rotation={90}
-                    className="iconStyle"
-                  />
-                  Create company
-                </a>
-              </MenuItem>
+              {company.map((item, index) => {
+                return (
+                  <MenuItem key={index} value={item.companyName}>
+                    {item.companyName}
+                  </MenuItem>
+                );
+              })}
             </Select>
           </FormControl>
 
@@ -544,7 +490,7 @@ const ProjectForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
               <TableHead>
                 <TableRow style={{ background: "#f2f2f2" }}>
                   <TableCell className="table-data">SL</TableCell>
-                  <TableCell className="table-data">Employee Id</TableCell>
+                  <TableCell className="table-data">Username</TableCell>
                   <TableCell className="table-data">Employee Name</TableCell>
                   <TableCell className="table-data">Project Name</TableCell>
                   <TableCell className="table-data">
@@ -577,58 +523,7 @@ const ProjectForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
                         padding: "8px",
                       }}
                     >
-                      <TextField
-                        name="employeeId"
-                        type="text"
-                        value={item.employeeId}
-                        onChange={(e) => handleItemChange(item.id, e)}
-                        style={{ width: "70px" }}
-                        disabled
-                      />
-                    </TableCell>
-                    <TableCell
-                      style={{
-                        border: "1px solid #ddd",
-                        padding: "8px",
-                      }}
-                    >
                       <FormControl fullWidth>
-                        <InputLabel id="demo-employee-select-label">
-                          Employee Name
-                        </InputLabel>
-                        <Select
-                          labelId="demo-company-select-label"
-                          id="selectedCompany"
-                          value={formData.employeeName}
-                          name="employeeName"
-                          label="employeeName"
-                          onChange={(e) => handleInputChange(e)}
-                          required
-                        >
-                          {employee &&
-                            employee.map((item, index) => {
-                              return (
-                                <MenuItem key={index} value={item.employeeName}>
-                                  {item.employeeName}
-                                </MenuItem>
-                              );
-                            })}
-                          <MenuItem
-                            className="linkStyle"
-                            value="addNewEmployee"
-                          >
-                            <a href="#">
-                              <FontAwesomeIcon
-                                icon={faCirclePlus}
-                                rotation={90}
-                                className="iconStyle"
-                              />
-                              Create Employee
-                            </a>
-                          </MenuItem>
-                        </Select>
-                      </FormControl>
-                      {/* <FormControl fullWidth>
                         <InputLabel id="demo-company-select-label">
                           Employee Name
                         </InputLabel>
@@ -646,7 +541,22 @@ const ProjectForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
                             );
                           })}
                         </Select>
-                      </FormControl> */}
+                      </FormControl>
+                    </TableCell>
+                    <TableCell
+                      style={{
+                        border: "1px solid #ddd",
+                        padding: "8px",
+                      }}
+                    >
+                      <TextField
+                        name="username"
+                        type="text"
+                        value={item.username}
+                        onChange={(e) => handleItemChange(item.id, e)}
+                        style={{ width: "70px" }}
+                        disabled
+                      />
                     </TableCell>
                     <TableCell
                       style={{

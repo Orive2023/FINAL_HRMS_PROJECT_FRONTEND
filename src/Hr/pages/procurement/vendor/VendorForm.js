@@ -136,6 +136,7 @@ const VendorForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
 
   const saveVendor = async () => {
     await api.saveVendor(formData);
+    window.location.reload();
    navigate("/hr/procurement/vendor")
     setFormData({
       vendorName:"",

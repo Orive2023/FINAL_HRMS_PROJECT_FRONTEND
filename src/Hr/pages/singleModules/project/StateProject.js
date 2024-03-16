@@ -35,7 +35,7 @@ const StateProject = () => {
     employeeProjectManagementEntities: [
       {
         id:"",
-        employeeId: "",
+        username: "",
         employeeName: "",
         projectName: "",
         taskAssignedFor: "",

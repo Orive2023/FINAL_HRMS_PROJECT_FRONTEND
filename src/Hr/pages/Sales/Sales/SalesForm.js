@@ -26,14 +26,28 @@ const SalesForm = ({ formData, setFormData, setFormVisible }) => {
 
   const saveSales = async () => {
     await salesApi.saveSales(formData);
-    console.log(formData);
+    window.location.reload();
     navigate("/hr/sales/sales");
-    window.location.reload(true);
+    setFormData({
+      developerCost :0,
+      researchAndDevlopment:0,
+      customerSupportAndTechnicalAssitance:0,
+      serverMaintance:0,
+      customerSegment:0,
+      distributionChannel:0,
+      thirdPartySoftwareComponent:0,
+      perUserPrice:0,
+      totalNumberOfUser:0,
+      totalUserCost:0,
+      directSalesThroughWebsite:0,
+      salesTeam:0,
+      totalCost:0,
+      status:0,
+      gstPrice:0,
+    })
   };
-  
 
-  let buttonCheck = 
-
+  let buttonCheck =
     formData.developerCost.length > 0 &&
     formData.researchAndDevlopment.length > 0 &&
     formData.customerSupportAndTechnicalAssitance.length > 0 &&
@@ -43,10 +57,8 @@ const SalesForm = ({ formData, setFormData, setFormVisible }) => {
     formData.thirdPartySoftwareComponent.length > 0 &&
     formData.perUserPrice.length > 0 &&
     formData.totalNumberOfUser.length > 0 &&
-    formData.totalUserCost.length > 0 &&
     formData.directSalesThroughWebsite.length > 0 &&
     formData.salesTeam.length > 0 &&
-    formData.totalCost.length > 0 &&
     formData.gstPrice.length > 0;
 
   const cancelButton = () => {
@@ -70,6 +82,41 @@ const SalesForm = ({ formData, setFormData, setFormVisible }) => {
       gstPrice: "",
     });
   };
+
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      totalUserCost:
+        parseInt(formData.perUserPrice) * parseInt(formData.totalNumberOfUser),
+
+      totalCost:
+        parseInt(formData.developerCost) +
+        parseInt(formData.researchAndDevlopment) +
+        parseInt(formData.customerSupportAndTechnicalAssitance) +
+        parseInt(formData.serverMaintance) +
+        parseInt(formData.customerSegment) +
+        parseInt(formData.distributionChannel) +
+        parseInt(formData.thirdPartySoftwareComponent) +
+        parseInt(formData.totalUserCost) +
+        parseInt(formData.directSalesThroughWebsite) +
+        parseInt(formData.salesTeam) +
+        parseInt(formData.gstPrice),
+    });
+  }, [
+    formData.perUserPrice,
+    formData.totalNumberOfUser,
+    formData.developerCost,
+    formData.researchAndDevlopment,
+    formData.customerSupportAndTechnicalAssitance,
+    formData.serverMaintance,
+    formData.customerSegment,
+    formData.distributionChannel,
+    formData.thirdPartySoftwareComponent,
+    formData.totalUserCost,
+    formData.directSalesThroughWebsite,
+    formData.salesTeam,
+    formData.gstPrice,
+  ]);
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
@@ -197,6 +244,7 @@ const SalesForm = ({ formData, setFormData, setFormVisible }) => {
           value={formData.totalUserCost}
           onChange={(e) => handleInputChange(e)}
           required
+          disabled
         />
         <TextField
           margin="dense"
@@ -244,17 +292,7 @@ const SalesForm = ({ formData, setFormData, setFormVisible }) => {
           value={formData.totalCost}
           onChange={(e) => handleInputChange(e)}
           required
-        />
-        <TextField
-          margin="dense"
-          label="Total Price"
-          type="number"
-          fullWidth
-          name="totalPrice"
-          id="totalPrice"
-          value={formData.totalPrice}
-          onChange={(e) => handleInputChange(e)}
-          required
+          disabled
         />
       </div>
       <div className="data-buttons">

@@ -7,9 +7,9 @@ import * as ClientsApi from "./ClientsApi";
 import { useNavigate } from "react-router-dom";
 import StateClients from "./StateClients";
 
-const ClientsForm = ({ formData, setFormData, setFormVisible }) => {
+const ClientsForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
   const navigate = useNavigate();
-  const { setClients, setToggle } = StateClients();
+  const { setClients } = StateClients();
 
   const saveClients = async () => {
     await ClientsApi.saveClients(formData);
@@ -71,6 +71,16 @@ const ClientsForm = ({ formData, setFormData, setFormVisible }) => {
     {
       value: "NetBanking",
       label: "Net Banking",
+    },
+  ];
+  const statuses = [
+    {
+      value: "Active",
+      label: "Active",
+    },
+    {
+      value: "Inactive",
+      label: "Inactive",
     },
   ];
 
@@ -297,17 +307,28 @@ const ClientsForm = ({ formData, setFormData, setFormVisible }) => {
          
         />
         <TextField
-          margin="dense"
-          label="status"
-          type="text"
-          fullWidth
-          name="status"
           id="status"
+          margin="dense"
+          select
+          label="Status"
+          fullWidth
+          defaultValue="Choose"
+          SelectProps={{
+            native: true,
+          }}
+          InputLabelProps={{
+            shrink: true,
+          }}
           value={formData.status}
           onChange={(e) => handleInputChange(e)}
-          required
-         
-        />
+          name="status"
+        >
+          {statuses.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </TextField>
       </div>
       <div className="data-buttons">
         <Button

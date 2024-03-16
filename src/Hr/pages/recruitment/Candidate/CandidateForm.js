@@ -30,8 +30,7 @@ const CandidateForm = ({ formData, setFormData, setFormVisible, setToggle }) => 
 
   const saveCandidate = async () => {
     await api.saveCandidate(formData);
-    console.log("hee",formData);
-    alert("Candidate added successfully");
+    window.location.reload();
     navigate("/hr/recruitment/candidate");
 
     setFormData({
@@ -219,7 +218,7 @@ const CandidateForm = ({ formData, setFormData, setFormVisible, setToggle }) => 
       <div className="data-input-fields">
       <TextField
         margin="dense"
-        label="Resume Upload"
+        label="Resume Upload in pdf"
         type="file"
         fullWidth
         name="file"

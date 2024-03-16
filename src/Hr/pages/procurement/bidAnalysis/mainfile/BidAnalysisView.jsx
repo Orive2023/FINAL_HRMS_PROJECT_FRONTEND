@@ -120,6 +120,8 @@ const BidAnalysisView = () => {
                         <BidAnalysisForm
                           formData={formData}
                           setFormData={setFormData}
+                          setFormVisible={setFormVisible}
+                      setToggle={setToggle}
                         />
                       </CardContent>
                     </Card>

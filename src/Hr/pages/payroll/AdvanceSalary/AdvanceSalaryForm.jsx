@@ -109,6 +109,8 @@ const AdvanceSalaryForm = ({ setFormVisible, setToggle }) => {
     formData.employeeName.length > 0 &&
     formData.monthAndYear.length > 0;
 
+    console.log("formdata", formData);
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="data-input-fields">

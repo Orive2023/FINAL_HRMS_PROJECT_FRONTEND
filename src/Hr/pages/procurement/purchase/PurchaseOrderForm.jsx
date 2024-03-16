@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
+
 import axios from "axios";
 
 import {
@@ -22,12 +20,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PurchaseOrderState from "./PurchaseOrderState";
 import * as PurchaseOrderApi from "./PurchaseOrderApi";
 
-const PurchaseOrderForm = ({
-  purchaseOrder,
-  formData,
-  setFormData,
-  setToggle,
-}) => {
+const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) => {
   const navigate = useNavigate();
   const {
     genId,
@@ -49,9 +42,7 @@ const PurchaseOrderForm = ({
     setFileError,
     dateError,
     setDateError,
-    vendor,
-    setVendor,
-    setPurchase,
+
     open,
     setOpen,
     recDelete,
@@ -62,8 +53,7 @@ const PurchaseOrderForm = ({
 
   const [quant, setQuant] = useState(0);
   const [pri, setPri] = useState(0);
-
-  const [unit, setUnit] = useState([]);
+  const [company, setCompany] = useState([]);
   const [purchaseData, setPurchaseData] = useState([]);
   const [saveDisable, setSaveDisable] = useState(true);
   const [totalAmount, setTotalAmount] = useState(0);
@@ -75,16 +65,6 @@ const PurchaseOrderForm = ({
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === "unitName" && value === "addNewunit") {
-      // Redirect to the company form in the company module
-      navigate("/hr/procurement/unit");
-      return;
-    }
-    if (name === "vendorName" && value === "addNewVendor") {
-      // Redirect to the company form in the company module
-      navigate("/hr/procurement/vendor");
-      return;
-    }
 
     setFormData({
       ...formData,
@@ -204,30 +184,29 @@ const PurchaseOrderForm = ({
       const result = await axios.get(
         `http://localhost:8094/purchaseorder/${purchaseOrder}`
       );
-      setPurchase(result.data);
+      setCompany(result.data);
     } catch (error) {
       console.error("Error loading purchase:", error);
     }
   };
 
-  const cancelButton = () => {
+  const cancelButton = () =>{
     setFormVisible(false);
     setToggle(false);
     setFormData({
-      description: "",
-      unitName: "",
-      quantity: "",
-      price: "",
-      total: "",
-      grandTotal: "",
-    });
-  };
+      description:"",
+      unitName:"",
+      quantity:"",
+      price:"",
+      total:"",
+      grandTotal:"",
+
+    })
+  }
 
   useEffect(() => {
     if (purchaseData.length > 0) {
       loadPurchase();
-      fetchUnit();
-      fetchVendor();
     }
   }, []);
 
@@ -237,15 +216,6 @@ const PurchaseOrderForm = ({
 
   const handleSubmit = (e) => {
     handleClose();
-  };
-
-  const fetchUnit = async () => {
-    const unitData = await PurchaseOrderApi.fetchUnit();
-    setUnit(unitData);
-  };
-  const fetchVendor = async () => {
-    const vendorData = await PurchaseOrderApi.fetchVendor();
-    setVendor(vendorData);
   };
 
   // const [listData, setListData] = useState({
@@ -474,43 +444,21 @@ const PurchaseOrderForm = ({
             justifyContent: "space-between",
           }}
         >
-          <FormControl
-            fullWidth
+          <TextField
             style={{
               margin: "8px 15px",
               width: "30%",
             }}
-          >
-            <InputLabel id="demo-company-select-label">Vendor Name</InputLabel>
-            <Select
-              labelId="demo-company-select-label"
-              id="selectedCompany"
-              value={formData.vendorName}
-              name="vendorName"
-              label="vendorName"
-              onChange={(e) => handleInputChange(e)}
-              required
-            >
-              {vendor &&
-                vendor.map((item, index) => {
-                  return (
-                    <MenuItem key={index} value={item.vendorName}>
-                      {item.vendorName}
-                    </MenuItem>
-                  );
-                })}
-              <MenuItem className="linkStyle" value="addNewVendor">
-                <a href="#">
-                  <FontAwesomeIcon
-                    icon={faCirclePlus}
-                    rotation={90}
-                    className="iconStyle"
-                  />
-                  Create Vendor
-                </a>
-              </MenuItem>
-            </Select>
-          </FormControl>
+            margin="dense"
+            label="Vendor Name"
+            type="text"
+            fullWidth
+            name="vendorName"
+            id="vendorName"
+            value={formData.vendorName}
+            onChange={(e) => handleInputChange(e)}
+            required
+          />
           <TextField
             style={{
               margin: "8px 15px",
@@ -634,45 +582,16 @@ const PurchaseOrderForm = ({
                       padding: "8px",
                     }}
                   >
-                    <FormControl
-                      fullWidth
-                      style={{
-                        // margin: "8px 15px",
-                        width: "100%",
+                    <TextField
+                      value={item.unitName}
+                      name="signature"
+                      type="text"
+                      onChange={(e) => {
+                        handleItemChange(item.id, "unitName", e.target.value);
+                        handleQuotationChange(e);
                       }}
-                    >
-                      <InputLabel id="demo-company-select-label">
-                        Unit Name
-                      </InputLabel>
-                      <Select
-                        labelId="demo-company-select-label"
-                        id="selectedCompany"
-                        value={formData.unitName}
-                        name="unitName"
-                        label="unitName"
-                        onChange={(e) => handleInputChange(e)}
-                        required
-                      >
-                        {unit &&
-                          unit.map((item, index) => {
-                            return (
-                              <MenuItem key={index} value={item.unitName}>
-                                {item.unitName}
-                              </MenuItem>
-                            );
-                          })}
-                        <MenuItem className="linkStyle" value="addNewunit">
-                          <a href="#">
-                            <FontAwesomeIcon
-                              icon={faCirclePlus}
-                              rotation={90}
-                              className="iconStyle"
-                            />
-                            Create unit
-                          </a>
-                        </MenuItem>
-                      </Select>
-                    </FormControl>
+                      style={{ width: "100%" }}
+                    />
                   </TableCell>
 
                   {/* purchasedby */}

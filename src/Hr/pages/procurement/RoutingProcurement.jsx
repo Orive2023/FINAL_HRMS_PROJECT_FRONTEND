@@ -11,12 +11,15 @@ import VendorProfile from "./vendor/Mainfile/VendorProfile";
 import UnitProfile from "./unit/Mainfile/UnitProfile";
 import RequestProfile from "./request/Mainfile/RequestProfile";
 import PurchaseOrderProfile from "./purchase/Mainfile/PurchaseOrderProfile";
+import EditVendor from "./vendor/Mainfile/EditVendor";
+
 const routesData = [
   { path: "/hr/procurement/committee", element: <CommitteeView /> },
   { path: "/procurement/edit-committee/:id", element: <EditCommittee /> },
   { path: "/hr/procurement/unit", element: <UnitView /> },
   { path: "/unit-profile/:id", element: <UnitProfile/> },
   { path: "/hr/procurement/vendor", element: <VendorView /> },
+  { path: "/procurement/edit-vendor/:id", element: <EditVendor /> },
   { path: "/vendor-profile/:id", element: <VendorProfile /> },
    { path: "/hr/procurement/purchase-order", element: <PurchaseOrder /> },
    { path: "/purchaseorder-profile/:id", element: <PurchaseOrderProfile /> },
