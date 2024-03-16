@@ -4,8 +4,6 @@ const PurchaseOrderState = () => {
   const [dateError, setDateError] = useState("");
   const [formVisible, setFormVisible] = useState(false);
   const [purchaseOrder, setPurchaseOrder] = useState([]);
-  const [vendor, setVendor] = useState([]);
-  const [unit, setUnit] = useState([]);
   const [open, setOpen] = useState(false);
   const [recDelete, setRecDelete] = useState("");
   const [genId, setGenId] = useState(1);
@@ -40,8 +38,6 @@ const PurchaseOrderState = () => {
     purchaseBy,
     setPurchaseBy,
     setFile,
-    vendor, 
-    setVendor,
     description,
     setDescription,
     descriptionError,
@@ -57,9 +53,6 @@ const PurchaseOrderState = () => {
     setPurchaseOrder,
     open,
     setOpen,
-    unit, 
-    setUnit,
-    vendor,setVendor,
     formData,
     setFormData,
     recDelete,

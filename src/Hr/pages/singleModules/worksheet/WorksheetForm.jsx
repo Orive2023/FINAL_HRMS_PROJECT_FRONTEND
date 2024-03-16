@@ -72,6 +72,26 @@ const WorksheetForm = ({
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    let un;
+    if(name==="employeeName"){
+      employeeName.map((elem)=>{
+        if(value===elem.employeeName){
+            un = elem.username;
+        }
+      })
+      setFormData({
+        ...formData,
+        [name]:value,
+        username: un
+      })
+    }
+
+    if (name === "employeeName" && value === "addNewEmployee") {
+      // Redirect to the company form in the company module
+      navigate("/hr/employee/employee");
+      return;
+    }
+
     if (name === "createdDate") {
       const isValidDate = value === getCurrentDate();
       setDateError(!isValidDate);
@@ -80,16 +100,13 @@ const WorksheetForm = ({
       // Redirect to the company form in the company module
       navigate("/hr/project");
       return;
-
     }
     const selectedProject = project.find((pro) => pro.projectName === value);
     if (selectedProject) {
       setFormData({
         ...formData,
         [e.target.name]: e.target.value,
-       username: selectedProject.username  || "",
-       
-       
+        username: selectedProject.username || "",
       });
     } else {
       setFormData({
@@ -97,22 +114,26 @@ const WorksheetForm = ({
         [e.target.name]: e.target.value,
       });
     }
+    setFormData({
+      ...formData,
+      [name]: value,
+      username: un
+    })
   };
-    // const selectedProject = project.find((pro) => pro.projectName === value);
-    // if (selectedProject) {
-    //   setFormData({
-    //     ...formData,
-    //     [e.target.name]: e.target.value,
-    //     employeeName: selectedProject.employeeName || "",
-    //     // username: selectedProject.username || "",
-    //   });
-    // } else {
-    //   setFormData({
-    //     ...formData,
-    //     [e.target.name]: e.target.value,
-    //   });
-    
-  
+  // const selectedProject = project.find((pro) => pro.projectName === value);
+  // if (selectedProject) {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //     employeeName: selectedProject.employeeName || "",
+  //     // username: selectedProject.username || "",
+  //   });
+  // } else {
+  //   setFormData({
+  //     ...formData,
+  //     [e.target.name]: e.target.value,
+  //   });
+
   const saveWorksheet = async () => {
     await api.saveWorksheet(formData);
     navigate("/hr/worksheets");
@@ -201,6 +222,68 @@ const WorksheetForm = ({
   return (
     <form onSubmit={handleSubmit}>
       <div className="data-input-fields">
+        <FormControl fullWidth>
+          <InputLabel id="demo-project-select-label">Project Name</InputLabel>
+          <Select
+            labelId="demo-project-select-label"
+            id="selectedProject"
+            value={formData.projectName}
+            name="projectName"
+            label="projectName"
+            onChange={(e) => handleInputChange(e)}
+            required
+          >
+            {project &&
+              project.map((item, index) => {
+                return (
+                  <MenuItem key={index} value={item.projectName}>
+                    {item.projectName}
+                  </MenuItem>
+                );
+              })}
+            <MenuItem className="linkStyle" value="addNewProject">
+              <a href="#">
+                <FontAwesomeIcon
+                  icon={faCirclePlus}
+                  rotation={90}
+                  className="iconStyle"
+                />
+                Create Project
+              </a>
+            </MenuItem>
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth>
+          <InputLabel id="demo-company-select-label">Employee Name</InputLabel>
+          <Select
+            labelId="demo-company-select-label"
+            id="selectedCompany"
+            value={formData.employeeName}
+            name="employeeName"
+            label="employeeName"
+            onChange={(e) => handleInputChange(e)}
+            required
+          >
+            {employeeName &&
+              employeeName.map((item, index) => {
+                return (
+                  <MenuItem key={index} value={item.employeeName}>
+                    {item.employeeName}
+                  </MenuItem>
+                );
+              })}
+             <MenuItem className="linkStyle" value="addNewEmployee">
+      <a href="#">
+        <FontAwesomeIcon icon={faCirclePlus} rotation={90} className="iconStyle" />
+       Create Employee
+      </a>
+    </MenuItem>
+
+          </Select>
+        </FormControl>
+
+
         <TextField
           margin="dense"
           label="User Name"
@@ -211,29 +294,8 @@ const WorksheetForm = ({
           value={formData.username}
           onChange={(e) => handleInputChange(e)}
           // required
+          disabled
         />
-        <FormControl fullWidth>
-          <InputLabel id="demo-worksheet-select-label">
-            Employee Name
-          </InputLabel>
-          <Select
-            labelId="demo-worksheet-select-label"
-            id="selectedEmployee"
-            value={formData.employeeName}
-            name="employeeName"
-            label="employeeName"
-            onChange={(e) => handleInputChange(e)}
-          >
-            {employeeName &&
-              employeeName.map((item, index) => {
-                return (
-                  <MenuItem key={index} value={item.employeeName}>
-                    {item.employeeName}
-                  </MenuItem>
-                );
-              })}
-          </Select>
-        </FormControl>
 
         <TextField
           margin="dense"
@@ -312,36 +374,6 @@ const WorksheetForm = ({
       </div>
 
       <div className="data-input-fields">
-      <FormControl fullWidth>
-          <InputLabel id="demo-project-select-label">Project Name</InputLabel>
-          <Select
-            labelId="demo-project-select-label"
-            id="selectedProject"
-            value={formData.projectName}
-            name="projectName"
-            label="projectName"
-            onChange={(e) => handleInputChange(e)}
-            required
-          >
-            {project &&
-              project.map((item, index) => {
-                return (
-                  <MenuItem key={index} value={item.projectName}>
-                    {item.projectName}
-                  </MenuItem>
-                );
-              })}
-            <MenuItem className="linkStyle" value="addNewProject">
-      <a href="#">
-        <FontAwesomeIcon icon={faCirclePlus} rotation={90} className="iconStyle" />
-       Create Project
-      </a>
-    </MenuItem>
-
-          </Select>
-        </FormControl>
-
-
         <TextField
           margin="dense"
           label="Assigned To"

@@ -308,7 +308,7 @@ const PurchaseOrderTable = ({
       className="d-flex"
       style={{ display: "flex", flexDirection: "column" }}
     >
-      <div className=" table-ka-top-btns">
+      <div className=" table-ka-top-btns" style={{marginTop:'60px'}}>
         <button
           variant="outlined"
           onClick={handleButtonClick}
@@ -479,15 +479,7 @@ const PurchaseOrderTable = ({
                       <td>{purchaseOrder.price}</td>
                       <td>{purchaseOrder.total}</td>
                       <td>{purchaseOrder.grandTotal}</td>
-                      
-                      <td className="mx-2">
-                <Link
-                  to={`/purchaseorder-profile/${purchaseOrder.purchaseOrderId}`}
-                  className="btn btn-warning"
-                >
-                  <FaEye />
-                </Link>
-                </td>
+
                       <td className="mx-2">
                         <button
                           className="btn btn-danger"

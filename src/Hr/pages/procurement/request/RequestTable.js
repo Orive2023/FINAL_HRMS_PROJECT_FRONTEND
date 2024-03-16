@@ -449,7 +449,7 @@ const RequestTable = ({ request, setRecDelete ,setFormVisible,
                     );
                 })
                 .map((req, index) => (
-                    <tr key={req.id}>
+                    <tr key={req.requestId}>
                       <th scope="row" key={index}>
                         {index + 1}
                       </th>
@@ -460,9 +460,8 @@ const RequestTable = ({ request, setRecDelete ,setFormVisible,
                       <td className="mx-2">
                         <Link
                            to={`/request-profile/${req.requestId}`}
-                           className="btn btn-warning"
                         >
-                          <FaEye />
+                          <FaEye className="action-eye"/>
                         </Link>
                       </td>
                      
@@ -476,12 +475,8 @@ const RequestTable = ({ request, setRecDelete ,setFormVisible,
                         </Link>
                       </td> */}
                       <td className="mx-2">
-                        <Link
-                          className="btn btn-danger"
-                          onClick={() => deleteRequest(req.requestId)}
-                        >
-                          <FaTrashAlt />
-                        </Link>
+                          <FaTrashAlt className="action-delete" onClick={() => deleteRequest(req.requestId)}
+                          />
                       </td>
                     </tr>
                   

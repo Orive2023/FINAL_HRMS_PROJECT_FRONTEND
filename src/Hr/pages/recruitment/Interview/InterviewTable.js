@@ -1,7 +1,7 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEdit, FaEye, FaTrashAlt } from "react-icons/fa";
-import DataNotFound from "../../../asset/images/no data 1.png"
+import DataNotFound from "../../../asset/images/no data 1.png";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import * as XLSX from "xlsx";
@@ -9,7 +9,7 @@ import { CSVLink } from "react-csv";
 import logo from "../../../asset/images/logo.png";
 import header from "../../../asset/images/Header.png";
 import footer from "../../../asset/images/Footer.png";
-import { styled } from '@mui/system';
+import { styled } from "@mui/system";
 import { BiSolidHide } from "react-icons/bi";
 import { MdAdd } from "react-icons/md";
 import Button from "@mui/material/Button";
@@ -17,47 +17,51 @@ import Button from "@mui/material/Button";
 import {
   TablePagination,
   tablePaginationClasses as classes,
-} from '@mui/base/TablePagination';
+} from "@mui/base/TablePagination";
 
-const InterviewTable = ({ interview, setRecDelete, setFormVisible,
+const InterviewTable = ({
+  interview,
+  setRecDelete,
+  setFormVisible,
   setToggle,
-  toggle, }) => {
+  toggle,
+}) => {
   const [search, setSearch] = useState("");
   const CustomTablePagination = styled(TablePagination)`
-  & .${classes.toolbar} {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 0 0 0 10px;
+    & .${classes.toolbar} {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 0 0 0 10px;
 
-    @media (min-width: 768px) {
-      flex-direction: row;
-      align-items: center;
+      @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: center;
+      }
     }
-  }
 
-  & .${classes.selectLabel} {
-    margin: 0;
-  }
-
-  & .${classes.displayedRows} {
-    margin: 0;
-
-    @media (min-width: 768px) {
-      margin-left: auto;
+    & .${classes.selectLabel} {
+      margin: 0;
     }
-  }
 
-  & .${classes.spacer} {
-    display: none;
-  }
+    & .${classes.displayedRows} {
+      margin: 0;
 
-  & .${classes.actions} {
-    display: flex;
-    gap: 0rem;
-  }
-`;
+      @media (min-width: 768px) {
+        margin-left: auto;
+      }
+    }
+
+    & .${classes.spacer} {
+      display: none;
+    }
+
+    & .${classes.actions} {
+      display: flex;
+      gap: 0rem;
+    }
+  `;
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -117,7 +121,6 @@ const InterviewTable = ({ interview, setRecDelete, setFormVisible,
           row.interviewerEmailId,
           row.meetingLink,
           row.date,
-          
         ]),
         styles: { fontSize: 5, fontStyle: "normal" },
         headStyles: {
@@ -171,7 +174,6 @@ const InterviewTable = ({ interview, setRecDelete, setFormVisible,
           row.interviewerEmailId,
           row.meetingLink,
           row.date,
-          
         ]),
         styles: { fontSize: 5, fontStyle: "normal" },
         headStyles: {
@@ -212,18 +214,17 @@ const InterviewTable = ({ interview, setRecDelete, setFormVisible,
       { width: 25 },
     ];
 
-   
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
     XLSX.writeFile(wb, "interview.xlsx");
   };
 
-  console.log(interview)
+  console.log(interview);
 
   const handlePrint = () => {
     createPdf();
-    const pdfContent = doc.output('bloburl');
-  
+    const pdfContent = doc.output("bloburl");
+
     if (pdfContent) {
       const printWindow = window.open("", "_blank");
       printWindow.document.write(`
@@ -267,9 +268,12 @@ const InterviewTable = ({ interview, setRecDelete, setFormVisible,
     return (
       <tr>
         <td colSpan="12" className="text-center">
-          <img style={{margin:"50px 0 50px 0"}} src={DataNotFound}></img>
+          <img style={{ margin: "50px 0 50px 0" }} src={DataNotFound}></img>
           <h1>No Data Found!</h1>
-          <p>It Looks like there is no data to display in this table at the moment</p>
+          <p>
+            It Looks like there is no data to display in this table at the
+            moment
+          </p>
         </td>
       </tr>
     );
@@ -281,181 +285,198 @@ const InterviewTable = ({ interview, setRecDelete, setFormVisible,
       style={{ display: "flex", flexDirection: "column" }}
     >
       <div className=" table-ka-top-btns">
-      <Button
-                  variant="outlined"
-                  onClick={() => {
-                    setToggle(!toggle);
-                    handleButtonClick();
-                  }}
-                  id='add-btn'
-                  style={{ width: "max-content", marginTop: "20px" }}
-                >
-                  {toggle ? (
-                    <div className="hide">
-                      <BiSolidHide
-                      />
-                      HIDE
-                    </div>
-                  ) : (
-                    <div className="add">
-                      <MdAdd />
-                      ADD Interview
-                    </div>
-                  )}
-                </Button>
-                {
-                  <div className="search-print">
-                    <input
-                      type="text"
-                      className="search-beside-btn"
-                      placeholder="Search"
-                      value={search}
-                      onChange={(e) => setSearch(e.target.value)}
-                      style={{
-                        width: "20rem",
-                        borderRadius: "5px",
-                        height: "40px",
-                        padding: "10px",
-                        border: "1px solid rgba(247, 108, 36, 1)",
-                        marginRight: "30px",
-                      }}
-                    />
-                    <div className="d-flex mt-4 four-btn" style={{ gap: "10px" }} y>
-        <button
-          className=""
-          style={{
-            height: "40px",
-            display: "flex",
-            alignItems: "center",
-            width: "100px",
-            justifyContent: "center",
+        <Button
+          variant="outlined"
+          onClick={() => {
+            setToggle(!toggle);
+            handleButtonClick();
           }}
-          onClick={handlePrint}
+          id="add-btn"
+          style={{ width: "max-content", marginTop: "20px" }}
         >
-          PRINT
-        </button>
-        <button
-          onClick={convertToPdf}
-          className=""
-          style={{
-            height: "40px",
-            display: "flex",
-            alignItems: "center",
-            width: "100px",
-            justifyContent: "center",
-          }}
-        >
-          PDF
-        </button>
-        <button
-          onClick={convertToExcel}
-          className=""
-          style={{
-            height: "40px",
-            display: "flex",
-            alignItems: "center",
-            width: "100px",
-            justifyContent: "center",
-          }}
-        >
-          EXCEL
-        </button>
-        <CSVLink
-          data={interview}
-          filename="interview.csv"
-          style={{ textDecoration: "none" }}
-        >
-          <button
-            className=""
-            style={{
-              height: "40px",
+          {toggle ? (
+            <div className="hide">
+              <BiSolidHide />
+              HIDE
+            </div>
+          ) : (
+            <div className="add">
+              <MdAdd />
+              ADD Interview
+            </div>
+          )}
+        </Button>
+        {
+          <div className="search-print">
+            <input
+              type="text"
+              className="search-beside-btn"
+              placeholder="Search"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={{
+                width: "20rem",
+                borderRadius: "5px",
+                height: "40px",
+                padding: "10px",
+                border: "1px solid rgba(247, 108, 36, 1)",
+                marginRight: "30px",
+              }}
+            />
+            <div className="d-flex mt-4 four-btn" style={{ gap: "10px" }} y>
+              <button
+                className=""
+                style={{
+                  height: "40px",
                   display: "flex",
                   alignItems: "center",
                   width: "100px",
                   justifyContent: "center",
-            }}
-          >
-            CSV
-          </button>
-        </CSVLink>
+                }}
+                onClick={handlePrint}
+              >
+                PRINT
+              </button>
+              <button
+                onClick={convertToPdf}
+                className=""
+                style={{
+                  height: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100px",
+                  justifyContent: "center",
+                }}
+              >
+                PDF
+              </button>
+              <button
+                onClick={convertToExcel}
+                className=""
+                style={{
+                  height: "40px",
+                  display: "flex",
+                  alignItems: "center",
+                  width: "100px",
+                  justifyContent: "center",
+                }}
+              >
+                EXCEL
+              </button>
+              <CSVLink
+                data={interview}
+                filename="interview.csv"
+                style={{ textDecoration: "none" }}
+              >
+                <button
+                  className=""
+                  style={{
+                    height: "40px",
+                    display: "flex",
+                    alignItems: "center",
+                    width: "100px",
+                    justifyContent: "center",
+                  }}
+                >
+                  CSV
+                </button>
+              </CSVLink>
+            </div>
+          </div>
+        }
       </div>
-      </div>
-    }
-  </div>
-      
-     
-    <div className="table-start-container">
-      <table className="table table-bordered table-hover shadow">
-        <thead>
-          <tr className="text-center">
-            <th>SL.</th>
-            <th>Candidate Email ID</th>
-            <th>Scheduler Email ID</th>
-            <th>interviewer Email ID</th>
-            <th>Talent ID</th>
-            <th>interview Status</th>
-            <th>Meeting Link</th>
-            <th>Date</th>
-          </tr>
-        </thead>
 
-        <tbody className="text-center">
-          {interview.length === 0 ? renderInterviewData() : (rowsPerPage > 0
-            ? interview.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : interview
-          ).filter((elem)=>{
-            if(search.length===0)
-              return elem;
-            else  
-              return (elem.candidateEmailId.toLowerCase().includes(search.toLocaleLowerCase()) ||
-              elem.schedulerEmailId.toLowerCase().includes(search.toLocaleLowerCase()) ||
-              elem.interviewerEmailId.toLowerCase().includes(search.toLocaleLowerCase()) ||
-              elem.talentId.toString().toLowerCase().includes(search.toLocaleLowerCase()) ||
-              elem.meetingLink.toLowerCase().includes(search.toLocaleLowerCase()) ||
-              elem.date.toLowerCase().includes(search.toLocaleLowerCase())
-              )
-          }).map((interview, index) => (
-              <tr key={interview.id}>
-                <th scope="row" key={index}>
-                  {index + 1}
-                </th>
-                <td>{interview.candidateEmailId}</td>
-                <td>{interview.schedulerEmailId}</td>
-                <td>{interview.interviewerEmailId}</td>
-                <td>{interview.talentId}</td>
-                <td>{interview.interviewStatus}</td>
-                <td>{interview.meetingLink}</td>
-                <td>{interview.date}</td>
-              </tr>
-            ))}
-        </tbody>
-        <tfoot>
-          <tr>
-            <CustomTablePagination
-            className="pagingg"
-              rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-              colSpan={12}
-              count={interview.length}
-              rowsPerPage={rowsPerPage}
-              page={page}
-              slotProps={{
-                select: {
-                  "aria-label": "rows per page",
-                },
-                actions: {
-                  // showFirstButton: true,
-                  // showLastButton: true,
-                },
-              }}
-              onPageChange={handleChangePage}
-              onRowsPerPageChange={handleChangeRowsPerPage}
-            />
-          </tr>
-        </tfoot>
-      </table>
+      <div className="table-start-container">
+        <table className="table table-bordered table-hover shadow">
+          <thead>
+            <tr className="text-center">
+              <th>SL.</th>
+              <th>Candidate Email ID</th>
+              <th>Scheduler Email ID</th>
+              <th>interviewer Email ID</th>
+              <th>Talent ID</th>
+              <th>interview Status</th>
+              <th>Meeting Link</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+
+          <tbody className="text-center">
+            {interview.length === 0
+              ? renderInterviewData()
+              : (rowsPerPage > 0
+                  ? interview.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                  : interview
+                )
+                  .filter((elem) => {
+                    if (search.length === 0) return elem;
+                    else
+                      return (
+                        elem.candidateEmailId
+                          .toLowerCase()
+                          .includes(search.toLocaleLowerCase()) ||
+                        elem.schedulerEmailId
+                          .toLowerCase()
+                          .includes(search.toLocaleLowerCase()) ||
+                        elem.interviewerEmailId
+                          .toLowerCase()
+                          .includes(search.toLocaleLowerCase()) ||
+                        elem.talentId
+                          .toString()
+                          .toLowerCase()
+                          .includes(search.toLocaleLowerCase()) ||
+                        elem.meetingLink
+                          .toLowerCase()
+                          .includes(search.toLocaleLowerCase()) ||
+                        elem.date
+                          .toLowerCase()
+                          .includes(search.toLocaleLowerCase())
+                      );
+                  })
+                  .map((interview, index) => (
+                    <tr key={interview.id}>
+                      <th scope="row" key={index}>
+                        {index + 1}
+                      </th>
+                      <td>{interview.candidateEmailId}</td>
+                      <td>{interview.schedulerEmailId}</td>
+                      <td>{interview.interviewerEmailId}</td>
+                      <td>{interview.talentId}</td>
+                      <td>{interview.interviewStatus}</td>
+                      <td>{interview.meetingLink}</td>
+                      <td>{interview.date}</td>
+                    </tr>
+                  ))}
+          </tbody>
+          <tfoot>
+            <tr>
+              <CustomTablePagination
+                className="pagingg"
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                colSpan={12}
+                count={interview.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                slotProps={{
+                  select: {
+                    "aria-label": "rows per page",
+                  },
+                  actions: {
+                    // showFirstButton: true,
+                    // showLastButton: true,
+                  },
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+              />
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
-    </div>
-    
   );
 };
 

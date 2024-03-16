@@ -14,9 +14,13 @@ import {
   TablePagination,
   tablePaginationClasses as classes,
 } from "@mui/base/TablePagination";
+import Button from "@mui/material/Button";
 
-const CommitteeTable = ({ committee, setRecDelete }) => {
+
+const CommitteeTable = ({ committee, setRecDelete, setFormVisible }) => {
   const [search, setSearch] = useState("");
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [deleteItemId, setDeleteItemId] = useState(null);
   const CustomTablePagination = styled(TablePagination)`
     & .${classes.toolbar} {
       display: flex;
@@ -180,6 +184,22 @@ const CommitteeTable = ({ committee, setRecDelete }) => {
   const handleDelete = (id) => {
     setRecDelete(id);
   };
+
+  const deleteCommitte = (id) => {
+    setDeleteItemId(id);
+    setShowDeleteConfirmation(true);
+  };
+  const confirmDelete = () => {
+    setRecDelete(deleteItemId);
+    setShowDeleteConfirmation(false);
+  };
+
+  const cancelDelete = () => {
+    setDeleteItemId(null);
+    setShowDeleteConfirmation(false);
+  };
+
+
   const handlePrint = () => {
     createPdf();
     const pdfContent = doc.output("bloburl");
@@ -221,6 +241,11 @@ const CommitteeTable = ({ committee, setRecDelete }) => {
           </html>
         `);
     }
+  };
+
+
+  const handleButtonClick = () => {
+    setFormVisible((prev) => !prev);
   };
 
   const renderCommitteData = () => {
@@ -375,12 +400,11 @@ const CommitteeTable = ({ committee, setRecDelete }) => {
                       </Link>
                     </td> */}
                     <td className="mx-2">
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => handleDelete(committee.committeesId)}
+                      <div
+                        onClick={() => deleteCommitte(committee.committeesId)}
                       >
-                        <FaTrashAlt />
-                      </button>
+                        <FaTrashAlt className="action-delete"/>
+                      </div>
                     </td>
                   </tr>
                 ))}
@@ -409,6 +433,23 @@ const CommitteeTable = ({ committee, setRecDelete }) => {
           </tr>
         </tfoot>
       </table>
+      {showDeleteConfirmation && (
+        <div className="confirmation">
+          <div className="confirmation-popup d-flex align-items-center justify-content-center">
+            <div>
+              <p className="fs-4 fw-bold">Are you sure you want to delete this item?</p>
+              <div className="d-flex" style={{ gap: "10px" }}>
+                <Button id="input-btn-submit" style={{width:'100%'}} onClick={confirmDelete} variant="contained">
+                  Yes
+                </Button>
+                <Button id="input-btn-cancel" style={{width:'100%'}} onClick={cancelDelete} variant="outlined">
+                  No
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -13,14 +13,14 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RequestState from "../request/RequestState";
 import * as RequestApi from "../request/RequestApi";
 
-const RequestForm = ({ formData, setFormData, setFormVisible, setToggle  }) => {
+const RequestForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
   const getCurrentDate = () => {
     const now = new Date();
     const year = now.getFullYear();
@@ -38,7 +38,8 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle  }) => {
     request,
     setRequest,
     open,
-    unit,setUnit,
+    unit,
+    setUnit,
     setOpen,
     recDelete,
     setRecDelete,
@@ -60,14 +61,13 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle  }) => {
       ...formData,
       [name]: value,
       [e.target.name]: e.target.value,
-      
     });
   };
- 
 
   const [items, setItems] = useState([
     {
       id: 1,
+      sl: 1,
       descriptionOfMaterialId: 0,
       descriptionOfMaterialOrGoodsOrService: "",
       unitName: "",
@@ -100,10 +100,9 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle  }) => {
     );
 
     setItems(updatedItems);
-    
+
     setFormData({
       ...formData,
- 
     });
     const formDataWithUpdatedItems = {
       ...formData,
@@ -129,20 +128,18 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle  }) => {
   };
 
   const saveRequest = async () => {
-
     try {
       await RequestApi.saveRequest(formData);
       navigate("/hr/procurement/request");
       RequestApi.loadRequest();
       setFormData({
-        createdDate: getCurrentDate(),
         requestId: 0,
         requestingPerson: "",
         requestingDepartment: "",
         expectedTimeToHaveTheGoodStarts: "",
         expectedTimeToHaveTheGoodEnds: "",
         reasonForRequesting: "",
-        createdDate: "",
+        createdDate: getCurrentDate(),
         descriptionOfMaterialEntities: [
           {
             descriptionOfMaterialId: 0,
@@ -152,7 +149,7 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle  }) => {
           },
         ],
       });
-     
+
       handleClose();
     } catch (error) {
       console.error("Error saving debit:", error);
@@ -181,7 +178,6 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle  }) => {
     const unitData = await RequestApi.fetchUnit();
     setUnit(unitData);
   };
-
 
   const VoucherTypes = [
     {
@@ -212,12 +208,6 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle  }) => {
       value: "Subham Parida",
       label: "Subham Parida",
     },
-    
-
-
-
-
-
   ];
   const DepartmentTypes = [
     {
@@ -262,7 +252,6 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle  }) => {
       expectedTimeToHaveTheGoodStarts: "",
       expectedTimeToHaveTheGoodEnds: "",
       reasonForRequesting: "",
-      createdDate: "",
       descriptionOfMaterialEntities: [
         {
           descriptionOfMaterialId: 0,
@@ -294,227 +283,248 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle  }) => {
   return (
     <div>
       <form onSubmit={handleSubmit}>
-       <div style={{
-           
-            marginLeft:"-30px", }}
-            >
         <div
           style={{
-            margin: "20px",
-            display: "flex",
-            flexDirection: "column",
+            marginLeft: "-30px",
           }}
         >
-           <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-        
-          <TextField
+          <div
             style={{
-              margin: "8px 15px",
-              width: "30%",
+              margin: "20px",
+              display: "flex",
+              flexDirection: "column",
             }}
-            margin="dense"
-            label="Create Date"
-            type="date"
-            fullWidth
-            name="createdDate"
-            id="createdDate"
-            value={formData.createdDate}
-            onChange={(e) => handleInputChange(e)}
-            required
-            error={dateError}
-            helperText={dateError && "Please select the current date"}
-            InputLabelProps={{
-              shrink: true,
-            }}
-          />
-         
-             <TextField
-            style={{
-              margin: "8px 15px",
-              width: "30%",
-            }}
-              label="Requesting Person"
-              id="outlined-size-small"
-              select
-              SelectProps={{
-                native: true,
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              name="requestingPerson"
-              value={formData.requestingPerson}
-              onChange={(e) => handleInputChange(e)}
-            >
-              {VoucherTypes.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </TextField>
-           
-            <TextField
+          >
+            <div
               style={{
-                margin: "8px 15px",
-                width: "30%",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
-              label="Requesting Department"
-              id="outlined-size-small"
-              select
-              SelectProps={{
-                native: true,
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              name="requestingDepartment"
-              value={formData.requestingDepartment}
-              onChange={(e) => handleInputChange(e)}
             >
-              {DepartmentTypes.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </TextField>
+              <TextField
+                style={{
+                  margin: "8px 15px",
+                  width: "30%",
+                }}
+                margin="dense"
+                label="Create Date"
+                type="date"
+                fullWidth
+                name="createdDate"
+                id="createdDate"
+                value={formData.createdDate}
+                onChange={(e) => handleInputChange(e)}
+                required
+                error={dateError}
+                helperText={dateError && "Please select the current date"}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                disabled
+              />
+
+              <TextField
+                style={{
+                  margin: "8px 15px",
+                  width: "30%",
+                }}
+                label="Requesting Person"
+                id="outlined-size-small"
+                select
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="requestingPerson"
+                value={formData.requestingPerson}
+                onChange={(e) => handleInputChange(e)}
+              >
+                {VoucherTypes.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
+
+              <TextField
+                style={{
+                  margin: "8px 15px",
+                  width: "30%",
+                }}
+                label="Requesting Department"
+                id="outlined-size-small"
+                select
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="requestingDepartment"
+                value={formData.requestingDepartment}
+                onChange={(e) => handleInputChange(e)}
+              >
+                {DepartmentTypes.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
+              </TextField>
             </div>
             <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          
-            <TextField
               style={{
-                margin: "8px 15px",
-                width: "50%",
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
               }}
-              margin="dense"
-              label=" ExpectedTimeToHaveTheGoodStarts"
-              type="date"
-              fullWidth
-              name="expectedTimeToHaveTheGoodStarts"
-              id="expectedTimeToHaveTheGoodStarts"
-              SelectProps={{
-                native: true,
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              value={formData.expectedTimeToHaveTheGoodStarts}
-              onChange={(e) => handleInputChange(e)}
-              required
-            />
-           
-        
-            <TextField
-              style={{
-                margin: "8px 15px",
-                width: "50%",
-              }}
-              margin="dense"
-              label="ExpectedTimeToHaveTheGoodEnds"
-              type="date"
-              fullWidth
-              SelectProps={{
-                native: true,
-              }}
-              InputLabelProps={{
-                shrink: true,
-              }}
-              name="expectedTimeToHaveTheGoodEnds"
-              id="expectedTimeToHaveTheGoodEnds"
-              value={formData.expectedTimeToHaveTheGoodEnds}
-              onChange={(e) => handleInputChange(e)}
-              required
-            />
+            >
+              <TextField
+                style={{
+                  margin: "8px 15px",
+                  width: "50%",
+                }}
+                margin="dense"
+                label=" ExpectedTimeToHaveTheGoodStarts"
+                type="date"
+                fullWidth
+                name="expectedTimeToHaveTheGoodStarts"
+                id="expectedTimeToHaveTheGoodStarts"
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                value={formData.expectedTimeToHaveTheGoodStarts}
+                onChange={(e) => handleInputChange(e)}
+                required
+              />
+
+              <TextField
+                style={{
+                  margin: "8px 15px",
+                  width: "50%",
+                }}
+                margin="dense"
+                label="ExpectedTimeToHaveTheGoodEnds"
+                type="date"
+                fullWidth
+                SelectProps={{
+                  native: true,
+                }}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+                name="expectedTimeToHaveTheGoodEnds"
+                id="expectedTimeToHaveTheGoodEnds"
+                value={formData.expectedTimeToHaveTheGoodEnds}
+                onChange={(e) => handleInputChange(e)}
+                required
+              />
+            </div>
           </div>
         </div>
-        </div>
-          <TableContainer component={Paper}>
-            <Table style={{ border: "1px solid #ddd" }}>
-              <TableHead>
-                <TableRow style={{ background: "#f2f2f2" }}>
-                  <TableCell className="table-data">
-                    Description Of Material/Good/Services
+        <TableContainer component={Paper}>
+          <Table style={{ border: "1px solid #ddd" }}>
+            <TableHead>
+              <TableRow style={{ background: "#f2f2f2" }}>
+                <TableCell className="table-data">
+                  SL
+                </TableCell>
+                <TableCell className="table-data">
+                  Description Of Material/Good/Services
+                </TableCell>
+                <TableCell className="table-data">Unit</TableCell>
+                <TableCell className="table-data">Quantity</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {items.map((item, index) => (
+                <TableRow key={index} style={{ border: "1px solid #ddd" }}>
+                  <TableCell
+                    style={{
+                      border: "1px solid #ddd",
+                      padding: "8px",
+                    }}
+                  >
+                    <TextField
+                      id="outlined-size-small"
+                      name="descriptionOfMaterialOrGoodsOrService"
+                      value={index+1}
+                      onChange={(e) => handleListChange(index, e)}
+                      style={{ width: "100%" }}
+                      disabled
+                    />
                   </TableCell>
-                  <TableCell className="table-data">Unit</TableCell>
-                  <TableCell className="table-data">Quantity</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {items.map((item, index) => (
-                  <TableRow key={index} style={{ border: "1px solid #ddd" }}>
-                    <TableCell
+                  <TableCell
+                    style={{
+                      border: "1px solid #ddd",
+                      padding: "8px",
+                    }}
+                  >
+                    <TextField
+                      id="outlined-size-small"
+                      name="descriptionOfMaterialOrGoodsOrService"
+                      value={
+                        formData.descriptionOfMaterialEntities[index]
+                          ?.descriptionOfMaterialOrGoodsOrService
+                      }
+                      onChange={(e) => handleListChange(index, e)}
+                      style={{ width: "100%" }}
+                    />
+                  </TableCell>
+
+                  {/* unit name  */}
+                  <TableCell
+                    style={{
+                      border: "1px solid #ddd",
+                      padding: "8px",
+                    }}
+                  >
+                    <FormControl
+                      fullWidth
                       style={{
-                        border: "1px solid #ddd",
-                        padding: "8px",
+                        // margin: "8px 15px",
+                        width: "100%",
                       }}
                     >
-                      <TextField
-                        id="outlined-size-small"
-                        name="descriptionOfMaterialOrGoodsOrService"
-                        value={
-                          formData.descriptionOfMaterialEntities[index]
-                            ?.descriptionOfMaterialOrGoodsOrService
-                        }
-                        onChange={(e) => handleListChange(index, e)}
-                        style={{ width: "100%" }}
-                      />
-                    </TableCell>
-
-                    {/* unit name  */}
-                    <TableCell
-                      style={{
-                        border: "1px solid #ddd",
-                        padding: "8px",
-                      }}
-                    >
-                       <FormControl fullWidth  style={{
-                          // margin: "8px 15px",
-                          width: "100%",
-                        }}>
-                      
-          <InputLabel id="demo-company-select-label">unit Name</InputLabel>
-          <Select
-            labelId="demo-company-select-label"
-            id="selectedCompany"
-            value={formData.unitName}
-            name="unitName"
-            label="unitName"
-            onChange={(e) => handleInputChange(e)}
-            required
-          >
-          
-            {unit &&
-              unit.map((item, index) => {
-                return (
-                  <MenuItem key={index} value={item.unitName}>
-                    {item.unitName}
-                  </MenuItem>
-                );
-              })}
-             <MenuItem className="linkStyle" value="addNewunit">
-      <a href="#">
-        <FontAwesomeIcon icon={faCirclePlus} rotation={90} className="iconStyle" />
-       Create unit
-      </a>
-    </MenuItem>
-
-          </Select>
-         
-        </FormControl>
-                      {/* <TextField
+                      <InputLabel id="demo-company-select-label">
+                        unit Name
+                      </InputLabel>
+                      <Select
+                        labelId="demo-company-select-label"
+                        id="selectedCompany"
+                        value={formData.unitName}
+                        name="unitName"
+                        label="unitName"
+                        onChange={(e) => handleInputChange(e)}
+                      >
+                        {unit &&
+                          unit.map((item, index) => {
+                            return (
+                              <MenuItem key={index} value={item.unitName}>
+                                {item.unitName}
+                              </MenuItem>
+                            );
+                          })}
+                        <MenuItem className="linkStyle" value="addNewunit">
+                          <a href="#">
+                            <FontAwesomeIcon
+                              icon={faCirclePlus}
+                              rotation={90}
+                              className="iconStyle"
+                            />
+                            Create unit
+                          </a>
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                    {/* <TextField
                         style={{
                           // margin: "8px 15px",
                           width: "100%",
@@ -527,83 +537,82 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle  }) => {
                         }
                         onChange={(e) => handleListChange(index, e)}
                       ></TextField> */}
-                    </TableCell>
+                  </TableCell>
 
-                    {/* unitname */}
-                    <TableCell
+                  {/* unitname */}
+                  <TableCell
+                    style={{
+                      border: "1px solid #ddd",
+                      padding: "8px",
+                    }}
+                  >
+                    <TextField
+                      type="text"
+                      name="quantity"
+                      value={
+                        formData.descriptionOfMaterialEntities[index]?.quantity
+                      }
+                      onChange={(e) => {
+                        handleItemChange(
+                          item.quantity,
+                          "quantity",
+                          e.target.value
+                        );
+                        handleListChange(index, e);
+                      }}
+                      style={{ width: "90%" }}
+                    />
+                  </TableCell>
+
+                  {/* Action */}
+
+                  <TableCell
+                    style={{
+                      border: "1px solid #ddd",
+                      padding: "8px",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      // startIcon={<AddIcon />}
+                      onClick={() => addItem(item.id)}
                       style={{
-                        border: "1px solid #ddd",
-                        padding: "8px",
+                        marginBottom: "7px",
+                        justifyContent: "center",
                       }}
                     >
-                      <TextField
-                        type="text"
-                        name="quantity"
-                        value={
-                          formData.descriptionOfMaterialEntities[index]
-                            ?.quantity
-                        }
-                        onChange={(e) => {
-                          handleItemChange(
-                            item.quantity,
-                            "quantity",
-                            e.target.value
-                          );
-                          handleListChange(index, e);
-                        }}
-                        style={{ width: "90%" }}
-                      />
-                    </TableCell>
-
-                    {/* Action */}
-
-                    <TableCell
-                      style={{
-                        border: "1px solid #ddd",
-                        padding: "8px",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                      }}
+                      {/* Add Item */}
+                      {<AddIcon />}
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="secondary"
+                      // startIcon={<DeleteIcon />}
+                      onClick={() => removeItem(item.id)}
                     >
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        // startIcon={<AddIcon />}
-                        onClick={() => addItem(item.id)}
-                        style={{
-                          marginBottom: "7px",
-                          justifyContent: "center",
-                        }}
-                      >
-                        {/* Add Item */}
-                        {<AddIcon />}
-                      </Button>
-                      <Button
-                        variant="contained"
-                        color="secondary"
-                        // startIcon={<DeleteIcon />}
-                        onClick={() => removeItem(item.id)}
-                      >
-                        {/* Delete */}
-                        {<DeleteIcon />}
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              gap: "10px",
-              marginTop: "20px",
-            }}
-          >
-            {/* <TextField
+                      {/* Delete */}
+                      {<DeleteIcon />}
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            alignItems: "center",
+            gap: "10px",
+            marginTop: "20px",
+          }}
+        >
+          {/* <TextField
             name="quantity"
             type="number"
             label="Qy"
@@ -619,41 +628,38 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle  }) => {
               handleInputChange(e);
             }}
           /> */}
-            <TextField
-              margin="dense"
-              label="Reason For Requesting"
-              type="text"
-              halfWidth
-              name="reasonForRequesting"
-              id="reasonForRequesting"
-              value={formData.reasonForRequesting}
-              onChange={(e) => handleInputChange(e)}
-            />
-          </div>
-  
-          
+          <TextField
+            margin="dense"
+            label="Reason For Requesting"
+            type="text"
+            halfWidth
+            name="reasonForRequesting"
+            id="reasonForRequesting"
+            value={formData.reasonForRequesting}
+            onChange={(e) => handleInputChange(e)}
+          />
+        </div>
 
-          <div className="data-buttons">
-            <Button
-              id="input-btn-submit"
-              className="submit"
-              type="submit"
-              onClick={saveRequest}
-              variant="outlined"
-              disabled={buttonCheck ? false : true}
-            >
-              Submit
-            </Button>
-            <Button
-              id="input-btn-cancel"
-              className="cancel"
-              onClick={cancelButton}
-              variant="outlined"
-            >
-              Cancel
-            </Button>
-          </div>
-       
+        <div className="data-buttons">
+          <Button
+            id="input-btn-submit"
+            className="submit"
+            type="submit"
+            onClick={saveRequest}
+            variant="outlined"
+            disabled={buttonCheck ? false : true}
+          >
+            Submit
+          </Button>
+          <Button
+            id="input-btn-cancel"
+            className="cancel"
+            onClick={cancelButton}
+            variant="outlined"
+          >
+            Cancel
+          </Button>
+        </div>
       </form>
     </div>
   );

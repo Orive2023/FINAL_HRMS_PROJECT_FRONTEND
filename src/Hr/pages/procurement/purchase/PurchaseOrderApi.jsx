@@ -35,36 +35,3 @@ export const deletePurchase = async (id) => {
     console.error("Error deleting purchaseorder", error);
   }
 };
-
-export const fetchUnit = async () => {
-  try {
-     const result =  await axios.get(
-          `http://localhost:8094/units/get/units`,
-          {
-            validateStatus: () => {
-              return true;
-            },
-          }
-      
-        );
-        return result.data
-  } catch (error) {
-      console.error("Error load unit", error)
-  }
-}
-export const fetchVendor = async () => {
-  try {
-     const result =  await axios.get(
-          `${url}/vendor/get/vendor`,
-          {
-            validateStatus: () => {
-              return true;
-            },
-          }
-      
-        );
-        return result.data
-  } catch (error) {
-      console.error("Error load vendor", error)
-  }
-}

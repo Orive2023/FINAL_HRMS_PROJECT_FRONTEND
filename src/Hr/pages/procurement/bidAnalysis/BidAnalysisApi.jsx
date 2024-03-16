@@ -35,20 +35,3 @@ export const deleteBid = async (id) => {
     console.error("Error deleting bid", error);
   }
 };
-
-export const fetchVendor = async () => {
-  try {
-     const result =  await axios.get(
-          `${url}/vendor/get/vendor`,
-          {
-            validateStatus: () => {
-              return true;
-            },
-          }
-      
-        );
-        return result.data
-  } catch (error) {
-      console.error("Error load vendor", error)
-  }
-}

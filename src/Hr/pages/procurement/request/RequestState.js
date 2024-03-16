@@ -25,7 +25,7 @@ const RequestState = () => {
     expectedTimeToHaveTheGoodStarts: "",
     expectedTimeToHaveTheGoodEnds: "",
     reasonForRequesting: "",
-    createdDate: "",
+    createdDate: getCurrentDate(),
     descriptionOfMaterialEntities: [
       {
         descriptionOfMaterialId: 0,

@@ -62,8 +62,8 @@ const RequestProfile = () => {
                         className="rounded-circle img-fluid"
                         style={{ width: 150 }}
                       />
-                      <h5 className="my-3">Orive Solution
-                        {/* {${request.requestingPerson} ${request.requestingDepartment}} */}
+                      <h5 className="my-3">
+                        {`${request.requestingPerson} ${request.requestingDepartment}`}
                       </h5>
                       <div className="d-flex justify-content-center mb-2">
                         <Link to="/hr/procurement/Request">
