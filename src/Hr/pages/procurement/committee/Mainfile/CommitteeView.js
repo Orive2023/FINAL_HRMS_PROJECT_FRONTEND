@@ -22,7 +22,7 @@ const CommitteeView = () => {
     setOpen,
     recDelete,
     setRecDelete,
-    
+    setFormVisible
   } = StateCommittee();
 
   const handleOpen = () => {
@@ -96,7 +96,7 @@ const CommitteeView = () => {
               </Button>
             </div>
           </div>
-          <CommitteeTable committee={committee} setRecDelete={setRecDelete}/>
+          <CommitteeTable committee={committee} setRecDelete={setRecDelete} setFormVisible={setFormVisible}/>
           <div>
             <Dialog open={open} onClose={handleClose}>
               <DialogTitle id="form-header-popup">

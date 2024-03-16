@@ -43,6 +43,7 @@ function App() {
   // var bytes = CryptoJS.AES.decrypt(ciphertext, 'my-secret-key@123');
   // var decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 
+
   if (token && Role === "client_HR") {
     return <MainHrRouting />;
   } else if (token && Role === "client_Employee") {
@@ -50,6 +51,9 @@ function App() {
   } else {
     return <LoginSignup />;
   }
+
+  
+
 }
 
 export default App;

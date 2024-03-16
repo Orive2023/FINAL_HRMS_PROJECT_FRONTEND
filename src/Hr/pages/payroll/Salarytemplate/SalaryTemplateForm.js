@@ -11,6 +11,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { useToastContainer } from "react-toastify";
 import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 const SalaryTemplateForm = ({
   formData,
@@ -44,23 +46,36 @@ const SalaryTemplateForm = ({
   };
 
   const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    if (name === "employeeName" && value === "addNewEmployee") {
+      // Redirect to the company form in the company module
+      navigate("/hr/employee/employee");
+      return;
+    }
 
     let eID;
-    if(e.target.name==='employeeName'){
-      employee.map((elem)=>{
-        if(elem.employeeName===e.target.value){
-          eID = elem.employeeId;
+    let des;
+    if (e.target.name === "employeeName") {
+      employee.map((elem) => {
+        if (elem.employeeName === e.target.value) {
+        
+          setFormData({
+            ...formData,
+            employeeName: elem.employeeName,
+            username: elem.username,
+            designation: elem.designationName,
+          });
         }
-      })
+      });
+     
+    } else{
       setFormData({
         ...formData,
-        [e.target.name]: e.target.value,
-        employeeId: eID
-      })
+        [name]: value,
+        // username: eID,
+        // designation: des,
+      });
+
     }
   };
 
@@ -82,8 +97,9 @@ const SalaryTemplateForm = ({
         parseInt(formData.overtimeSalary) +
         parseInt(formData.specialAllowance) +
         parseInt(formData.otherAllowance),
-        employeeDeductionProvidentFund: formData.basicSalary * 0.12,
-        employeeDeductionEsic: formData.grossSalary < 21000 ? formData.grossSalary * 0.0075 : 0,
+      employeeDeductionProvidentFund: formData.basicSalary * 0.12,
+      employeeDeductionEsic:
+        formData.grossSalary < 21000 ? formData.grossSalary * 0.0075 : 0,
       netSalary:
         parseInt(formData.grossSalary) -
         (parseInt(formData.employeeDeductionProvidentFund) +
@@ -96,8 +112,8 @@ const SalaryTemplateForm = ({
       gratuity: ((formData.basicSalary / 26) * 15 * formData.gratuityYear) / 12,
       ctc:
         parseInt(formData.grossSalary) +
-        parseInt(formData.employeeDeductionProvidentFund) +
-        parseInt(formData.employeeDeductionEsic) +
+        parseInt(formData.employeerContributionProvidentFund) +
+        parseInt(formData.employeerContributionEsic) +
         parseInt(formData.gratuity) +
         parseInt(formData.bonus) +
         parseInt(formData.employeerContributionVariablePay),
@@ -185,25 +201,29 @@ const SalaryTemplateForm = ({
       newSlab5Percents:
         formData.newTaxableIncome > 600000
           ? 15000
-          : formData.newTaxableIncome > 300000 && formData.newTaxableIncome <= 600000
+          : formData.newTaxableIncome > 300000 &&
+            formData.newTaxableIncome <= 600000
           ? (parseInt(formData.newTaxableIncome) - 300000) * 0.05
           : 0,
       newSlab10Percents:
         formData.newTaxableIncome > 900000
           ? 30000
-          : formData.newTaxableIncome > 600000 && formData.newTaxableIncome <= 900000
+          : formData.newTaxableIncome > 600000 &&
+            formData.newTaxableIncome <= 900000
           ? (parseInt(formData.newTaxableIncome) - 600000) * 0.1
           : 0,
       newSlab15Percents:
         formData.newTaxableIncome > 1200000
           ? 45000
-          : formData.newTaxableIncome > 900000 && formData.newTaxableIncome <= 1200000
+          : formData.newTaxableIncome > 900000 &&
+            formData.newTaxableIncome <= 1200000
           ? (parseInt(formData.newTaxableIncome) - 900000) * 0.15
           : 0,
       slab20New:
         formData.newTaxableIncome > 1500000
           ? 60000
-          : formData.newTaxableIncome > 1200000 && formData.newTaxableIncome <= 1500000
+          : formData.newTaxableIncome > 1200000 &&
+            formData.newTaxableIncome <= 1500000
           ? (parseInt(formData.newTaxableIncome) - 1200000) * 0.2
           : 0,
       newSlab20Percents:
@@ -244,8 +264,8 @@ const SalaryTemplateForm = ({
         parseInt(formData.newTaxAfterTaxRebate) + parseInt(formData.cess4New),
       oldTds: formData.totalIncomeTax / 12,
       newTds: formData.newTotalIncomeTax / 12,
-      annualIncome: formData.grossSalary*12,
-      newAnnualIncome: formData.grossSalary*12,
+      annualIncome: formData.grossSalary * 12,
+      newAnnualIncome: formData.grossSalary * 12,
     });
   }, [
     formData.basicSalary,
@@ -331,7 +351,7 @@ const SalaryTemplateForm = ({
     setPeriod("monthly");
     setFormData({
       employeeName: "",
-      employeeId: "",
+      username: "",
       designation: "",
       workingDays: "",
       basicSalary: "",
@@ -414,7 +434,7 @@ const SalaryTemplateForm = ({
     setPeriod("monthly");
     setFormData({
       employeeName: "",
-      employeeId: "",
+      username: "",
       designation: "",
       workingDays: "",
       basicSalary: "",
@@ -512,10 +532,7 @@ const SalaryTemplateForm = ({
     },
   ];
 
-  let buttonCheck =
-    formData.employeeName.length > 0 &&
-    formData.employeeId.length > 0 &&
-    formData.designation.length > 0;
+  let buttonCheck = formData.employeeName.length > 0;
   // formData.basicSalary.length > 0 &&
   // formData.conveyanceAllowance.length > 0 &&
   // formData.medicalAllowance.length > 0 &&
@@ -535,35 +552,50 @@ const SalaryTemplateForm = ({
   return (
     <form onSubmit={handleSubmit}>
       <div className="data-input-fields">
-      <FormControl fullWidth>
+        <FormControl fullWidth>
           <InputLabel id="demo-company-select-label">Employee Name</InputLabel>
           <Select
             labelId="demo-company-select-label"
-            id="selectedEmployee"
+            id="selectedCompany"
             value={formData.employeeName}
             name="employeeName"
-            label="Employee Name"
+            label="employeeName"
             onChange={(e) => handleInputChange(e)}
+            required
           >
-            {employee.map((item, index) => {
-              return (
-                <MenuItem key={index} value={item.employeeName}>
-                  {item.employeeName}
-                </MenuItem>
-              );
-            })}
+            {employee &&
+              employee.map((item, index) => {
+                return (
+                  <MenuItem key={index} value={item.employeeName}>
+                    {item.employeeName}
+                  </MenuItem>
+                );
+              })}
+            <MenuItem className="linkStyle" value="addNewEmployee">
+              <a href="#">
+                <FontAwesomeIcon
+                  icon={faCirclePlus}
+                  rotation={90}
+                  className="iconStyle"
+                />
+                Create Employee
+              </a>
+            </MenuItem>
           </Select>
         </FormControl>
         <TextField
           margin="dense"
-          label="Employee ID"
-          type="number"
+          label="Username"
+          type="text"
           fullWidth
-          name="employeeId"
-          id="employeeId"
-          value={formData.employeeId}
+          name="username"
+          id="username"
+          value={formData.username}
           onChange={(e) => {
             handleInputChange(e);
+          }}
+          InputLabelProps={{
+            shrink: true,
           }}
           required
           disabled
@@ -580,8 +612,27 @@ const SalaryTemplateForm = ({
           onChange={(e) => {
             handleInputChange(e);
           }}
+          InputLabelProps={{
+            shrink: true,
+          }}
           required
-          disabled={period == "yearly" ? true : false}
+          disabled
+        />
+        <TextField
+          margin="dense"
+          label="Working Days"
+          type="number"
+          fullWidth
+          name="workingDays"
+          id="workingDays"
+          value={formData.workingDays}
+          onChange={(e) => {
+            handleInputChange(e);
+          }}
+          InputLabelProps={{
+            shrink: true,
+          }}
+          required
         />
       </div>
       <div className="data-input-fields">
@@ -847,7 +898,11 @@ const SalaryTemplateForm = ({
           fullWidth
           name="employeeDeductionEsic"
           id="employeeDeductionEsic"
-          value={period == "yearly" ? formData.employeeDeductionEsic * 12 : formData.employeeDeductionEsic}
+          value={
+            period == "yearly"
+              ? formData.employeeDeductionEsic * 12
+              : formData.employeeDeductionEsic
+          }
           onChange={(e) => handleInputChange(e)}
           required
           disabled
@@ -948,7 +1003,9 @@ const SalaryTemplateForm = ({
           name="employeerContributionEsic"
           id="employeerContributionEsic"
           value={
-            period == "yearly" ? formData.employeerContributionEsic * 12 : formData.employeerContributionEsic
+            period == "yearly"
+              ? formData.employeerContributionEsic * 12
+              : formData.employeerContributionEsic
           }
           onChange={(e) => handleInputChange(e)}
           required
@@ -1019,11 +1076,7 @@ const SalaryTemplateForm = ({
         fullWidth
         name="ctc"
         id="ctc"
-        value={
-          period == "yearly"
-            ? formData.ctc * 12
-            : formData.ctc
-        }
+        value={period == "yearly" ? formData.ctc * 12 : formData.ctc}
         onChange={(e) => handleInputChange(e)}
         required
         disabled
@@ -1847,7 +1900,7 @@ const SalaryTemplateForm = ({
       <div className="data-buttons">
         <Button
           type="submit"
-          onClick={(e)=>saveSalaryTemplate(e)}
+          onClick={(e) => saveSalaryTemplate(e)}
           variant="outlined"
           // disabled={buttonCheck ? false : true}
           id="input-btn-submit"

@@ -242,7 +242,7 @@ const MainFile = ({name}) => {
                   {/* {empData.map((item, index) => { */}
                     {/* return ( */}
                       <div className="mb-4">
-                      <h4>Welcome {userName}!</h4>
+                      <h4>Welcome {localStorage.getItem("UserName")}!</h4>
 
                         <p>Your performance is looking good</p>
                       </div>

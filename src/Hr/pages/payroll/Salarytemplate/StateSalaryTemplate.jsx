@@ -16,7 +16,7 @@ const StateSalaryTemplate = () => {
     const [employee, setEmployee] = useState([]);
     const [formData, setFormData] = useState({
       employeeName:"",
-      employeeId:"",
+      username:"",
       designation:"",
       workingDays:0,
       basicSalary:0,

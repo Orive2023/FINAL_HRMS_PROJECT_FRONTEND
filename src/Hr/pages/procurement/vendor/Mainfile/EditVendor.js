@@ -16,10 +16,7 @@ const EditVendor = () => {
     vendorName: "",
     mobileNo: "",
     emailAddress: "",
-    address: "",
-    country: "",
-    city: "",
-    zipCode: "",
+    status:""
   });
   const { id } = useParams();
   let navigate = useNavigate();
@@ -125,18 +122,21 @@ const EditVendor = () => {
               </div>
 
               <div className="input-group mb-5">
-                <label className="input-group-text" htmlFor="address">
-                  Address
+                <label className="input-group-text" htmlFor="approval">
+                  Status
                 </label>
-                <input
+                <select
                   className="form-control col-sm-6"
-                  type="text"
-                  name="address"
-                  id="address"
+                  name="status"
+                  id="status"
                   required
-                  value={vendor.address}
+                  value={vendor.status}
                   onChange={(e) => handleInputChange(e)}
-                />
+                >
+                  <option value="select">Select</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                </select>
               </div>
               {/* Add more input fields as needed */}
 

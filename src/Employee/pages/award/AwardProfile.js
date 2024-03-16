@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import SideBar from "../../components/SideBar";
 import Header from "../../components/Header";
 import CompanyLogoFile from "../../components/CompanyLogoFile";
+import logo from "../../../Hr/asset/Orive Logo 2.png";
 
 const AwardProfile = () => {
 	const { id } = useParams();
@@ -53,7 +54,7 @@ const AwardProfile = () => {
 						<div className="card mb-4">
 							<div className="card-body text-center">
 								<img
-									src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+									src={logo}
 									alt="avatar"
 									className="rounded-circle img-fluid"
 									style={{ width: 150 }}

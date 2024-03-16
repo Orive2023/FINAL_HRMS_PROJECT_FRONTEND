@@ -144,9 +144,7 @@ const InterviewForm = ({formData, setFormData, setFormVisible, setToggle}) => {
   };
 
   const saveInterview = async (e) => {
-    e.preventDefault();
     await api.saveInterview(formData);
-    alert("Interview added successfully");
     handleClose();
     navigate("/hr/recruitment/Interview");
     loadInterview();

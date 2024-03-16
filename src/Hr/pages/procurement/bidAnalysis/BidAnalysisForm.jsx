@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
+
 import axios from "axios";
 
 import {
@@ -22,19 +20,20 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import BidAnalysisState from "./BidAnalysisState";
 import * as BidAnalysisApi from "./BidAnalysisApi";
 
-const BidAnalysisForm = ({ formData, setFormData }) => {
+const BidAnalysisForm = ({
+  formData,
+  setFormData,
+  setFormVisible,
+  setToggle,
+}) => {
   const navigate = useNavigate();
   const {
     setPurchaseError,
     setDescriptionError,
     updatedTotalAmount,
     genId,
-    unit,
-    setUnit,
     setGenId,
     setBidAnalysis,
-    setOpen,
-    setFormVisible,
   } = BidAnalysisState();
 
   const [quant, setQuant] = useState(0);
@@ -51,11 +50,7 @@ const BidAnalysisForm = ({ formData, setFormData }) => {
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
-    if (name === "unitName" && value === "addNewunit") {
-      // Redirect to the company form in the company module
-      navigate("/hr/procurement/unit");
-      return;
-    }
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -144,6 +139,7 @@ const BidAnalysisForm = ({ formData, setFormData }) => {
   const saveBid = async () => {
     try {
       await BidAnalysisApi.saveBid(formData);
+      window.location.reload();
       navigate("/hr/procurement/bidAnalysis");
       setGenId(genId + 1);
       handleClose();
@@ -187,7 +183,7 @@ const BidAnalysisForm = ({ formData, setFormData }) => {
   }, []);
 
   const handleClose = () => {
-    setOpen(false);
+    setToggle(false);
   };
 
   const handleSubmit = (e) => {
@@ -716,49 +712,15 @@ const BidAnalysisForm = ({ formData, setFormData }) => {
                     padding: "8px",
                   }}
                 >
-                 <FormControl
-                      fullWidth
-                      style={{
-      
-                        width:"50px"
-                      }}
-                    >
-                      <InputLabel id="demo-company-select-label">
-                        Unit Name
-                      </InputLabel>
-                      <Select
-                        labelId="demo-company-select-label"
-                        id="selectedCompany"
-                        value={formData.unitName}
-                        name="unitName"
-                        label="unitName"
-                        onChange={(e) => handleInputChange(e)}
-                        required
-                      >
-                        {unit &&
-                          unit.map((item, index) => {
-                            return (
-                              <MenuItem key={index} value={item.unitName}>
-                                {item.unitName}
-                              </MenuItem>
-                            );
-                          })}
-                          
-                        <MenuItem className="linkStyle" value="addNewunit">
-                          <a href="#">
-                            <FontAwesomeIcon
-                              icon={faCirclePlus}
-                              rotation={90}
-                              className="iconStyle"
-                            />
-                            Create unit
-                          </a>
-                        </MenuItem>
-                      </Select>
-                    </FormControl>
-                  </TableCell>
-
-                
+                  <TextField
+                    value={listData.unitName}
+                    name="unitName"
+                    onChange={(e) => {
+                      handleListChange(e);
+                    }}
+                    style={{ width: "100%" }}
+                  />
+                </TableCell>
 
                 {/* Amount */}
                 <TableCell
@@ -1101,7 +1063,7 @@ const BidAnalysisForm = ({ formData, setFormData }) => {
           <Button
             id="input-btn-cancel"
             className="cancel"
-            onClick={() => setFormVisible(false)}
+            onClick={() => {setFormVisible(false); setToggle(false)}}
             variant="outlined"
           >
             Cancel
