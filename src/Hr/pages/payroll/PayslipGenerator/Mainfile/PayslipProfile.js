@@ -78,8 +78,8 @@ const PayslipProfile = () => {
                       className="rounded-circle img-fluid"
                       style={{ width: 150 }}
                     />
-                    <h5 className="my-3">Orive Solution
-                      {/* {${holiday.employeeName }} */}
+                    <h5 className="my-3">
+                      {`${holiday.employeeName }`}
                     </h5>
                     <div className="d-flex justify-content-center mb-2">
                     <Link to="/hr/payroll/payslip-generator">

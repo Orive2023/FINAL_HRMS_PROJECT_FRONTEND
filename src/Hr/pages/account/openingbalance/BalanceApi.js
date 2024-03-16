@@ -4,7 +4,7 @@ const url = "http://localhost:8093";
 
 export const saveBalance = async (formData) => {
   try {
-    await axios.post(`${url}/openingBalance/create/openingBalance`, formData);
+    await axios.post(`${url}/openingbalance/create/openingBalance`, formData);
   } catch (error) {
     console.error("saveBalance", error);
   }
@@ -12,7 +12,7 @@ export const saveBalance = async (formData) => {
 
 export const loadBalance = async () => {
   try {
-    const result = await axios.get(`${url}/openingBalance/get/openingBalance`, {
+    const result = await axios.get(`${url}/openingbalance/get/openingBalance`, {
       validateStatus: () => {
         return true;
       },
@@ -25,7 +25,7 @@ export const loadBalance = async () => {
 
 export const deleteBalance = async (id) => {
   try {
-    await axios.delete(`${url}/openingBalance/delete/${id}`);
+    await axios.delete(`${url}/openingbalance/delete/${id}`);
   } catch (error) {
     console.error("Error deleting balance", error);
   }

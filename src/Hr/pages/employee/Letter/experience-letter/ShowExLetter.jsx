@@ -10,14 +10,21 @@ import Footer from "./Footer";
 import Table1 from "./ExpLetterTable";
 import Head from "../../../../components/Header";
 import SideBar from "../../../../components/SideBar";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+
+import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
+
 
 import CompanyLogoFile from "../../../../components/CompanyLogoFile";
+import { useNavigate } from "react-router";
 
 const ShowLetter = () => {
   const [showInvoice, setShowInvoice] = useState(false);
   const [referrenceNumber, setReferrenceNumber] = useState("");
   const [date, setDate] = useState("");
   const [employeeName, setEmployeeName] = useState("");
+  const [employee, setEmployee] = useState([]);
   const [username, setUsername] = useState("");
   const [designation, setDesignation] = useState("");
   const [formReleaseDate, setFormReleaseDate] = useState("");
@@ -28,6 +35,7 @@ const ShowLetter = () => {
   const [recDelete, setRecDelete] = useState("");
 
   const [menu, setMenu] = useState(false);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     referrenceNumber: "",
@@ -42,12 +50,9 @@ const ShowLetter = () => {
     workBasedOn: "",
   });
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+
+ 
+  
 
   const handleSave = async () => {
     setShowInvoice(false);
@@ -66,9 +71,50 @@ const ShowLetter = () => {
     setGetTable(result.data);
   };
 
+  const fetchEmployee = async () => {
+    try {
+      const response = await axios.get("http://localhost:8082/employee/get/employee");
+      setEmployee(response.data); // Update the employee state with fetched data
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching company data", error);
+      return [];
+    }
+  };
+  
+ 
+  
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "employeeName" && value === "addNewEmployee") {
+      navigate("/hr/employee/employee");
+      return;
+    }
+    
+  
+    const selectedEmployee = employee.find((emp) => emp.employeeName === value);
+
+    if (selectedEmployee) {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+        username:selectedEmployee.username || ""
+       } );
+    }else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+  
   useEffect(() => {
     getData();
+    fetchEmployee();
   }, []);
+ 
+   
+
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
@@ -198,41 +244,54 @@ const ShowLetter = () => {
                 </div>
 
                 <div className="data-input-fields">
-                  <TextField
-                    id="employeeName"
-                    type="text"
-                    autoComplete="off"
-                    name="employeeName"
-                    margin="dense"
-                    label="Enter Employee Name:"
-                    fullWidth
-                    value={formData.employeeName}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    onChange={(e) => {
-                      setEmployeeName(e.target.value);
-                      handleInputChange(e);
-                    }}
-                  ></TextField>
-
-                  <TextField
-                    id="username"
-                    type="text"
-                    autoComplete="off"
-                    name="username"
-                    margin="dense"
-                    label="Enter Employee ID:"
-                    fullWidth
-                    value={formData.username}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    onChange={(e) => {
-                      setUsername(e.target.value);
-                      handleInputChange(e);
-                    }}
-                  ></TextField>
+                <FormControl fullWidth>
+                <InputLabel id="demo-employee-select-label">Employee Name</InputLabel>
+                <Select
+                  labelId="demo-employee-select-label"
+                  id=""
+                  value={formData.employeeName}
+                  onChange={(e) => {
+                  setEmployeeName(e.target.value);
+                    handleInputChange(e);
+                  }}
+                  name="employeeName"
+                  label="employeeName"
+                  required
+                >
+                  {employee &&
+                    employee.map((item, index) => {
+                      return (
+                        <MenuItem key={index} value={item.employeeName}>
+                          {item.employeeName}
+                        </MenuItem>
+                      );
+                    })}
+                   <MenuItem className="linkStyle" value="addNewEmployee">
+            <a href="#">
+              <FontAwesomeIcon icon={faCirclePlus} rotation={90} className="iconStyle" />
+             Create Employee
+            </a>
+          </MenuItem>
+      
+                </Select>
+              </FormControl>
+      
+              <TextField
+              margin="dense"
+              label="username"
+              type="string"
+              fullWidth
+              name="username"
+              id="username"
+              value={formData.username}
+            
+              onChange={(e) => {
+                setUsername(e.target.value);
+                  handleInputChange(e);
+                }}
+              required
+              disabled
+            />
                   <TextField
                     id="designation"
                     type="text"

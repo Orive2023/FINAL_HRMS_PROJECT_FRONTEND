@@ -134,13 +134,9 @@ const EmployeeForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
 
   const handleInputChange = (e) => {
 
-    if (name === "designationName" && value === "addNewDesignation") {
-      // Redirect to the company form in the company module
-      navigate("/hr/organisation/designation");
-      return;
-    }
+
     const { name, value } = e.target;
-   
+
     const files = e.target.files;
 
     const selectedFile = files && files.length ? files[0] : null;
@@ -149,7 +145,7 @@ const EmployeeForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       const isValidDate = value === getCurrentDate();
       setDateError(!isValidDate);
     }
- 
+
 
     const updatedFormData = { ...formData };
 
@@ -661,6 +657,7 @@ const EmployeeForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
   };
 
   const saveEmployee = async (e) => {
+    e.preventDefault();
     await api.saveEmployees(formData);
     navigate("/hr/employee/employee");
     loademployees();
@@ -799,79 +796,78 @@ const EmployeeForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     });
   };
 
-  let buttonCheckBasicInfo =
-    formData.employeeName.length > 0 &&
-    formData.username.length > 0 &&
-    formData.email.length > 0 &&
-    formData.phone.length > 0 &&
-    formData.alternativePhone.length > 0 &&
-    formData.country.length > 0 &&
-    formData.city.length > 0 &&
-    formData.zipCode.length > 0 &&
-    formData.employeeRole.length > 0 &&
-    formData.attendanceTime.length > 0 &&
-    formData.designationName.length > 0 &&
-    formData.employeeType.length > 0 &&
-    formData.companyType.length > 0 &&
-    formData.createdDate.length > 0;
+  let buttonCheckBasicInfo = true
+    // formData.employeeName.length > 0 &&
+    // formData.username.length > 0 &&
+    // formData.email.length > 0 &&
+    // formData.phone.length > 0 &&
+    // formData.alternativePhone.length > 0 &&
+    // formData.country.length > 0 &&
+    // formData.city.length > 0 &&
+    // formData.zipCode.length > 0 &&
+    // formData.employeeRole.length > 0 &&
+    // formData.attendanceTime.length > 0 &&
+    // formData.designationName.length > 0 &&
+    // formData.employeeType.length > 0 &&
+    // formData.companyType.length > 0 &&
+    // formData.createdDate.length > 0;
 
-  let buttonCheckBankDetails =
-    formData.accountNumber.length > 0 &&
-    formData.bankName.length > 0 &&
-    formData.ifscNumber.length > 0 &&
-    formData.branchName.length > 0;
+  let buttonCheckBankDetails = true
+    // formData.accountNumber.length > 0 &&
+    // formData.bankName.length > 0 &&
+    // formData.ifscNumber.length > 0 &&
+    // formData.branchName.length > 0;
 
-  let buttonCheckSalaryDetails =
-    formData.basicSalary.length > 0 &&
-    formData.transportAllowance.length > 0 &&
-    formData.tinNumber.length > 0 &&
-    formData.hraAllowances.length > 0 &&
-    formData.otherInsurance.length > 0 &&
-    formData.pfAllowances.length > 0 &&
-    formData.daAllowances.length > 0 &&
-    formData.medicalAllowances.length > 0 &&
-    formData.otherAllowances.length > 0 &&
-    formData.tax.length > 0;
+  let buttonCheckSalaryDetails = true
+    // formData.basicSalary.length > 0 &&
+    // formData.transportAllowance.length > 0 &&
+    // formData.tinNumber.length > 0 &&
+    // formData.hraAllowances.length > 0 &&
+    // formData.otherInsurance.length > 0 &&
+    // formData.pfAllowances.length > 0 &&
+    // formData.daAllowances.length > 0 &&
+    // formData.medicalAllowances.length > 0 &&
+    // formData.otherAllowances.length > 0 &&
+    // formData.tax.length > 0;
 
-  let buttonCheckPersonalInfo =
-    formData.subDepartment.length > 0 &&
-    formData.position.length > 0 &&
-    formData.dutyType.length > 0 &&
-    formData.hireDate.length > 0 &&
-    formData.joiningDate.length > 0 &&
-    formData.rateType.length > 0 &&
-    formData.rateNumber.length > 0 &&
-    formData.monthlyWorkHours.length > 0 &&
-    formData.payFrequency.length > 0;
+  let buttonCheckPersonalInfo = true
+    // formData.subDepartment.length > 0 &&
+    // formData.position.length > 0 &&
+    // formData.dutyType.length > 0 &&
+    // formData.hireDate.length > 0 &&
+    // formData.joiningDate.length > 0 &&
+    // formData.rateType.length > 0 &&
+    // formData.rateNumber.length > 0 &&
+    // formData.monthlyWorkHours.length > 0 &&
+    // formData.payFrequency.length > 0;
 
-  let buttonCheckBenefit =
-    formData.medical.length > 0 &&
-    formData.family.length > 0 &&
-    formData.transportation.length > 0 &&
-    formData.others.length > 0;
+  let buttonCheckBenefit = true
+    // formData.medical.length > 0 &&
+    // formData.family.length > 0 &&
+    // formData.transportation.length > 0 &&
+    // formData.others.length > 0;
 
-  let buttonCheckSupervisor =
-    formData.reportingTo.length > 0 && formData.teamLeaderName.length > 0;
+  let buttonCheckSupervisor = true
+    // formData.reportingTo.length > 0 && formData.teamLeaderName.length > 0;
 
-  let buttonCheckBiographicalInfo =
-    formData.dateOfBirth.length > 0 &&
-    formData.gender.length > 0 &&
-    formData.maritalStatus.length > 0 &&
-    formData.workInCity.length > 0 &&
-    formData.cityOfResidence.length > 0 &&
-    formData.workPermit.length > 0 &&
-    formData.uploadPhoto;
+  let buttonCheckBiographicalInfo = true
+    // formData.dateOfBirth.length > 0 &&
+    // formData.gender.length > 0 &&
+    // formData.maritalStatus.length > 0 &&
+    // formData.workInCity.length > 0 &&
+    // formData.cityOfResidence.length > 0 &&
+    // formData.workPermit.length > 0 &&
+    // formData.uploadPhoto;
 
-  let buttonCheckAdditionalAddress =
-    formData.businessEmail.length > 0 &&
-    formData.homePhone.length > 0 &&
-    formData.cellPhone.length > 0;
+  let buttonCheckAdditionalAddress = true
+    // formData.businessEmail.length > 0 &&
+    // formData.homePhone.length > 0 &&
+    // formData.cellPhone.length > 0;
 
-  let buttonCheckLoginInfo =
-    formData.userEmailOrName.length > 0 &&
-    formData.password.length > 0 &&
-    formData.uploadDocument &&
-    formData.status.length > 0;
+  let buttonCheckLoginInfo = true
+    // formData.userEmailOrName.length > 0 &&
+    // formData.password.length > 0 &&
+    // formData.uploadDocument;
 
   console.log(formData);
 
@@ -1113,33 +1109,33 @@ const EmployeeForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
                     </TextField>
 
                     <FormControl fullWidth>
-          <InputLabel id="demo-company-select-label">Employee Name</InputLabel>
-          <Select
-            labelId="demo-company-select-label"
-            id="selectedCompany"
-            value={formData.employeeName}
-            name="designationName"
-            label="designationName"
-            onChange={(e) => handleInputChange(e)}
-            required
-          >
-            {designation &&
-              designation.map((item, index) => {
-                return (
-                  <MenuItem key={index} value={item.designationName}>
-                    {item.designationName}
-                  </MenuItem>
-                );
-              })}
-             <MenuItem className="linkStyle" value="addNewdesignation">
-      <a href="#">
-        <FontAwesomeIcon icon={faCirclePlus} rotation={90} className="iconStyle" />
-       Create Designation
-      </a>
-    </MenuItem>
+                      <InputLabel id="demo-company-select-label">Designation Name</InputLabel>
+                      <Select
+                        labelId="demo-company-select-label"
+                        id="selectedCompany"
+                        value={formData.designationName}
+                        name="designationName"
+                        label="designationName"
+                        onChange={(e) => handleInputChange(e)}
+                        required
+                      >
+                        {designation &&
+                          designation.map((item, index) => {
+                            return (
+                              <MenuItem key={index} value={item.designationName}>
+                                {item.designationName}
+                              </MenuItem>
+                            );
+                          })}
+                        <MenuItem className="linkStyle" value="addNewdesignation">
+                          <a href="#">
+                            <FontAwesomeIcon icon={faCirclePlus} rotation={90} className="iconStyle" />
+                            Create Designation
+                          </a>
+                        </MenuItem>
 
-          </Select>
-        </FormControl>
+                      </Select>
+                    </FormControl>
                   </div>
                   <div className="data-input-fields">
                     <TextField
@@ -1198,6 +1194,7 @@ const EmployeeForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
                       value={formData.createdDate}
                       onChange={(e) => handleInputChange(e)}
                       required
+                      disabled
                       error={dateError}
                       helperText={dateError && "Please select the current date"}
                       InputLabelProps={{
@@ -2021,6 +2018,7 @@ const EmployeeForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
                       InputLabelProps={{
                         shrink: true,
                       }}
+                      
                     />
                   </div>
                   <div className="data-buttons">
@@ -2065,12 +2063,12 @@ const EmployeeForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
                       value={formData.businessEmail}
                       onChange={(e) => handleInputChange(e)}
                       required
-                      // error={emailBusinessError}
-                      // helperText={
-                      //   emailBusinessError
-                      //     ? "Please enter a valid email address."
-                      //     : ""
-                      // }
+                    // error={emailBusinessError}
+                    // helperText={
+                    //   emailBusinessError
+                    //     ? "Please enter a valid email address."
+                    //     : ""
+                    // }
                     />
 
                     <TextField
@@ -2132,88 +2130,88 @@ const EmployeeForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
               <div style={{ marginTop: "20px" }}>
                 <h3 className="form-header">Login Info</h3>
                 <DialogContent>
-                    <div className="data-input-fields">
-                      <TextField
-                        margin="dense"
-                        label="User Name/Email "
-                        type="text"
-                        fullWidth
-                        name="userEmailOrName"
-                        id="userEmailOrName"
-                        value={formData.userEmailOrName}
-                        onChange={(e) => handleInputChange(e)}
-                        required
-                      />
-                      <TextField
-                        margin="dense"
-                        label="Password "
-                        type="password"
-                        fullWidth
-                        name="password"
-                        id="password"
-                        value={formData.password}
-                        onChange={(e) => handleInputChange(e)}
-                        required
-                      />
-
-                      <TextField
-                        margin="dense"
-                        label="Upload Document"
-                        type="file"
-                        fullWidth
-                        name="uploadDocument"
-                        id="uploadDocument"
-                        inputProps={{ accept: ".pdf" }}
-                        onChange={(e) => handleInputChange(e)}
-                        required
-                        InputLabelProps={{
-                          shrink: true,
-                        }}
-                      />
-                    </div>
+                  <div className="data-input-fields">
                     <TextField
-                      id="status"
                       margin="dense"
-                      select
-                      label="status"
+                      label="User Name/Email "
+                      type="text"
                       fullWidth
-                      defaultValue="Choose"
-                      SelectProps={{
-                        native: true,
-                      }}
+                      name="userEmailOrName"
+                      id="userEmailOrName"
+                      value={formData.userEmailOrName}
+                      onChange={(e) => handleInputChange(e)}
+                      required
+                    />
+                    <TextField
+                      margin="dense"
+                      label="Password "
+                      type="password"
+                      fullWidth
+                      name="password"
+                      id="password"
+                      value={formData.password}
+                      onChange={(e) => handleInputChange(e)}
+                      required
+                    />
+
+                    <TextField
+                      margin="dense"
+                      label="Upload Document"
+                      type="file"
+                      fullWidth
+                      name="uploadDocument"
+                      id="uploadDocument"
+                      inputProps={{ accept: ".pdf" }}
+                      onChange={(e) => handleInputChange(e)}
+                      required
                       InputLabelProps={{
                         shrink: true,
                       }}
-                      value={formData.status}
-                      onChange={(e) => handleInputChange(e)}
-                      name="status"
-                    >
-                      {statuses.map((option) => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </TextField>
+                    />
+                  </div>
+                  <TextField
+                    id="status"
+                    margin="dense"
+                    select
+                    label="status"
+                    fullWidth
+                    defaultValue="Choose"
+                    SelectProps={{
+                      native: true,
+                    }}
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    value={formData.status}
+                    onChange={(e) => handleInputChange(e)}
+                    name="status"
+                  >
+                    {statuses.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </TextField>
 
-                    <div className="data-buttons">
-                      <Button
-                        id="input-btn-cancel"
-                        type="submit"
-                        onClick={handleBack}
-                        variant="outlined"
-                      >
-                        PREVIOUS
-                      </Button>
-                      <Button
-                        id="input-btn-submit"
-                        className="cancel"
-                        onClick={saveEmployee}
-                        disabled={buttonCheckLoginInfo ? false : true}
-                        variant="outlined"
-                      >
-                        SUBMIT
-                      </Button>
-                    </div>
+                  <div className="data-buttons">
+                    <Button
+                      id="input-btn-cancel"
+                      type="submit"
+                      onClick={handleBack}
+                      variant="outlined"
+                    >
+                      PREVIOUS
+                    </Button>
+                    <Button
+                      id="input-btn-submit"
+                      className="cancel"
+                      onClick={saveEmployee}
+                      disabled={buttonCheckLoginInfo ? false : true}
+                      variant="outlined"
+                    >
+                      SUBMIT
+                    </Button>
+                  </div>
                 </DialogContent>
               </div>
             </Card>

@@ -88,7 +88,7 @@ const AccountBalanceView = () => {
           <Link to="/HRDashboard" style={{ textDecoration: 'none', color: 'inherit' }}>
            Dashboard </Link> / 
           Account /</span> 
-          <span style={{color:'black'}}> Termination</span>
+          <span style={{color:'black'}}> Account Balance</span>
           </div>
           </div>
              

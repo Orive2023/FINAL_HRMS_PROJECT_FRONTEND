@@ -4,11 +4,10 @@ import Button from "@mui/material/Button";
 import * as api from "./api";
 import { useNavigate } from "react-router-dom";
 import StatePayslipGenerator from "./StatePayslipGenerator";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
 import { useToastContainer } from "react-toastify";
-
 
 const PayslipGeneratorForm = ({
   formData,
@@ -26,32 +25,37 @@ const PayslipGeneratorForm = ({
   };
 
   const handleInputChange = (e) => {
+    let eID;
+    let designation;
+    let department;
+    if (e.target.name === "employeeName") {
+      employee.map((elem) => {
+        if (e.target.value === elem.employeeName) {
+          eID = elem.username;
+          designation = elem.designationName;
+          department = elem.departmentName;
+        }
+      });
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+        username: eID,
+        designation: designation,
+        department: department?department: "",
+      });
+    }
     const { name, value } = e.target;
     if (name === "employeeName" && value === "addNewEmployee") {
       // Redirect to the company form in the company module
       navigate("/hr/employee/employee");
       return;
     }
-    
-  //   setFormData({
-  //     ...formData,
-  //     [e.target.name]: e.target.value,
-  //   });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
 
-  //   let eID;
-  //   if (e.target.name === "employeeName") {
-  //     employee.map((elem) => {
-  //       if (e.target.value === elem.employeeName) {
-  //         eID = elem.username;
-  //       }
-  //     });
-  //     setFormData({
-  //       ...formData,
-  //       [e.target.name]: e.target.value,
-  //      username: eID,
-  //     });
-  //   }
-   };
+  };
 
   useEffect(() => {
     setFormData({
@@ -61,8 +65,7 @@ const PayslipGeneratorForm = ({
       houserentAllowance: formData.presentBasicSalary * 0.4,
       educationalAllowance:
         formData.noOfChildren * formData.companyPreferredEducationalAllowance,
-      overTimeSalary:
-        (formData.basicSalary / 26 / 8) * formData.overTimeInHrs,
+      overTimeSalary: (formData.basicSalary / 26 / 8) * formData.overTimeInHrs,
       grossSalary:
         parseInt(formData.presentBasicSalary) +
         parseInt(formData.houserentAllowance) +
@@ -129,7 +132,7 @@ const PayslipGeneratorForm = ({
     navigate("/hr/payroll/salary-template ");
     loadPayslipGenerator();
     setFormData({
-     username: "",
+      username: "",
       employeeName: "",
       designation: "",
       department: "",
@@ -184,7 +187,7 @@ const PayslipGeneratorForm = ({
     setFormVisible(false);
     setToggle(false);
     setFormData({
-     username: "",
+      username: "",
       employeeName: "",
       designation: "",
       department: "",
@@ -233,13 +236,12 @@ const PayslipGeneratorForm = ({
   ];
 
   let buttonCheck =
-    (formData.employeeName.length > 0 && formData.designation.length > 0) &&
-    formData.department.length > 0;
+    formData.employeeName.length > 0;
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="data-input-fields">
-      <FormControl fullWidth>
+        <FormControl fullWidth>
           <InputLabel id="demo-company-select-label">Employee Name</InputLabel>
           <Select
             labelId="demo-company-select-label"
@@ -258,19 +260,22 @@ const PayslipGeneratorForm = ({
                   </MenuItem>
                 );
               })}
-             <MenuItem className="linkStyle" value="addNewEmployee">
-      <a href="#">
-        <FontAwesomeIcon icon={faCirclePlus} rotation={90} className="iconStyle" />
-       Create Employee
-      </a>
-    </MenuItem>
-
+            <MenuItem className="linkStyle" value="addNewEmployee">
+              <a href="#">
+                <FontAwesomeIcon
+                  icon={faCirclePlus}
+                  rotation={90}
+                  className="iconStyle"
+                />
+                Create Employee
+              </a>
+            </MenuItem>
           </Select>
         </FormControl>
         <TextField
           margin="dense"
           label="Employee ID"
-          type="number"
+          type="text"
           fullWidth
           name="username"
           id="username"
@@ -292,7 +297,7 @@ const PayslipGeneratorForm = ({
           onChange={(e) => {
             handleInputChange(e);
           }}
-          required
+          disabled
         />
         <TextField
           margin="dense"
@@ -306,6 +311,7 @@ const PayslipGeneratorForm = ({
             handleInputChange(e);
           }}
           required
+          disabled
         />
       </div>
       <div className="data-input-fields">

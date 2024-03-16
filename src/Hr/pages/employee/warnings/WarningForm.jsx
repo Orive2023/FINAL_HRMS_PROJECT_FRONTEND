@@ -106,42 +106,49 @@ const WarningForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     });
   };
 
-  let buttonClick =
-    formData.employeeName.length > 0 &&
-    formData.warningType.length > 0 &&
-    formData.subject.length > 0 &&
-    formData.warningByEmployee.length > 0 &&
-    formData.warningDate.length > 0 &&
-    formData.description.length > 0;
+  let buttonClick =true
+    // formData.employeeName.length > 0 &&
+    // formData.warningType.length > 0 &&
+    // formData.subject.length > 0 &&
+    // formData.warningByEmployee.length > 0 &&
+    // formData.warningDate.length > 0 &&
+    // formData.description.length > 0;
   return (
     <form onSubmit={handleSubmit}>
       <div className="data-input-fields">
   
 
-    <FormControl fullWidth>
-    <InputLabel id="demo-company-select-label">Employee Name</InputLabel>
-    <Select
-      labelId="demo-company-select-label"
-      id="selectedCompany"
-      value={formData.employeeName}
-      name="employeeName"
-      label="employeeName"
-      onChange={(e) => handleInputChange(e)}
-      required
-    >
-      {employee &&
-        employee.map((item, index) => {
-          return (
-            <MenuItem key={index} value={item.employeeName}>
-              {item.employeeName}
+      <FormControl fullWidth>
+          <InputLabel id="demo-employee-select-label">Employee Name</InputLabel>
+          <Select
+            labelId="demo-employee-select-label"
+            id="selectedEmployee"
+            value={formData.employeeName}
+            name="employeeName"
+            label="employeeName"
+            onChange={(e) => handleInputChange(e)}
+            required
+          >
+            {employee &&
+              employee.map((item, index) => {
+                return (
+                  <MenuItem key={index} value={item.employeeName}>
+                    {item.employeeName}
+                  </MenuItem>
+                );
+              })}
+            <MenuItem className="linkStyle" value="addNewEmployee">
+              <a href="#">
+                <FontAwesomeIcon
+                  icon={faCirclePlus}
+                  rotation={90}
+                  className="iconStyle"
+                />
+                Create Employee
+              </a>
             </MenuItem>
-          );
-        })}
-       
-
-    </Select>
-  </FormControl>
-
+          </Select>
+        </FormControl>
   <TextField
   margin="dense"
   label="username"
@@ -149,6 +156,7 @@ const WarningForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
   fullWidth
   name="username"
   id="username"
+  InputLabelProps={{ shrink: true }}
   value={formData.username}
   onChange={(e) => {
     handleInputChange(e);

@@ -116,7 +116,7 @@ const SubTypeTable = ({ subType, setRecDelete, setOpen }) => {
             "SL",
             "SUBTYPE",
             "ACCOUNT NAME",
-            "STATUS",
+           
             
             
           ],
@@ -165,7 +165,7 @@ const SubTypeTable = ({ subType, setRecDelete, setOpen }) => {
             "SL",
             "SUBTYPE",
             "ACCOUNT NAME",
-            "STATUS",
+            
           
             
           ],

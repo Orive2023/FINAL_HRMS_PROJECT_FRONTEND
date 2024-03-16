@@ -256,7 +256,7 @@ const CreditForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
   const saveCredit = async () => {
     try {
       await CreditApi.saveCredit(formData);
-      navigate("/hr/accounts/debit");
+      navigate("/hr/account/credit-voucher");
       CreditApi.loadCredit();
       setGenId(genId + 1);
       handleClose();
@@ -267,7 +267,7 @@ const CreditForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
   const loadCredit = async () => {
     try {
       const result = await CreditApi.loadCredit();
-      StateCredit(result);
+      setCredit(result);
     } catch (error) {
       console.error("Error loading expenses:", error.response.data);
     }

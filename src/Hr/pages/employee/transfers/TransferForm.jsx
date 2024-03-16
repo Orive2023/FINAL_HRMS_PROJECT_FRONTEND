@@ -139,8 +139,9 @@ const TransferForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       username:"",
       email:"",
       transferDate: "",
-      transferToDepartment: "",
-      transferToLocation: "",
+      departmentName: "",
+      locationName: "",
+      description:"",
       createdDate: getCurrentDate(),
     });
   };

@@ -19,11 +19,13 @@ const StatePromotion = () => {
   
   const [formData, setFormData] = useState({
     employeeName: "",
-    promotionTitle: "",
-    promotionDate: "",
-    description: "",
-    salaryHike:"",
-    hrName:"",
+      username:"",
+      email:"",
+      promotionTitle: "",
+      promotionDate: "",
+      description: "",
+      salaryHike:"",
+      hrName:"",
   });
   return {
     location,setLocation,setEmployee,

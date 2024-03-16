@@ -166,16 +166,7 @@ const EmployeeProfile = () => {
                   </div>
                 </div>
                 <hr />
-                <div className="row">
-                  <div className="col-sm-3">
-                    <h5 className="mb-0">Employee Role</h5>
-                  </div>
-
-                  <div className="col-sm-9">
-                    <p className="text-muted mb-0">{employee.employeeRole}</p>
-                  </div>
-                </div>
-                <hr />
+               
                 <div className="row">
                   <div className="col-sm-3">
                     <h5 className="mb-0">Company Type</h5>

@@ -9,6 +9,7 @@ import Header from "../../../../components/Header";
 import SideBar from "../../../../components/SideBar";
 import CompanyLogoFile from "../../../../components/CompanyLogoFile";
 import { Link } from "react-router-dom";
+import logo from '../../../../asset/Orive Logo 2.png'
 const ResignationPofile = () => {
 	const { id } = useParams();
 
@@ -49,7 +50,7 @@ const ResignationPofile = () => {
 						<div className="card mb-4">
 							<div className="card-body text-center">
 								<img
-									src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+									src={logo}
 									alt="avatar"
 									className="rounded-circle img-fluid"
 									style={{ width: 150 }}

@@ -29,18 +29,14 @@ const OfficeShiftForm = ({ formData, setFormData, setOpen }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "createdDate") {
-      const isValidDate = value === getCurrentDate();
-      setDateError(!isValidDate);
-    }
-
-    if (name === "officeClockInTime") {
+   
+    if (name === "officeClockIn") {
       setFormData({
         ...formData,
         [name]: `${value}:00`,
       });
     }
-    if (name === "officeClockOutTime") {
+    if (name === "officeClockOut") {
       setFormData({
         ...formData,
         [name]: `${value}:00`,
@@ -62,16 +58,16 @@ const OfficeShiftForm = ({ formData, setFormData, setOpen }) => {
     navigate("/hr/timesheets/officeshift");
     setFormData({
       createdDate: "",
-      officeClockInTime: "",
-      officeClockOutTime: "",
+      officeClockIn: "",
+      officeClockOut: "",
     });
   };
   const cancelButton = () => {
     setOpen(false);
     setFormData({
       createdDate: "",
-      officeClockInTime: "",
-      officeClockOutTime: "",
+      officeClockIn: "",
+      officeClockOut: "",
     });
   };
   const handleSubmit = (e) => {
@@ -81,8 +77,8 @@ const OfficeShiftForm = ({ formData, setFormData, setOpen }) => {
   console.log(formData);
 
   let buttonClick =
-    formData.officeClockInTime?.length > 0 &&
-    formData.officeClockOutTime?.length > 0;
+    formData.officeClockIn?.length > 0 &&
+    formData.officeClockOut?.length > 0;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -104,9 +100,9 @@ const OfficeShiftForm = ({ formData, setFormData, setOpen }) => {
           label="Office Clock In"
           type="time"
           fullWidth
-          name="officeClockInTime"
-          id="officeClockInTime"
-          value={formData.officeClockInTime}
+          name="officeClockIn"
+          id="officeClockIn"
+          value={formData.officeClockIn}
           InputLabelProps={{ shrink: true }}
           onChange={(e) => handleInputChange(e)}
           required
@@ -119,9 +115,9 @@ const OfficeShiftForm = ({ formData, setFormData, setOpen }) => {
           label="Office Clock Out"
           type="time"
           fullWidth
-          name="officeClockOutTime"
-          id="officeClockOutTime"
-          value={formData.officeClockOutTime}
+          name="officeClockOut"
+          id="officeClockOut"
+          value={formData.officeClockOut}
           InputLabelProps={{ shrink: true }}
           onChange={(e) => handleInputChange(e)}
           required

@@ -213,11 +213,15 @@ const CertificateTable = ({
     setDeleteItemId(id);
     setShowDeleteConfirmation(true);
   };
-  const confirmDelete = () => {
-    setRecDelete(deleteItemId);
-    setShowDeleteConfirmation(false);
+  const confirmDelete = async () => {
+    try {
+      await handleDelete(deleteItemId);
+      setShowDeleteConfirmation(false);
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
   };
-
+  
   const cancelDelete = () => {
     setDeleteItemId(null);
     setShowDeleteConfirmation(false);
@@ -254,7 +258,6 @@ const CertificateTable = ({
               <th>Referrence No</th>
               <th>Date</th>
              <th>Registration No</th>
-              <th>Employee Name</th>
               <th>Intern Name</th>
               <th>Start Date</th>
               <th>End Date</th>
@@ -311,7 +314,6 @@ const CertificateTable = ({
                       <td>{item.referrenceNo}</td>
                       <td>{item.date}</td>
                       <td>{item.registrationNo}</td>
-                      <td>{item.employeeName}</td>
                       <td>{item.internsName}</td>
                       <td>{item.startDate}</td>
                       <td>{item.endDate}</td>

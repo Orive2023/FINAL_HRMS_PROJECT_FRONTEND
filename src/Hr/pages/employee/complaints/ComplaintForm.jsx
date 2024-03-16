@@ -22,6 +22,8 @@ const ComplaintForm = ({
     setComplaint,
     employee,
     setEmployee,
+    dateError,
+    setDateError,
     formVisible,
     toggle,
     projectTitle,
@@ -36,7 +38,6 @@ const ComplaintForm = ({
     setSummary,
     company,
     setLocation,
-    setDateError,
     setCompany,
     setFormErrors,
   } = StateComplaint();
@@ -74,7 +75,7 @@ const ComplaintForm = ({
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    if (name === "createdDate") {
+    if (name === "complaintDate") {
       const isValidDate = value === getCurrentDate();
       setDateError(!isValidDate);
     }
@@ -125,7 +126,7 @@ const ComplaintForm = ({
       employeeName: "",
       username: "",
       complaintTitle: "",
-      complaintDate: "",
+      complaintDate: getCurrentDate(),
       complaintAgainst: "",
       description: "",
     });
@@ -142,7 +143,7 @@ const ComplaintForm = ({
       employeeName: "",
       username: "",
       complaintTitle: "",
-      complaintDate: "",
+      complaintDate: getCurrentDate(),
       complaintAgainst: "",
       description: "",
     });
@@ -150,7 +151,6 @@ const ComplaintForm = ({
 
   let buttonClick =
     formData.complaintTitle.length > 0 &&
-    formData.complaintDate.length > 0 &&
     formData.complaintAgainst.length > 0 &&
     formData.description.length > 0;
 
@@ -197,6 +197,8 @@ const ComplaintForm = ({
           fullWidth
           name="username"
           id="username"
+          InputLabelProps={{ shrink: true }}
+          disabled
           value={formData.username}
           onChange={(e) => handleInputChange(e)}
           required
@@ -223,8 +225,11 @@ const ComplaintForm = ({
           name="complaintDate"
           id="complaintDate"
           value={formData.complaintDate}
+          error={dateError}
+          helperText={dateError && "Please select the current date"}
           onChange={(e) => handleInputChange(e)}
           required
+          disabled
           InputLabelProps={{
             shrink: true,
           }}

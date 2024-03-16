@@ -8,10 +8,6 @@ import { useNavigate } from "react-router-dom";
 import StateCompany from "./StateCompany";
 import Input from "@mui/material/Input";
 
-
-
-
-
 const CompanyForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
   const navigate = useNavigate();
   
@@ -131,10 +127,10 @@ const CompanyForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       const isValidWebsite = isValidURL(value);
       setWebsiteError(!isValidWebsite);
     }
-    // if (name === "createdDate") {
-    //   const isValidDate = value === getCurrentDate();
-    //   setDateError(!isValidDate);
-    // }
+    if (name === "createdDate") {
+      const isValidDate = value === getCurrentDate();
+      setDateError(!isValidDate);
+    }
     if (name === "companyName") {
       const truncatedValue = enforceMaxLength(value, 50);
       handleNameChange(truncatedValue);
@@ -263,7 +259,7 @@ const CompanyForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       cin: "",
       gst: "",
       uan: "",
-      createdDate: getCurrentDate(),
+      createdDate:getCurrentDate(),
       file: "",
       status:""
     });
@@ -313,7 +309,7 @@ const CompanyForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       cin: "",
       gst: "",
       uan: "",
-      createdDate: getCurrentDate(),
+      createdDate:getCurrentDate(),
       file: "",
       status:""
     });
@@ -542,21 +538,23 @@ const CompanyForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       </div>
 
       <div className="data-input-fields">
-      <TextField
+        <TextField disabled
           margin="dense"
-          label="createdDate"
+          label="Create Date"
           type="date"
           fullWidth
           name="createdDate"
           id="createdDate"
           value={formData.createdDate}
           onChange={(e) => handleInputChange(e)}
-          required
+          // required
+          error={dateError}
+          helperText={dateError && "Please select the current date"}
           InputLabelProps={{
             shrink: true,
           }}
-          disabled
         />
+
 <TextField
           margin="dense"
           label="Company Logo"

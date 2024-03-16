@@ -19,6 +19,7 @@ const AwardPofile = () => {
       date: "",
       employeeName: "",
       awardBy: "",
+	  email:"",
       giftItem: "",
 	});
 
@@ -178,6 +179,20 @@ const AwardPofile = () => {
 									<div className="col-sm-9">
 										<p className="text-muted mb-0">
 											{award.giftItem}
+										</p>
+									</div>
+								</div>
+								<hr />
+								<div className="row">
+									<div className="col-sm-3">
+										<h5 className="mb-0">
+										Email
+										</h5>
+									</div>
+
+									<div className="col-sm-9">
+										<p className="text-muted mb-0">
+											{award.email}
 										</p>
 									</div>
 								</div>

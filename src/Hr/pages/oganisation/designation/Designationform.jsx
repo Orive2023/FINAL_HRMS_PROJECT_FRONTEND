@@ -57,7 +57,6 @@ const Designationform = ({ formData, setFormData, setOpen }) => {
 
   const saveDesignation = async () => {
     await api.saveDesignation(formData);
-    alert("Designation is added successfully");
     navigate("/hr/organisation/designation");
 
     handleClose();
@@ -135,8 +134,9 @@ const Designationform = ({ formData, setFormData, setOpen }) => {
           value={formData.createdDate}
           onChange={(e) => handleInputChange(e)}
           required
-          // error={dateError}
-          // helperText={dateError && "Please select the current date"}
+          disabled
+          error={dateError}
+          helperText={dateError && "Please select the current date"}
           InputLabelProps={{
             shrink: true,
           }}

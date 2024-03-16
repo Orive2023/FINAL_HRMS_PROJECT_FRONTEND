@@ -1,6 +1,13 @@
 import {useState} from 'react'
 
 const StatePolicies = () => {
+  const getCurrentDate = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = `${now.getMonth() + 1}`.padStart(2, "0");
+    const day = `${now.getDate()}`.padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
     const [descriptionError,setDescriptionError]= useState(false);
     const [policies, setPolicies] = useState([]);
     const [open, setOpen] = useState(false);
@@ -13,7 +20,7 @@ const StatePolicies = () => {
         companyName: "",
         title: "",
         description: "",
-        createdDate: "",
+        createdDate: getCurrentDate(),
         uploadPdf: "",
       });
   return {

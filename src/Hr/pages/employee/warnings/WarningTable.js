@@ -108,7 +108,7 @@ const WarningTable = ({warning,setRecDelete, setFormVisible,
         ],
         body: warning.map((row,index) => [
           index+1,
-          row.warningToEmployee,
+          row.employeeName,
           row.warningType,
           row.subject,
           row.warningByEmployee,
@@ -163,7 +163,7 @@ const WarningTable = ({warning,setRecDelete, setFormVisible,
         ],
         body: warning.map((row,index) => [
           index+1,
-          row.warningToEmployee,
+          row.employeeName,
           row.warningType,
           row.subject,
           row.warningByEmployee,
@@ -417,8 +417,8 @@ const WarningTable = ({warning,setRecDelete, setFormVisible,
         <table id='table' className="table table-bordered table-hover shadow">
         <thead>
           <tr className="text-center">
-           
-            <th>warning to employee</th>
+           <th>SL</th>
+            <th>Employee name</th>
             <th>warning type</th>
             <th>Subject</th>
             <th>Warning by employee</th>
@@ -438,7 +438,7 @@ const WarningTable = ({warning,setRecDelete, setFormVisible,
               return elem;
             else  
               return (
-              elem.warningToEmployee.toLowerCase().includes(search.toLocaleLowerCase()) ||
+                elem.employeeName.toLowerCase().includes(search.toLocaleLowerCase()) ||
               elem.warningType.toLowerCase().includes(search.toLocaleLowerCase()) ||
               elem.subject.toLowerCase().includes(search.toLocaleLowerCase()) ||
               elem.warningByEmployee.toLowerCase().includes(search.toLocaleLowerCase()) ||
@@ -446,8 +446,9 @@ const WarningTable = ({warning,setRecDelete, setFormVisible,
               elem.description.toLowerCase().includes(search.toLocaleLowerCase()) 
               )
           }).map((warning,index) => (
-                      <tr key={warning.id}>
-                        <td>{warning.warningToEmployee}</td>
+            <tr key={index}>
+                      <td>{index + 1}</td>
+                        <td>{warning.employeeName}</td>
                         <td>{warning.warningType}</td>
                         <td>{warning.subject}</td>
                         <td>{warning.warningByEmployee}</td>

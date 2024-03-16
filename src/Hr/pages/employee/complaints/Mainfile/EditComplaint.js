@@ -13,7 +13,7 @@ const EditComplaint = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const [complaint, setcomplaint] = useState({
-    complaintFrom: "",
+    employeeName: "",
     complaintTitle: "",
   });
   const [menu, setMenu] = useState(false);
@@ -74,15 +74,15 @@ const EditComplaint = () => {
               }}>
               <div className="input-group mb-5">
                 <label className="input-group-text" htmlFor="complaintFrom">
-                  Complaint From
+                  Employee Name
                 </label>
                 <input
                   className="form-control col-sm-6"
                   type="text"
-                  name="complaintFrom"
-                  id="complaintFrom"
+                  name="employeeName"
+                  id="employeeName"
                   required
-                  value={complaint.complaintFrom}
+                  value={complaint.employeeName}
                   onChange={(e) => handleInputChange(e)}
                 />
               </div>

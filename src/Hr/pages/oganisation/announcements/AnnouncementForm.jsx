@@ -98,7 +98,7 @@ const AnnouncementForm = ({formData,setFormData,setFormVisible, setToggle }) => 
           departmentName: "",
           summary: "",
           description: "",
-          createdDate: "",
+          createdDate:getCurrentDate(),
         });
       };
 
@@ -217,8 +217,9 @@ const AnnouncementForm = ({formData,setFormData,setFormVisible, setToggle }) => 
         InputLabelProps={{
           shrink: true,
         }}
-        // error={dateError}
-        // helperText={dateError ? "Please select the current date" : ""}
+        disabled
+        error={dateError}
+        helperText={dateError ? "Please select the current date" : ""}
       />
     </div>
     <div className="data-input-fields">
@@ -261,8 +262,6 @@ const AnnouncementForm = ({formData,setFormData,setFormVisible, setToggle }) => 
           name="locationName"
           label="location Name"
           onChange={(e) => handleInputChange(e)}
-          required
-          disabled
         >
           {location && location.map((item, index) => {
             return (
@@ -283,8 +282,6 @@ const AnnouncementForm = ({formData,setFormData,setFormVisible, setToggle }) => 
           name="companyName"
           label="Company Name"
           onChange={(e) => handleInputChange(e)}
-          required
-          disabled
         >
           {company && company.map((item, index) => {
             return (

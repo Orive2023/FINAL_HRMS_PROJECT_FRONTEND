@@ -11,8 +11,8 @@ const StateOfficeShift = () => {
 
   const [formData, setFormData] = useState({
     createdDate: "",
-    officeClockInTime: "",
-    officeClockOutTime: "",
+    officeClockIn: "",
+    officeClockOut: "",
   });
   return {
     officeShift,

@@ -17,7 +17,7 @@ const Content = ({
   specialAllowance,
   hraConveyance,
   salaryComponentPerBasic,
-  employeeId,
+  username,
   salaryComponentPerMonth,
   ctc,
   workingHours,
@@ -272,7 +272,7 @@ const Content = ({
             <div className="paragraph-1">
               {" "}
               <span className="">Employee ID:</span>
-              {employeeId}
+              {username}
             </div>
             <div className="paragraph-1">
               {" "}

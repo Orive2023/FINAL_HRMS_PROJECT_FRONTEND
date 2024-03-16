@@ -67,7 +67,7 @@ const LeaveForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       navigate("/hr/employee/employee");
       return;
     }
-    const selectedEmployee = employee.find((emp) => emp.employeeName === value);
+    const selectedEmployee = employee.find((emp) => emp.employeeName === value) ;
     if (selectedEmployee) {
       setFormData({
         ...formData,
@@ -110,8 +110,8 @@ const LeaveForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       endDate: "",
       employeeName: "",
       leaveReason: "",
-      description: "",
       appliedOn: "",
+      approval:"",
     });
   };
 
@@ -136,10 +136,7 @@ const LeaveForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       value: "Casual Leave",
       label: "Casual Leave",
     },
-    {
-      value: "Sick Leave",
-      label: "Sick Leave",
-    },
+  
     {
       value: "Maternity Leave",
       label: "Maternity Leave",
@@ -157,7 +154,6 @@ const LeaveForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     formData.endDate.length > 0 &&
     formData.employeeName.length > 0 &&
     formData.leaveReason.length > 0 &&
-    formData.description.length > 0 &&
     formData.appliedOn.length > 0;
 
   const cancelButton = () => {
@@ -179,27 +175,7 @@ const LeaveForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="data-input-fields">
-        <TextField
-          id="leaveType"
-          margin="dense"
-          select
-          //  label="Priority"
-          // type="text"
-          fullWidth
-          defaultValue="Choose"
-          SelectProps={{
-            native: true,
-          }}
-          value={formData.leaveType}
-          onChange={(e) => handleInputChange(e)}
-          name="leaveType"
-        >
-          {Type.map((option) => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </TextField>
+       
         <FormControl fullWidth>
           <InputLabel id="demo-company-select-label">Employee Name</InputLabel>
           <Select
@@ -231,17 +207,40 @@ const LeaveForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
         <TextField
         margin="dense"
         label="User Name"
-        type="number"
+        type="text"
         fullWidth
         name="username"
         id="username"
         value={formData.username}
         onChange={(e) => handleInputChange(e)}
         required
+        disabled
         InputLabelProps={{
           shrink: true,
         }}
       />
+
+      <TextField
+      id="leaveType"
+      margin="dense"
+      select
+      //  label="Priority"
+      // type="text"
+      fullWidth
+      defaultValue="Choose"
+      SelectProps={{
+        native: true,
+      }}
+      value={formData.leaveType}
+      onChange={(e) => handleInputChange(e)}
+      name="leaveType"
+    >
+      {Type.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </TextField>
 
         <TextField
           margin="dense"
@@ -298,25 +297,7 @@ const LeaveForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
         />
       </div>
       <div className="data-input-fields">
-        <TextField
-          id="description"
-          margin="dense"
-          type="text"
-          label="Description"
-          fullWidth
-          name="description"
-          value={formData.description}
-          onChange={(e) => handleInputChange(e)}
-          required
-          InputProps={{
-            minLength: 2, // Set your minimum length here
-            maxLength: 200, // Set your maximum length here
-          }}
-          onInput={(e) => {
-            e.target.value = enforceMaxLength(e.target.value, 200);
-            handleNameChange(e);
-          }}
-        ></TextField>
+       
         <TextField
           margin="dense"
           label="Applied On"

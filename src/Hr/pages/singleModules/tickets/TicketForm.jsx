@@ -51,6 +51,7 @@ const TicketForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       ticketsCode: "",
       subject: "",
       employeeName: "",
+      username:"",
       priority: "",
       date: getCurrentDate(),
       createdBy: "",
@@ -59,14 +60,14 @@ const TicketForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     });
   };
 
-  let buttonClick =true
-    // formData.ticketsCode.length > 0 &&
-    // formData.subject.length > 0 &&
-    // formData.priority.length > 0 &&
-    // formData.date.length > 0 &&
-    // formData.createdBy.length > 0 &&
-    // formData.projectTitle.length > 0 &&
-    // formData.description.length > 0;
+  let buttonCheck =
+    formData.ticketsCode.length > 0 &&
+    formData.subject.length > 0 &&
+    formData.priority.length > 0 &&
+    formData.date.length > 0 &&
+    formData.createdBy.length > 0 &&
+    formData.projectTitle.length > 0 &&
+    formData.description.length > 0;
 
   const handleSubmit = (e) => {
     console.log("FormData", formData);
@@ -95,10 +96,20 @@ const TicketForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     }
 
 
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const selectedEmployee = employee.find((emp) => emp.employeeName === value);
+    if (selectedEmployee) {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      username: selectedEmployee.username || "",
+
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const enforceMaxLength = (value, maxLength) => {
@@ -177,6 +188,7 @@ const TicketForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     setFormData({
       ticketsCode: "",
       subject: "",
+      username:"",
       employeeName: "",
       priority: "",
       date: getCurrentDate(),
@@ -243,7 +255,7 @@ const TicketForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
             name="employeeName"
             label="employeeName"
             onChange={(e) => handleInputChange(e)}
-            // required
+            required
           >
             {employee &&
               employee.map((item, index) => {
@@ -262,7 +274,21 @@ const TicketForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
 
           </Select>
         </FormControl>
-
+        <TextField
+        margin="dense"
+        label="username"
+        type="username"
+        fullWidth
+        name="username"
+        id="username"
+        value={formData.username}
+        onChange={(e) => handleInputChange(e)}
+        required
+        InputLabelProps={{
+          shrink: true,
+        }}
+        disabled
+      />
         <TextField
           id="priority"
           margin="dense"
@@ -324,7 +350,7 @@ const TicketForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
             name="projectTitle"
             label="projectTitle"
             onChange={(e) => handleInputChange(e)}
-            // required
+            required
           >
             {project &&
               project.map((item, index) => {
@@ -362,7 +388,7 @@ const TicketForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
           variant="outlined"
           type="submit"
           onClick={saveTicket}
-          disabled={buttonClick ? false : true}
+          disabled={buttonCheck ? false : true}
         >
           Submit
         </Button>

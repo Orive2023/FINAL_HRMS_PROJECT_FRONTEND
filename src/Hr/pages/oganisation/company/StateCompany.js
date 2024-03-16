@@ -1,7 +1,14 @@
 import { useState } from "react";
 
 const StateCompany = () => {
-  
+  const getCurrentDate = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = `${now.getMonth() + 1}`.padStart(2, "0");
+    const day = `${now.getDate()}`.padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
   const [dateError, setDateError] = useState("");
   const [websiteError, setWebsiteError] = useState("");
   const [isValidCIN, setIsValidCIN] = useState(true);
@@ -39,7 +46,7 @@ const StateCompany = () => {
     cin: "",
     gst: "",
     uan: "",
-    createdDate: "",
+    createdDate:getCurrentDate(),
     file:"",
     status:""
   });

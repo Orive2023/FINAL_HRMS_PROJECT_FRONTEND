@@ -17,7 +17,7 @@ const AppraisalForm = ({
 }) => {
   let navigate = useNavigate()
   const {
-    employee,setEmployee,
+    employee,setEmployee,department,setDepartment,
     overallRating,
     setPerformances,
     setOverallRating,
@@ -75,13 +75,19 @@ const AppraisalForm = ({
       navigate("/hr/employee/employee");
       return;
     }
+    if (name === "departmentName" && value === "addNewDepartment") {
+      // Redirect to the company form in the company module
+      navigate("/hr/organisation/department");
+      return;
+    }
+    // const selectedDepartment = department.find((demp) => demp.departmentName === value);
     const selectedEmployee = employee.find((emp) => emp.employeeName === value);
     if (selectedEmployee) {
+
       setFormData({
         ...formData,
         [e.target.name]: e.target.value,
        username: selectedEmployee.username  || "",
-       departmentName: selectedEmployee.departmentName  || "",
        position:selectedEmployee.position  || "",
        
       });
@@ -229,11 +235,18 @@ const AppraisalForm = ({
   useEffect(() => {
     loadPerformances();
     fetchEmployee();
+    fetchDepartment();
   }, []);
   const fetchEmployee = async () => {
     const employeeData = await api.fetchEmployee();
     setEmployee(employeeData);
   };
+
+  const fetchDepartment = async () => {
+    const departmentData = await api.fetchDepartment();
+    setEmployee(departmentData);
+  };
+
   console.log(formData)
   return (
     <form onSubmit={handleSubmit}>
@@ -271,31 +284,50 @@ const AppraisalForm = ({
         <TextField
           margin="dense"
           label="Employee ID Number"
-          type="number"
+          type="string"
           fullWidth
           name="username"
           id="username"
           value={formData.username}
           onChange={(e) => handleInputChange(e)}
           required
+          InputLabelProps={{ shrink: true }}
           style={{ margin: '8px 3px' }}
+          disabled
         />
-        <TextField
-          margin="dense"
-          label="Department Name"
-          type="text"
-          fullWidth
-          name="departmentName"
-          id="departmentName"
-          value={formData.departmentName}
-          onChange={(e) => handleInputChange(e)}
-          required
-          style={{ margin: '8px 3px' }}
-        />
+        <FormControl fullWidth>
+          <InputLabel id="demo-department-select-label">Department Name</InputLabel>
+          <Select
+            labelId="demo-department-select-label"
+            id="selectedDepartment"
+            value={formData.departmentName}
+            name="departmentName"
+            label="departmentName"
+            onChange={(e) => handleInputChange(e)}
+            // required
+          >
+            {department &&
+              department.map((item, index) => {
+                return (
+                  <MenuItem key={index} value={item.departmentName}>
+                    {item.departmentName}
+                  </MenuItem>
+                );
+              })}
+             <MenuItem className="linkStyle" value="addNewDepartment">
+      <a href="#">
+        <FontAwesomeIcon icon={faCirclePlus} rotation={90} className="iconStyle" />
+       Create Department
+      </a>
+    </MenuItem>
+
+          </Select>
+        </FormControl>
+
       </div>
 
       <div style={{ display: 'flex' }}>
-        <TextField
+        <TextField disabled
           margin="dense"
           label="Position"
           type="text"
@@ -303,9 +335,11 @@ const AppraisalForm = ({
           name="position"
           id="position"
           value={formData.position}
+          InputLabelProps={{ shrink: true }}
           onChange={(e) => handleInputChange(e)}
           required
           style={{ margin: '0px 3px' }}
+       
         />
         <TextField
           margin="dense"

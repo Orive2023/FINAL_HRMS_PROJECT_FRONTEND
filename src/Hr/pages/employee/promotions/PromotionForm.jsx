@@ -97,6 +97,7 @@ const PromotionForm = ({
         ...formData,
         [e.target.name]: e.target.value,
       username: selectedEmployee.username || "",
+      email :selectedEmployee.email || "",
 
       });
     } else {
@@ -133,6 +134,8 @@ const PromotionForm = ({
 
     setFormData({
       employeeName: "",
+      username:"",
+      email:"",
       promotionTitle: "",
       promotionDate: "",
       description: "",
@@ -184,6 +187,8 @@ const PromotionForm = ({
     setToggle(false);
     setFormData({
       employeeName: "",
+      username:"",
+      email:"",
       promotionTitle: "",
       promotionDate: "",
       description: "",
@@ -243,6 +248,22 @@ const PromotionForm = ({
         value={formData.username}
         onChange={(e) => handleInputChange(e)}
         required
+        disabled
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+       <TextField
+        margin="dense"
+        label="Email"
+        type="email"
+        fullWidth
+        name="email"
+        id="email"
+        value={formData.email}
+        onChange={(e) => handleInputChange(e)}
+        required
+        disabled
         InputLabelProps={{
           shrink: true,
         }}

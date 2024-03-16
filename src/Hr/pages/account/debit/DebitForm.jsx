@@ -79,6 +79,22 @@ const DebitForm = ({ formData, setFormData, setToggle, setFormVisible }) => {
     if (name === "amount") {
       ta = value;
     }
+
+    const selectedAmmount = subType.find((emp) => emp.subType === value);
+    if (selectedAmmount) {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      subType: selectedAmmount.subType || "",
+
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
+  
     setFormData({
       ...formData,
       [name]: value,
@@ -131,7 +147,8 @@ const DebitForm = ({ formData, setFormData, setToggle, setFormVisible }) => {
     };
 
     setItems([...items, newItem]);
-
+    
+    
     setFormData({
       ...formData,
       remark: "",
@@ -297,7 +314,7 @@ const DebitForm = ({ formData, setFormData, setToggle, setFormVisible }) => {
   const saveDebit = async () => {
     try {
       await DebitApi.saveDebit(formData);
-      navigate("/account/debit");
+      navigate("hr/account/debit");
       DebitApi.loadDebit();
       setFormData({
         voucherType: "",
@@ -743,6 +760,8 @@ const DebitForm = ({ formData, setFormData, setToggle, setFormVisible }) => {
       </div>
     </form>
   );
+        
 };
+  
 
 export default DebitForm;

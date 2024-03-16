@@ -486,12 +486,12 @@ const ExpensesForm = ({
             value={formData.createdDate}
             onChange={(e) => handleInputChange(e)}
             required
+            disabled
             error={dateError}
             helperText={dateError && "Please select the current date"}
             InputLabelProps={{
               shrink: true,
             }}
-            disabled
           />
         </div>
         <TableContainer component={Paper}>

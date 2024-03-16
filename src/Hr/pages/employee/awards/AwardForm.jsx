@@ -51,7 +51,7 @@ const AwardForm = ({ formData, setFormData, setOpen }) => {
         ...formData,
         [e.target.name]: e.target.value,
        username: selectedEmployee.username  || "",
-       
+       email: selectedEmployee.email || "",
       });
     } else {
       setFormData({
@@ -104,6 +104,7 @@ const AwardForm = ({ formData, setFormData, setOpen }) => {
       date: "",
       employeeName: "",
       awardBy: "",
+      email:"",
       giftItem: "",
     });
   };
@@ -131,6 +132,7 @@ const AwardForm = ({ formData, setFormData, setOpen }) => {
       date: "",
       employeeName: "",
       awardBy: "",
+      email:"",
       giftItem: "",
     });
   };
@@ -140,6 +142,7 @@ const AwardForm = ({ formData, setFormData, setOpen }) => {
     formData.date?.length > 0 &&
     formData.awardBy?.length > 0 &&
     formData.giftItem?.length > 0 &&
+    formData.email?.length > 0 &&
     formData.awardDescription?.length > 0;
 
   const [employee, setEmployee] = useState([]);
@@ -217,6 +220,7 @@ const AwardForm = ({ formData, setFormData, setOpen }) => {
           value={formData.username}
           onChange={(e) => handleInputChange(e)}
           required
+          disabled
          
         />
         <TextField
@@ -229,6 +233,7 @@ const AwardForm = ({ formData, setFormData, setOpen }) => {
         value={formData.email}
         onChange={(e) => handleInputChange(e)}
         required
+        disabled
        
       />
       </div>

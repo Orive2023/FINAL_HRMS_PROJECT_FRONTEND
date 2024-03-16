@@ -12,6 +12,7 @@ const StatePerformance = () => {
     const [adaptabilityRating, setAdaptabilityRating] = useState(0);
     const [communicationSkillsComments, setCommunicationSkillsComments] = useState(0);
     const [employee, setEmployee] = useState([]);
+    const [department, setDepartment] = useState([]);
 
     
     const [overallRating , setOverallRating] = useState(0);
@@ -54,7 +55,7 @@ const StatePerformance = () => {
       });
 
   return {
-    recDelete,setRecDelete,performances,setPerformances,overallRating,setOverallRating,setPunctualityAndAttendanceRating,punctualityAndAttendanceRating,adaptabilityRating,setAdaptabilityRating,teamworkAndCollaborationRating,setTeamWorkAndCollaborationRating,initiativeAndCreativityRating,setInitiativeAndCreativityRating,jobKnowledgeRating,setJobKnowledgeRating,communicationSkillsRating,setCommunicationSkillsRating,formData,setFormData,formVisible,setFormVisible,toggle,setToggle,qualityOfWorkRating, communicationSkillsComments, setCommunicationSkillsComments, setQualityOfWorkRating,employee, setEmployee,
+    recDelete,setRecDelete,performances,setPerformances,overallRating,setOverallRating,setPunctualityAndAttendanceRating,punctualityAndAttendanceRating,adaptabilityRating,setAdaptabilityRating,teamworkAndCollaborationRating,setTeamWorkAndCollaborationRating,initiativeAndCreativityRating,setInitiativeAndCreativityRating,jobKnowledgeRating,setJobKnowledgeRating,communicationSkillsRating,setCommunicationSkillsRating,formData,setFormData,formVisible,setFormVisible,toggle,setToggle,qualityOfWorkRating, communicationSkillsComments, setCommunicationSkillsComments, setQualityOfWorkRating,employee, setEmployee,department,setDepartment
   }
 }
 

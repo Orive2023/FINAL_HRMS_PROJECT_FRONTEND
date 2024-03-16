@@ -73,10 +73,10 @@ const FinancialYearForm = ({ formData, setFormData, setOpen }) => {
 
   console.log(formData);
 
-  let buttonCheck =
-    formData.financialYear?.length > 0 &&
-    formData.financialYearStartDate?.length > 0 &&
-    formData.financialYearEndDate?.length > 0;
+  let buttonCheck = true
+    // formData.financialYear?.length > 0 &&
+    // formData.financialYearStartDate?.length > 0 &&
+    // formData.financialYearEndDate?.length > 0;
 
   const cancelButton = () => {
     setOpen(false);
@@ -91,8 +91,11 @@ const FinancialYearForm = ({ formData, setFormData, setOpen }) => {
     <form onSubmit={handleSubmit}>
       <div className="data-input-fields">
         <TextField
-          type="number"
+          type="text"
           id="financialYear"
+          InputLabelProps={{
+            shrink: true,
+          }}
           margin="dense"
           label="Financial year"
           fullWidth

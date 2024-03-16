@@ -62,6 +62,7 @@ const EditTransfer = () => {
     await axios.put(`http://${url}/transfers/update/${id}`, transfer);
     navigate("/hr/employee/transfer");
   };
+  console.log("here",transfer);
 
   return (
     <div>

@@ -35,5 +35,15 @@ export const loadLoan = async () => {
         console.error("Error loading loan", error)
     }
 }
-
+export const fetchEmployee = async () => {
+    try {
+        const response = await axios.get(
+            "http://localhost:8082/employee/get/employee"
+          );
+          return response.data
+    } catch (error){
+        console.error("Error fetching employee data", error);
+        return []
+    }
+}
 

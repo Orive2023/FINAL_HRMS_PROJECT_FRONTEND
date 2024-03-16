@@ -23,6 +23,7 @@ const StateTicket = () => {
     ticketsCode: "",
     subject: "",
     employeeName: "",
+    username:"",
     priority: "",
     date: getCurrentDate(),
     createdBy: "",

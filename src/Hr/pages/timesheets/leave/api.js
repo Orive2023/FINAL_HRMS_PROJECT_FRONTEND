@@ -39,7 +39,7 @@ export const loadLeave = async () => {
 export const fetchEmployee = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8084/employee/get/employee"
+            "http://localhost:8082/employee/get/employee"
           );
           return response.data
     } catch (error){

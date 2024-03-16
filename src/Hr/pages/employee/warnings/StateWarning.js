@@ -11,6 +11,7 @@ const StateWarning = () => {
   const [warningError,setWarningError] = useState(false);
   const[subjectError, setSubjectError] = useState(false);
   const [warning, setWarning] = useState([]);
+  const [employee, setEmployee] = useState([]);
   const [search, setSearch] = useState("");
   const [open, setOpen] = useState(false);
 
@@ -42,7 +43,7 @@ const StateWarning = () => {
     setWarning,
     setDateError,
     setRecDelete,
-   
+   employee,setEmployee,
     setFormVisible,
     setFormData,
     summary,

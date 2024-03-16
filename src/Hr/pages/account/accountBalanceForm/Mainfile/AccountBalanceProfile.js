@@ -3,6 +3,7 @@ import { useParams,Link } from "react-router-dom";
 import axios from "axios";
 import Header from "../../../../components/Header";
 import SideBar from "../../../../components/SideBar";
+import Orive from "../../../../asset/Orive Logo 2.png";
 import CompanyLogoFile from "../../../../components/CompanyLogoFile";
 
 const AccountBalanceProfile = () => {
@@ -59,7 +60,7 @@ const AccountBalanceProfile = () => {
                   <div className="card mb-4">
                     <div className="card-body text-center">
                       <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                       src={Orive}
                         alt="avatar"
                         className="rounded-circle img-fluid"
                         style={{ width: 150 }}
@@ -88,7 +89,7 @@ const AccountBalanceProfile = () => {
 
                       <div className="row">
                         <div className="col-sm-3">
-                          <h5 className="mb-0">Employee Full Name</h5>
+                          <h5 className="mb-0">Employee  Name</h5>
                         </div>
 
                         <div className="col-sm-9">

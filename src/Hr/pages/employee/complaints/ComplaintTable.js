@@ -431,7 +431,7 @@ const ComplaintTable = ({
                         elem.complaintTitle
                           .toLowerCase()
                           .includes(search.toLowerCase()) ||
-                        elem.complaintFrom
+                        elem.employeeName
                           .toLowerCase()
                           .includes(search.toLowerCase()) ||
                         elem.complaintDate
@@ -458,7 +458,7 @@ const ComplaintTable = ({
 
                       <td className="mx-2">
                         <Link
-                          to={`/employee/edit-complaint/${complaint.complaintsId}`}
+                          to={`/employee/edit-complaints/${complaint.complaintsId}`}
                         >
                           <FaEdit className="action-edit" />
                         </Link>

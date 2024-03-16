@@ -10,7 +10,7 @@ import CompanyLogoFile from "../../../../components/CompanyLogoFile";
 const PerformanceappraisalProfile = () => {
   const { id } = useParams();
 
-  const [holiday, setHoliday] = useState({
+  const [performances, setPerformances] = useState({
     employeeName: "",
   username: "",
   departmentName: "",
@@ -46,12 +46,12 @@ const PerformanceappraisalProfile = () => {
   managersComments: ""
   });
   useEffect(() => {
-    loadHoliday();
+    loadPerformances();
   }, []);
 
-  const loadHoliday = async () => {
+  const loadPerformances = async () => {
     const result = await axios.get(`http://localhost:8083/performanceappraisal/get/${id}`);
-    setHoliday(result.data);
+    setPerformances(result.data);
   };
   const [menu, setMenu] = useState(false);
 
@@ -77,7 +77,7 @@ const PerformanceappraisalProfile = () => {
                       style={{ width: 150 }}
                     />
                     <h5 className="my-3">Orive Solution
-                      {/* {${holiday.employeeName }} */}
+                      {/* {${performances.employeeName }} */}
                     </h5>
                     <div className="d-flex justify-content-center mb-2">
                     <Link to="/hr/performance/Performance-Appraisal">
@@ -105,7 +105,7 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.employeeName}</p>
+                        <p className="text-muted mb-0">{performances.employeeName}</p>
                       </div>
                     </div>
 
@@ -117,7 +117,7 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.username}</p>
+                        <p className="text-muted mb-0">{performances.username}</p>
                       </div>
                     </div>
                     <hr />
@@ -128,7 +128,7 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.departmentName}</p>
+                        <p className="text-muted mb-0">{performances.departmentName}</p>
                       </div>
                     </div>
                     <hr />
@@ -139,7 +139,7 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.position}</p>
+                        <p className="text-muted mb-0">{performances.position}</p>
                       </div>
                     </div>
                     <hr />
@@ -150,7 +150,7 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.appraisalPeriod}</p>
+                        <p className="text-muted mb-0">{performances.appraisalPeriod}</p>
                       </div>
                     </div>
                     <hr />
@@ -161,7 +161,7 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.qualityOfWorkRating}</p>
+                        <p className="text-muted mb-0">{performances.qualityOfWorkRating}</p>
                       </div>
                     </div>
                     <hr />
@@ -172,21 +172,12 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.qualityOfWorkComments}</p>
+                        <p className="text-muted mb-0">{performances.qualityOfWorkComments}</p>
                       </div>
                     </div>
                     <hr />
 
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <h5 className="mb-0">Quality Of Work Score</h5>
-                      </div>
-
-                      <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.qualityOfWorkScore}</p>
-                      </div>
-                    </div>
-                    <hr />
+                   
 
                     <div className="row">
                       <div className="col-sm-3">
@@ -194,32 +185,23 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.jobKnowledgeRating}</p>
+                        <p className="text-muted mb-0">{performances.jobKnowledgeRating}</p>
                       </div>
                     </div>
                     <hr />
 
-                    <div className="row">
+                    {/* <div className="row">
                       <div className="col-sm-3">
                         <h5 className="mb-0">Job Knowledge Comments</h5>
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.jobKnowledgeComments}</p>
+                        <p className="text-muted mb-0">{performances.jobKnowledgeComments}</p>
                       </div>
                     </div>
-                    <hr />
+                    <hr /> */}
 
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <h5 className="mb-0">Job Knowledge Score</h5>
-                      </div>
-
-                      <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.jobKnowledgeScore}</p>
-                      </div>
-                    </div>
-                    <hr />
+                   
 
                     <div className="row">
                       <div className="col-sm-3">
@@ -227,54 +209,35 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.communicationSkillsRating}</p>
+                        <p className="text-muted mb-0">{performances.communicationSkillsRating}</p>
                       </div>
                     </div>
                     <hr />
 
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <h5 className="mb-0">Communication Skills Score</h5>
-                      </div>
-
-                      <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.communicationSkillsScore}</p>
-                      </div>
-                    </div>
-                    <hr />
-
+                   
                     <div className="row">
                       <div className="col-sm-3">
                         <h5 className="mb-0">Teamwork And Collaboration Rating</h5>
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.teamworkAndCollaborationRating}</p>
+                        <p className="text-muted mb-0">{performances.teamworkAndCollaborationRating}</p>
                       </div>
                     </div>
                     <hr />
 
-                    <div className="row">
+                    {/* <div className="row">
                       <div className="col-sm-3">
                         <h5 className="mb-0">Team work And Collaboration Comments</h5>
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.teamworkAndCollaborationComments}</p>
+                        <p className="text-muted mb-0">{performances.teamworkAndCollaborationComments}</p>
                       </div>
                     </div>
-                    <hr />
+                    <hr /> */}
 
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <h5 className="mb-0">Team work And Collaboration Score</h5>
-                      </div>
-
-                      <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.teamworkAndCollaborationScore}</p>
-                      </div>
-                    </div>
-                    <hr />
+                   
 
                     <div className="row">
                       <div className="col-sm-3">
@@ -282,65 +245,46 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.initiativeAndCreativityRating}</p>
+                        <p className="text-muted mb-0">{performances.initiativeAndCreativityRating}</p>
                       </div>
                     </div>
                     <hr />
 
-                    <div className="row">
+                    {/* <div className="row">
                       <div className="col-sm-3">
                         <h5 className="mb-0">Initiative And Creativity Comments</h5>
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.initiativeAndCreativityComments}</p>
+                        <p className="text-muted mb-0">{performances.initiativeAndCreativityComments}</p>
                       </div>
                     </div>
-                    <hr />
+                    <hr /> */}
 
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <h5 className="mb-0">Initiative And Creativity Score</h5>
-                      </div>
-
-                      <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.initiativeAndCreativityScore}</p>
-                      </div>
-                    </div>
-                    <hr />
-
+                   
                     <div className="row">
                       <div className="col-sm-3">
                         <h5 className="mb-0">Punctuality And Attendance Rating</h5>
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.punctualityAndAttendanceRating}</p>
+                        <p className="text-muted mb-0">{performances.punctualityAndAttendanceRating}</p>
                       </div>
                     </div>
                     <hr />
 
-                    <div className="row">
+                    {/* <div className="row">
                       <div className="col-sm-3">
                         <h5 className="mb-0">Punctuality And Attendance Comments</h5>
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.punctualityAndAttendanceComments}</p>
+                        <p className="text-muted mb-0">{performances.punctualityAndAttendanceComments}</p>
                       </div>
                     </div>
-                    <hr />
+                    <hr /> */}
 
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <h5 className="mb-0">Punctuality And Attendance Score</h5>
-                      </div>
-
-                      <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.punctualityAndAttendanceScore}</p>
-                      </div>
-                    </div>
-                    <hr />
+                   
 
                     <div className="row">
                       <div className="col-sm-3">
@@ -348,32 +292,23 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.adaptabilityRating}</p>
+                        <p className="text-muted mb-0">{performances.adaptabilityRating}</p>
                       </div>
                     </div>
                     <hr />
 
-                    <div className="row">
+                    {/* <div className="row">
                       <div className="col-sm-3">
                         <h5 className="mb-0">Adaptability Comments</h5>
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.adaptabilityComments}</p>
+                        <p className="text-muted mb-0">{performances.adaptabilityComments}</p>
                       </div>
                     </div>
-                    <hr />
+                    <hr /> */}
 
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <h5 className="mb-0">Adaptability Score</h5>
-                      </div>
-
-                      <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.adaptabilityScore}</p>
-                      </div>
-                    </div>
-                    <hr />
+                  
 
                     <div className="row">
                       <div className="col-sm-3">
@@ -381,40 +316,30 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.overallRating}</p>
+                        <p className="text-muted mb-0">{performances.overallRating}</p>
                       </div>
                     </div>
                     <hr />
 
-                    <div className="row">
+                    {/* <div className="row">
                       <div className="col-sm-3">
                         <h5 className="mb-0">Overall Comments</h5>
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.overallComments}</p>
+                        <p className="text-muted mb-0">{performances.overallComments}</p>
                       </div>
                     </div>
-                    <hr />
+                    <hr /> */}
 
-                    <div className="row">
-                      <div className="col-sm-3">
-                        <h5 className="mb-0">Overall Score</h5>
-                      </div>
-
-                      <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.overallScore}</p>
-                      </div>
-                    </div>
-                    <hr />
-
+                   
                     <div className="row">
                       <div className="col-sm-3">
                         <h5 className="mb-0">Areas For Improvement</h5>
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.areasForImprovement}</p>
+                        <p className="text-muted mb-0">{performances.areasForImprovement}</p>
                       </div>
                     </div>
                     <hr />
@@ -425,7 +350,7 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.employeesSelfAssessment}</p>
+                        <p className="text-muted mb-0">{performances.employeesSelfAssessment}</p>
                       </div>
                     </div>
                     <hr />
@@ -436,7 +361,7 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.goalsAchieved}</p>
+                        <p className="text-muted mb-0">{performances.goalsAchieved}</p>
                       </div>
                     </div>
                     <hr />
@@ -447,22 +372,22 @@ const PerformanceappraisalProfile = () => {
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.developmentPlan}</p>
+                        <p className="text-muted mb-0">{performances.developmentPlan}</p>
                       </div>
                     </div>
                     <hr />
 
                     
 
-                    <div className="row">
+                    {/* <div className="row">
                       <div className="col-sm-3">
                         <h5 className="mb-0">Managers Comments</h5>
                       </div>
 
                       <div className="col-sm-9">
-                        <p className="text-muted mb-0">{holiday.managersComments}</p>
+                        <p className="text-muted mb-0">{performances.managersComments}</p>
                       </div>
-                    </div>
+                    </div> */}
 
                    
                   </div>

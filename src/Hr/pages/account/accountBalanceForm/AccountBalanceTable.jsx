@@ -405,7 +405,7 @@ const AccountBalanceTable = ({ accountBalance, setRecDelete
               <th>User Name</th>
               <th>HSA Balance</th>
               <th>FSA Balance</th>
-            
+              <th>Status</th>
               <th colSpan={3}>Action</th>
             </tr>
           </thead>
@@ -431,13 +431,14 @@ const AccountBalanceTable = ({ accountBalance, setRecDelete
                           .toLowerCase()
                           .includes(search.toLocaleLowerCase()) ||
                         elem.hsaBalance
+                        .toString()
                           .toLowerCase()
-                          .includes(search.toLocaleLowerCase()) ||
+                          .includes(search) ||
                         elem.fsaBalance
                           .toString()
                           .toLowerCase()
-                          .includes(search.toLocaleLowerCase()) 
-                       
+                          .includes(search.toLocaleLowerCase()) ||
+                          elem.status?.toLowerCase().includes(search.toLowerCase())
                       );
                   })
                   .map((accountBalance, index) => (
@@ -450,36 +451,35 @@ const AccountBalanceTable = ({ accountBalance, setRecDelete
                       <td>{accountBalance.username}</td>
                       <td>{accountBalance.hsaBalance}</td>
                       <td>{accountBalance.fsaBalance}</td>
+                      <td><span className={accountBalance.status === "Registered" ? "complete" : "incomplete"}>
+
+{accountBalance.status?accountBalance.status:<p className="nil">--nil--</p>}
+</span></td>
+                      
+                     
 
                       <td className="mx-2">
                         <Link
                           to={`/accountbalance-profile/${accountBalance.accountBalancesId}`}
-                          className="btn btn-info"
                         >
-                          <FaEye />
+                          <FaEye  className="action-eye"/>
                         </Link>
                       </td>
-
                       <td className="mx-2">
                         <Link
-                          to={`/account/edit-account-balance/${accountBalance.accountBalancesId}`}
-                          className="btn btn-warning"
+                          to={`/account/edit-accountBalance/${accountBalance.accountBalancesId}`}
+                        
                         >
-                          <FaEdit />
+                          <FaEdit className="action-edit"/>
                         </Link>
                       </td>
-
                       <td className="mx-2">
-                        <button
-                          className="btn btn-danger"
-                          onClick={() =>
+                       
+                          <FaTrashAlt className="action-delete" onClick={() =>
                             deleteAccountBalance(accountBalance.accountBalancesId)
-                          }
-                        >
-                          <FaTrashAlt />
-                        </button>
+                            
+                          }/>
                       </td>
-
                     </tr>
                   ))}
           </tbody>

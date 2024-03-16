@@ -13,7 +13,7 @@ const EditEmployeeExit = () => {
   const { id } = useParams();
 
   const [employeeExit, setemployeeExit] = useState({
-    employeeToExit: "",
+    employeeName: "",
     typeOfExit: "",
     exitDate: "",
   });
@@ -85,7 +85,7 @@ const EditEmployeeExit = () => {
                 type="text"
                 name="employeeToExit"
                 id="employeeToExit"
-                value={employeeExit.employeeToExit}
+                value={employeeExit.employeeName}
                 onChange={(e) => handleInputChange(e)}
               />
             </div>

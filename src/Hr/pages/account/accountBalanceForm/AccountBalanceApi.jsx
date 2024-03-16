@@ -13,6 +13,25 @@ export const saveAccountBalance = async (formData) => {
     }
 }
 
+export const loadAccBalanceById = async (id) => {
+  try {
+    const result =  await axios.get(
+         `${url}/accountbalance/get/${id}`,
+         {
+           validateStatus: () => {
+             return true;
+           },
+         }
+     
+       );
+       return result.data
+ } catch (error) {
+     console.error("Error load Account Balance", error)
+ }
+};
+
+
+
 
   export const loadAccountBalance = async () => {
     try {
@@ -60,4 +79,18 @@ export const deleteAccountBalance = async (id) => {
     } catch(error) {
         console.error("Error deleting Account Balance",error)
     }
+};
+
+export  const updateAccountBalance = async (formData,id) => {
+  try {
+    const result =  await axios.put(
+      `http://localhost:8093/accountbalance/update/${id}`,formData,
+       );
+       console.log(formData,id)
+       return result.data
+ } catch (error) {
+     console.error("Error load company", error)
+ }
+ 
+      
 };

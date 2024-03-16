@@ -48,3 +48,15 @@ export const fetchEmployee = async () => {
       return []
   }
 }
+
+export const fetchDepartment = async () => {
+  try {
+      const response = await axios.get(
+          "http://localhost:8081/department/get/department"
+        );
+        return response.data
+  } catch (error){
+      console.error("Error fetching employee data", error);
+      return []
+  }
+}

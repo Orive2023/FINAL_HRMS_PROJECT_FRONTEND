@@ -10,6 +10,16 @@ export const saveDebit = async (formData) => {
   }
 };
 
+export const saveDebitByID = async (formData,id) => {
+  try {
+    await axios.get(`${url}/debitvoucher/get/${id}`, formData);
+  } catch (error) {
+    console.error("saveDebit", error);
+  }
+};
+
+
+
 export const loadDebit = async () => {
   try {
     const result = await axios.get(`${url}/debitvoucher/get/debitVoucher`, {

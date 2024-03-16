@@ -9,13 +9,18 @@ import Dates from "./HeadContent";
 import Table from "./JoiningContent";
 import Footer from "./Footer";
 import JoiningExpTabale from "./JoiningExpTable";
+import { FormControl, MenuItem, Select, InputLabel } from "@mui/material";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 import Head from "../../../../components/Header";
 import SideBar from "../../../../components/SideBar";
 
 import CompanyLogoFile from "../../../../components/CompanyLogoFile";
+import { useNavigate } from "react-router";
 
 const ShowInvoice = () => {
+  const [employee, setEmployee] = useState([]);
   const [showInvoice, setShowInvoice] = useState(false);
   const [referrenceNo, setReferrenceNo] = useState("");
   const [formReleaseDate, setFormReleaseDate] = useState("");
@@ -39,7 +44,7 @@ const ShowInvoice = () => {
   const [marksheets, setMarksheets] = useState("");
   const [department, setDepartment] = useState("");
   const [employeeName, setEmployeeName] = useState("");
-  const [employeeId, setEmployeeId] = useState("");
+  const [username, setUsername] = useState("");
   const [employeeAddress, setEmployeeAddress] = useState("");
   const [subject, setSubject] = useState("");
   const [medical, setMedical] = useState("");
@@ -56,12 +61,13 @@ const ShowInvoice = () => {
   const [recDelete, setRecDelete] = useState("");
 
   const [menu, setMenu] = useState(false);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     referrenceNo: "",
     formReleaseDate: "",
     employeeName: "",
-    employeeId: "",
+    username: "",
     employeeAddress: "",
     subject: "",
     employeeDesignation: "",
@@ -80,16 +86,11 @@ const ShowInvoice = () => {
     earnedLeaves: "",
     noticePeriod: "",
     department: "",
-    workingHours: "",
-    workingTiming: "",
+    // workingHours: "",
+    // workingTiming: "",
   });
 
-  const handleInputChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+
   const handleSave = async () => {
     setShowInvoice(false);
     await axios.post(
@@ -107,8 +108,47 @@ const ShowInvoice = () => {
     setGetTable(result.data);
   };
 
+  const fetchEmployee = async () => {
+    try {
+      const response = await axios.get("http://localhost:8082/employee/get/employee");
+      setEmployee(response.data); // Update the employee state with fetched data
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching company data", error);
+      return [];
+    }
+  };
+ 
+  
+    
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === "employeeName" && value === "addNewEmployee") {
+      navigate("/hr/employee/employee");
+      return;
+    }
+    
+  
+    const selectedEmployee = employee.find((emp) => emp.employeeName === value);
+
+    if (selectedEmployee) {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+        username:selectedEmployee.username || ""
+        
+       } );
+    }else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
+
   useEffect(() => {
     getData();
+    fetchEmployee();
   }, []);
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
@@ -145,7 +185,7 @@ const ShowInvoice = () => {
                 </h1>
                 <Dates
                   employeeName={employeeName}
-                  employeeId={employeeId}
+                  username={username}
                   employeeAddress={employeeAddress}
                 />
 
@@ -170,7 +210,7 @@ const ShowInvoice = () => {
                   salaryComponentPerBasic={salaryComponentPerBasic}
                   salaryComponentPerMonth={salaryComponentPerMonth}
                   employeeName={employeeName}
-                  employeeId={employeeId}
+                  username={username}
                   annualCtc={annualCtc}
                   workingHours={workingHours}
                   workingTiming={workingTiming}
@@ -243,44 +283,53 @@ const ShowInvoice = () => {
                       handleInputChange(e);
                     }}
                   ></TextField>
-
-                  <TextField
-                    id="employeeName"
-                    type="text"
-                    autoComplete="off"
-                    name="employeeName"
-                    margin="dense"
-                    label="Enter Employee Name:"
-                    fullWidth
+                  <FormControl fullWidth>
+                  <InputLabel id="demo-employee-select-label">Employee Name</InputLabel>
+                  <Select
+                    labelId="demo-employee-select-label"
+                    id=""
                     value={formData.employeeName}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
+                    name="employeeName"
+                    label="employeeName"
+                    required
                     onChange={(e) => {
                       setEmployeeName(e.target.value);
                       handleInputChange(e);
                     }}
-                  ></TextField>
-                </div>
-
-                <div className="data-input-fields">
-                  <TextField
-                    id="employeeId"
-                    type="text"
-                    autoComplete="off"
-                    name="employeeId"
-                    margin="dense"
-                    label="Enter Employee ID:"
-                    fullWidth
-                    value={formData.employeeId}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    onChange={(e) => {
-                      setEmployeeId(e.target.value);
-                      handleInputChange(e);
-                    }}
-                  ></TextField>
+                  >
+                    {employee &&
+                      employee.map((item, index) => {
+                        return (
+                          <MenuItem key={index} value={item.employeeName}>
+                            {item.employeeName}
+                          </MenuItem>
+                        );
+                      })}
+                     <MenuItem className="linkStyle" value="addNewEmployee">
+              <a href="#">
+                <FontAwesomeIcon icon={faCirclePlus} rotation={90} className="iconStyle" />
+               Create Employee
+              </a>
+            </MenuItem>
+        
+                  </Select>
+                </FormControl>
+        
+                <TextField
+                margin="dense"
+                label="username"
+                type="string"
+                fullWidth
+                name="username"
+                id="username"
+                value={formData.username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  handleInputChange(e);
+                }}
+                required
+                disabled
+              />
                   <TextField
                     id="employeeAddress"
                     type="text"
@@ -299,23 +348,7 @@ const ShowInvoice = () => {
                     }}
                   ></TextField>
 
-                  <TextField
-                    id="employeeDesignation"
-                    type="text"
-                    autoComplete="off"
-                    name="employeeDesignation"
-                    margin="dense"
-                    label="Enter Position:"
-                    fullWidth
-                    value={formData.employeeDesignation}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    onChange={(e) => {
-                      setEmployeeDesignation(e.target.value);
-                      handleInputChange(e);
-                    }}
-                  ></TextField>
+                
                 </div>
 
                 <div className="data-input-fields">

@@ -9,6 +9,7 @@ const StateLeaves = () => {
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState(false);
   const [leave, setLeave] = useState([]);
+  const [employee, setEmployee] = useState([]);
   const [email, setEmail] = useState("");
   const [emailError, setEmailError] = useState("");
   const [address, setAddress] = useState("");
@@ -47,6 +48,7 @@ const StateLeaves = () => {
     setName,
     address,
     setAddress,
+    employee, setEmployee,
   };
 };
 

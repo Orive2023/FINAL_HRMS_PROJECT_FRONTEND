@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
@@ -77,9 +76,13 @@ const ExpLetterTable = ({
     setDeleteItemId(id);
     setShowDeleteConfirmation(true);
   };
-  const confirmDelete = () => {
-    setRecDelete(deleteItemId);
-    setShowDeleteConfirmation(false);
+  const confirmDelete = async () => {
+    try {
+      await handleDelete(deleteItemId);
+      setShowDeleteConfirmation(false);
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
   };
 
   const cancelDelete = () => {
@@ -256,7 +259,7 @@ const ExpLetterTable = ({
               <th>Reference No.</th>
              <th>Registration No</th>
               <th>Releasing Date</th>
-              <th>Employee Id</th>
+              <th>UserName</th>
               <th>Employee Designation</th>
               <th>Joining Date</th>
               <th>Leave Date</th>
@@ -290,7 +293,7 @@ const ExpLetterTable = ({
                         elem.formReleaseDate
                           .toLowerCase()
                           .includes(search.toLocaleLowerCase())||
-                          elem.employeeId
+                          elem.username
                           .toLowerCase()
                           .includes(search.toLocaleLowerCase()) ||
                         elem.designation
@@ -313,13 +316,13 @@ const ExpLetterTable = ({
                       <td>{item.referrenceNumber}</td>
                       <td>{item.date}</td>
                       <td>{item.formReleaseDate}</td>
-                      <td>{item.employeeId}</td>
+                      <td>{item.username}</td>
                       <td>{item.designation}</td>
                       <td>{item.joiningDate}</td>
                       <td>{item.leavesDate}</td>
 
                       {/* <td className="mx-2">
-                        <Link to={`/employee/edit-awards/${item.itemId}`}>
+                        <Link to={/employee/edit-awards/${item.itemId}}>
                           <FaEdit className="action-edit" />
                         </Link>
                       </td> */}

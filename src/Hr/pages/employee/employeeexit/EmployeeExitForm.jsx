@@ -244,6 +244,7 @@ const EmployeeExitForm = ({ formData, setFormData, setOpen }) => {
     fullWidth
     name="username"
     id="username"
+    InputLabelProps={{ shrink: true }}
     value={formData.username}
     onChange={(e) => {
       handleInputChange(e);

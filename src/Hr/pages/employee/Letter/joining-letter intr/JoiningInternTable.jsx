@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
@@ -77,9 +76,13 @@ const JoiningExpTable = ({
     setDeleteItemId(id);
     setShowDeleteConfirmation(true);
   };
-  const confirmDelete = () => {
-    setRecDelete(deleteItemId);
-    setShowDeleteConfirmation(false);
+  const confirmDelete = async () => {
+    try {
+      await handleDelete(deleteItemId);
+      setShowDeleteConfirmation(false);
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
   };
 
   const cancelDelete = () => {
@@ -398,5 +401,3 @@ const JoiningExpTable = ({
 };
 
 export default JoiningExpTable;
-
-

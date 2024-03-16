@@ -273,11 +273,9 @@ const DepartmentForm = ({formData,setFormData,setFormVisible, setToggle}) => {
         onChange={(e) => handleInputChange(e)}
         required
         InputLabelProps={{shrink:true}}
-        // error={dateError}
-        // helperText={dateError && "Please select the current date"}
-        // InputLabelProps={{
-        //   shrink: true,
-        // }}
+        error={dateError}
+        helperText={dateError && "Please select the current date"}
+       disabled
       />
       
       <FormControl fullWidth>

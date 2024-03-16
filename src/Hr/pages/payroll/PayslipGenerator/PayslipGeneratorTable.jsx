@@ -17,6 +17,8 @@ import {
 import { BiSolidHide } from "react-icons/bi";
 import { MdAdd } from "react-icons/md";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
+import { MdOutlineFileDownload } from "react-icons/md";
 
 const DepartmentTable = ({
   salary,
@@ -26,6 +28,7 @@ const DepartmentTable = ({
   setFormVisible,
 }) => {
   const [search, setSearch] = useState("");
+  const nav = useNavigate();
   const CustomTablePagination = styled(TablePagination)`
     & .${classes.toolbar} {
       display: flex;
@@ -290,6 +293,10 @@ const DepartmentTable = ({
     setShowDeleteConfirmation(false);
   };
 
+  const handleDownload = () => {
+    nav('/payslip-download');
+  }
+
   return (
     <div>
       <div
@@ -408,7 +415,7 @@ const DepartmentTable = ({
               <th>Gross Salary</th>
               <th>Net Salary</th>
               <th>Created Date</th>
-              <th colSpan="2">Actions</th>
+              <th colSpan="3">Actions</th>
             </tr>
           </thead>
 
@@ -449,6 +456,11 @@ const DepartmentTable = ({
                       <td>{salary.netSalary}</td>
                       <td>{salary.createdDate}</td>
                        
+                      <td className="mx-2">
+                        <Link to={`/payslip-download/${salary.paySlipGenerateId}`} target="_blank">
+                          <MdOutlineFileDownload className="action-edit" />
+                        </Link>
+                      </td>
                       <td className="mx-2">
                         <Link to={`/payroll/payslip-profile/${salary.paySlipGenerateId}`}>
                           <FaEye className="action-eye" />

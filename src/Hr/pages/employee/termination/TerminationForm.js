@@ -39,6 +39,7 @@ const TerminationForm = ({formData,
       terminateDate: "",
       reasonForTermination: "",
       terminatedBy: "",
+      email:"",
     });
   };
 
@@ -119,6 +120,7 @@ const TerminationForm = ({formData,
       terminateDate: "",
       reasonForTermination: "",
       terminatedBy: "",
+      email:"",
     });
   };
 
@@ -130,6 +132,8 @@ const TerminationForm = ({formData,
     const employeeData = await api.fetchEmployee();
     setEmployee(employeeData);
   };
+
+  
 
   const term = [
     {
@@ -184,6 +188,7 @@ const TerminationForm = ({formData,
         fullWidth
         name="username"
         id="username"
+        InputLabelProps={{ shrink: true }}
         value={formData.username}
         onChange={(e) => {
           handleInputChange(e);
@@ -203,6 +208,21 @@ const TerminationForm = ({formData,
           name="terminateDate"
           id="terminateDate"
           value={formData.terminateDate}
+          onChange={(e) => handleInputChange(e)}
+          required
+        />
+         <TextField
+          margin="dense"
+          label="Email"
+          type="email"
+          fullWidth
+          InputLabelProps={{
+          shrink: true,
+        }}
+          name="email"
+          id="email"
+          disabled
+          value={formData.email}
           onChange={(e) => handleInputChange(e)}
           required
         />

@@ -8,6 +8,7 @@ import CreditView from "./credit/Mainfile/CreditView";
 import FinacialYearView from "./financialYear/Mainfile/FinancialYearView";
 import ContraVoucherView from "./contraVoucher/Mainfile/ContraVoucherView";
 import OpeningBalanceView from "./openingbalance/Mainfile/BalanceView";
+import EditDebit from "../account/debit/Mainfile/EditDebit"
 import EditAccountBalance from "./accountBalanceForm/Mainfile/EditAccountBalance";
 import EditContraVoucher from "./contraVoucher/Mainfile/EditContraVoucher";
 import EditSubType from "./subType/Mainfile/EditSubtype";
@@ -20,9 +21,10 @@ import ContraVoucherProfile from "./contraVoucher/Mainfile/ContraVoucherProfile"
 const routesData = [
   { path: "/hr/account/account-balance", element: <AccountBalanceView /> },
   {
-    path: "/account/edit-account-balance/:id",
+    path: "/account/edit-accountBalance/:id",
     element: <EditAccountBalance />,
   },
+  { path: "/account/edit-debit/:id", element: <EditDebit/> },
   { path: "/hr/account/sub-type", element: <SubTypeView /> },
   { path: "/account/edit-sub-type/:id", element: <EditSubType /> },
   { path: "/hr/account/debit", element: <DebitView /> },

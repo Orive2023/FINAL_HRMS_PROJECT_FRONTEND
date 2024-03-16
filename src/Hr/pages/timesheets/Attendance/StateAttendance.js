@@ -15,6 +15,7 @@ const StateAttendance = () => {
   const [attendance, setAttendance] = useState([]);
   const [recDelete, setRecDelete] = useState("");
   const [dateError, setDateError] = useState(false);
+  const [officeShift, setOfficeShift] = useState([]);
 
   const [formData, setFormData] = useState({
     employeeName: "",
@@ -41,6 +42,8 @@ const StateAttendance = () => {
     setEmployee,
     attendance,
     setAttendance,
+    officeShift,
+    setOfficeShift
   };
 };
 

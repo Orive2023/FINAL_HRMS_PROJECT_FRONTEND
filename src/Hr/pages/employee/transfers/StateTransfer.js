@@ -27,11 +27,14 @@ const StateTransfer = () => {
    
 
     const [formData, setFormData] = useState({
-        employeeName: "",
-        transferDate: "",
-        departmentName: "",
-        locationName: "",
-        description:""
+      employeeName: "",
+      username:"",
+      email:"",
+      transferDate: "",
+      departmentName: "",
+      locationName: "",
+      description:"",
+      createdDate: getCurrentDate(),
       });
     return {
        formData,setFormData,dateError,description,setDescription,descriptionError,setDescriptionError, setDateError, formVisible,formErrors,setFormerrors,open, setOpen,setFormVisible,toggle,setToggle,employee,transfer, setTransfer, formControl,setFormControl,setEmployee,recDelete,setRecDelete, location, setLocation,department, setDepartment

@@ -5,13 +5,21 @@ import AdvanceSalaryEdit from "../payroll/AdvanceSalary/Mainfile/AdvanceSalaryEd
 import SalaryTemplateView from "../payroll/Salarytemplate/Mainfile/SalaryTemplateView";
 import EditSalaryTemplate from "./Salarytemplate/Mainfile/EditSalaryTemplate";
 import PayslipGenerator from './PayslipGenerator/Mainfile/PayslipGeneratorView'
+import Payslip from "../../pages/payroll/PayslipGenerator/Payslip"
 import PayslipProfile from "./PayslipGenerator/Mainfile/PayslipProfile";
 import AdvanceProfile from "./AdvanceSalary/Mainfile/AdvanceProfile";
+import PayslipGeneratorView from "./PayslipGenerator/Mainfile/PayslipGeneratorView";
 const RoutingProject = () => {
   return (
     <div>
       <div className="App">
         <Routes>
+        <Route
+            path="/payslip-download/:id"
+            exact
+            element={<Payslip />}
+          />
+
           <Route
             path="/hr/payroll/advance-Salary"
             exact

@@ -109,33 +109,8 @@ const ExpensesProfile = () => {
                         </div>
                       </div>
                       <hr />
-                      <table className="table">
-                        <thead>
-                          <tr>
-                            <th>SL</th>
-                            <th>Expence List Id</th>
-                            <th>Expence Id</th>
-                            <th>Purchase Date</th>
-                            <th>Description</th>
-                            <th>Purchased By</th>
-                            <th>Amount</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {expenses.expenseListEntities.map((subVoucher, index) => (
-                            <tr key={index}>
-                              <td>{index + 1}</td>
-                              <td>{subVoucher.expenceListId}</td>
-                              <td>{subVoucher.expenceId}</td>
-                              <td>{subVoucher.purchaseDate}</td>
-                              <td>{subVoucher.description}</td>
-                              <td>{subVoucher.purchasedBy}</td>
-                              <td>{subVoucher.amount}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                      <hr />
+                     
+                    
                     
                       
                     </div>

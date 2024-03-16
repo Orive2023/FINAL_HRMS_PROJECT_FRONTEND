@@ -32,9 +32,7 @@ const OfficeShiftView = () => {
   } = StateOfficeShift();
 
   const handleOpen = () => {
-    officeShift.length > 0
-      ? alert("Time already exist, please update in below table")
-      : setOpen(true);
+     setOpen(true);
   };
 
   const handleClose = () => {
@@ -93,15 +91,13 @@ const OfficeShiftView = () => {
               <span style={{color:'black'}}> OfficeShift</span>
             </div>
             </div>
-                <Button variant="outlined" onClick={handleOpen} id="add-btn">
-                  <MdAdd />
-                  Add Office Shift
-                </Button>
+              
               </div>
             </div>
             <OfficeShiftTable
               officeShift={officeShift}
               setRecDelete={setRecDelete}
+              setOpen={setOpen}
             />
             <div>
               <Dialog open={open} onClose={handleClose}>
@@ -122,4 +118,4 @@ const OfficeShiftView = () => {
   );
 };
 
-export default OfficeShiftView;
+export default OfficeShiftView

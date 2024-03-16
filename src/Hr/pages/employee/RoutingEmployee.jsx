@@ -27,7 +27,7 @@ import EmployeeProfile from "./employees/Mainfile/EmployeeProfile";
 import TransferProfile from "./transfers/mainfile/TransferPofile";
 import EditPromotion from "./promotions/Mainfile/EditPromotion";
 import EditWarning from "./warnings/Mainfile/EditWarning";
-import Certificate from './Letter/certificate format/CertificateContent';
+import Certificate from './Letter/certificate format/CertificateForm';
 import ExperienceLetter from './Letter/experience-letter/ShowExLetter';
 import JoiningLetterExp from './Letter/Joining letter exp/JoiningExperienceLetter';
 import JoiningLetterIntern from './Letter/joining-letter intr/ShowJoiningLetter';

@@ -7,13 +7,14 @@ import Header from "../../../../components/Header";
 import SideBar from "../../../../components/SideBar";
 import CompanyLogoFile from "../../../../components/CompanyLogoFile";
 import { useParams } from "react-router-dom";
+import logo from '../../../../asset/Orive Logo 2.png'
 import axios from "axios";
 
 const WarningPofile = () => {
 	const { id } = useParams();
 
 	const [warning, setwarning] = useState({
-		warningToEmployee: "",
+		employeeName: "",
 		warningType: "",
 		subject: "",
 		warningByEmployee: "",
@@ -47,7 +48,7 @@ const WarningPofile = () => {
 				   <div className="card mb-4">
 					 <div className="card-body text-center">
 					   <img
-						 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+						src={logo}
 						 alt="avatar"
 						 className="rounded-circle img-fluid"
 						 style={{ width: 150 }}
@@ -81,7 +82,7 @@ const WarningPofile = () => {
  
 						 <div className="col-sm-9">
 						   <p className="text-muted mb-0">
-							 {warning.warningToEmployee}
+							 {warning.employeeName}
 						   </p>
 						 </div>
 					   </div>

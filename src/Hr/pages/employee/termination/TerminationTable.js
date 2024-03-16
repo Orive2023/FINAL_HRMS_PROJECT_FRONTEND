@@ -406,7 +406,7 @@ const TerminationTable = ({
               <th>Terminate Date</th>
               <th>Reason For Terminate</th>
               <th>Terminated By</th>
-              <th colSpan={2}>Action</th>
+              <th colSpan={3}>Action</th>
             </tr>
           </thead>
 
@@ -434,7 +434,6 @@ const TerminationTable = ({
                           .toLowerCase()
                           .includes(search.toLocaleLowerCase()) ||
                         elem.terminatedBy
-                          .toString()
                           .toLowerCase()
                           .includes(search.toLocaleLowerCase())
                       );

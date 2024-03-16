@@ -11,13 +11,13 @@ const EditAccountBalance = () => {
   let navigate = useNavigate();
   const { id } = useParams();
   const [accountBalance, setAccountBalance] = useState({
-    employeeFullName: "",
+    employeeName: "",
     hsaBalance: "",
     fsaBalance: "",
     status: "",
   });
 
-  const { employeeFullName, hsaBalance, fsaBalance } = accountBalance;
+  const {  employeeName, hsaBalance, fsaBalance } = accountBalance;
 
   useEffect(() => {
     loadAccountBalance();

@@ -436,7 +436,6 @@ const TransferTable = ({
                           .toLowerCase()
                           .includes(search.toLocaleLowerCase()) ||
                         elem.locationName
-                          .toString()
                           .toLowerCase()
                           .includes(search.toLocaleLowerCase())
                       );

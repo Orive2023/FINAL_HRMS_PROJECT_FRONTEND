@@ -11,6 +11,7 @@ const StateTermination = () => {
     const [dateError,setDateError] = useState([]);
     const [employeeName,setEmployeeName] =useState([]);
     const [open, setOpen] = useState(false);
+    const [employee, setEmployee] = useState([]);
     const [recDelete, setRecDelete] = useState("");
 
     const [formData, setFormData] = useState({
@@ -18,9 +19,11 @@ const StateTermination = () => {
         terminateDate: "",
         reasonForTermination: "",
         terminatedBy:"",
+        email:"",
     });
     return {
-        formData, setFormData,employeeName,setEmployeeName,dateError,setDateError,description,setDescription, formVisible,setFormVisible, formErrors, setFormerrors, open, setOpen,  toggle, setToggle, termination, setTermination, formControl, setFormControl, recDelete, setRecDelete
+        formData, employee,
+        setEmployee, setFormData,employeeName,setEmployeeName,dateError,setDateError,description,setDescription, formVisible,setFormVisible, formErrors, setFormerrors, open, setOpen,  toggle, setToggle, termination, setTermination, formControl, setFormControl, recDelete, setRecDelete
     
     }
 }

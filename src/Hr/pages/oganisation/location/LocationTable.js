@@ -502,7 +502,7 @@ const LocationTable = ({
                       <td className="mx-2">
                         <FaTrashAlt
                           className="action-delete"
-                          onClick={() => deleteLocation(location.locationId)}
+                          onClick={() => deleteLocation(item.locationId)}
                         />
                       </td>
                     </tr>

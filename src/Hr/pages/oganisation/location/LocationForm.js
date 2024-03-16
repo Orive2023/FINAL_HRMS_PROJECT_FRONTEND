@@ -69,6 +69,7 @@ const LocationForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
         [e.target.name]: e.target.value,
         state: selectedCompany.state || "",
         country: selectedCompany.country || "",
+       zipCode: selectedCompany.zipCode || "",
       });
     } else {
       setFormData({

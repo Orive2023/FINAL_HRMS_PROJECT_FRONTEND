@@ -30,6 +30,7 @@ const StateAward = () => {
     date: "",
     employeeName: "",
     awardBy: "",
+    email:"",
     giftItem:""
   });
   return {

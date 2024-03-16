@@ -2,6 +2,13 @@ import { useState } from "react";
 import ComplaintView from "./Mainfile/ComplaintView";
 
 const StateComplaint = () => {
+  const getCurrentDate = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = `${now.getMonth() + 1}`.padStart(2, "0");
+    const day = `${now.getDate()}`.padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
   const [formVisible, setFormVisible] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [employee, setEmployee]= useState([]);
@@ -15,7 +22,7 @@ const StateComplaint = () => {
     employeeName: "",
     username: "",
     complaintTitle: "",
-    complaintDate: "",
+    complaintDate: getCurrentDate(),
     complaintAgainst: "",
     description: "",  });
   return {

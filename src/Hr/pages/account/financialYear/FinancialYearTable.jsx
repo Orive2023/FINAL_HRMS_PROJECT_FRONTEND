@@ -288,7 +288,7 @@ const FinancialYearTable = ({
           variant="outlined"
           onClick={handleOpen}
           id="add-btn"
-          style={{ width: "max-content", marginTop: "50px" }}
+          style={{ width: "max-content", marginTop: "20px" }}
         >
           <MdAdd />
           Add Financial Year

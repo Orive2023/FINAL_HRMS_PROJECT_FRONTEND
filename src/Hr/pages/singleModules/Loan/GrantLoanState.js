@@ -15,10 +15,12 @@ const GrantLoanState = () => {
   const [formData, setFormData] = useState({
     employeeName: "",
     permittedBy: "",
+    username:"",
     loanDetails: "",
     approveDate: "",
     repaymentForm: "",
     amount: "",
+    accountType:"",
     interestPersentage: "",
     installmentPeriod: "",
     status: "",

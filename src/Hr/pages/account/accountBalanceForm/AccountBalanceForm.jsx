@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import { useNavigate} from 'react-router-dom';
  import StateAccountBalance from "./StateAccountBalance";
 import * as AccountBalanceApi from "./AccountBalanceApi";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 
 
 const AccountBalanceForm = ({formData,setFormData, setFormVisible, setToggle}) => {
@@ -68,11 +70,27 @@ const AccountBalanceForm = ({formData,setFormData, setFormVisible, setToggle}) =
           const isValidDate = value === getCurrentDate();
           setDateError(!isValidDate);
         }
-        setFormData({
-          ...formData,
-          [e.target.name]: e.target.value,
-          [name]: value,
-        });
+
+        if (name === "employeeName" && value === "addNewEmployee") {
+          // Redirect to the company form in the company module
+          navigate("/hr/employee/employee");
+          return;
+        }
+        const selectedEmployee = employee.find((emp) => emp.employeeName === value);
+        if (selectedEmployee) {
+          setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+          username: selectedEmployee.username || "",
+          email: selectedEmployee.email || "",
+    
+          });
+        } else {
+          setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+          });
+        }
       };
       const Type = [
             {
@@ -124,8 +142,8 @@ const AccountBalanceForm = ({formData,setFormData, setFormVisible, setToggle}) =
       const saveAccountBalance = async () => {
     
         await  AccountBalanceApi.saveAccountBalance(formData);
-        navigate("/hr/account/account-balance");
-        window.location.reload(true);
+        navigate("/hr/accounts/AccountBalance");
+        
         setFormData({
                     employeeName: "",
                     username: "",
@@ -203,6 +221,12 @@ const AccountBalanceForm = ({formData,setFormData, setFormVisible, setToggle}) =
               </MenuItem>
             );
           })}
+          <MenuItem className="linkStyle" value="addNewEmployee">
+          <a href="#">
+            <FontAwesomeIcon icon={faCirclePlus} rotation={90} className="iconStyle" />
+           Create Employee
+          </a>
+        </MenuItem>
         </Select>
       </FormControl>
       <FormControl fullWidth>

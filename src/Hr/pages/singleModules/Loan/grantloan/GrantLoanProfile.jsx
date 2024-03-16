@@ -58,8 +58,8 @@ const GrantLoanProfile = () => {
                         className="rounded-circle img-fluid"
                         style={{ width: 150 }}
                       />
-                      <h5 className="my-3"> Orive Solution
-                        {/* {${loan.employeeName}} */}
+                      <h5 className="my-3">
+                        {loan.employeeName}
                       </h5>
                       <div className="d-flex justify-content-center mb-2">
                       <Link to="/hr/loan/grant-loan">
@@ -168,18 +168,6 @@ const GrantLoanProfile = () => {
                         <div className="col-sm-9">
                           <p className="text-muted mb-0">
                             {loan.installmentPeriod}
-                          </p>
-                        </div>
-                      </div>
-<hr />
-<div className="row">
-                        <div className="col-sm-3">
-                          <h5 className="mb-0">Account Type </h5>
-                        </div>
-
-                        <div className="col-sm-9">
-                          <p className="text-muted mb-0">
-                            {loan.accountType}
                           </p>
                         </div>
                       </div>

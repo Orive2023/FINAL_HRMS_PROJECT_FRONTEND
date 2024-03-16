@@ -112,7 +112,7 @@ const ShowInvoice = () => {
                   <MainDetails referrenceNo={referrenceNo} date={date} />
 
                   <Dates
-                    employeeName={employeeName}
+                  internName={internName}
                     date={date}
                     issueDate={issueDate}
                     registrationNo={registrationNo}
@@ -124,7 +124,6 @@ const ShowInvoice = () => {
                       productName={productName}
                       endDate={endDate}
                       directorName={directorName}
-                      employeeName={employeeName}
                       internName={internName}
                     />
                   </div>
@@ -234,23 +233,7 @@ const ShowInvoice = () => {
                     }}
                   ></TextField>
 
-                  <TextField
-                    id="employeeName"
-                    type="text"
-                    autoComplete="off"
-                    name="employeeName"
-                    margin="dense"
-                    label="Enter Employee Name:"
-                    fullWidth
-                    value={formData.employeeName}
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    onChange={(e) => {
-                      setEmployeeName(e.target.value);
-                      handleInputChange(e);
-                    }}
-                  ></TextField>
+                
 
                   <TextField
                     id="internsName"

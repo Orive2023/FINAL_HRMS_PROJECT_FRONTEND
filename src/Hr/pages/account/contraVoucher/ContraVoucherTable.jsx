@@ -321,7 +321,7 @@ const ContraVoucherTable = ({
             handleButtonClick();
           }}
           id="add-btn"
-          style={{ width: "max-content", marginTop: "50px" }}
+          style={{ width: "max-content", marginTop: "20px" }}
         >
           {toggle ? (
             <div className="hide">
@@ -495,13 +495,7 @@ const ContraVoucherTable = ({
                         <FaEye className="action-eye" />
                       </Link>
                     </td>
-                    <td className="mx-2">
-                      <Link
-                        to={`/account/edit-ContraVoucher/${contraVoucher.contraVoucherId}`}
-                      >
-                        <FaEdit className="action-edit" />
-                      </Link>
-                    </td>
+                   
                     <td className="mx-2">
                       <FaTrashAlt
                         className="action-delete"

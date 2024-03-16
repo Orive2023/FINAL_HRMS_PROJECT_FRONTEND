@@ -1,17 +1,14 @@
 import React from "react";
 
-const Dates = ({ registrationNo, employeeName, issueDate}) => {
+const Dates = ({ employeeName, username, employeeAddress }) => {
   return (
-    <article className=" d-flex">
+    <article className="d-flex">
       <ul>
         <li className="">
           <span className="fw-bold">Employee Name:</span> {employeeName}
         </li>
         <li className="">
-          <span className="fw-bold">Registration No.:</span> {registrationNo}
-        </li>
-        <li className="">
-          <span className="fw-bold">Issue Date:</span> {issueDate}
+          <span className="fw-bold">Employee Address:</span> {employeeAddress}
         </li>
       </ul>
     </article>

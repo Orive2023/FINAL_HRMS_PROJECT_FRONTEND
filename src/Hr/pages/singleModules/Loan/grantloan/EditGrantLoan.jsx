@@ -119,24 +119,6 @@ const EditLoan = () => {
                 />
               </div>
 
-              <div className="input-group mb-5">
-                <label className="input-group-text" htmlFor="approval">
-                  Status
-                </label>
-                <select
-                  className="form-control col-sm-6"
-                  name="status"
-                  id="status"
-                  required
-                  value={loan.status}
-                  onChange={(e) => handleInputChange(e)}
-                >
-                  <option value="">Select</option>
-                  <option value="Active">Active</option>
-                  <option value="Inactive">Inactive</option>
-                </select>
-              </div>
-
               <div className="data-buttons">
                 <Button id="input-btn-submit" variant="outlined" type="submit">
                   Submit

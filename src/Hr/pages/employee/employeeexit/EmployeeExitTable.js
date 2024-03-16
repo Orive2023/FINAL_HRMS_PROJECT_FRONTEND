@@ -412,7 +412,7 @@ const EmployeeExitTable = ({ employeeExit, setRecDelete,setOpen }) => {
             if(search.length===0)
               return elem;
             else  
-              return (elem.employeeToExit.toLowerCase().includes(search.toLocaleLowerCase()) ||
+              return (elem.employeeName.toLowerCase().includes(search.toLocaleLowerCase()) ||
               elem.exitDate.toLowerCase().includes(search.toLocaleLowerCase()) ||
               elem.typeOfExit.toLowerCase().includes(search.toLocaleLowerCase()) ||
               elem.exitInterview.toString().toLowerCase().includes(search.toLocaleLowerCase()) ||
@@ -424,7 +424,7 @@ const EmployeeExitTable = ({ employeeExit, setRecDelete,setOpen }) => {
                 <th scope="row" key={index}>
                   {index + 1}
                 </th>
-                <td>{employeeExit.employeeToExit}</td>
+                <td>{employeeExit.employeeName}</td>
                 <td>{employeeExit.exitDate}</td>
                 <td>{employeeExit.typeOfExit}</td>
                 <td>{employeeExit.exitInterview}</td>

@@ -40,6 +40,7 @@ const GrantLoanForm = ({
 
   useEffect(() => {
     loadLoan();
+    fetchEmployee();
   }, []); // Remove loadLoan from the dependency array
 
   const saveLoan = async () => {
@@ -47,16 +48,23 @@ const GrantLoanForm = ({
     navigate("/hr/loan/grant-loan");
     setFormData({
       employeeName: "",
+      username:"",
       permittedBy: "",
       loanDetails: "",
       approveDate: "",
       repaymentForm: "",
       amount: "",
       interestPersentage: "",
+      accountType:"",
       installmentPeriod: "",
       status: "",
       installmentCleared: "",
     });
+  };
+
+  const fetchEmployee = async () => {
+    const employeeData = await loanapi.fetchEmployee();
+    setEmployee(employeeData);
   };
 
   const handleSubmit = (e) => {
@@ -117,6 +125,21 @@ const GrantLoanForm = ({
       repaymentTotal: pay,
       totalPaymentCleared: emiClear,
     });
+
+    const selectedEmployee = employee.find((emp) => emp.employeeName === value);
+    if (selectedEmployee) {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      username: selectedEmployee.username || "",
+
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
 
     repaymentAmtTotal();
     emi();
@@ -198,11 +221,13 @@ const GrantLoanForm = ({
     setToggle(false);
     setFormData({
       employeeName: "",
+      username:"",
       permittedBy: "",
       loanDetails: "",
       approveDate: "",
       repaymentForm: "",
       amount: "",
+      accountType:"",
       interestPersentage: "",
       installmentPeriod: "",
       status: "",
@@ -215,35 +240,49 @@ const GrantLoanForm = ({
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-company-select-label">Employee Name</InputLabel>
-          <Select
-            labelId="demo-company-select-label"
-            id="selectedCompany"
-            value={formData.employeeName}
-            name="employeeName"
-            label="employeeName"
-            onChange={(e) => handleInputChange(e)}
-            required
-          >
-            {employee &&
-              employee.map((item, index) => {
-                return (
-                  <MenuItem key={index} value={item.employeeName}>
-                    {item.employeeName}
-                  </MenuItem>
-                );
-              })}
-             <MenuItem className="linkStyle" value="addNewEmployee">
-      <a href="#">
-        <FontAwesomeIcon icon={faCirclePlus} rotation={90} className="iconStyle" />
-       Create Employee
-      </a>
-    </MenuItem>
+      <div style={{ display: "flex", gap: "10px", margin: "5px 0" }}>
 
-          </Select>
-        </FormControl>
 
+      <FormControl fullWidth>
+      <InputLabel id="demo-company-select-label">Employee Name</InputLabel>
+      <Select
+        labelId="demo-company-select-label"
+        id="selectedCompany"
+        value={formData.employeeName}
+        name="employeeName"
+        label="employeeName"
+        onChange={(e) => handleInputChange(e)}
+        required
+      >
+        {employee &&
+          employee.map((item, index) => {
+            return (
+              <MenuItem key={index} value={item.employeeName}>
+                {item.employeeName}
+              </MenuItem>
+            );
+          })}
+        
+
+      </Select>
+    </FormControl>
+      <TextField
+        margin="dense"
+        label="username"
+        type="string"
+        fullWidth
+        name="username"
+        id="username"
+        value={formData.username}
+        onChange={(e) => handleInputChange(e)}
+        required
+        InputLabelProps={{
+          shrink: true,
+        }}
+        disabled
+      />
+       
+        </div>
         <div style={{ display: "flex", gap: "10px", margin: "5px 0" }}>
           <TextField
             margin="dense"
@@ -364,7 +403,7 @@ const GrantLoanForm = ({
             required
           />
           <TextField
-            id="status"
+            id="accountType"
             margin="dense"
             select
             label="Account Type"
@@ -375,11 +414,11 @@ const GrantLoanForm = ({
             }}
             InputLabelProps={{
               shrink: true,
-              htmlFor: "accountType", // Add the 'htmlFor' property with the ID of the input field
+              htmlFor: "accountType", 
             }}
-            value={formData.status}
+            value={formData.accountType}
             onChange={(e) => handleInputChange(e)}
-            name="status"
+            name="accountType"
             required
           >
             <option disabled value="">
@@ -402,12 +441,12 @@ const GrantLoanForm = ({
             value={formData.installmentCleared}
             onChange={(e) => handleInputChange(e)}
             required
-            error={formData.installmentCleared > formData.installmentPeriod}
-            helperText={
-              formData.installmentCleared > formData.installmentPeriod
-                ? `Exceeding installment limit of ${formData.installmentPeriod}`
-                : ""
-            }
+            // error={formData.installmentCleared > formData.installmentPeriod}
+            // helperText={
+            //   formData.installmentCleared > formData.installmentPeriod
+            //     ? Exceeding installment limit of ${formData.installmentPeriod}
+            //     : ""
+            // }
           />
 
           <TextField
@@ -429,11 +468,11 @@ const GrantLoanForm = ({
             type="submit"
             onClick={saveLoan}
             variant="outlined"
-            disabled={
-              formData.installmentCleared > formData.installmentPeriod
-                ? true
-                : false
-            }
+            // disabled={
+            //   formData.installmentCleared > formData.installmentPeriod
+            //     ? true
+            //     : false
+            // }
           >
             Submit
           </Button>

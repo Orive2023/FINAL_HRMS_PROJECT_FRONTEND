@@ -94,7 +94,7 @@ const EditWarning = () => {
 						name="warningToEmployee"
 						id="warningToEmployee"
 						required
-						value={warning.warningToEmployee}
+						value={warning.employeeName}
 						onChange={(e) => handleInputChange(e)}
 					/>
 				</div>

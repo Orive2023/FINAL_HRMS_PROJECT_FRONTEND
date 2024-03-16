@@ -310,6 +310,9 @@ const TravelForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
           handleInputChange(e);
         }}
         required
+        InputLabelProps={{
+          shrink: true,
+        }}
         disabled
       />
       </div>
@@ -484,11 +487,13 @@ const TravelForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
         value={formData.createdDate}
         onChange={(e) => handleInputChange(e)}
         required
+        disabled
         error={dateError}
         helperText={dateError && "Please select the current date"}
         InputLabelProps={{
           shrink: true,
         }}
+
       />
       <div className="data-buttons">
         <Button

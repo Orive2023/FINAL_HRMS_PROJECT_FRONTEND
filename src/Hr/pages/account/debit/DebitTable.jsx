@@ -424,22 +424,15 @@ const cancelDelete = () => {
             <td className="mx-2">
               <Link
                 to={`/debit-profile/${debit.debitVoucherId}`}
-                className="btn btn-info"
+                className="action-eye"
               >
                 <FaEye />
               </Link>
             </td>
-            <td className="mx-2">
-              <Link
-                to={`/edit-Debit/${debit.debitVoucherId}`}
-                className="btn btn-warning"
-              >
-                <FaEdit />
-              </Link>
-            </td>
+            
             <td className="mx-2">
                   <Link
-                    className="btn btn-danger"
+                    className="action-delete"
                     onClick={() => deleteDebit(debit.debitVoucherId)}
                   >
                     <FaTrashAlt />

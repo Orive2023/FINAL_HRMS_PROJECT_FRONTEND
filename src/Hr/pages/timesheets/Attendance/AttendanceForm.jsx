@@ -15,19 +15,7 @@ const AttendanceForm = ({
   setFormVisible,
   setToggle,
 }) => {
-  // const calculateTimeDifference = (t1, t2) => {
-  //   if (t1 && t2) {
-  //     const time1 = new Date(`1970-01-01T${t1}:00`);
-  //     const time2 = new Date(`1970-01-01T${t2}:00`);
-  //     const timeDifferenceInMilliseconds = time2 - time1;
-  //     const timeDifferenceInMinutes =
-  //       timeDifferenceInMilliseconds / (1000 * 60);
-  //     const hours = timeDifferenceInMinutes / 60;
-  //     return hours;
-  //   } else {
-  //     return 100;
-  //   }
-  // };
+ 
 
   const navigate = useNavigate();
 
@@ -39,11 +27,6 @@ const AttendanceForm = ({
     dateError,
     setDateError,
   } = StateAttendance();
-
-  // const checkIn = "09:30";
-  // const checkOut = "18:30";
-  // const workingHours = calculateTimeDifference(checkIn, checkOut);
-
   const loadAttendance = async () => {
     const result = await api.loadAttendance();
     setAttendance(result);
@@ -57,8 +40,8 @@ const AttendanceForm = ({
   const getCurrentDate = () => {
     const now = new Date();
     const year = now.getFullYear();
-    const month = `${now.getMonth() + 1}`.padStart(2, "0");
-    const day = `${now.getDate()}`.padStart(2, "0");
+    const month = `${now.getMonth() + 1}.padStart(2, "0")`;
+    const day = `${now.getDate()}.padStart(2, "0")`;
     return `${year}-${month}-${day}`;
   };
 
@@ -89,35 +72,7 @@ const AttendanceForm = ({
     }
   };
 
-    //   let lateValue;
-    //   let earlyLeavingValue;
-    //   let overtimeValue;
-    //   let totWorkValue;
-    //   let totRest;
-    //   if (name === "clockOut") {
-    //     lateValue = calculateTimeDifference(checkIn, formData.clockIn);
-    //     earlyLeavingValue =
-    //       workingHours - calculateTimeDifference(formData.clockIn, value);
-    //     overtimeValue =
-    //       calculateTimeDifference(checkOut, value) < 0
-    //         ? 0
-    //         : calculateTimeDifference(checkOut, value);
-    //     totWorkValue = calculateTimeDifference(formData.clockIn, value);
-    //     totRest = 1;
-    //   } else {
-    //     lateValue = formData.late;
-    //     earlyLeavingValue = formData.earlyLeaving;
-    //     overtimeValue = formData.overtime;
-    //     totWorkValue = formData.totalWork;
-    //     totRest = formData.totalRest;
-    //   }
-
   
-      // late: lateValue,
-      // earlyLeaving: earlyLeavingValue,
-      // overtime: overtimeValue,
-      // totalWork: totWorkValue,
-      // totalRest: totRest,
    
 
   const saveAttendance = async () => {
@@ -132,6 +87,14 @@ const AttendanceForm = ({
       officeClockIn: "",
       officeClockOut: "",
       date: getCurrentDate(),
+       late:"",
+       earlyLeaving:"",
+       overTime:"",
+       totalWork:"",
+       totalRest:"",
+      date:"",
+       clockInLocation:"",
+       clockOutLocation:"",
     });
   };
 
@@ -160,13 +123,21 @@ const AttendanceForm = ({
     setFormVisible(false);
     setToggle(false);
     setFormData({
-      employeeName: "",
+       employeeName: "",
       username: "",
       clockIn: "",
       clockOut: "",
       officeClockIn: "",
       officeClockOut: "",
       date: getCurrentDate(),
+       late:"",
+       earlyLeaving:"",
+       overTime:"",
+       totalWork:"",
+       totalRest:"",
+      date:"",
+       clockInLocation:"",
+       clockOutLocation:"",
     });
   };
 

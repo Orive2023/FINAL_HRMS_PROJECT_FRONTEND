@@ -2,6 +2,14 @@ import {useState} from 'react'
 // import DepartmentView from './Mainfile/DepartmentView';
 
 const StateDepartment = () => {
+  const getCurrentDate = () => {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = `${now.getMonth() + 1}`.padStart(2, "0");
+    const day = `${now.getDate()}`.padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+
     const [formVisible, setFormVisible] = useState(false);
     const [toggle, setToggle] = useState(false);
 
@@ -16,8 +24,7 @@ const StateDepartment = () => {
         companyName: "",
         locationName: "",
         departmentHead: "",
-        createdDate: "",
-      });
+        createdDate:getCurrentDate(),      });
     return {
        formData,setFormData,department,setDepartment, formVisible,setFormVisible,toggle,setToggle,company,setCompany,location,setLocation,recDelete,setRecDelete,dateError,setDateError
  

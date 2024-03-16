@@ -83,23 +83,7 @@ const EditPolicies = () => {
           />
         </div>
 
-        <div className="input-group mb-5">
-                <label className="input-group-text" htmlFor="status">
-                  Status
-                </label>
-                <select
-                  className="form-control col-sm-6"
-                  name="status"
-                  id="status"
-                  required
-                  value={policies.status}
-                  onChange={(e) => handleInputChange(e)}
-                >
-                  <option value="select">Select</option>
-                  <option value="Registered">Registered</option>
-                  <option value="Unregistered">Unregistered</option>
-                </select>
-              </div>
+       
 
         <div className="data-buttons">
                 <Button id="input-btn-submit" variant="outlined" type="submit">

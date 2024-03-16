@@ -3,6 +3,7 @@ import React, {
 	useState,
 } from "react";
 import { useParams } from "react-router-dom";
+import logo from '../../../../asset/Orive Logo 2.png'
 import axios from "axios";
 import { Link } from "react-router-dom";
 import Header from "../../../../components/Header";
@@ -48,7 +49,7 @@ const EmployeeExitPofile = () => {
 				   <div className="card mb-4">
 					 <div className="card-body text-center">
 					   <img
-						 src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+						src={logo}
 						 alt="avatar"
 						 className="rounded-circle img-fluid"
 						 style={{ width: 150 }}
@@ -84,7 +85,7 @@ const EmployeeExitPofile = () => {
 
 									<div className="col-sm-9">
 										<p className="text-muted mb-0">
-											{employeeExit.employeeToExit}
+											{employeeExit.employeeName}
 										</p>
 									</div>
 								</div>

@@ -3,7 +3,7 @@ import axios from 'axios';
 export const saveAttendance = async (formData) => {
     try{
         await axios.post(
-            "http://localhost:8084/attendance/create/attendance",
+            "http://localhost:8084/attendance/create",
             formData
           );
     } catch(error) {
@@ -38,7 +38,7 @@ export const loadAttendance = async () => {
 export const fetchEmployee = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8084/employee/get/employee"
+            "http://localhost:8082/employee/get/employee"
           );
           return response.data
     } catch (error){
@@ -46,4 +46,16 @@ export const fetchEmployee = async () => {
         return []
     }
 }
+export const fetchShift = async () => {
+    try {
+        const response = await axios.get(
+            "http://localhost:8084/officeshifts/get/officeShifts",
+            );
+          return response.data
+    } catch (error){
+        console.error("Error fetching shift data", error);
+        return []
+    }
+}
+
 

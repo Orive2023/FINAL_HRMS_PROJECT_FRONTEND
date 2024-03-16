@@ -91,13 +91,12 @@ useEffect(() => {
    
 
       await api.savePolicies(formData);
-
       navigate("/hr/organisation/policies");
       setFormData({
         companyName: "",
         title: "",
         description: "",
-        createdDate: "",
+        createdDate:getCurrentDate(),
         uploadPdf: "",
       })
     
@@ -226,8 +225,9 @@ useEffect(() => {
           value={formData.createdDate}
           onChange={(e) => handleInputChange(e)}
           required
-          // error={dateError}
-          // helperText={dateError && "Please select the current date"}
+          disabled
+          error={dateError}
+          helperText={dateError && "Please select the current date"}
           InputLabelProps={{
             shrink: true,
           }}

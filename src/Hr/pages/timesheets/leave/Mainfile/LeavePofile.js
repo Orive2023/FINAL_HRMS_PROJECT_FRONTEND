@@ -64,7 +64,7 @@ const LeavePofile = () => {
 									{/* {${officeshift.employeeName}} */}
 								</h5>
 								<div className="d-flex justify-content-center mb-2">
-                        <Link to="/hr/timesheets/officeshift">
+                        <Link to="/hr/timesheets/leaves">
                           <button
                             type="button"
                             className="btn btn-outline-secondary ms-1"

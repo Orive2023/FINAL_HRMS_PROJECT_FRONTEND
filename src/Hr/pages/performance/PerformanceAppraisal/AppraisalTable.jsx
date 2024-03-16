@@ -128,7 +128,7 @@ const PerformanceTable = ({ performances, setRecDelete,  setFormVisible,
         body: performances.map((row, index) => [
           index+1,
           row.employeeName,
-          row.employeeId,
+          row.username,
           row.qualityOfWorkRating,
           row.jobKnowledgeRating,
           row.punctualityAndAttendanceRating,
@@ -181,7 +181,7 @@ const PerformanceTable = ({ performances, setRecDelete,  setFormVisible,
         body: performances.map((row, index) => [
           index+1,
           row.employeeName,
-          row.employeeId,
+          row.username,
           row.qualityOfWorkRating,
           row.jobKnowledgeRating,
           row.punctualityAndAttendanceRating,
@@ -434,7 +434,7 @@ const PerformanceTable = ({ performances, setRecDelete,  setFormVisible,
                         elem.employeeName
                           .toLowerCase()
                           .includes(search.toLocaleLowerCase()) ||
-                        elem.employeeId.toString().includes(search) ||
+                        elem.username.toString().includes(search) ||
                         elem.qualityOfWorkRating.toString().includes(search) ||
                         elem.jobKnowledgeRating
                           .toString()
@@ -452,7 +452,7 @@ const PerformanceTable = ({ performances, setRecDelete,  setFormVisible,
                         {index + 1}
                       </th>
                       <td>{performances.employeeName}</td>
-                      <td>{performances.employeeId}</td>
+                      <td>{performances.username}</td>
                       <td>{performances.qualityOfWorkRating}</td>
                       <td>{performances.jobKnowledgeRating}</td>
                       <td>{performances.punctualityAndAttendanceRating}</td>

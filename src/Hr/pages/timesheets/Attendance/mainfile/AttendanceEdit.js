@@ -24,6 +24,24 @@ const AttendanceEdit = () => {
   useEffect(() => {
     loadAttendance();
   }, []);
+  const [clockOutTime, setClockOutTime] = useState('00:00:00');
+  const [isFieldOpen, setIsFieldOpen] = useState(false);
+
+  const handleTimeChange = (e) => {
+    const value = e.target.value;
+    // Perform validation if necessary
+    setClockOutTime(value);
+  };
+
+  const handleFieldOpen = () => {
+    setIsFieldOpen(true);
+    // You can set the default value when the field is opened
+    setClockOutTime('00:00:00');
+  };
+
+  const handleFieldClose = () => {
+    setIsFieldOpen(false);
+  };
 
   const loadAttendance = async () => {
     const result = await axios.get(
@@ -79,16 +97,16 @@ const AttendanceEdit = () => {
                 <label className="input-group-text" htmlFor="officeClockInTime">
                   Clock Out
                 </label>
-                <input
-                className="form-control col-sm-6"
-                type="time"
-                name="clockOut"
-                id="clockOut"
-                required
-                step="1" 
-                value={attendance.clockOut}
-                onChange={(e) => handleInputChange(e)}
-              />
+              <input
+          label="ClockOut Time"
+          type="time"
+          id="clockOutTime"
+          name="clockOutTime"
+          value={isFieldOpen ? clockOutTime : '00:00:00'}
+          onChange={handleTimeChange}
+          onFocus={handleFieldOpen}
+          onBlur={handleFieldClose}
+          />
               
               </div>
 
