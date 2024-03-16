@@ -31,6 +31,7 @@ import TransferProfile from "../pages/transfer/TransferProfile"
 import ExpJoiningLetter from "../pages/experienceletter/ExpJoiningLetter";
 import Expletter from "../pages/experienceletter/Expletter";
 import IntJoiningLetter from "../pages/experienceletter/IntJoiningLetter";
+
 import ResignationView from './resignation/mainfile/ResignationView'
 import ResignationEdit from './resignation/mainfile/ResignationEdit'
 import ResignationProfile from './resignation/mainfile/ResignationProfile'
@@ -40,6 +41,12 @@ import LeaveProfile from './leave/mainfile/LeaveProfile'
 import LeaveEdit from './leave/mainfile/LeaveEdit'
 import Leave from './leave/mainfile/Leave'
 import Worksheets from "../pages/worksheets/Worksheets";
+
+import Profile from "../pages/profile/Profile";
+
+
+
+
 
 const routesData = [
   { path: "/Employee-Dashboard", element: <Dashboard /> },
@@ -73,6 +80,7 @@ const routesData = [
   { path: "/employee/experience-letter", element: <Expletter /> },
   { path: "/employee/joining-letter", element: <ExpJoiningLetter /> },
   { path: "/employee/int-letter", element: <IntJoiningLetter /> },
+
   { path: "/transfer-profile/:id", element: <TransferProfile /> },
   { path: "/employee/resignation", element: <ResignationView /> },
   { path: "/edit-resignation/:id", element: <ResignationEdit /> },
@@ -83,6 +91,7 @@ const routesData = [
   { path: "/leave-edit/:id", element: <LeaveEdit /> },
   { path: "/leaves-profile/:id", element: <LeaveProfile /> },
   { path: "/employee/worksheets", element: <Worksheets /> },
+
 ];
 
 const RoutingEmployee = () => {

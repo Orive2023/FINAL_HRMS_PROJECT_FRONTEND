@@ -6,14 +6,21 @@ import clock from "../../asset/40px/clock.png";
 //import graph from "../../asset/40px/graph";
 import graph from "../../asset/40px/graph.png";
 import axios from "axios";
+
 import { Link } from "react-router-dom";
+
+import { jwtDecode } from "jwt-decode";
+
+
 
 const Attendance = () => {
   const [menu, setMenu] = useState(false);
 
   const [attendanceGet, setAttendanceGet] = useState([]);
-  const username = localStorage.getItem("UserName")
-
+  const token = localStorage.getItem("AuthToken");
+  const decoded = jwtDecode(String(token));
+  const usernameRec = decoded.preferred_username;
+  const username = usernameRec.toUpperCase();
   const getAttendance = async () => {
     try {
       const result = await axios.get(

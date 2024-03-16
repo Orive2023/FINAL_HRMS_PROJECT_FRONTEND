@@ -89,7 +89,9 @@ const Complaint = () => {
                     <div style={{ padding: "2px" }}>
                       <span style={{ color: "black", fontWeight: "bold" }}>
                         <Link
+
                           to="/Employee-Dashboard"
+
                           style={{ textDecoration: "none", color: "inherit" }}
                         >
                           Dashboard{" "}

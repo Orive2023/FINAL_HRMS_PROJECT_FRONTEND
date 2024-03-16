@@ -1,30 +1,22 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import ProjectLogo from "../../asset/24px/Project.png";
 
-import ProjectLogo from "../../asset/24px/user (2).png";
-
-
-
-
-const ProfileFile = () => {
+const ComplaintFile = () => {
   const navigation = useNavigate();
   return (
     <div>
       <div
         className="logo-text-p"
-        onClick={() => navigation("/employee/profile")}
+        onClick={() => navigation("/employee/complaint")}
       >
         <span></span>
         <img src={ProjectLogo} alt="Profile" />
-
-       
-
-        <p>Profile</p>
-
+        <p>Complaint</p>
       </div>
       <div
         className="mobile-logo-text-p"
-        onClick={() => navigation("/employee/profile")}
+        onClick={() => navigation("/employee/complaint")}
       >
         <span></span>
         <img src={ProjectLogo} alt="Profile" />
@@ -33,4 +25,4 @@ const ProfileFile = () => {
   );
 };
 
-export default ProfileFile;
+export default ComplaintFile;

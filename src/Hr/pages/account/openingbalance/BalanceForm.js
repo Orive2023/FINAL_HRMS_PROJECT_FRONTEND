@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -29,7 +29,6 @@ const BalanceForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
 
   const navigate = useNavigate();
   const {
-   
     updatedTotalCredit,
     setUpdatedTotalCredit,
     updatedTotalDebit,
@@ -49,13 +48,11 @@ const BalanceForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     setTotalCredit,
   } = StateBalance();
 
+  useEffect(() => {
+    loadBalance();
+  }, []);
 
-  setFormData({
-    ...formData,
-    totalDebit: updatedTotalDebit,
-    totalCredit: updatedTotalCredit,
-  });
-  const [totalAmount,setTotalAmount]=useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
 
   const [items, setItems] = useState([
     {
@@ -89,13 +86,9 @@ const BalanceForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     setItems([...items, newItem]);
   };
 
-  console.log(formData);
-
-
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-  
+
     if (name === "totalCredit" || name === "totalDebit") {
       setFormData({
         ...formData,
@@ -111,56 +104,55 @@ const BalanceForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       });
     }
   };
-  
+
   const removeItem = (id) => {
     const updatedItems = items.filter((item) => item.id !== id);
     setItems(updatedItems);
-  
+
     const updatedTotalDebit = updatedItems.reduce((total, item) => {
       const itemAmount = parseFloat(item.debit) || 0;
       return total + itemAmount;
     }, 0);
-  
+
     setTotalDebit(updatedTotalDebit);
-  
+
     const updatedTotalCredit = updatedItems.reduce((total, item) => {
       const itemAmount = parseFloat(item.credit) || 0;
       return total + itemAmount;
-    },
-  0);
-  
+    }, 0);
+
     setTotalCredit(updatedTotalCredit);
   };
-  
+
   const handleItemChange = (id, field, value) => {
     const updatedItems = items.map((item) =>
       item.id === id ? { ...item, [field]: value } : item
     );
-  
+
     setItems(updatedItems);
-  
+
     if (field === "debit") {
       const updatedTotalDebit = updatedItems.reduce((total, item) => {
         const itemAmount = parseFloat(item.debit) || 0;
         return total + itemAmount;
       }, 0);
-  
+
       setTotalDebit(updatedTotalDebit);
     } else if (field === "credit") {
       const updatedTotalCredit = updatedItems.reduce((total, item) => {
         const itemAmount = parseFloat(item.credit) || 0;
         return total + itemAmount;
       }, 0);
-  
+
       setTotalCredit(updatedTotalCredit);
     }
-  
+
     const formDataWithUpdatedItems = {
       ...formData,
       totalDebit: updatedTotalDebit,
       totalCredit: updatedTotalCredit,
     };
-  
+
     setFormData(formDataWithUpdatedItems);
   };
   const saveBalance = async () => {
@@ -258,6 +250,7 @@ const BalanceForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
   };
 
   console.log(formData);
+
   return (
     <form onSubmit={handleSubmit}>
       <div

@@ -23,10 +23,16 @@ import PoliciesFile from  "../components/sidebarComponent/PoliciesFile";
 import AnnouncementFile from "../components/sidebarComponent/AnnouncementFile";
 import ProfileFile from "../components/sidebarComponent/ProfileFile";
 import ExperienceLetter from "./sidebarComponent/ExperienceLetter";
+
 import ResignationFile from './sidebarComponent/ResignationFile '
 import ComplaintFile from './sidebarComponent/ComplaintFile'
 import LeaveFile from './sidebarComponent/LeaveFile'
 import WorksheetsFile from "./sidebarComponent/WorksheetsFile";
+
+import ResignationFile from './sidebarComponent/ResignationFile';
+import ComplaintFile from './sidebarComponent/ComplaintFile';
+import ProfileFile from './sidebarComponent/ProfileFile';
+
 
 import { useNavigate } from "react-router-dom/dist";
 import useAuth from "../../Hr/hooks/useAuth";
@@ -81,7 +87,13 @@ const SideBar = ({ menu }) => {
           <ExperienceLetter/>
           <ResignationFile />
           <ComplaintFile />
+
           <LeaveFile />
+
+          <ProfileFile />
+          
+          
+
           {/* <Trainingfile /> */}
         </div>
         <button id="logout-hrms-btn" onClick={handleLogout} >

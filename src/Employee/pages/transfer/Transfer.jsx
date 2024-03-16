@@ -36,7 +36,7 @@ const Transfer = () => {
 
   const loadTransfer = async () => {
     const response = await axios.get(
-      `http://localhost:8082/transfers/findtransfer/${username}`
+      http://localhost:8082/transfers/findtransfer/${username}
     );
     setTransfer(response.data);
   };
@@ -450,7 +450,7 @@ const Transfer = () => {
                               <td>{transfer.locationName}</td>
                               <td className="mx-2">
                                 <Link
-                                  to={`/transfer-profile/${transfer.transferId}`}
+                                  to={/transfer-profile/${transfer.transferId}}
                                 >
                                   <FaEye className="action-eye" />
                                 </Link>

@@ -392,7 +392,7 @@ const Worksheets = () => {
                 </div>
                 <div style={{ marginTop: "20px" }}>
                   <div style={{ margin: "auto", width: "90%" }}>
-                    <ProgressBar className="pb" now={now} label={`${now}%`} />
+                    <ProgressBar className="pb" now={now} label={${now}%} />
                   </div>
                 </div>
 
@@ -540,7 +540,7 @@ const Worksheets = () => {
                 </div>
                 <div style={{ marginTop: "20px" }}>
                   <div style={{ margin: "auto", width: "90%" }}>
-                    <ProgressBar className="pb" now={now} label={`${now}%`} />
+                    <ProgressBar className="pb" now={now} label={${now}%} />
                   </div>
                 </div>
 
@@ -687,7 +687,7 @@ const Worksheets = () => {
                 </div>
                 <div style={{ marginTop: "20px" }}>
                   <div style={{ margin: "auto", width: "90%" }}>
-                    <ProgressBar className="pb" now={now} label={`${now}%`} />
+                    <ProgressBar className="pb" now={now} label={${now}%} />
                   </div>
                 </div>
 

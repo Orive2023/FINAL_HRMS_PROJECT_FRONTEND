@@ -3,7 +3,7 @@ import { useState } from "react";
 const StateBalance = () => {
   const [dateError, setDateError] = useState("");
   const [formVisible, setFormVisible] = useState(false);
-  const [Balance, setBalance] = useState([]);
+  const [balance, setBalance] = useState([]);
   const [open, setOpen] = useState(false);
   const [recDelete, setRecDelete] = useState("");
   const [genId, setGenId] = useState(1);
@@ -36,7 +36,7 @@ const StateBalance = () => {
     totalCredit: 0,
   });
   return {
-    Balance,
+    balance,
     genId,
     setGenId,
     file,
