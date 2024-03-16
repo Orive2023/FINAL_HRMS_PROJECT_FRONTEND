@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Loan from "../../asset/24px/Loan.png";
+import Loan from "../../asset/24px/umbrella.png";
 const HolidayFile = () => {
   const navigation = useNavigate();
   return (

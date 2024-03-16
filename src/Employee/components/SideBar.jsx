@@ -4,7 +4,6 @@ import DashboardFile from "./sidebarComponent/DashboardFile";
 import PerformanceFile from "./sidebarComponent/PerformanceFile";
 import ProjectsFile from "./sidebarComponent/ProjectsFile";
 import TicketsFile from "./sidebarComponent/TicketsFile";
-import WorksheetsFile from "./sidebarComponent/Worksheetsfile";
 import Trainingfile from "./sidebarComponent/Trainingfile";
 import AttendanceFile from "./sidebarComponent/AttendanceFile";
 import MyFinanceFile from "./sidebarComponent/MyFinanceFile";
@@ -22,10 +21,18 @@ import PayslipGeneratorFile from "./sidebarComponent/PayslipGeneratorFile";
 import TransferFile from "../components/sidebarComponent/TransferFile";
 import PoliciesFile from  "../components/sidebarComponent/PoliciesFile";
 import AnnouncementFile from "../components/sidebarComponent/AnnouncementFile";
+import ProfileFile from "../components/sidebarComponent/ProfileFile";
 import ExperienceLetter from "./sidebarComponent/ExperienceLetter";
+
+import ResignationFile from './sidebarComponent/ResignationFile '
+import ComplaintFile from './sidebarComponent/ComplaintFile'
+import LeaveFile from './sidebarComponent/LeaveFile'
+import WorksheetsFile from "./sidebarComponent/WorksheetsFile";
+
 import ResignationFile from './sidebarComponent/ResignationFile';
 import ComplaintFile from './sidebarComponent/ComplaintFile';
 import ProfileFile from './sidebarComponent/ProfileFile';
+
 
 import { useNavigate } from "react-router-dom/dist";
 import useAuth from "../../Hr/hooks/useAuth";
@@ -74,11 +81,15 @@ const SideBar = ({ menu }) => {
           <HolidayFile/>
           <PayslipGeneratorFile/>
           <AnnouncementFile/>
+          <ProfileFile/>
           <PoliciesFile/>
           <TransferFile/>
           <ExperienceLetter/>
           <ResignationFile />
           <ComplaintFile />
+
+          <LeaveFile />
+
           <ProfileFile />
           
           

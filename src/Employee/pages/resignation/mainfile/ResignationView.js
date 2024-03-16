@@ -90,7 +90,10 @@ const ResignationView = () => {
                   <div style={{ padding: "2px" }}>
                     <span style={{ color: "black", fontWeight: "bold" }}>
                       <Link
-                        to="/HRDashboard"
+
+                        to="/Employee-Dashboard"
+
+
                         style={{ textDecoration: "none", color: "inherit" }}
                       >
                         Dashboard{" "}

@@ -24,10 +24,18 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import "../../styles.css";
 import { Watch } from "react-loader-spinner";
-
+import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import { IoStar } from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 const Performance = () => {
+  const token = localStorage.getItem("AuthToken");
+  const decoded = jwtDecode(String(token));
+  const usernameRec = decoded.preferred_username;
+  const username = usernameRec.toUpperCase();
+  console.log("decoded", username);
+
   const [open, setOpen] = useState(false);
   const [value, setValue] = React.useState(0);
 
@@ -43,42 +51,16 @@ const Performance = () => {
 
   const [performanceData, setPerformanceData] = useState([]);
 
-  const [empData, setEmpData] = useState([]);
-  // const loadEmployee = async () => {
-  //   try {
-  //     const result = await api.loadEmployee();
-  //     setEmpData(result.data);
-
-  //     // After setting employee data, call loadPerformance
-  //     loadPerformance(result.data);
-  //   } catch (error) {
-  //     console.error("Error loading employee data:", error);
-  //   }
-  // };
-
-  console.log(empData.length > 0);
-
-  const loadPerformance = async (employeeData) => {
-    try {
-      const empId = employeeData[0]?.employeeId;
-
-      const result = await axios.get(
-        `http://13.126.190.50:5000/performanceappraisal/byId/${11}`
-      );
-
-      setPerformanceData(result.data[0]);
-    } catch (error) {
-      console.error("Error loading performance data:", error);
-    }
+  const loadPerformance = async () => {
+    const result = await axios.get(
+      `http://localhost:8083/performanceappraisal/byId/${username}`
+    );
+    setPerformanceData(result.data[0]);
   };
-  console.log("ddd", performanceData);
+  console.log("appri", performanceData);
   useEffect(() => {
     loadPerformance();
   }, []);
-
-  // useEffect(() => {
-  //   if ()
-  // })
 
   const communicationData = {
     series: [(performanceData?.communicationSkillsRating / 5) * 100],
@@ -243,7 +225,7 @@ const Performance = () => {
   const loadAward = async () => {
     try {
       const result = await axios.get(
-        "http://13.126.190.50:5000/awards/employee/get/11",
+        `http://localhost:8082/awards/employee/get/${username}`,
         {
           validateStatus: () => {
             return true;
@@ -269,7 +251,8 @@ const Performance = () => {
     loadAward();
   }, []);
 
-  console.log(award);
+  console.log("awards", award);
+  console.log("ddd", performanceData);
   return (
     <div>
       <div id="header-container" className="header-container">
@@ -281,14 +264,48 @@ const Performance = () => {
         <div className="head-foot-part">
           <div>
             <div
-              className="per-heading-head"
+            className="mx-4"
+              style={{
+                marginTop: "70px",
+                marginBottom: "-50px",
+                width: "150px",
+              }}
             >
+              <div
+                style={{
+                  fontSize: "1.4rem",
+                  width: "500px",
+                  display: "flex",
+                }}
+              >
+                <div style={{ paddingRight: "10px" }}>
+                  <img
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAM7SURBVHgB3VVNaBNREJ55b3ezQYrRg9Sf2m3poTeriLQquBWrvQjtSTy1god6aoIXb9aTXqS99CCC9qoHE0GKYCEpolToIYKiojXJQaziYYNISpLdcXY3Nbv9iWlv+sJmed/OvG/mm5ldgP9lYbOGFw4OjTsEcSKIIUKq8hMSKStlNePbFMmIcf6+DTi6xjEvodw/k3+a/5t/Q5K4YcZ+qTuSHL3JppZDmHBsOyslJjkbg6+8ViVzOjdb2BZJvHvQcADTDkA7ARSqUg7defvktftsjJ8pJJKAdIi3lmJXT099fJbd7Cy5EXit2zSEpqQlR6siFYCgf/rd7IfV54s/PlnH2/Y/0FDsVQX0SgXHTrZ2FV98W1poimSi54yJikgrSK1SUHZFlvum3swtr7VbWM6vvPy+lDL3dYAmwGT7c2ZrJ8wvf55vSHLzqGlKAWlFkK4gzABVL97KZhp20HM+dOBAJ0aEc4qD6j/b1mnNfcm9CtqEajLZa6ZZf5OviasLmRuwhXW71xwVAPcIoYgR6Ehk6sGJoKGukqErDuwU5RnY4uKgZti/oEs71lIu7ww+U0IksuqmRlUB21oR9hcb+IdJVBaKCFu0cGc/HOgbdxDi3oaHxlcZM6WKlrgUkCWqOu4NW2xsQKLwXPNPDZTq8eCxEUJnimp7JG5o14icEV0pxRgarvt7JKCp4aYNJRZlI5dI1+tYRKO46xwRdgIi2EE6dqpoH+asLcaH0mZPLOjvnaFDg0yk7SmhQjWIxVxQRSd54tHin9dHZvhIkW+71N3oFtmq+7tKlBqQsKaeXHYAU9ZjPk6eqEE8GmEtHQe0RjVxU3W1D2oaremsrtE5qninUxDXJdsKWmcbJvG6yyHFrgSy8zqOI66EM6l1oqpVwiQcZhBbRxLxa4KaTgZvPf29juPzFA3CJNKvm1rb50a7DYFu/Qgcu1QM2obE+3q5e4LfvNe5PzlGn4QJ2sm3LAj+8wX1AMObGf6muDh7xDiPGMeY2XP3ff+mJO4qXumaFCjibkT+Gf5crM6g61DHkXHy5wY8pTKqqI5Gp3OFhiSrqzRmGBvhukQvlRWbQr48GxZO5Zv65v+76zfuAjbSpiR+NAAAAABJRU5ErkJggg=="
+                    alt="Dashboard"
+                  />
+                </div>
+                <div className="d-flex" style={{ padding: "2px" }}>
+                  <div style={{ color: "black", fontWeight: "bold" }}>
+                    <Link
+                      to="/Employee-Dashboard"
+                      style={{ textDecoration: "none", color: "inherit" }}
+                    >
+                      Dashboard
+                    </Link>{" "}
+                    / Employee /{" "}
+                  </div>
+                  <div style={{ color: "black" }}> Performance</div>
+                </div>
+              </div>
+            </div>
+            <div className="per-heading-head">
               <div className="mb-4">
                 <h4 className="heading">MY PERFORMANCE INDEX</h4>
               </div>
 
               <div
-                className="side-icons" id="side-icons-per"
+                className="side-icons"
+                id="side-icons-per"
                 style={{ marginTop: "60px", marginRight: "20px" }}
               >
                 <img src={appl} style={{ cursor: "pointer" }} alt="" />
@@ -304,10 +321,7 @@ const Performance = () => {
 
           <div className="my-4 row container-fluid">
             <div className="col-xl-9 col-lg-9 col-md-9">
-              <div
-                id="card"
-                className="card per-ka-card"
-              >
+              <div id="card" className="card per-ka-card">
                 <div className="card-top"></div>
 
                 <div>
@@ -325,7 +339,7 @@ const Performance = () => {
                           fontSize: "20px",
                         }}
                       >
-                        Hi Praveen!
+                        Hi {localStorage.getItem("UserName")}!
                       </h4>
 
                       <h2
@@ -448,13 +462,29 @@ const Performance = () => {
                       >
                         Meets Expectations
                       </div>
+
                       <div style={{ width: "140px", marginLeft: "15px" }}>
-                        <ChartApex
-                          options={teamData.options}
-                          series={teamData.series}
-                          type="radialBar"
-                          height={150}
-                        />
+                        <div
+                          style={{
+                            height: "130px",
+                            width: "130px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <div className="fs-3" style={{ fontWeight: "600" }}>
+                            {performanceData.teamworkAndCollaborationRating}/5{" "}
+                            <IoStar
+                              style={{
+                                color: "orange",
+                                marginTop: "-8px",
+                                filter: "drop-shadow(0 0 0.075rem black)",
+                                fontSize: "25px",
+                              }}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -496,12 +526,27 @@ const Performance = () => {
                         Meets Expectations
                       </div>
                       <div style={{ width: "140px", marginLeft: "15px" }}>
-                        <ChartApex
-                          options={initiativeData.options}
-                          series={initiativeData.series}
-                          type="radialBar"
-                          height={150}
-                        />
+                        <div
+                          style={{
+                            height: "130px",
+                            width: "130px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <div className="fs-3" style={{ fontWeight: "600" }}>
+                            {performanceData.initiativeAndCreativityRating}/5{" "}
+                            <IoStar
+                              style={{
+                                color: "orange",
+                                marginTop: "-8px",
+                                filter: "drop-shadow(0 0 0.075rem black)",
+                                fontSize: "25px",
+                              }}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -548,12 +593,27 @@ const Performance = () => {
                         Meets Expectations
                       </div>
                       <div style={{ width: "140px" }}>
-                        <ChartApex
-                          options={communicationData.options}
-                          series={communicationData.series}
-                          type="radialBar"
-                          height={150}
-                        />
+                        <div
+                          style={{
+                            height: "130px",
+                            width: "130px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <div className="fs-3" style={{ fontWeight: "600" }}>
+                            {performanceData.communicationSkillsRating}/5{" "}
+                            <IoStar
+                              style={{
+                                color: "orange",
+                                marginTop: "-8px",
+                                filter: "drop-shadow(0 0 0.075rem black)",
+                                fontSize: "25px",
+                              }}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -600,12 +660,27 @@ const Performance = () => {
                         Meets Expectations
                       </div>
                       <div style={{ width: "140px" }}>
-                        <ChartApex
-                          options={workData.options}
-                          series={workData.series}
-                          type="radialBar"
-                          height={150}
-                        />
+                        <div
+                          style={{
+                            height: "130px",
+                            width: "130px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <div className="fs-3" style={{ fontWeight: "600" }}>
+                            {performanceData.qualityOfWorkRating}/5{" "}
+                            <IoStar
+                              style={{
+                                color: "orange",
+                                marginTop: "-8px",
+                                filter: "drop-shadow(0 0 0.075rem black)",
+                                fontSize: "25px",
+                              }}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -649,12 +724,27 @@ const Performance = () => {
                         Meets Expectations
                       </div>
                       <div div style={{ width: "140px" }}>
-                        <ChartApex
-                          options={revenueData.options}
-                          series={revenueData.series}
-                          type="radialBar"
-                          height={150}
-                        />
+                        <div
+                          style={{
+                            height: "130px",
+                            width: "130px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                          }}
+                        >
+                          <div className="fs-3" style={{ fontWeight: "600" }}>
+                            {performanceData.punctualityAndAttendanceRating}/5{" "}
+                            <IoStar
+                              style={{
+                                color: "orange",
+                                marginTop: "-8px",
+                                filter: "drop-shadow(0 0 0.075rem black)",
+                                fontSize: "25px",
+                              }}
+                            />
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -702,12 +792,27 @@ const Performance = () => {
                           Meets Expectations
                         </div>
                         <div style={{ width: "140px" }}>
-                          <ChartApex
-                            options={adaptabilityData.options}
-                            series={adaptabilityData.series}
-                            type="radialBar"
-                            height={150}
-                          />
+                          <div
+                            style={{
+                              height: "130px",
+                              width: "130px",
+                              display: "flex",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <div className="fs-3" style={{ fontWeight: "600" }}>
+                              {performanceData.adaptabilityRating}/5{" "}
+                              <IoStar
+                                style={{
+                                  color: "orange",
+                                  marginTop: "-8px",
+                                  filter: "drop-shadow(0 0 0.075rem black)",
+                                  fontSize: "25px",
+                                }}
+                              />
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -730,12 +835,28 @@ const Performance = () => {
                 </div>
                 <div className="card-body text-center">
                   <div style={{ textAlign: "center", marginTop: "-20px" }}>
-                    <ChartApex
-                      options={revenueData.options}
-                      series={revenueData.series}
-                      type="radialBar"
-                      height={180}
-                    />
+                    <div
+                      style={{
+                        height: "130px",
+                        width: "130px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        margin: "auto",
+                      }}
+                    >
+                      <div className="fs-1" style={{ fontWeight: "600" }}>
+                        {performanceData.overallRating}/5{" "}
+                        <IoStar
+                          style={{
+                            color: "orange",
+                            marginTop: "-8px",
+                            filter: "drop-shadow(0 0 0.075rem black)",
+                            fontSize: "30px",
+                          }}
+                        />
+                      </div>
+                    </div>
                   </div>
                   <h3 className="mb-0 mt-3 font300">
                     <span className="counter">{`${overall}% `}</span>

@@ -12,10 +12,13 @@ import { jwtDecode } from "jwt-decode";
 
 import EmployeeDetails from "./sidebarComponent/EmployeeDetails";
 import Modal from "react-modal";
+import { useNavigate } from "react-router-dom";
 const Header = ({ menu, setMenu }) => {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [address, setAddress] = useState("");
+  const [search, setSearch] = useState("");
+  const nav = useNavigate();
 
   window.navigator.geolocation.getCurrentPosition((data) =>
     setLongitude(data.coords.longitude)
@@ -42,10 +45,14 @@ const Header = ({ menu, setMenu }) => {
     }
   };
 
+
+  const username = localStorage.getItem("UserName");
+
   const token = localStorage.getItem("AuthToken");
   const decoded = jwtDecode(String(token));
   const usernameRec = decoded.preferred_username;
   const username = usernameRec.toUpperCase();
+
 
   const now = new Date();
   let todayDate = date.format(now, "YYYY-MM-DD");
@@ -69,19 +76,18 @@ const Header = ({ menu, setMenu }) => {
   const [buttonClicked, setButtonClicked] = useState(false);
   const [buttonOutClicked, setButtonOutClicked] = useState(false);
 
-
-  const [shift,setShift] = useState([])
+  const [shift, setShift] = useState([]);
 
   const loadShift = async () => {
-await axios.get("http://localhost:8084/officeshifts/get/officeShifts")
-.then((res) => setShift(res.data))
-.catch((err) => console.log(err))
-  }
+    await axios
+      .get("http://localhost:8084/officeshifts/get/officeShifts")
+      .then((res) => setShift(res.data))
+      .catch((err) => console.log(err));
+  };
 
   useEffect(() => {
-    loadShift()
-  },[])
-
+    loadShift();
+  }, []);
 
   const handleButtonClick = async () => {
     const currentDate = new Date().toLocaleDateString();
@@ -104,7 +110,7 @@ await axios.get("http://localhost:8084/officeshifts/get/officeShifts")
       totalRest: "",
       date: todayDate,
       clockInLocation: address,
-      clockOutLocation: ""
+      clockOutLocation: "",
     });
     setTimeout(() => {
       setModalCheckInOpen(true);
@@ -166,6 +172,17 @@ await axios.get("http://localhost:8084/officeshifts/get/officeShifts")
                   type="text"
                   className="form-control"
                   placeholder="Search..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  onKeyPress={(event) => {
+                    if (event.key === "Enter") {
+                      if(search==="leave"){
+                        nav(`/leave`);
+                      }
+                      else
+                      nav(`/employee/${search}`)
+                    }
+                  }}
                 />
               </div>
             </div>

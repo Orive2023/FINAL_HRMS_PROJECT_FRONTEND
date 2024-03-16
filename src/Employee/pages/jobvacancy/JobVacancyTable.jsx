@@ -16,31 +16,25 @@ import { BiSolidHide } from "react-icons/bi";
 import { MdAdd } from "react-icons/md";
 import Button from "@mui/material/Button";
 import {
-    TablePagination,
-    tablePaginationClasses as classes,
+  TablePagination,
+  tablePaginationClasses as classes,
 } from "@mui/base/TablePagination";
+import { Link } from "react-router-dom";
 
+const JobVacancyTable = ({ setFormVisible, setToggle, toggle }) => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState("");
+  const [talent, setTalent] = useState([]);
+  const [managerNameError, setManagerNameError] = useState(false);
+  const [requirementsError, setRequirementsError] = useState(false);
+  const [jobLocationError, setJobLocationError] = useState("");
+  const [projectNameError, setProjectNameError] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [menu, setMenu] = useState(false);
+  const [search, setSearch] = useState("");
 
-
-const JobVacancyTable = ({ setFormVisible,
-    setToggle,
-    toggle, }) => {
-
-        const navigate = useNavigate();
-    const [formData, setFormData] = useState("");
-    const [talent, setTalent] = useState([]);
-    const [managerNameError, setManagerNameError] = useState(false);
-    const [requirementsError, setRequirementsError] = useState(false);
-    const [jobLocationError, setJobLocationError] = useState("");
-    const [projectNameError, setProjectNameError] = useState("");
-    const [nameError, setNameError] = useState("");
-    const [menu, setMenu] = useState(false);
-    const [search, setSearch] = useState("");
-
-
-
-    const CustomTablePagination = styled(TablePagination)`
-    & .${classes.toolbar} { 
+  const CustomTablePagination = styled(TablePagination)`
+    & .${classes.toolbar} {
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -155,7 +149,6 @@ const JobVacancyTable = ({ setFormVisible,
             "DESIGNATION",
             "START-DATE",
             "END-DATE",
-            
           ],
         ],
         body: talent.map((row) => [
@@ -165,7 +158,6 @@ const JobVacancyTable = ({ setFormVisible,
           row.designation,
           row.startDate,
           row.endDate,
-          
         ]),
         styles: { fontSize: 5, fontStyle: "normal" },
         headStyles: {
@@ -211,27 +203,25 @@ const JobVacancyTable = ({ setFormVisible,
     XLSX.writeFile(wb, "talent.xlsx");
   };
 
+  const [page, setPage] = React.useState(0);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  useEffect(() => {
+    loadTalent();
+  }, []);
 
-    useEffect(() => {
-        loadTalent();
-      }, []);
+  const loadTalent = async () => {
+    const response = await axios.get("http://localhost:8089/talents/getAll");
+    setTalent(response.data);
+  };
 
-    const loadTalent = async () => {
-        const response = await axios.get(
-            "http://localhost:8089/talents/getAll",);
-            setTalent(response.data);
-    }
+  const handlePrint = () => {
+    createPdf();
+    const pdfContent = doc.output("bloburl");
 
-    const handlePrint = () => {
-        createPdf();
-        const pdfContent = doc.output("bloburl");
-    
-        if (pdfContent) {
-          const printWindow = window.open("", "_blank");
-          printWindow.document.write(`
+    if (pdfContent) {
+      const printWindow = window.open("", "_blank");
+      printWindow.document.write(`
               <html>
                 <head>
                   <title>Print Document</title>
@@ -265,236 +255,269 @@ const JobVacancyTable = ({ setFormVisible,
                 </body>
               </html>
             `);
-        }
-      };
+    }
+  };
 
-      const renderTalentData = () => {
-        return (
-          <tr>
-            <td colSpan="12" className="text-center">
-              {/* <img style={{ margin: "50px 0 50px 0" }} src={DataNotFound}></img> */}
-              <h1>No Data Found!</h1>
-              <p>
-                It Looks like there is no data to display in this table at the
-                moment
-              </p>
-            </td>
-          </tr>
-        );
-      };
-
-    const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - talent.length) : 0;
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
-    };
-
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
-    };
-    const handleButtonClick = () => {
-        setFormVisible((prev) => !prev);
-    };
-
-
-  
+  const renderTalentData = () => {
     return (
+      <tr>
+        <td colSpan="12" className="text-center">
+          {/* <img style={{ margin: "50px 0 50px 0" }} src={DataNotFound}></img> */}
+          <h1>No Data Found!</h1>
+          <p>
+            It Looks like there is no data to display in this table at the
+            moment
+          </p>
+        </td>
+      </tr>
+    );
+  };
 
-      <div>
+  const emptyRows =
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - talent.length) : 0;
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+  const handleButtonClick = () => {
+    setFormVisible((prev) => !prev);
+  };
+
+  return (
+    <div>
       <div id="header-container" className="header-container">
         <CompanyLogoFile />
         <Header menu={menu} setMenu={setMenu} />
       </div>
       <div className="dashboard-container">
-      <SideBar menu={menu} setMenu={setMenu}/>
+        <SideBar menu={menu} setMenu={setMenu} />
         <div className="head-foot-part">
-        <div
-        className="d-flex"
-        style={{ display: "flex", flexDirection: "column" }}
-      >
-        <div className=" table-ka-top-btns">
-       
-      {
-        <div className="search-print">
-          <input
-            type="text"
-            className="search-beside-btn"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            style={{
-              width: "20rem",
-              borderRadius: "5px",
-              height: "40px",
-              padding: "10px",
-              border: "1px solid rgba(247, 108, 36, 1)",
-              marginRight: "30px",
-            }}
-          />
-          <div className="d-flex mt-4 four-btn" style={{ gap: "10px" }} y>
-    
-            <button
-              className=""
+          <div
+            className="d-flex"
+            style={{ display: "flex", flexDirection: "column" }}
+          >
+            <div className=" table-ka-top-btns">
+            <div
+            className="mx-3"
+            style={{ marginTop: "70px", marginBottom: "-50px", width: "150px" }}
+          >
+            <div
               style={{
-                height: "40px",
+                fontSize: "1.4rem",
+                width: "500px",
                 display: "flex",
-                alignItems: "center",
-                width: "100px",
-                justifyContent: "center",
-        }}
-              onClick={handlePrint}
+              }}
             >
-              PRINT
-            </button>
-            <button
-              onClick={convertToPdf}
-              className=""
-              style={{
-                height: "40px",
-                display: "flex",
-                alignItems: "center",
-                width: "100px",
-                justifyContent: "center",
-        }}
-            >
-              PDF
-            </button>
-            <button
-              onClick={convertToExcel}
-              className=""
-              style={{
-                height: "40px",
-                display: "flex",
-                alignItems: "center",
-                width: "100px",
-                justifyContent: "center",
-        }}
-            >
-              EXCEL
-            </button>
-            <CSVLink
-              data={talent}
-              filename="Talent.csv"
-              style={{ textDecoration: "none" }}
-            >
-              <button
-                className=""
-                style={{
-                  height: "40px",
-                  display: "flex",
-                  alignItems: "center",
-                  width: "100px",
-                  justifyContent: "center",
-            }}
-              >
-                CSV
-              </button>
-            </CSVLink>
+              <div style={{ paddingRight: "10px" }}>
+                <img
+                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAM7SURBVHgB3VVNaBNREJ55b3ezQYrRg9Sf2m3poTeriLQquBWrvQjtSTy1god6aoIXb9aTXqS99CCC9qoHE0GKYCEpolToIYKiojXJQaziYYNISpLdcXY3Nbv9iWlv+sJmed/OvG/mm5ldgP9lYbOGFw4OjTsEcSKIIUKq8hMSKStlNePbFMmIcf6+DTi6xjEvodw/k3+a/5t/Q5K4YcZ+qTuSHL3JppZDmHBsOyslJjkbg6+8ViVzOjdb2BZJvHvQcADTDkA7ARSqUg7defvktftsjJ8pJJKAdIi3lmJXT099fJbd7Cy5EXit2zSEpqQlR6siFYCgf/rd7IfV54s/PlnH2/Y/0FDsVQX0SgXHTrZ2FV98W1poimSi54yJikgrSK1SUHZFlvum3swtr7VbWM6vvPy+lDL3dYAmwGT7c2ZrJ8wvf55vSHLzqGlKAWlFkK4gzABVL97KZhp20HM+dOBAJ0aEc4qD6j/b1mnNfcm9CtqEajLZa6ZZf5OviasLmRuwhXW71xwVAPcIoYgR6Ehk6sGJoKGukqErDuwU5RnY4uKgZti/oEs71lIu7ww+U0IksuqmRlUB21oR9hcb+IdJVBaKCFu0cGc/HOgbdxDi3oaHxlcZM6WKlrgUkCWqOu4NW2xsQKLwXPNPDZTq8eCxEUJnimp7JG5o14icEV0pxRgarvt7JKCp4aYNJRZlI5dI1+tYRKO46xwRdgIi2EE6dqpoH+asLcaH0mZPLOjvnaFDg0yk7SmhQjWIxVxQRSd54tHin9dHZvhIkW+71N3oFtmq+7tKlBqQsKaeXHYAU9ZjPk6eqEE8GmEtHQe0RjVxU3W1D2oaremsrtE5qninUxDXJdsKWmcbJvG6yyHFrgSy8zqOI66EM6l1oqpVwiQcZhBbRxLxa4KaTgZvPf29juPzFA3CJNKvm1rb50a7DYFu/Qgcu1QM2obE+3q5e4LfvNe5PzlGn4QJ2sm3LAj+8wX1AMObGf6muDh7xDiPGMeY2XP3ff+mJO4qXumaFCjibkT+Gf5crM6g61DHkXHy5wY8pTKqqI5Gp3OFhiSrqzRmGBvhukQvlRWbQr48GxZO5Zv65v+76zfuAjbSpiR+NAAAAABJRU5ErkJggg=="
+                  alt="Dashboard"
+                />
+              </div>
+              <div style={{ padding: "2px" }}>
+                <span style={{ color: "black", fontWeight: "bold" }}>
+                  <Link
+                    to="/HRDashboard"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    Dashboard{" "}
+                  </Link>{" "}
+                  / Employee /{" "}
+                </span>
+                <span style={{ color: "black" }}> Job Vacancy</span>
+              </div>
+            </div>
           </div>
-          </div>
-        }
-      </div>
-    
-          
-          <div className="table-start-container">
-            <table className="table table-bordered table-hover shadow">
-              <thead>
-                <tr className="text-center">
-                  <th>SL No</th>
-                  <th>Talent Id</th>
-                  <th>Role</th>
-                  <th>Project Role</th>
-                  <th>Designation</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-             
-                </tr>
-              </thead>
-    
-              <tbody className="text-center">
-                {talent.length === 0
-                  ? renderTalentData()
-                  : (rowsPerPage > 0
-                      ? talent.slice(
-                          page * rowsPerPage,
-                          page * rowsPerPage + rowsPerPage
-                        )
-                      : talent
-                    )
-                      .filter((elem) => {
-                        if (search.length === 0) return elem;
-                        else
-                          return (
-                            elem.id
-                            .toLowerCase()
-                            .includes(search.toLocaleLowerCase())||
-                            elem.role
-                              .toLowerCase()
-                              .includes(search.toLocaleLowerCase()) ||
-                            elem.projectRole
-                              .toLowerCase()
-                              .includes(search.toLocaleLowerCase()) ||
-                            elem.designation
-                              .toLowerCase()
-                              .includes(search.toLocaleLowerCase()) ||
-                            elem.startDate
-                              .toString()
-                              .toLowerCase()
-                              .includes(search.toLocaleLowerCase()) ||
-                            elem.endDate
-                              .toLowerCase()
-                              .includes(search.toLocaleLowerCase()) 
-                          );
-                      })
-                      .map((talent, index) => (
-                        <tr key={index}>
-                          <th scope="row" key={index}>
-                            {index + 1}
-                          </th>
-                          <td>{talent.id}</td>
-                          <td>{talent.role}</td>
-                          <td>{talent.projectRole}</td>
-                          <td>{talent.designation}</td>
-                          <td>{talent.startDate}</td>
-                          <td>{talent.endDate}</td>
-    
-                        </tr>
-                      ))}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <CustomTablePagination
-                    className="pagingg"
-                    rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
-                    colSpan={12}
-                    count={talent.length}
-                    rowsPerPage={rowsPerPage}
-                    page={page}
-                    slotProps={{
-                      select: {
-                        "aria-label": "rows per page",
-                      },
-                      actions: {
-                        // showFirstButton: true,
-                        // showLastButton: true,
-                      },
+              {
+                <div
+                  className="search-print d-flex justify-content-between"
+                  style={{ marginTop: "70px", marginBottom: "-50px" }}
+                >
+                  <input
+                    type="text"
+                    className="search-beside-btn"
+                    placeholder="Search"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    style={{
+                      width: "20rem",
+                      borderRadius: "5px",
+                      height: "40px",
+                      padding: "10px",
+                      border: "1px solid rgba(247, 108, 36, 1)",
+                      marginRight: "30px",
                     }}
-                    onPageChange={handleChangePage}
-                    onRowsPerPageChange={handleChangeRowsPerPage}
                   />
-                </tr>
-              </tfoot>
-            </table>
+                  <div
+                    className="d-flex mt-4 four-btn"
+                    style={{ gap: "10px" }}
+                    y
+                  >
+                    <button
+                      className=""
+                      style={{
+                        height: "40px",
+                        display: "flex",
+                        alignItems: "center",
+                        width: "100px",
+                        justifyContent: "center",
+                      }}
+                      onClick={handlePrint}
+                    >
+                      PRINT
+                    </button>
+                    <button
+                      onClick={convertToPdf}
+                      className=""
+                      style={{
+                        height: "40px",
+                        display: "flex",
+                        alignItems: "center",
+                        width: "100px",
+                        justifyContent: "center",
+                      }}
+                    >
+                      PDF
+                    </button>
+                    <button
+                      onClick={convertToExcel}
+                      className=""
+                      style={{
+                        height: "40px",
+                        display: "flex",
+                        alignItems: "center",
+                        width: "100px",
+                        justifyContent: "center",
+                      }}
+                    >
+                      EXCEL
+                    </button>
+                    <CSVLink
+                      data={talent}
+                      filename="Talent.csv"
+                      style={{ textDecoration: "none" }}
+                    >
+                      <button
+                        className=""
+                        style={{
+                          height: "40px",
+                          display: "flex",
+                          alignItems: "center",
+                          width: "100px",
+                          justifyContent: "center",
+                        }}
+                      >
+                        CSV
+                      </button>
+                    </CSVLink>
+                  </div>
+                </div>
+              }
+            </div>
+
+            <div className="table-start-container">
+              <table className="table table-bordered table-hover shadow">
+                <thead>
+                  <tr className="text-center">
+                    <th>SL No</th>
+                    <th>Talent Id</th>
+                    <th>Role</th>
+                    <th>Project Role</th>
+                    <th>Designation</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                  </tr>
+                </thead>
+
+                <tbody className="text-center">
+                  {talent.length === 0
+                    ? renderTalentData()
+                    : (rowsPerPage > 0
+                        ? talent.slice(
+                            page * rowsPerPage,
+                            page * rowsPerPage + rowsPerPage
+                          )
+                        : talent
+                      )
+                        .filter((elem) => {
+                          if (search.length === 0) return elem;
+                          else
+                            return (
+                              elem.id
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase()) ||
+                              elem.role
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase()) ||
+                              elem.projectRole
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase()) ||
+                              elem.designation
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase()) ||
+                              elem.startDate
+                                .toString()
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase()) ||
+                              elem.endDate
+                                .toLowerCase()
+                                .includes(search.toLocaleLowerCase())
+                            );
+                        })
+                        .map((talent, index) => (
+                          <tr key={index}>
+                            <th scope="row" key={index}>
+                              {index + 1}
+                            </th>
+                            <td>{talent.id}</td>
+                            <td>{talent.role}</td>
+                            <td>{talent.projectRole}</td>
+                            <td>{talent.designation}</td>
+                            <td>{talent.startDate}</td>
+                            <td>{talent.endDate}</td>
+                          </tr>
+                        ))}
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <CustomTablePagination
+                      className="pagingg"
+                      rowsPerPageOptions={[
+                        5,
+                        10,
+                        25,
+                        { label: "All", value: -1 },
+                      ]}
+                      colSpan={12}
+                      count={talent.length}
+                      rowsPerPage={rowsPerPage}
+                      page={page}
+                      slotProps={{
+                        select: {
+                          "aria-label": "rows per page",
+                        },
+                        actions: {
+                          // showFirstButton: true,
+                          // showLastButton: true,
+                        },
+                      }}
+                      onPageChange={handleChangePage}
+                      onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
           </div>
-        </div>
         </div>
       </div>
     </div>
-      
+  );
+};
 
-    )
-}
-
-export default JobVacancyTable
+export default JobVacancyTable;

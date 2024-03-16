@@ -1,6 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import ProjectLogo from "../../asset/24px/Project.png";
+
+import ProjectLogo from "../../asset/24px/user (2).png";
+
+
+
 
 const ProfileFile = () => {
   const navigation = useNavigate();
@@ -12,7 +16,11 @@ const ProfileFile = () => {
       >
         <span></span>
         <img src={ProjectLogo} alt="Profile" />
+
+       
+
         <p>Profile</p>
+
       </div>
       <div
         className="mobile-logo-text-p"
