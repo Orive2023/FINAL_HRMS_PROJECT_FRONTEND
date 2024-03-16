@@ -22,7 +22,7 @@ const Profile = () => {
   const ip = "13.126.190.50:8082";
 
   const loadEmployee = async () => {
-    const result = await axios.get(http://${url}/employee/byId/${username});
+    const result = await axios.get(`http://${url}/employee/byId/${username}`);
     setEmployee(result.data[0]);
   };
 
@@ -82,7 +82,7 @@ const Profile = () => {
                   style={{ width: 100 }}
                 />
                 <h5 className="my-3 fw-bold">
-                  {${employee.employeeName}}
+                  {`${employee.employeeName}`}
                 </h5>
                 <h6 style={{marginTop:'-10px', marginBottom:'10px'}}>
              
