@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 import axios from "axios";
 
@@ -20,7 +23,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PurchaseOrderState from "./PurchaseOrderState";
 import * as PurchaseOrderApi from "./PurchaseOrderApi";
 
-const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) => {
+const PurchaseOrderForm = ({
+  purchaseOrder,
+  formData,
+  setFormVisible,
+  setFormData,
+  setToggle,
+}) => {
   const navigate = useNavigate();
   const {
     genId,
@@ -37,7 +46,6 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
     descriptionError,
     setDescriptionError,
     formVisible,
-    setFormVisible,
     fileError,
     setFileError,
     dateError,
@@ -49,118 +57,132 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
     setRecDelete,
     purchaseorder,
     setPurchaseOrder,
+    unit,
+    setUnit,
+    purchaseData,
+    setPurchaseData,
   } = PurchaseOrderState();
-
-  const [quant, setQuant] = useState(0);
-  const [pri, setPri] = useState(0);
-  const [company, setCompany] = useState([]);
-  const [purchaseData, setPurchaseData] = useState([]);
-  const [saveDisable, setSaveDisable] = useState(true);
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [quantPriceValue, setQuantPriceValue] = useState(0);
-
-  const handleTextFieldChange = (event) => {
-    setQuantPriceValue(event.target.value);
-  };
 
   const handleInputChange = (e) => {
     const { name, value, files } = e.target;
-
+    if (e.target.name === "vendorName" && e.target.value === "addNewunit") {
+      navigate("/hr/procurement/vendor");
+      return;
+    }
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
-      [name]: name === "attachment" ? files[0] : value,
+      [name]: name === "signatureAndStamp" ? files[0] : value,
     });
   };
 
-  const [items, setItems] = useState([
-    {
-      id: 1,
-      purchaseorderId: purchaseData.length + 1,
-      name: "",
-      signature: null,
-      date: "",
-    },
-  ]);
+  useEffect(() => {
+    fetchUnit();
+    fetchList();
+    fetchVendor();
+  }, []);
+
+  const [vendor, setVendor] = useState([]);
+
+  const fetchVendor = async () => {
+    const data = await axios.get("http://localhost:8094/vendor/get/vendor");
+    setVendor(data.data);
+  };
+
+  const [list, setList] = useState([]);
+
+  const fetchList = async () => {
+    const data = await axios.get("http://localhost:8094/purchaseorderlist/all");
+    setList(data.data);
+  };
+
+  const fetchUnit = async () => {
+    const data = await PurchaseOrderApi.fetchUnit();
+    setUnit(data);
+  };
+
+  const [items, setItems] = useState([]);
 
   const addItem = async () => {
     const newItem = {
-      id: items.length + 1,
-      purchaseorderId: purchaseData.length + 1,
-      name: "",
-      signature: null,
-      date: "",
+      id: new Date().getTime().toString(),
+      purchaseorderId: list.length,
+      description: "",
+      unitName: "",
+      quantity: 0,
+      price: 0,
+      total: 0,
+
     };
-
     setItems([...items, newItem]);
-    setSaveDisable(true);
   };
 
-  const removeItem = async (id) => {
-    const updatedItems = items.filter((item) => item.id !== id);
-    setItems(updatedItems);
-
-    // const updatedTotalAmount = updatedItems.reduce((total, item) => {
-    //   const itemAmount = parseFloat(item.total) || 0;
-    //   return total + itemAmount;
-    // }, 0);
-
-    // setTotalAmount(updatedTotalAmount);
-
-    await axios.delete(`http://localhost:8094/purchaseOrder/delete/${id}`);
-    loadAllPurchase();
+  const removeItem = (id) => {
+    const updatedData = items.filter((elem) => {
+      return elem.id !== id;
+    });
+    setItems(updatedData);
   };
 
-  const handleItemChange = (id, field, value) => {
+  const handleItemChange = (id, e) => {
+    if (e.target.name === "unitName" && e.target.value === "addNewunit") {
+      navigate("/hr/procurement/unit");
+      return;
+    }
     const updatedItems = items.map((item) =>
-      item.id === id ? { ...item, [field]: value } : item
+      item.id === id
+        ? {
+            ...item,
+            [e.target.name]: e.target.value,
+            ["total"]: item.quantity * item.price,
+          }
+        : item
     );
-    // setItems(updatedItems);
-    // setTotalAmount(updatedTotalAmount);
-
-    // if (field === "total") {
-    //   const updatedTotalAmount = updatedItems.reduce((totalPrice, item) => {
-    //     const itemAmount = parseFloat(item.total) || 0;
-    //     return totalPrice + itemAmount;
-    //   }, 0);
-    //   setTotalAmount(updatedTotalAmount);
-    // }
+    setItems(updatedItems);
 
     setFormData({
       ...formData,
-      //   totalAmount: updatedTotalAmount,
     });
-    const formDataWithUpdatedItems = {
-      ...formData,
-      //    totalAmount: updatedTotalAmount,
-    };
-    if (field === "totalAmount") {
-      formDataWithUpdatedItems.totalAmount = value;
-    }
-
-    const formDataWithTotalAmount = {
-      ...formData,
-      //   totalAmount: updatedTotalAmount,
-    };
-    setFormData(formDataWithTotalAmount);
-
-    if (field === "total") {
-      formDataWithUpdatedItems.total = value;
-    }
-
-    setFormData(formDataWithUpdatedItems);
   };
+
+  const [gt, setGt] = useState(0);
+
+  useEffect(() => {
+    const calcTotal = items.reduce((total, elem) => {
+      return total + parseInt(elem.total || 0);
+    }, 0);
+    setGt(calcTotal);
+  });
+
+  useEffect(() => {
+    const data = items.map((elem) => {
+      let qty = elem.quantity || 0;
+      let pr = elem.price || 0;
+      let tot = qty * pr;
+      if (tot !== elem.total) {
+        return {
+          ...elem,
+          total: tot,
+        };
+      }
+      return elem;
+    });
+    if (JSON.stringify(data) !== JSON.stringify(items)) {
+      setItems(data);
+    }
+  }, [items]);
+
+  console.log("itemsData", items);
 
   const savePurchase = async () => {
     try {
       await PurchaseOrderApi.savePurchase(formData);
-      navigate("/hr/procurement/purchaseorder");
-      setGenId(genId + 1);
+      // await PurchaseOrderApi.saveItems(items);
+      navigate("/hr/procurement/purchase-order");
       handleClose();
     } catch (error) {
       console.error("Error saving purchaseorder:", error);
     }
-    setSaveDisable(true);
   };
 
   const loadAllPurchase = async () => {
@@ -169,45 +191,35 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
     });
   };
 
-  // const loadBid = async () => {
-  //   try {
-  //     const result = await axios.get(
-  //       `http://13.126.190.50:5000/quotationlist/${bidAllData.length + 1}`
-  //     );
-  //     setCompany(result.data);
-  //   } catch (error) {
-  //     console.error("Error loading bid:", error);
-  //   }
-  // };
   const loadPurchase = async () => {
     try {
       const result = await axios.get(
         `http://localhost:8094/purchaseorder/${purchaseOrder}`
       );
-      setCompany(result.data);
+      setPurchaseData(result.data);
     } catch (error) {
       console.error("Error loading purchase:", error);
     }
   };
 
-  const cancelButton = () =>{
+  const cancelButton = () => {
     setFormVisible(false);
     setToggle(false);
     setFormData({
-      description:"",
-      unitName:"",
-      quantity:"",
-      price:"",
-      total:"",
-      grandTotal:"",
-
-    })
-  }
+      description: "",
+      unitName: "",
+      quantity: "",
+      price: "",
+      total: "",
+      status:"",
+      grandTotal: 0,
+    });
+  };
 
   useEffect(() => {
-    if (purchaseData.length > 0) {
-      loadPurchase();
-    }
+    // if (purchaseData.length > 0) {
+    //   loadPurchase();
+    // }
   }, []);
 
   const handleClose = () => {
@@ -218,110 +230,10 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
     handleClose();
   };
 
-  // const [listData, setListData] = useState({
-  //   id: 1,
-  //   quotationListId: 0,
-  //   quotationId: bidAllData.length + 1,
-  //   descriptionOfMaterials: "",
-  //   unitName: "",
-  //   quantity: 0,
-  //   price: 0,
-  //   total: 0,
-  //   grandTotal: 0,
-  // });
-  const [listData, setListData] = useState({
-    purchaseOrderListId: 0,
-    purchaseOrderId: 0,
-    description: "string",
-    unitName: "string",
-    quantity: 0,
-    price: 0,
-    total: 0,
-    grandTotal: 0,
-  });
-
-  console.log(listData);
-
-  const [quotationData, setQuotationData] = useState({
-    purchaseOrderListId: 0,
-    purchaseOrderId: 0,
-    description: "string",
-    unitName: "string",
-    quantity: 0,
-    price: 0,
-    total: 0,
-    grandTotal: 0,
-  });
-
-  const handleListChange = (e) => {
-    setListData({
-      ...listData,
-      [e.target.name]: e.target.value,
-      total: quantPriceValue,
-    });
-  };
-
-  // const handleAdd = async (id) => {
-  //   setListData({
-  //     ...listData,
-  //     total: quantPriceValue,
-  //   });
-  //   await axios.post("http://13.126.190.50:5000/quotationlist/add", {
-  //     ...listData,
-  //     total: quantPriceValue,
-  //     quotationId: bidAllData.length + 1,
-  //   });
-  //   setQuantPriceValue(0);
-  //   setQuant(0);
-  //   setPri(0);
-  //   loadBid();
-  //   setListData({
-  //     descriptionOfMaterials: "",
-  //     unitName: "",
-  //     quantity: 0,
-  //     price: 0,
-  //     total: 0,
-  //     grandTotal: 0,
-  //   });
-  // };
-  //   const handleAdd = async (id) => {
-  //     setListData({
-  //       ...listData,
-  //       total: quantPriceValue,
-  //     });
-  //     await axios.post("http://13.126.190.50:5000/companylist/add", {
-  //       ...listData,
-  //       total: quantPriceValue,
-  //       purchaseorderId: bidAllData.length + 1,
-  //     });
-  //     setQuantPriceValue(0);
-  //     setQuant(0);
-  //     setPri(0);
-  //     loadBid();
-  //     setListData({
-  //       company: "",
-  //       description: "",
-  //       reasonOfChoosing: "",
-  //       remarks: "",
-  //       unitName: "",
-  //       quantity: 0,
-  //       price: 0,
-  //       total: 0,
-  //       grandTotal: 0,
-  //     });
-  //   };
-
-  //   useEffect(() => {
-  //     setQuantPriceValue(quant * pri);
-
-  //     loadAllBid();
-  //   }, [quant, pri]);
-
-  const handleComAdd = async (id) => {
-    setSaveDisable(false);
+  const saveItems = async (id) => {
     await axios.post(
       `http://localhost:8094/purchaseOrder/create/purchaseOrder`,
-      quotationData,
+      items,
       {
         headers: {
           "Content-Type":
@@ -331,33 +243,14 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
     );
   };
 
-  const removeComItem = async (id) => {
-    const updatedItems = items.filter((item) => item.id !== id);
-    setItems(updatedItems);
-
-    const updatedTotalAmount = updatedItems.reduce((total, item) => {
-      const itemAmount = parseFloat(item.amount) || 0;
-      return total + itemAmount;
-    }, 0);
-
-    setTotalAmount(updatedTotalAmount);
-
-    await axios.delete(`http://localhost:8094/purchaseOrder/delete/${id}`);
-  };
-
-  const handleQuotationChange = (e) => {
-    const { name, value, files } = e.target;
-    setQuotationData({
-      ...quotationData,
-      [e.target.name]: e.target.value,
-      [name]: name === "signature" ? files[0] : value,
-      purchaseorderId: purchaseData.length + 1,
+  const saveSingleItem = async (id) => {
+    const data = items.filter((elem) => {
+      return elem.id === id;
     });
+    await PurchaseOrderApi.saveItems(data[0]);
   };
 
-  console.log(quotationData);
-
-  const [increment, setIncrement] = useState(1);
+  console.log(formData);
 
   return (
     <form onSubmit={handleSubmit}>
@@ -444,21 +337,41 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
             justifyContent: "space-between",
           }}
         >
-          <TextField
+          <FormControl
+            fullWidth
+            className="mx-3"
             style={{
-              margin: "8px 15px",
               width: "30%",
             }}
-            margin="dense"
-            label="Vendor Name"
-            type="text"
-            fullWidth
-            name="vendorName"
-            id="vendorName"
-            value={formData.vendorName}
-            onChange={(e) => handleInputChange(e)}
-            required
-          />
+          >
+            <InputLabel id="demo-company-select-label">unit Name</InputLabel>
+            <Select
+              labelId="demo-company-select-label"
+              value={formData.vendorName}
+              name="vendorName"
+              label="Vendor Name"
+              onChange={(e) => handleInputChange(e)}
+            >
+              {vendor &&
+                vendor.map((item, index) => {
+                  return (
+                    <MenuItem key={index} value={item.vendorName}>
+                      {item.vendorName}
+                    </MenuItem>
+                  );
+                })}
+              <MenuItem className="linkStyle" value="addNewunit">
+                <a href="#">
+                  <FontAwesomeIcon
+                    icon={faCirclePlus}
+                    rotation={90}
+                    className="iconStyle"
+                  />
+                  Create Vendor
+                </a>
+              </MenuItem>
+            </Select>
+          </FormControl>
           <TextField
             style={{
               margin: "8px 15px",
@@ -500,23 +413,24 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
             }}
           ></h1>
         </div>
+
         <TableContainer component={Paper}>
           <Table style={{ border: "1px solid #ddd" }}>
             <TableHead>
               <TableRow style={{ background: "#f2f2f2" }}>
-                <TableCell className="table-data">Serial No.</TableCell>
-                <TableCell className="table-data">Purchase Order ID</TableCell>
+                <TableCell className="table-data">SL</TableCell>
+                <TableCell className="table-data">Id</TableCell>
                 <TableCell className="table-data">Description</TableCell>
                 <TableCell className="table-data">Unit Name</TableCell>
+                <TableCell className="table-data">Quantity</TableCell>
                 <TableCell className="table-data">Price</TableCell>
                 <TableCell className="table-data">Total</TableCell>
-                <TableCell className="table-data">GrandTotal</TableCell>
                 <TableCell className="table-data">Action</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {items.map((item, index) => (
-                <TableRow key={index} style={{ border: "1px solid #ddd" }}>
+                <TableRow key={item.id} style={{ border: "1px solid #ddd" }}>
                   <TableCell
                     style={{
                       border: "1px solid #ddd",
@@ -526,11 +440,9 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
                     <TextField
                       disabled={true}
                       value={index + 1}
-                      style={{ width: "100%" }}
+                      style={{ width: "70px" }}
                     />
                   </TableCell>
-
-                  {/* expense id  */}
                   <TableCell
                     style={{
                       border: "1px solid #ddd",
@@ -538,21 +450,14 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
                     }}
                   >
                     <TextField
-                      value={purchaseData.length + 1}
                       name="purchaseorderId"
+                      type="number"
+                      value={item.purchaseorderId}
+                      onChange={(e) => handleItemChange(item.id, e)}
+                      style={{ width: "70px" }}
                       disabled
-                      onChange={(e) => {
-                        handleItemChange(
-                          item.id,
-                          "purchaseorderId",
-                          e.target.value * 2
-                        );
-                      }}
-                      style={{ width: "100%" }}
                     />
                   </TableCell>
-
-                  {/* purchaseDate */}
                   <TableCell
                     style={{
                       border: "1px solid #ddd",
@@ -560,22 +465,59 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
                     }}
                   >
                     <TextField
+                      name="description"
                       type="text"
                       value={item.description}
-                      name="description"
-                      onChange={(e) => {
-                        handleItemChange(
-                          item.id,
-                          "description",
-                          e.target.value
-                        );
-                        handleQuotationChange(e);
-                      }}
-                      style={{ width: "100%" }}
+                      onChange={(e) => handleItemChange(item.id, e)}
+                      style={{ width: "70px" }}
                     />
                   </TableCell>
+                  <TableCell
+                    style={{
+                      border: "1px solid #ddd",
+                      padding: "8px",
+                    }}
+                  >
+                    <FormControl
+                      fullWidth
+                      style={{
+                        // margin: "8px 15px",
+                        width: "100%",
+                      }}
+                    >
+                      <InputLabel id="demo-company-select-label">
+                        unit Name
+                      </InputLabel>
+                      <Select
+                        labelId="demo-company-select-label"
+                        id="selectedCompany"
+                        value={formData.unitName}
+                        name="unitName"
+                        label="unitName"
+                        onChange={(e) => handleItemChange(item.id, e)}
+                      >
+                        {unit &&
+                          unit.map((item, index) => {
+                            return (
+                              <MenuItem key={index} value={item.unitName}>
+                                {item.unitName}
+                              </MenuItem>
+                            );
+                          })}
+                        <MenuItem className="linkStyle" value="addNewunit">
+                          <a href="#">
+                            <FontAwesomeIcon
+                              icon={faCirclePlus}
+                              rotation={90}
+                              className="iconStyle"
+                            />
+                            Create unit
+                          </a>
+                        </MenuItem>
+                      </Select>
+                    </FormControl>
+                  </TableCell>
 
-                  {/* description */}
                   <TableCell
                     style={{
                       border: "1px solid #ddd",
@@ -583,32 +525,10 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
                     }}
                   >
                     <TextField
-                      value={item.unitName}
-                      name="signature"
-                      type="text"
-                      onChange={(e) => {
-                        handleItemChange(item.id, "unitName", e.target.value);
-                        handleQuotationChange(e);
-                      }}
-                      style={{ width: "100%" }}
-                    />
-                  </TableCell>
-
-                  {/* purchasedby */}
-                  <TableCell
-                    style={{
-                      border: "1px solid #ddd",
-                      padding: "8px",
-                    }}
-                  >
-                    <TextField
-                      value={item.quantity}
                       name="quantity"
                       type="number"
-                      onChange={(e) => {
-                        handleItemChange(item.id, "quantity", e.target.value);
-                        handleQuotationChange(e);
-                      }}
+                      value={item.quantity}
+                      onChange={(e) => handleItemChange(item.id, e)}
                       style={{ width: "100%" }}
                     />
                   </TableCell>
@@ -619,35 +539,28 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
                     }}
                   >
                     <TextField
-                      value={item.total}
+                      name="price"
+                      type="number"
+                      value={item.price}
+                      onChange={(e) => handleItemChange(item.id, e)}
+                      style={{ width: "100%" }}
+                    />
+                  </TableCell>
+                  <TableCell
+                    style={{
+                      border: "1px solid #ddd",
+                      padding: "8px",
+                    }}
+                  >
+                    <TextField
                       name="total"
                       type="number"
-                      onChange={(e) => {
-                        handleItemChange(item.id, "total", e.target.value);
-                        handleQuotationChange(e);
-                      }}
+                      value={item.total}
+                      onChange={(e) => handleItemChange(item.id, e)}
                       style={{ width: "100%" }}
+                      disabled
                     />
                   </TableCell>
-                  <TableCell
-                    style={{
-                      border: "1px solid #ddd",
-                      padding: "8px",
-                    }}
-                  >
-                    <TextField
-                      value={item.grandTotal}
-                      name="grandTotal"
-                      type="number"
-                      onChange={(e) => {
-                        handleItemChange(item.id, "grandTotal", e.target.value);
-                        handleQuotationChange(e);
-                      }}
-                      style={{ width: "100%" }}
-                    />
-                  </TableCell>
-
-                  {/* Action */}
 
                   <TableCell
                     style={{
@@ -660,71 +573,65 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
                     }}
                   >
                     {" "}
-                    {index + 1 === items.length ? (
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        onClick={() => handleComAdd(item.id)}
-                      >
-                        {/* Add Item */}
-                        Save
-                      </Button>
-                    ) : (
-                      ""
-                    )}
+                    <Button
+                      variant="contained"
+                      onClick={() => saveSingleItem(item.id)}
+                    >
+                      Save
+                    </Button>
                     <Button
                       variant="contained"
                       color="secondary"
-                      onClick={() => {
-                        removeComItem(item.id);
-                        setIncrement(increment - 1);
-                      }}
-                      disabled={items.length === 1 ? true : false}
+                      onClick={() => removeItem(item.id)}
                     >
-                      {/* Delete */}
                       {<DeleteIcon />}
                     </Button>
                   </TableCell>
-                  {index + 1 === items.length ? (
-                    <TableCell
-                      style={{
-                        border: "1px solid #ddd",
-                        padding: "8px",
-                        display: "flex",
-                        flexDirection: "column",
-                      }}
-                    >
-                      <Button
-                        variant="contained"
-                        // startIcon={<AddIcon />}
-                        onClick={() => {
-                          addItem(item.id);
-                          setIncrement(increment + 1);
-                        }}
-                        disabled={saveDisable}
-                        style={{
-                          marginBottom: "7px",
-                          justifyContent: "center",
-                          background: "#f76c24",
-                          color: "white",
-                        }}
-                      >
-                        {/* Add Item */}
-                        Add More
-                      </Button>
-                    </TableCell>
-                  ) : (
-                    ""
-                  )}
                 </TableRow>
               ))}
+              <Button
+                variant="contained"
+                className="m-2"
+                style={{
+                  marginBottom: "7px",
+                  justifyContent: "center",
+                  background: "#f76c24",
+                  color: "white",
+                  marginTop: "10px",
+                  width: "max-content",
+                }}
+                onClick={addItem}
+              >
+                Add Item
+              </Button>
             </TableBody>
           </Table>
         </TableContainer>
+
+        <div className="d-flex align-items-center justify-content-end">
+          <TextField
+            style={{
+              margin: "30px 0",
+              width: "20%",
+            }}
+            margin="dense"
+            label="Grand Total"
+            type="number"
+            fullWidth
+            name="grandTotal"
+            id="grandTotal"
+            value={gt}
+            onChange={(e) => handleInputChange(e)}
+            required
+            InputLabelProps={{
+              shrink: true,
+            }}
+            disabled
+          />
+        </div>
+
         <div
           style={{
-            // display: "flex",
-            // justifyContent: "end",
             marginBottom: "20px",
           }}
         >
@@ -734,16 +641,30 @@ const PurchaseOrderForm = ({ purchaseOrder,formData, setFormData, setToggle }) =
               width: "20%",
             }}
             margin="dense"
-            label="Attachment"
+            label="Signature And Stamp"
             type="file"
             fullWidth
-            name="attachment"
-            id="attachment"
+            name="signatureAndStamp"
+            id="signatureAndStamp"
             onChange={(e) => handleInputChange(e)}
             required
             InputLabelProps={{
               shrink: true,
             }}
+          />
+          <TextField
+            style={{
+              margin: "30px 10px",
+              width: "20%",
+            }}
+            margin="dense"
+            label="Status"
+            type="text"
+            fullWidth
+            name="status"
+            id="status"
+            onChange={(e) => handleInputChange(e)}
+            required
           />
         </div>
 

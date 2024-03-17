@@ -18,6 +18,7 @@ const Header = ({ menu, setMenu }) => {
   const [longitude, setLongitude] = useState("");
   const [address, setAddress] = useState("");
   const [search, setSearch] = useState("");
+  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const nav = useNavigate();
 
   window.navigator.geolocation.getCurrentPosition((data) =>
@@ -92,6 +93,7 @@ const Header = ({ menu, setMenu }) => {
   const handleButtonClick = async () => {
     const currentDate = new Date().toLocaleDateString();
     localStorage.setItem("lastClickedDate", currentDate);
+    alert(currentDate)
     setIsButtonDisabled(true);
     setButtonClicked(true);
     setModalIsOpen(false);
@@ -118,6 +120,7 @@ const Header = ({ menu, setMenu }) => {
   };
   const empName = "Praveen";
   const handleOutButtonClick = async () => {
+    setIsButtonDisabled(false);
     setButtonOutClicked(true);
     setModalIsOpen(false);
 
@@ -135,6 +138,8 @@ const Header = ({ menu, setMenu }) => {
     setTimeout(() => {
       setModalCheckOutOpen(true);
     }, 1500);
+
+    window.location.reload();
   };
 
   const closeCheckIn = () => {
@@ -146,19 +151,43 @@ const Header = ({ menu, setMenu }) => {
     setModalCheckOutOpen(false);
     setButtonOutClicked(false);
   };
+  const [attendData, setAttendData] = useState([])
+  useEffect(()=>{
+    fetchAttendance();
+  },[])
 
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+  const fetchAttendance = async() => {
+    const data = await axios.get("http://localhost:8084/attendance/get/attendance");
+    setAttendData(data.data);
+  }
+
+  const [cond, setCond] = useState(false);
 
   useEffect(() => {
-    const lastClickedDate = localStorage.getItem("lastClickedDate");
-    const currentDate = new Date().toLocaleDateString();
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+    let formattedDate = `${year}-${month}-${day}`;
 
-    if (lastClickedDate === currentDate) {
-      setIsButtonDisabled(true);
-    } else {
-      setIsButtonDisabled(false);
-    }
-  }, []);
+    attendData.map((elem)=>{
+        if(formattedDate===elem.date){
+          setIsButtonDisabled(true);
+          setCond(true);
+        }
+        else{
+          setIsButtonDisabled(false);
+          setCond(false);
+        }
+    })
+    // const lastClickedDate = localStorage.getItem("lastClickedDate");
+
+    // if (lastClickedDate === currentDate) {
+    //   setIsButtonDisabled(true);
+    // } else {
+    //   setIsButtonDisabled(false);
+    // }
+  });
 
   return (
     <>
@@ -257,7 +286,7 @@ const Header = ({ menu, setMenu }) => {
             >
               Check In
             </button>
-            <button className="check-out-btn" onClick={handleOutButtonClick}>
+            <button className="check-out-btn" onClick={handleOutButtonClick} disabled={cond?true:!isButtonDisabled}>
               Check Out
             </button>
           </div>

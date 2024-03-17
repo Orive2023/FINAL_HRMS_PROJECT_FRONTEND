@@ -15,15 +15,19 @@ const PurchaseOrderState = () => {
   const [description, setDescription] = useState("");
   const [purchaseError, setPurchaseError] = useState(false);
   const [purchaseBy, setPurchaseBy] = useState("");
+  const [unit, setUnit] = useState([]);
 
   const [formData, setFormData] = useState({
-    purchaseOrderListId: 0,
-    purchaseOrderId: 0,
-    description: "string",
-    unitName: "string",
-    quantity: 0,
-    price: 0,
-    total: 0,
+    quotation:"",
+    location:"",
+    vendorName:"",
+    address:"",
+    notes :"",
+    authorizedByName :"",
+    title :"",
+    date :"",
+    signatureAndStamp: null,
+    status:"",
     grandTotal: 0,
   });
   return {
@@ -56,7 +60,7 @@ const PurchaseOrderState = () => {
     formData,
     setFormData,
     recDelete,
-    setRecDelete,
+    setRecDelete,unit, setUnit
   };
 };
 
