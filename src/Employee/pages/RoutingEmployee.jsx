@@ -6,9 +6,9 @@ import Attendance from "../pages/attendance/Attendance";
 import Performance from "./performance/Performance";
 import LeaveView from "../../Hr/pages/timesheets/leave/Mainfile/LeaveView";
 import EventCalender from "./cardCode/events/EventCalender";
-import JobVacancyTable from "../pages/jobvacancy/JobVacancyTable"
-import Award from "../pages/award/Award"
-import AwardProfile from "../pages/award/AwardProfile"
+import JobVacancyTable from "../pages/jobvacancy/JobVacancyTable";
+import Award from "../pages/award/Award";
+import AwardProfile from "../pages/award/AwardProfile";
 import LoanFile from "../pages/loan/LoanFile";
 import Travel from "../pages/travel/Travel";
 import TravelProfile from "../pages/travel/TravelProfile";
@@ -27,26 +27,21 @@ import Profile from "./profile/Profile";
 import Policies from "../pages/policies/Policies";
 import PolicyProfile from "./policies/policyProfile";
 import Transfer from "../pages/transfer/Transfer";
-import TransferProfile from "../pages/transfer/TransferProfile"
+import TransferProfile from "../pages/transfer/TransferProfile";
 import ExpJoiningLetter from "../pages/experienceletter/ExpJoiningLetter";
 import Expletter from "../pages/experienceletter/Expletter";
 import IntJoiningLetter from "../pages/experienceletter/IntJoiningLetter";
 
-import ResignationView from './resignation/mainfile/ResignationView'
-import ResignationEdit from './resignation/mainfile/ResignationEdit'
-import ResignationProfile from './resignation/mainfile/ResignationProfile'
-import ComplaintEdit from './complaint/mainfile/ComplaintEdit'
-import Complaint from './complaint/mainfile/Complaint'
-import LeaveProfile from './leave/mainfile/LeaveProfile'
-import LeaveEdit from './leave/mainfile/LeaveEdit'
-import Leave from './leave/mainfile/Leave'
+import ResignationView from "./resignation/mainfile/ResignationView";
+import ResignationEdit from "./resignation/mainfile/ResignationEdit";
+import ResignationProfile from "./resignation/mainfile/ResignationProfile";
+import ComplaintEdit from "./complaint/mainfile/ComplaintEdit";
+import Complaint from "./complaint/mainfile/Complaint";
+import LeaveProfile from "./leave/mainfile/LeaveProfile";
+import LeaveEdit from "./leave/mainfile/LeaveEdit";
+import Leave from "./leave/mainfile/Leave";
 import Worksheets from "../pages/worksheets/Worksheets";
-
-
-
-
-
-
+import Payslip from '../pages/payslip/Payslip'
 
 const routesData = [
   { path: "/Employee-Dashboard", element: <Dashboard /> },
@@ -69,12 +64,18 @@ const routesData = [
   { path: "/employee/officeshift", element: <Officeshift /> },
   { path: "/employee/holiday", element: <Holiday /> },
   { path: "/employee/announcement", element: <Announcement /> },
-  { path: "/employee/announcement-profile/:id", element: <AnnouncementProfile /> },
+  {
+    path: "/employee/announcement-profile/:id",
+    element: <AnnouncementProfile />,
+  },
   { path: "/employee/profile", element: <Profile /> },
   { path: "/employee/policies", element: <Policies /> },
   { path: "/employee/policies-profile/:id", element: <PolicyProfile /> },
   { path: "/employee/payslip", element: <PaySlipGenerator /> },
-  { path: "/employee/payslip-profile/:id", element: <PayslipGeneratorProfile /> },
+  {
+    path: "/employee/payslip-profile/:id",
+    element: <PayslipGeneratorProfile />,
+  },
   { path: "/employee/transfer", element: <Transfer /> },
   { path: "/employee/transfer-profile/:id", element: <TransferProfile /> },
   { path: "/employee/experience-letter", element: <Expletter /> },
@@ -91,7 +92,7 @@ const routesData = [
   { path: "/leave-edit/:id", element: <LeaveEdit /> },
   { path: "/leaves-profile/:id", element: <LeaveProfile /> },
   { path: "/employee/worksheets", element: <Worksheets /> },
-
+  { path: "/payslip/:id", element: <Payslip /> },
 ];
 
 const RoutingEmployee = () => {

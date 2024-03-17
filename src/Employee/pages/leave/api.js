@@ -4,9 +4,9 @@ import { jwtDecode } from "jwt-decode";
 const url = "localhost:8082";
 const ip = "12.126.190.50:8082";
 const token = localStorage.getItem("AuthToken");
-const decoded = jwtDecode(String(token));
-const usernameRec = decoded.preferred_username;
-const username = usernameRec.toUpperCase();
+const decoded = token?jwtDecode(String(token)):"";
+const usernameRec = decoded===""?"":decoded.preferred_username;
+const username = usernameRec?usernameRec.toUpperCase():"";
 
 export const saveLeave = async (formData) => {
     try{

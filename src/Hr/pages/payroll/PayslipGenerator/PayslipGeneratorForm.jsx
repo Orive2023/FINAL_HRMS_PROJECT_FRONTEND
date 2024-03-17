@@ -19,53 +19,63 @@ const PayslipGeneratorForm = ({
 
   const { setSalary, employee, setEmployee } = StatePayslipGenerator();
 
+  useEffect(() => {
+    loadPayslipGenerator();
+    fetchEmployee();
+  }, []);
+
   const loadPayslipGenerator = async () => {
     const result = await api.loadPayslipGenerator();
     setSalary(result);
   };
 
+  const fetchEmployee = async () => {
+    const result = await api.fetchEmployee();
+    setEmployee(result);
+  };
+
   const handleInputChange = (e) => {
-    let eID;
-    let designation;
-    let department;
+    const { name, value } = e.target;
+
     if (e.target.name === "employeeName") {
       employee.map((elem) => {
-        if (e.target.value === elem.employeeName) {
-          eID = elem.username;
-          designation = elem.designationName;
-          department = elem.departmentName;
+        if (elem.employeeName === e.target.value) {
+          setFormData({
+            ...formData,
+            employeeName: elem.employeeName,
+            username: elem.username,
+            designation: elem.designationName,
+            deapartment: elem.deapartmentName,
+          });
         }
       });
+    } else {
       setFormData({
         ...formData,
-        [e.target.name]: e.target.value,
-        username: eID,
-        designation: designation,
-        department: department?department: "",
+        [name]: value,
       });
     }
-    const { name, value } = e.target;
+
     if (name === "employeeName" && value === "addNewEmployee") {
       // Redirect to the company form in the company module
       navigate("/hr/employee/employee");
       return;
     }
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-
   };
 
   useEffect(() => {
     setFormData({
       ...formData,
       presentBasicSalary:
-        (formData.basicSalary / formData.workingDays) * formData.presentDays,
-      houserentAllowance: formData.presentBasicSalary * 0.4,
+        (parseInt(formData.basicSalary) / parseInt(formData.workingDays)) *
+        parseInt(formData.presentDays),
+      houserentAllowance: parseInt(formData.presentBasicSalary) * 0.4,
       educationalAllowance:
-        formData.noOfChildren * formData.companyPreferredEducationalAllowance,
-      overTimeSalary: (formData.basicSalary / 26 / 8) * formData.overTimeInHrs,
+        parseInt(formData.noOfChildren) *
+        parseInt(formData.companyPreferredEducationalAllowance),
+      overTimeSalary:
+        (parseInt(formData.basicSalary) / 26 / 8) *
+        parseInt(formData.overTimeInHrs),
       grossSalary:
         parseInt(formData.presentBasicSalary) +
         parseInt(formData.houserentAllowance) +
@@ -169,18 +179,8 @@ const PayslipGeneratorForm = ({
     });
   };
 
-  useEffect(() => {
-    loadPayslipGenerator();
-    fetchEmployee();
-  }, []);
-
   const handleSubmit = (e) => {
     console.log("formData", formData);
-  };
-
-  const fetchEmployee = async () => {
-    const result = await api.fetchEmployee();
-    setEmployee(result);
   };
 
   const cancelButton = () => {
@@ -235,8 +235,7 @@ const PayslipGeneratorForm = ({
     },
   ];
 
-  let buttonCheck =
-    formData.employeeName.length > 0;
+  let buttonCheck = formData.employeeName.length > 0;
 
   return (
     <form onSubmit={handleSubmit}>
@@ -274,7 +273,7 @@ const PayslipGeneratorForm = ({
         </FormControl>
         <TextField
           margin="dense"
-          label="Employee ID"
+          label="Username"
           type="text"
           fullWidth
           name="username"

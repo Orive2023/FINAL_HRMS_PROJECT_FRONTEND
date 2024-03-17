@@ -21,68 +21,66 @@ import {
   tablePaginationClasses as classes,
 } from "@mui/base/TablePagination";
 import { styled } from "@mui/system";
-
+import { MdOutlineFileDownload } from "react-icons/md";
 
 const PaySlipGenerator = () => {
-    // const token = localStorage.getItem("AuthToken");
-    // const decoded = jwtDecode(String(token));
-    // const usernameRec = decoded.preferred_username;
-    // const username = usernameRec.toUpperCase();
-    const username = localStorage.getItem("UserName")
-    const [payroll, setPayroll] = useState([]);
-  
-  
+  const token = localStorage.getItem("AuthToken");
+  const decoded = jwtDecode(String(token));
+  const usernameRec = decoded.preferred_username;
+  const username = usernameRec.toUpperCase();
+  // const username = localStorage.getItem("UserName")
+  const [payroll, setPayroll] = useState([]);
 
+  const loadPayroll = async () => {
+    const response = await axios.get(
+      `http://localhost:8085/payslipgenerate/findpayslipgenerate/${username}`
+    );
+    setPayroll(response.data);
+  };
 
-    const loadPayroll = async () => {
-        const response = await axios.get(`http://localhost:8085/payslipgenerate/findpayslipgenerate/${username}`);
-        setPayroll(response.data);
-      };
-    
-      console.log("poli", payroll);
-      useEffect(() => {
-        loadPayroll();
-      }, []);
+  console.log("poli", payroll);
+  useEffect(() => {
+    loadPayroll();
+  }, []);
 
-      const [search, setSearch] = useState("");
-      const CustomTablePagination = styled(TablePagination)`
-        & .${classes.toolbar} {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 10px;
-          padding: 0 0 0 10px;
-    
-          @media (min-width: 768px) {
-            flex-direction: row;
-            align-items: center;
-          }
-        }
-    
-        & .${classes.selectLabel} {
-          margin: 0;
-        }
-    
-        & .${classes.displayedRows} {
-          margin: 0;
-    
-          @media (min-width: 768px) {
-            margin-left: auto;
-          }
-        }
-    
-        & .${classes.spacer} {
-          display: none;
-        }
-    
-        & .${classes.actions} {
-          display: flex;
-          gap: 0rem;
-        }
-      `;
+  const [search, setSearch] = useState("");
+  const CustomTablePagination = styled(TablePagination)`
+    & .${classes.toolbar} {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 0 0 0 10px;
 
+      @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: center;
+      }
+    }
 
-      const [page, setPage] = React.useState(0);
+    & .${classes.selectLabel} {
+      margin: 0;
+    }
+
+    & .${classes.displayedRows} {
+      margin: 0;
+
+      @media (min-width: 768px) {
+        margin-left: auto;
+      }
+    }
+
+    & .${classes.spacer} {
+      display: none;
+    }
+
+    & .${classes.actions} {
+      display: flex;
+      gap: 0rem;
+    }
+  `;
+
+  const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
   const emptyRows =
@@ -115,7 +113,16 @@ const PaySlipGenerator = () => {
       const tableMargin = 20;
       const tableStartY = 15 + tableMargin;
       doc.autoTable({
-        head: [["SL", "EMPLOYEE NAME", "EMPLOYEE BASIC SALARY", "GROSS SALARY", "NET SALARY", "CREATED DATE"]],
+        head: [
+          [
+            "SL",
+            "EMPLOYEE NAME",
+            "EMPLOYEE BASIC SALARY",
+            "GROSS SALARY",
+            "NET SALARY",
+            "CREATED DATE",
+          ],
+        ],
         body: payroll.map((row, index) => [
           index + 1,
           row.employeeName,
@@ -140,9 +147,6 @@ const PaySlipGenerator = () => {
     }
   };
 
-
-
-
   const createPdf = () => {
     try {
       doc = new jsPDF();
@@ -161,7 +165,16 @@ const PaySlipGenerator = () => {
       const tableMargin = 20;
       const tableStartY = 15 + tableMargin;
       doc.autoTable({
-        head: [["SL", "EMPLOYEE NAME", "EMPLOYEE BASIC SALARY", "GROSS SALARY", "NET SALARY", "CREATED DATE"]],
+        head: [
+          [
+            "SL",
+            "EMPLOYEE NAME",
+            "EMPLOYEE BASIC SALARY",
+            "GROSS SALARY",
+            "NET SALARY",
+            "CREATED DATE",
+          ],
+        ],
         body: payroll.map((row, index) => [
           index + 1,
           row.employeeName,
@@ -184,9 +197,6 @@ const PaySlipGenerator = () => {
       console.error("Error creating PDF:", error);
     }
   };
-
-
-
 
   const convertToExcel = () => {
     const ws = XLSX.utils.json_to_sheet(payroll);
@@ -216,9 +226,6 @@ const PaySlipGenerator = () => {
     XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
     XLSX.writeFile(wb, "policies.xlsx");
   };
-
-
-
 
   const handlePrint = () => {
     createPdf();
@@ -263,8 +270,6 @@ const PaySlipGenerator = () => {
     }
   };
 
-
-
   const renderpayrollData = () => {
     return (
       <tr>
@@ -279,8 +284,6 @@ const PaySlipGenerator = () => {
       </tr>
     );
   };
-
-
 
   const [menu, setMenu] = useState(false);
 
@@ -299,37 +302,34 @@ const PaySlipGenerator = () => {
               style={{ display: "flex", flexDirection: "column" }}
             >
               <div className=" table-ka-top-btns" style={{ marginTop: "30px" }}>
-              <div
-            className="mx-3"
-            style={{  width: "150px" }}
-          >
-            <div
-              style={{
-                fontSize: "1.4rem",
-                width: "500px",
-                display: "flex",
-              }}
-            >
-              <div style={{ paddingRight: "10px" }}>
-                <img
-                  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAM7SURBVHgB3VVNaBNREJ55b3ezQYrRg9Sf2m3poTeriLQquBWrvQjtSTy1god6aoIXb9aTXqS99CCC9qoHE0GKYCEpolToIYKiojXJQaziYYNISpLdcXY3Nbv9iWlv+sJmed/OvG/mm5ldgP9lYbOGFw4OjTsEcSKIIUKq8hMSKStlNePbFMmIcf6+DTi6xjEvodw/k3+a/5t/Q5K4YcZ+qTuSHL3JppZDmHBsOyslJjkbg6+8ViVzOjdb2BZJvHvQcADTDkA7ARSqUg7defvktftsjJ8pJJKAdIi3lmJXT099fJbd7Cy5EXit2zSEpqQlR6siFYCgf/rd7IfV54s/PlnH2/Y/0FDsVQX0SgXHTrZ2FV98W1poimSi54yJikgrSK1SUHZFlvum3swtr7VbWM6vvPy+lDL3dYAmwGT7c2ZrJ8wvf55vSHLzqGlKAWlFkK4gzABVL97KZhp20HM+dOBAJ0aEc4qD6j/b1mnNfcm9CtqEajLZa6ZZf5OviasLmRuwhXW71xwVAPcIoYgR6Ehk6sGJoKGukqErDuwU5RnY4uKgZti/oEs71lIu7ww+U0IksuqmRlUB21oR9hcb+IdJVBaKCFu0cGc/HOgbdxDi3oaHxlcZM6WKlrgUkCWqOu4NW2xsQKLwXPNPDZTq8eCxEUJnimp7JG5o14icEV0pxRgarvt7JKCp4aYNJRZlI5dI1+tYRKO46xwRdgIi2EE6dqpoH+asLcaH0mZPLOjvnaFDg0yk7SmhQjWIxVxQRSd54tHin9dHZvhIkW+71N3oFtmq+7tKlBqQsKaeXHYAU9ZjPk6eqEE8GmEtHQe0RjVxU3W1D2oaremsrtE5qninUxDXJdsKWmcbJvG6yyHFrgSy8zqOI66EM6l1oqpVwiQcZhBbRxLxa4KaTgZvPf29juPzFA3CJNKvm1rb50a7DYFu/Qgcu1QM2obE+3q5e4LfvNe5PzlGn4QJ2sm3LAj+8wX1AMObGf6muDh7xDiPGMeY2XP3ff+mJO4qXumaFCjibkT+Gf5crM6g61DHkXHy5wY8pTKqqI5Gp3OFhiSrqzRmGBvhukQvlRWbQr48GxZO5Zv65v+76zfuAjbSpiR+NAAAAABJRU5ErkJggg=="
-                  alt="Dashboard"
-                />
-              </div>
-              <div style={{ padding: "2px" }}>
-                <span style={{ color: "black", fontWeight: "bold" }}>
-                  <Link
-                    to="/HRDashboard"
-                    style={{ textDecoration: "none", color: "inherit" }}
+                <div className="mx-3" style={{ width: "150px" }}>
+                  <div
+                    style={{
+                      fontSize: "1.4rem",
+                      width: "500px",
+                      display: "flex",
+                    }}
                   >
-                    Dashboard{" "}
-                  </Link>{" "}
-                  / Employee /{" "}
-                </span>
-                <span style={{ color: "black" }}> Payslip</span>
-              </div>
-            </div>
-          </div>
+                    <div style={{ paddingRight: "10px" }}>
+                      <img
+                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAM7SURBVHgB3VVNaBNREJ55b3ezQYrRg9Sf2m3poTeriLQquBWrvQjtSTy1god6aoIXb9aTXqS99CCC9qoHE0GKYCEpolToIYKiojXJQaziYYNISpLdcXY3Nbv9iWlv+sJmed/OvG/mm5ldgP9lYbOGFw4OjTsEcSKIIUKq8hMSKStlNePbFMmIcf6+DTi6xjEvodw/k3+a/5t/Q5K4YcZ+qTuSHL3JppZDmHBsOyslJjkbg6+8ViVzOjdb2BZJvHvQcADTDkA7ARSqUg7defvktftsjJ8pJJKAdIi3lmJXT099fJbd7Cy5EXit2zSEpqQlR6siFYCgf/rd7IfV54s/PlnH2/Y/0FDsVQX0SgXHTrZ2FV98W1poimSi54yJikgrSK1SUHZFlvum3swtr7VbWM6vvPy+lDL3dYAmwGT7c2ZrJ8wvf55vSHLzqGlKAWlFkK4gzABVL97KZhp20HM+dOBAJ0aEc4qD6j/b1mnNfcm9CtqEajLZa6ZZf5OviasLmRuwhXW71xwVAPcIoYgR6Ehk6sGJoKGukqErDuwU5RnY4uKgZti/oEs71lIu7ww+U0IksuqmRlUB21oR9hcb+IdJVBaKCFu0cGc/HOgbdxDi3oaHxlcZM6WKlrgUkCWqOu4NW2xsQKLwXPNPDZTq8eCxEUJnimp7JG5o14icEV0pxRgarvt7JKCp4aYNJRZlI5dI1+tYRKO46xwRdgIi2EE6dqpoH+asLcaH0mZPLOjvnaFDg0yk7SmhQjWIxVxQRSd54tHin9dHZvhIkW+71N3oFtmq+7tKlBqQsKaeXHYAU9ZjPk6eqEE8GmEtHQe0RjVxU3W1D2oaremsrtE5qninUxDXJdsKWmcbJvG6yyHFrgSy8zqOI66EM6l1oqpVwiQcZhBbRxLxa4KaTgZvPf29juPzFA3CJNKvm1rb50a7DYFu/Qgcu1QM2obE+3q5e4LfvNe5PzlGn4QJ2sm3LAj+8wX1AMObGf6muDh7xDiPGMeY2XP3ff+mJO4qXumaFCjibkT+Gf5crM6g61DHkXHy5wY8pTKqqI5Gp3OFhiSrqzRmGBvhukQvlRWbQr48GxZO5Zv65v+76zfuAjbSpiR+NAAAAABJRU5ErkJggg=="
+                        alt="Dashboard"
+                      />
+                    </div>
+                    <div style={{ padding: "2px" }}>
+                      <span style={{ color: "black", fontWeight: "bold" }}>
+                        <Link
+                          to="/HRDashboard"
+                          style={{ textDecoration: "none", color: "inherit" }}
+                        >
+                          Dashboard{" "}
+                        </Link>{" "}
+                        / Employee /{" "}
+                      </span>
+                      <span style={{ color: "black" }}> Payslip</span>
+                    </div>
+                  </div>
+                </div>
                 {
                   <div className="search-print">
                     <input
@@ -427,7 +427,7 @@ const PaySlipGenerator = () => {
                       <th>Gross Salary</th>
                       <th>Net Salary</th>
                       <th>Created Date</th>
-                      <th colSpan={3}>Action</th>
+                      <th colSpan={2}>Action</th>
                     </tr>
                   </thead>
 
@@ -472,6 +472,15 @@ const PaySlipGenerator = () => {
                               <td>{payroll.grossSalary}</td>
                               <td>{payroll.netSalary}</td>
                               <td>{payroll.createdDate}</td>
+
+                              <td className="mx-2">
+                                <Link
+                                  to={`/payslip/${payroll.paySlipGenerateId}`}
+                                  target="_blank"
+                                >
+                                  <MdOutlineFileDownload className="action-edit" />
+                                </Link>
+                              </td>
 
                               <td className="mx-2">
                                 <Link

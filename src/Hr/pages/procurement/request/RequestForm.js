@@ -60,7 +60,6 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     setFormData({
       ...formData,
       [name]: value,
-      [e.target.name]: e.target.value,
     });
   };
 
@@ -107,19 +106,6 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
     const formDataWithUpdatedItems = {
       ...formData,
     };
-
-    if (field === "descriptionOfMaterialOrGoodsOrService") {
-      formDataWithUpdatedItems.descriptionOfMaterialOrGoodsOrService = value;
-    }
-
-    if (field === "unitName") {
-      formDataWithUpdatedItems.unitName = value;
-    }
-
-    if (field === "quantity") {
-      formDataWithUpdatedItems.quantity = value;
-    }
-
     setFormData(formDataWithUpdatedItems);
   };
 
@@ -456,7 +442,14 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
                       id="outlined-size-small"
                       name="descriptionOfMaterialOrGoodsOrService"
                       value={index+1}
-                      onChange={(e) => handleListChange(index, e)}
+                      onChange={(e) => {
+                        handleItemChange(
+                          item.quantity,
+                          "descriptionOfMaterialOrGoodsOrService",
+                          e.target.value
+                        );
+                        handleListChange(index, e);
+                      }}
                       style={{ width: "100%" }}
                       disabled
                     />
@@ -474,7 +467,14 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
                         formData.descriptionOfMaterialEntities[index]
                           ?.descriptionOfMaterialOrGoodsOrService
                       }
-                      onChange={(e) => handleListChange(index, e)}
+                      onChange={(e) => {
+                        handleItemChange(
+                          item.quantity,
+                          "descriptionOfMaterialOrGoodsOrService",
+                          e.target.value
+                        );
+                        handleListChange(index, e);
+                      }}
                       style={{ width: "100%" }}
                     />
                   </TableCell>
@@ -502,7 +502,14 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
                         value={formData.unitName}
                         name="unitName"
                         label="unitName"
-                        onChange={(e) => handleInputChange(e)}
+                        onChange={(e) => {
+                        handleItemChange(
+                          item.quantity,
+                          "unitName",
+                          e.target.value
+                        );
+                        handleListChange(index, e);
+                      }}
                       >
                         {unit &&
                           unit.map((item, index) => {

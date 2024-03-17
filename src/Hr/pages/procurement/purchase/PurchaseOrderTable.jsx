@@ -16,7 +16,7 @@ import {
   TablePagination,
   tablePaginationClasses as classes,
 } from "@mui/base/TablePagination";
-import { Button } from "bootstrap";
+import Button from "@mui/material/Button";
 
 const PurchaseOrderTable = ({
   purchaseOrder,
@@ -303,17 +303,22 @@ const PurchaseOrderTable = ({
     );
   };
 
+  console.log("tablesmei", purchaseOrder)
+
   return (
     <div
       className="d-flex"
       style={{ display: "flex", flexDirection: "column" }}
     >
       <div className=" table-ka-top-btns" style={{marginTop:'60px'}}>
-        <button
+      <Button
           variant="outlined"
-          onClick={handleButtonClick}
+          onClick={() => {
+            setToggle(!toggle);
+            handleButtonClick();
+          }}
           id="add-btn"
-          style={{ width: "max-content", marginTop: "20px" }}
+          style={{width:'max-content', marginTop:'20px'}}
         >
           {toggle ? (
             <div className="hide">
@@ -326,7 +331,7 @@ const PurchaseOrderTable = ({
               ADD PURCHASE ORDER
             </div>
           )}
-        </button>
+        </Button>
         {
           <div className="search-print">
             <input
@@ -420,8 +425,6 @@ const PurchaseOrderTable = ({
               <th>Unit Name</th>
               <th>Quantity</th>
               <th>Price</th>
-              <th>Total</th>
-              <th>GrandTotal</th>
               <th colSpan="3">Actions</th>
             </tr>
           </thead>
@@ -440,9 +443,6 @@ const PurchaseOrderTable = ({
                     if (search.length === 0) return elem;
                     else {
                       return (
-                        elem.purchaseOrderId
-                          .toLowerCase()
-                          .includes(search.toLowerCase()) ||
                         elem.description
                           .toLowerCase()
                           .includes(search.toLowerCase()) ||
@@ -451,20 +451,10 @@ const PurchaseOrderTable = ({
                           .includes(search.toLowerCase()) ||
                         elem.quantity
                           .toString()
-                          .toLowerCase()
-                          .includes(search.toLowerCase()) ||
+                          .includes(search) ||
                         elem.price
                           .toString()
-                          .toLowerCase()
-                          .includes(search.toLowerCase()) ||
-                        elem.total
-                          .toString()
-                          .toLowerCase()
-                          .includes(search.toLowerCase()) ||
-                        elem.grandTotal
-                          .toString()
-                          .toLowerCase()
-                          .includes(search.toLowerCase())
+                          .includes(search) 
                       );
                     }
                   })
@@ -477,18 +467,15 @@ const PurchaseOrderTable = ({
                       <td>{purchaseOrder.unitName}</td>
                       <td>{purchaseOrder.quantity}</td>
                       <td>{purchaseOrder.price}</td>
-                      <td>{purchaseOrder.total}</td>
-                      <td>{purchaseOrder.grandTotal}</td>
 
                       <td className="mx-2">
-                        <button
-                          className="btn btn-danger"
+                        <div
                           onClick={() =>
-                            deletePurchase(purchaseOrder.purchaseOrderId)
+                            deletePurchase(purchaseOrder.purchaseOrderListId)
                           }
                         >
-                          <FaTrashAlt />
-                        </button>
+                          <FaTrashAlt className="action-delete"/>
+                        </div>
                       </td>
                     </tr>
                   ))}

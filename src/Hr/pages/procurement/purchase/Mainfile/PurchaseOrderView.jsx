@@ -42,30 +42,27 @@ const PurchaseOrderView = () => {
     setRecDelete,
   } = PurchaseOrderState();
 
-  const handleButtonClick = () => {
-    setFormVisible((prev) => !prev);
-  };
-
   useEffect(() => {
-    handleDelete();
     loadAllPurchase();
   }, []);
 
   const loadAllPurchase = async () => {
-    const result = await PurchaseOrderApi.loadAllPurchase();
+    const result = await PurchaseOrderApi.loadAItemPurchase();
     setPurchaseOrder(result);
   };
 
   const handleDelete = async () => {
-    await PurchaseOrderApi.deletePurchase(recDelete);
+    await PurchaseOrderApi.deletePurchaseList(recDelete);
     loadAllPurchase();
   };
 
-  console.log(formData);
-
   useEffect(() => {
-    loadAllPurchase();
-  }, []);
+    if (recDelete !== "") {
+      handleDelete();
+      setRecDelete("");
+    }
+  });
+
   const [menu, setMenu] = useState(false);
 
   return (
@@ -90,7 +87,6 @@ const PurchaseOrderView = () => {
                     <Card style={{ margin: "20px", border: "1px solid black" }}>
                       <CardContent>
                         <PurchaseOrderForm
-                          purchaseOrder={purchaseOrder}
                           formData={formData}
                           setFormData={setFormData}
                           setToggle={setToggle}
@@ -106,7 +102,9 @@ const PurchaseOrderView = () => {
               purchaseOrder={purchaseOrder}
               setRecDelete={setRecDelete}
               setToggle={setToggle}
+              toggle={toggle}
               setFormVisible={setFormVisible}
+              setOpen={setOpen}
             />
             <div></div>
           </section>
