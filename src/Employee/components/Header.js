@@ -9,7 +9,6 @@ import { Watch } from "react-loader-spinner";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-
 import EmployeeDetails from "./sidebarComponent/EmployeeDetails";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +18,12 @@ const Header = ({ menu, setMenu }) => {
   const [address, setAddress] = useState("");
   const [search, setSearch] = useState("");
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
+  const token = localStorage.getItem("AuthToken");
+  const decoded = token ? jwtDecode(String(token)) : "";
+  const usernameRec = decoded === "" ? "" : decoded.preferred_username;
+  const username = usernameRec ? usernameRec.toUpperCase() : "";
+
   const nav = useNavigate();
 
   window.navigator.geolocation.getCurrentPosition((data) =>
@@ -46,15 +51,7 @@ const Header = ({ menu, setMenu }) => {
     }
   };
 
-
-
-
-  const token = localStorage.getItem("AuthToken");
-  const decoded = jwtDecode(String(token));
-  const usernameRec = decoded.preferred_username;
-  const username = usernameRec.toUpperCase();
-
-  const employee = localStorage.getItem("UserName")
+  const employee = localStorage.getItem("UserName");
 
   const now = new Date();
   let todayDate = date.format(now, "YYYY-MM-DD");
@@ -80,7 +77,6 @@ const Header = ({ menu, setMenu }) => {
 
   const [shift, setShift] = useState([]);
 
-
   const loadShift = async () => {
     await axios
       .get("http://localhost:8084/officeshifts/get/officeShifts")
@@ -98,13 +94,19 @@ const Header = ({ menu, setMenu }) => {
     setIsButtonDisabled(true);
     setButtonClicked(true);
     setModalIsOpen(false);
+    let currentTime = new Date();
+    let hours = currentTime.getHours().toString().padStart(2, "0");
+    let minutes = currentTime.getMinutes().toString().padStart(2, "0");
+    let seconds = currentTime.getSeconds().toString().padStart(2, "0");
+    let formattedTime = hours + ":" + minutes + ":" + seconds;
 
     await axios.post("http://localhost:8084/attendance/create", {
       officeClockIn: shift[0].officeClockIn,
       officeClockOut: shift[0].officeClockOut,
       employeeName: employee,
       username: username,
-      clockIn: date.format(new Date(), "hh:mm:ss"),
+      // clockIn: date.format(new Date(), "hh:mm:ss"),
+      clockIn: formattedTime,
       clockOut: "00:00:00",
       late: "",
       earlyLeaving: "",
@@ -126,11 +128,17 @@ const Header = ({ menu, setMenu }) => {
     setModalIsOpen(false);
 
     handleConvertClick();
+    let currentTime = new Date();
+    let hours = currentTime.getHours().toString().padStart(2, "0");
+    let minutes = currentTime.getMinutes().toString().padStart(2, "0");
+    let seconds = currentTime.getSeconds().toString().padStart(2, "0");
+    let formattedTime = hours + ":" + minutes + ":" + seconds;
 
     await axios.put(
       `http://localhost:8084/attendance/update/Id/${username}/${todayDate}`,
       {
-        clockOut: date.format(new Date(), "hh:mm:ss"),
+        // clockOut: date.format(new Date(), "hh:mm:ss"),
+        clockOut: formattedTime,
         date: todayDate,
         clockOutLocation: address,
       }
@@ -139,8 +147,6 @@ const Header = ({ menu, setMenu }) => {
     setTimeout(() => {
       setModalCheckOutOpen(true);
     }, 1500);
-
-  //  window.location.reload();
   };
 
   const closeCheckIn = () => {
@@ -151,36 +157,37 @@ const Header = ({ menu, setMenu }) => {
   const closeCheckOut = () => {
     setModalCheckOutOpen(false);
     setButtonOutClicked(false);
+    window.location.reload();
   };
-  const [attendData, setAttendData] = useState([])
-  useEffect(()=>{
+  const [attendData, setAttendData] = useState([]);
+  useEffect(() => {
     fetchAttendance();
-  },[])
+  }, []);
 
-  const fetchAttendance = async() => {
-    const data = await axios.get("http://localhost:8084/attendance/get/attendance");
+  const fetchAttendance = async () => {
+    const data = await axios.get(
+      "http://localhost:8084/attendance/get/attendance"
+    );
     setAttendData(data.data);
-  }
+  };
 
   const [cond, setCond] = useState(false);
 
   useEffect(() => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
-    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-    const day = String(currentDate.getDate()).padStart(2, '0');
+    const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+    const day = String(currentDate.getDate()).padStart(2, "0");
     let formattedDate = `${year}-${month}-${day}`;
 
-    attendData.map((elem)=>{
-        if(formattedDate===elem.date){
-          setIsButtonDisabled(true);
+    attendData.map((elem) => {
+      if ((formattedDate === elem.date) && username===elem.username) {
+        setIsButtonDisabled(true);
+        if (elem.clockOut !== "00:00:00") {
           setCond(true);
         }
-        else{
-          setIsButtonDisabled(false);
-          setCond(false);
-        }
-    })
+      }
+    });
     // const lastClickedDate = localStorage.getItem("lastClickedDate");
 
     // if (lastClickedDate === currentDate) {
@@ -206,11 +213,9 @@ const Header = ({ menu, setMenu }) => {
                   onChange={(e) => setSearch(e.target.value)}
                   onKeyPress={(event) => {
                     if (event.key === "Enter") {
-                      if(search==="leave"){
+                      if (search === "leave") {
                         nav(`/leave`);
-                      }
-                      else
-                      nav(`/employee/${search}`)
+                      } else nav(`/employee/${search}`);
                     }
                   }}
                 />
@@ -287,7 +292,11 @@ const Header = ({ menu, setMenu }) => {
             >
               Check In
             </button>
-            <button className="check-out-btn" onClick={handleOutButtonClick}>
+            <button
+              className="check-out-btn"
+              onClick={handleOutButtonClick}
+              disabled={cond ? true : !isButtonDisabled}
+            >
               Check Out
             </button>
           </div>
