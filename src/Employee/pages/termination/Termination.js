@@ -24,13 +24,13 @@ import { styled } from "@mui/system";
 
 
 const Termination = () => {
-    // const token = localStorage.getItem("AuthToken");
-    // const decoded = jwtDecode(String(token));
-    // const usernameRec = decoded.preferred_username;
-    // const username = usernameRec.toUpperCase();
+    const token = localStorage.getItem("AuthToken");
+    const decoded = jwtDecode(String(token));
+    const usernameRec = decoded.preferred_username;
+    const username = usernameRec.toUpperCase();
   
     const [termination, setTermination] = useState([]);
-    const username = localStorage.getItem("UserName")
+    // const username = localStorage.getItem("UserName")
 
    
 
@@ -338,12 +338,12 @@ const Termination = () => {
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                       style={{
-                        width: "20rem",
+                        width: "18rem",
                         borderRadius: "5px",
                         height: "40px",
                         padding: "10px",
                         border: "1px solid rgba(247, 108, 36, 1)",
-                        marginRight: "30px",
+                        marginRight: "20px",
                       }}
                     />
                     <div

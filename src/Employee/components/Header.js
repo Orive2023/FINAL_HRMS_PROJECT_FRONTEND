@@ -54,6 +54,7 @@ const Header = ({ menu, setMenu }) => {
   const usernameRec = decoded.preferred_username;
   const username = usernameRec.toUpperCase();
 
+  const employee = localStorage.getItem("UserName")
 
   const now = new Date();
   let todayDate = date.format(now, "YYYY-MM-DD");
@@ -79,6 +80,7 @@ const Header = ({ menu, setMenu }) => {
 
   const [shift, setShift] = useState([]);
 
+
   const loadShift = async () => {
     await axios
       .get("http://localhost:8084/officeshifts/get/officeShifts")
@@ -93,7 +95,6 @@ const Header = ({ menu, setMenu }) => {
   const handleButtonClick = async () => {
     const currentDate = new Date().toLocaleDateString();
     localStorage.setItem("lastClickedDate", currentDate);
-    alert(currentDate)
     setIsButtonDisabled(true);
     setButtonClicked(true);
     setModalIsOpen(false);
@@ -101,7 +102,7 @@ const Header = ({ menu, setMenu }) => {
     await axios.post("http://localhost:8084/attendance/create", {
       officeClockIn: shift[0].officeClockIn,
       officeClockOut: shift[0].officeClockOut,
-      employeeName: username,
+      employeeName: employee,
       username: username,
       clockIn: date.format(new Date(), "hh:mm:ss"),
       clockOut: "00:00:00",
@@ -118,7 +119,7 @@ const Header = ({ menu, setMenu }) => {
       setModalCheckInOpen(true);
     }, 1500);
   };
-  const empName = "Praveen";
+
   const handleOutButtonClick = async () => {
     setIsButtonDisabled(false);
     setButtonOutClicked(true);
@@ -139,7 +140,7 @@ const Header = ({ menu, setMenu }) => {
       setModalCheckOutOpen(true);
     }, 1500);
 
-    window.location.reload();
+  //  window.location.reload();
   };
 
   const closeCheckIn = () => {
@@ -286,7 +287,7 @@ const Header = ({ menu, setMenu }) => {
             >
               Check In
             </button>
-            <button className="check-out-btn" onClick={handleOutButtonClick} disabled={cond?true:!isButtonDisabled}>
+            <button className="check-out-btn" onClick={handleOutButtonClick}>
               Check Out
             </button>
           </div>

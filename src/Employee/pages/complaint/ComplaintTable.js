@@ -451,7 +451,7 @@ const ComplaintTable = ({
                         {index + 1}
                       </th>
                       <td>{complaint.complaintTitle}</td>
-                      <td>{complaint.complaintFrom}</td>
+                      <td>{complaint.employeeName}</td>
                       <td>{complaint.complaintAgainst}</td>
                       <td>{complaint.complaintDate}</td>
                       <td>{complaint.description}</td>

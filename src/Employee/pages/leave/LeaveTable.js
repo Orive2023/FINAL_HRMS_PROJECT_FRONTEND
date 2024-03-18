@@ -469,13 +469,7 @@ const LeaveTable = ({
                           <FaEye className="action-eye" />
                         </Link>
                       </td>
-                      <td className="mx-2">
-                        <Link
-                          to={`/leave-edit/${leave.leaveId}`}
-                        >
-                          <FaEdit className="action-edit" />
-                        </Link>
-                      </td>
+                     
                       <td className="mx-2">
                         <FaTrashAlt
                           className="action-delete"

@@ -31,7 +31,7 @@ import TransferProfile from "../pages/transfer/TransferProfile";
 import ExpJoiningLetter from "../pages/experienceletter/ExpJoiningLetter";
 import Expletter from "../pages/experienceletter/Expletter";
 import IntJoiningLetter from "../pages/experienceletter/IntJoiningLetter";
-
+import TerminationProfile from "../pages/termination/TerminationProfile";
 import ResignationView from "./resignation/mainfile/ResignationView";
 import ResignationEdit from "./resignation/mainfile/ResignationEdit";
 import ResignationProfile from "./resignation/mainfile/ResignationProfile";
@@ -54,6 +54,7 @@ const routesData = [
   { path: "/employee/loan", element: <LoanFile /> },
   { path: "/employee/award", element: <Award /> },
   { path: "/employee/award-profile/:id", element: <AwardProfile /> },
+  { path: "/employee/termination-profile/:id", element: <TerminationProfile /> },
   { path: "/employee/travel", element: <Travel /> },
   { path: "/employee/travel-profile/:id", element: <TravelProfile /> },
   { path: "/employee/promotion", element: <Promotion /> },
@@ -64,6 +65,7 @@ const routesData = [
   { path: "/employee/officeshift", element: <Officeshift /> },
   { path: "/employee/holiday", element: <Holiday /> },
   { path: "/employee/announcement", element: <Announcement /> },
+
   {
     path: "/employee/announcement-profile/:id",
     element: <AnnouncementProfile />,

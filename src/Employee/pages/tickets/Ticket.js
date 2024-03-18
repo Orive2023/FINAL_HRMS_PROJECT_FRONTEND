@@ -44,12 +44,12 @@ const Ticket = ({setFormVisible}) => {
 
  
 
-  // const token = localStorage.getItem("AuthToken");
-  // const decoded = jwtDecode(String(token));
-  // const usernameRec = decoded.preferred_username;
-  // const username = usernameRec.toUpperCase();
+  const token = localStorage.getItem("AuthToken");
+  const decoded = jwtDecode(String(token));
+  const usernameRec = decoded.preferred_username;
+  const username = usernameRec.toUpperCase();
 
-const username = localStorage.getItem("UserName")
+// const username = localStorage.getItem("UserName")
   useEffect(() => {
     loadTickets();
   }, []);
@@ -743,7 +743,7 @@ const username = localStorage.getItem("UserName")
                 height: "40px",
                 padding: "10px",
                 border: "1px solid rgba(247, 108, 36, 1)",
-                marginRight: "30px",
+                marginLeft: "30px",
               }}
             />
             <div className="d-flex mt-4 four-btn" style={{ gap: "10px" }} y>

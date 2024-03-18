@@ -89,7 +89,7 @@ const SideBar = ({ menu }) => {
 
           <LeaveFile />
 
-          <ProfileFile />
+        
           
           
 

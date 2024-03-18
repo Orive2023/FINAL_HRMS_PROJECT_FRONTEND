@@ -18,11 +18,14 @@ const Profile = () => {
     loadEmployee();
   }, []);
 
+  console.log(username)
+
   const url = "localhost:8082";
   const ip = "13.126.190.50:8082";
 
   const loadEmployee = async () => {
-    const result = await axios.get(`http://${url}/employee/byId/${username}`);
+    const result = await axios.get(`http://localhost:8082/employee/byId/${username}`);
+    console.log(result.data)
     setEmployee(result.data[0]);
   };
 
@@ -75,7 +78,6 @@ const Profile = () => {
             <div className="card mb-4">
               <div className="card-body text-center">
                 <img
-                  // src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
                   src={logo}
                   alt="avatar"
                   className="rounded-circle img-fluid"

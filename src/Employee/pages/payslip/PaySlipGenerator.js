@@ -24,6 +24,7 @@ import { styled } from "@mui/system";
 import { MdOutlineFileDownload } from "react-icons/md";
 
 const PaySlipGenerator = () => {
+  const [employee, setEmployee] = useState([]);
   const token = localStorage.getItem("AuthToken");
   const decoded = jwtDecode(String(token));
   const usernameRec = decoded.preferred_username;
@@ -37,10 +38,17 @@ const PaySlipGenerator = () => {
     );
     setPayroll(response.data);
   };
+  const fetchEmployee = async () => {
+    const result = await axios.get(
+      "http://localhost:8082/employee/get/employee"
+    );
+    setEmployee(result);
+  };
 
   console.log("poli", payroll);
   useEffect(() => {
     loadPayroll();
+    fetchEmployee();
   }, []);
 
   const [search, setSearch] = useState("");

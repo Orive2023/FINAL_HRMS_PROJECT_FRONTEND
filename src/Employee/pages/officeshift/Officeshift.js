@@ -344,7 +344,7 @@ const Officeshift = () => {
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                       style={{
-                        width: "20rem",
+                        width: "18rem",
                         borderRadius: "5px",
                         height: "40px",
                         padding: "10px",
@@ -430,7 +430,7 @@ const Officeshift = () => {
                       <th>Created Date</th>
                       <th>Office Clock In</th>
                       <th>Office Clock Out</th>
-                      <th colSpan={3}>Action</th>
+                      
                     </tr>
                   </thead>
 
@@ -470,13 +470,7 @@ const Officeshift = () => {
                               <td>{award.officeClockOut}</td>
                               
 
-                              <td className="mx-2">
-                                {/* <Link
-                                  to={`/employee/officeshift-profile/${award.officeShiftsId}`}
-                                >
-                                  <FaEye className="action-eye" />
-                                </Link> */}
-                              </td>
+                             
                             </tr>
                           ))}
                   </tbody>
