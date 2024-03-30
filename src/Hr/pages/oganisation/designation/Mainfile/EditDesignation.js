@@ -27,7 +27,7 @@ const EditDesignation = () => {
 
   const loadDesignation = async () => {
     const result = await axios.get(
-      `http://localhost:8081/designation/get/${id}`
+      `http://localhost:8080/designation/get/${id}`
     );
     setDesignation(result.data);
   };
@@ -49,7 +49,7 @@ const EditDesignation = () => {
  
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8081/designation/update/${id}`, designation);
+    await axios.put(`http://localhost:8080/designation/update/${id}`, designation);
     navigate("/hr/organisation/designation");
   };
 

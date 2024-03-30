@@ -17,14 +17,14 @@ const Attendance = () => {
   const [menu, setMenu] = useState(false);
 
   const [attendanceGet, setAttendanceGet] = useState([]);
-  const token = localStorage.getItem("AuthToken");
-  const decoded = jwtDecode(String(token));
-  const usernameRec = decoded.preferred_username;
-  const username = usernameRec.toUpperCase();
+const token = localStorage.getItem("AuthToken");
+const decoded = token?jwtDecode(String(token)):"";
+const usernameRec = decoded===""?"":decoded.preferred_username;
+const username = usernameRec?usernameRec.toUpperCase():"";
   const getAttendance = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:8084/attendance/get/username/${username}`,
+        `http://localhost:8080/attendance/get/username/${username}`,
         {
           validateStatus: () => {
             return true;

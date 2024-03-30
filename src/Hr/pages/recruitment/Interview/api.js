@@ -3,7 +3,7 @@ import axios from 'axios';
 export const saveInterview = async (formData) => {
     try{
         await axios.post(
-            "http://localhost:8089/interviews/scheduleInterview",
+            "http://localhost:8080/interviews/scheduleInterview",
             formData
           );
     } catch(error) {
@@ -13,7 +13,7 @@ export const saveInterview = async (formData) => {
 
 export const deleteInterview = async (id) => {
     try{
-        await axios.delete(`http://localhost:8089/interview/delete/${id}`)
+        await axios.delete(`http://localhost:8080/interview/delete/${id}`)
     } catch(error) {
         console.error("Error deleting interview",error)
     }
@@ -22,7 +22,7 @@ export const deleteInterview = async (id) => {
 export const loadInterview = async () => {
     try {
         const result = await axios.get(
-            "http://localhost:8089/interviews/all",
+            "http://localhost:8080/interviews/all",
             {
               validateStatus: () => {
                 return true;
@@ -37,7 +37,7 @@ export const loadInterview = async () => {
 export const fetchCandidate = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8089/candidates/getAllCandidate`,
+        `http://localhost:8080/candidates/getAllCandidate`,
         );
       return response.data; // Log the response data
     } catch (error) {
@@ -48,7 +48,7 @@ export const fetchCandidate = async () => {
   export const fetchUser = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8089/users/getAll",
+        "http://localhost:8080/users/getAll",
         );
       return response.data; // Log the response data
     } catch (error) {
@@ -59,7 +59,7 @@ export const fetchCandidate = async () => {
   export const fetchTalent = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8089/talents/getAll",
+        "http://localhost:8080/talents/getAll",
         );
       return response.data; // Log the response data
     } catch (error) {

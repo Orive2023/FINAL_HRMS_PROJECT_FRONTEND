@@ -36,7 +36,7 @@ const Promotion = () => {
 
 
     const loadPromotion = async () => {
-        const response = await axios.get(`http://localhost:8082/promotions/get/promotions`);
+        const response = await axios.get(`http://localhost:8080/promotions/get/promotions`);
         setPromotion(response.data);
       };
     
@@ -283,7 +283,7 @@ const Promotion = () => {
 
   const loadpromotion = async () => {
     const result = await axios.get(
-      `http://localhost:8082/promotions/findpromotions/${username}`
+      `http://localhost:8080/promotions/findpromotions/${username}`
     );
     setPromotion(result.data);
   };

@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const saveCompany = async (formData) => {
   try {
-    await axios.post(`http://localhost:8081/company/create/company`, formData, {
+    await axios.post(`http://localhost:8080/company/create/company`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -15,7 +15,7 @@ export const saveCompany = async (formData) => {
 export const deleteCompany = async (id) => {
   try {
     console.log(id)
-    await axios.delete(`http://localhost:8081/company/delete/${id}`);
+    await axios.delete(`http://localhost:8080/company/delete/${id}`);
   } catch (error) {
     console.error("Error deleting company", error);
   }
@@ -23,7 +23,7 @@ export const deleteCompany = async (id) => {
 
 export const loadCompanyById = async (id) => {
   try {
-    const result = await axios.get(`http://localhost:8081/company/get/${id}`, {
+    const result = await axios.get(`http://localhost:8080/company/get/${id}`, {
       validateStatus: () => {
         return true;
       },
@@ -37,7 +37,7 @@ export const loadCompanyById = async (id) => {
 export const loadCompany = async () => {
   try {
     const result = await axios.get(
-      `http://localhost:8081/company/get/company`,
+      `http://localhost:8080/company/get/company`,
       {
         validateStatus: () => {
           return true;
@@ -54,7 +54,7 @@ export const loadCompany = async () => {
 export const updateCompany = async (formData,id) => {
     try {
        const result =  await axios.put(
-            `http://localhost:8081/company/update/${id}`,formData,
+            `http://localhost:8080/company/update/${id}`,formData,
           );
           console.log(formData,id)
           return result.data

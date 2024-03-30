@@ -1,11 +1,12 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Dashboard from "../../components/Dashboard";
 import Projects from "./Projects";
 import ProjectLand from "./ProjectLand";
+import Login from '../../../Login'
 
 const routesData = [
-  { path: "/employee/project", element: <ProjectLand /> },
+  { path: "/employee/project", element:localStorage.getItem("Role")==="USER"?<ProjectLand />:<Navigate to='/'/> },
   // { path: "/employee/project/profile/:id", element: <Projects /> },
 ];
 

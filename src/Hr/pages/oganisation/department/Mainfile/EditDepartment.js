@@ -31,7 +31,7 @@ const EditDepartment = () => {
 
   const loadDepartment = async () => {
     const result = await axios.get(
-      `http://localhost:8081/department/get/${id}`
+      `http://localhost:8080/department/get/${id}`
     );
     setDepartment(result.data);
   };
@@ -45,7 +45,7 @@ const EditDepartment = () => {
   const updateDepartment = async (e) => {
     e.preventDefault();
     await axios.put(
-      `http://localhost:8081/department/update/${id}`,
+      `http://localhost:8080/department/update/${id}`,
       department
     );
     navigate("/hr/organisation/department");
@@ -62,7 +62,7 @@ const EditDepartment = () => {
  
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8081/department/update/${id}`, department);
+    await axios.put(`http://localhost:8080/department/update/${id}`, department);
     navigate("/hr/organisation/department");
   };
   const [menu, setMenu] = useState(false);

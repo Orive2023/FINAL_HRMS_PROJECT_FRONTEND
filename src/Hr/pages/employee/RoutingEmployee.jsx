@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import AwardsView from "./awards/Mainfile/AwardView";
 import EditAward from "./awards/Mainfile/EditAward";
 import AwardPofile from "./awards/Mainfile/AwardPofile";
@@ -31,39 +31,40 @@ import Certificate from './Letter/certificate format/CertificateForm';
 import ExperienceLetter from './Letter/experience-letter/ShowExLetter';
 import JoiningLetterExp from './Letter/Joining letter exp/JoiningExperienceLetter';
 import JoiningLetterIntern from './Letter/joining-letter intr/ShowJoiningLetter';
+import Login from '../../../Login'
 
 const routesData = [
-  { path: "/hr/employee/awards", element: <AwardsView /> },
-  { path: "/employee/edit-awards/:id", element: <EditAward /> },
-  { path: "/employee/awards-profile/:id", element: <AwardPofile /> },
-  { path: "/hr/employee/complaints", element: <ComplaintView /> },
-  { path: "/employee/edit-complaints/:id", element: <EditComplaint /> },
-  { path: "/hr/employee/employee-exit", element: <EmployeeExitView /> },
-  { path: "/employee/edit-employee-exit/:id", element: <EditEmployeeExit /> },
-  { path: "/employee/employee-exit-profile/:id", element: <EmployeeExitPofile /> },
-  { path: "/hr/employee/employee", element: <EmployeeView /> },
-  { path: "/employee/edit-employee/:id", element: <Editemployee /> },
-  { path: "/employee/employee-profile/:id", element: <EmployeeProfile /> },
-  { path: "/hr/employee/promotions", element: <PromotionView /> },
-  { path: "/employee/edit-promotions/:id", element: <EditPromotion /> },
-  { path: "/hr/employee/resignation", element: <ResignationView /> },
-  { path: "/employee/edit-resignation/:id", element: <EditResignation /> },
-  { path: "/employee/resignation-profile/:id", element: <ResignationPofile/> },
-  { path: "/hr/employee/termination", element: <TerminationView /> },
-  { path: "/employee/edit-termination/:id", element: <EditTermination /> },
-  { path: "/employee/termination-profile/:id", element: <TerminationProfile /> },
-  { path: "/hr/employee/transfer", element: <TransferView /> },
-  { path: "/employee/edit-transfer/:id", element: <EditTransfer /> },
-  { path: "/employee/transfer-profile/:id", element: <TransferProfile /> },
-  { path: "/hr/employee/travel", element: <TravelView /> },
-  { path: "/employee/edit-travel/:id", element: <EditTravel /> },
-  { path: "/hr/employee/warning", element: <WarningView /> },
-  { path: "/employee/edit-warning/:id", element: <EditWarning /> },
-  { path: "/employee/warning-pofile/:id", element: <WarningPofile /> },
-  { path: "/hr/employee/certificate", element: <Certificate /> },
-  { path: "/hr/employee/experience", element: <ExperienceLetter /> },
-  { path: "/hr/employee/joining", element: <JoiningLetterExp /> },
-  { path: "/hr/employee/intern", element: <JoiningLetterIntern /> },
+  { path: "/hr/employee/awards", element: localStorage.getItem("Role")==="ADMIN"?<AwardsView />:<Navigate to='/'/> },
+  { path: "/employee/edit-awards/:id", element: localStorage.getItem("Role")==="ADMIN"?<EditAward />:<Navigate to='/'/> },
+  { path: "/employee/awards-profile/:id", element: localStorage.getItem("Role")==="ADMIN"?<AwardPofile />:<Navigate to='/'/> },
+  { path: "/hr/employee/complaints", element: localStorage.getItem("Role")==="ADMIN"?<ComplaintView />:<Navigate to='/'/> },
+  { path: "/employee/edit-complaints/:id", element: localStorage.getItem("Role")==="ADMIN"?<EditComplaint />:<Navigate to='/'/> },
+  { path: "/hr/employee/employee-exit", element: localStorage.getItem("Role")==="ADMIN"?<EmployeeExitView />:<Navigate to='/'/> },
+  { path: "/employee/edit-employee-exit/:id", element: localStorage.getItem("Role")==="ADMIN"?<EditEmployeeExit />:<Navigate to='/'/> },
+  { path: "/employee/employee-exit-profile/:id", element: localStorage.getItem("Role")==="ADMIN"?<EmployeeExitPofile />:<Navigate to='/'/> },
+  { path: "/hr/employee/employee", element: localStorage.getItem("Role")==="ADMIN"?<EmployeeView />:<Navigate to='/'/> },
+  { path: "/employee/edit-employee/:id", element: localStorage.getItem("Role")==="ADMIN"?<Editemployee />:<Navigate to='/'/> },
+  { path: "/employee/employee-profile/:id", element: localStorage.getItem("Role")==="ADMIN"?<EmployeeProfile />:<Navigate to='/'/> },
+  { path: "/hr/employee/promotions", element: localStorage.getItem("Role")==="ADMIN"?<PromotionView />:<Navigate to='/'/> },
+  { path: "/employee/edit-promotions/:id", element: localStorage.getItem("Role")==="ADMIN"?<EditPromotion />:<Navigate to='/'/> },
+  { path: "/hr/employee/resignation", element: localStorage.getItem("Role")==="ADMIN"?<ResignationView />:<Navigate to='/'/> },
+  { path: "/employee/edit-resignation/:id", element: localStorage.getItem("Role")==="ADMIN"?<EditResignation />:<Navigate to='/'/> },
+  { path: "/employee/resignation-profile/:id", element: localStorage.getItem("Role")==="ADMIN"?<ResignationPofile/>:<Navigate to='/'/> },
+  { path: "/hr/employee/termination", element: localStorage.getItem("Role")==="ADMIN"?<TerminationView />:<Navigate to='/'/> },
+  { path: "/employee/edit-termination/:id", element: localStorage.getItem("Role")==="ADMIN"?<EditTermination />:<Navigate to='/'/> },
+  { path: "/employee/termination-profile/:id", element: localStorage.getItem("Role")==="ADMIN"?<TerminationProfile />:<Navigate to='/'/> },
+  { path: "/hr/employee/transfer", element: localStorage.getItem("Role")==="ADMIN"?<TransferView />:<Navigate to='/'/> },
+  { path: "/employee/edit-transfer/:id", element: localStorage.getItem("Role")==="ADMIN"?<EditTransfer />:<Navigate to='/'/> },
+  { path: "/employee/transfer-profile/:id", element: localStorage.getItem("Role")==="ADMIN"?<TransferProfile />:<Navigate to='/'/> },
+  { path: "/hr/employee/travel", element: localStorage.getItem("Role")==="ADMIN"?<TravelView />:<Navigate to='/'/> },
+  { path: "/employee/edit-travel/:id", element: localStorage.getItem("Role")==="ADMIN"?<EditTravel />:<Navigate to='/'/> },
+  { path: "/hr/employee/warning", element: localStorage.getItem("Role")==="ADMIN"?<WarningView />:<Navigate to='/'/> },
+  { path: "/employee/edit-warning/:id", element: localStorage.getItem("Role")==="ADMIN"?<EditWarning />:<Navigate to='/'/> },
+  { path: "/employee/warning-pofile/:id", element: localStorage.getItem("Role")==="ADMIN"?<WarningPofile />:<Navigate to='/'/> },
+  { path: "/hr/employee/certificate", element: localStorage.getItem("Role")==="ADMIN"?<Certificate />:<Navigate to='/'/> },
+  { path: "/hr/employee/experience", element: localStorage.getItem("Role")==="ADMIN"?<ExperienceLetter />:<Navigate to='/'/> },
+  { path: "/hr/employee/joining", element: localStorage.getItem("Role")==="ADMIN"?<JoiningLetterExp />:<Navigate to='/'/> },
+  { path: "/hr/employee/intern", element: localStorage.getItem("Role")==="ADMIN"?<JoiningLetterIntern />:<Navigate to='/'/> },
 ];
 
 const RoutingOrganisation = () => {

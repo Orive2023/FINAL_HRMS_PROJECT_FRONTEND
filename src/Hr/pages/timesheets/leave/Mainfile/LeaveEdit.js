@@ -24,7 +24,7 @@ const EditLeave = () => {
   }, []);
 
   const loadLeave = async () => {
-    const result = await axios.get(`http://localhost:8084/leaves/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/leaves/get/${id}`);
     setLeave(result.data);
   };
 
@@ -45,7 +45,7 @@ const EditLeave = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8084/leaves/update/${id}`, leave);
+    await axios.put(`http://localhost:8080/leaves/update/${id}`, leave);
     navigate("/hr/timesheets/leaves");
   };
 

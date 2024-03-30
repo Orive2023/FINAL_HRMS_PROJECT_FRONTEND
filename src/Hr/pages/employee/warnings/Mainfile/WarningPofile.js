@@ -27,7 +27,7 @@ const WarningPofile = () => {
 	}, []);
 
 	const loadWarning = async () => {
-		const result = await axios.get(`http://localhost:8082/warnings/get/${id}`
+		const result = await axios.get(`http://localhost:8080/warnings/get/${id}`
 		);
 		setwarning(result.data);
 	};

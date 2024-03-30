@@ -199,7 +199,7 @@ const ProjectLand = () => {
 
   const loadProject = async () => {
     try {
-      const result = await axios.get(`http://localhost:8086/projects/employee/details/${username}`, {
+      const result = await axios.get(`http://localhost:8080/projects/employee/details/${username}`, {
         validateStatus: () => {
           return true;
         },

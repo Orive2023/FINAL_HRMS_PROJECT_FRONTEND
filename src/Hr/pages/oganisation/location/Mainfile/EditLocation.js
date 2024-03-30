@@ -35,7 +35,7 @@ const EditLocation = () => {
 
   const loadLocation = async () => {
     const result = await axios.get(
-      `http://localhost:8081/location/get/${id}`
+      `http://localhost:8080/location/get/${id}`
     );
     setLocation(result.data);
   };
@@ -58,7 +58,7 @@ const EditLocation = () => {
  
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8081/location/update/${id}`, location);
+    await axios.put(`http://localhost:8080/location/update/${id}`, location);
     navigate("/hr/organisation/location");
   };
 

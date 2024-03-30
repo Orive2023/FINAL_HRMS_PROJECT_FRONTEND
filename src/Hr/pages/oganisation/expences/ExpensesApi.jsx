@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8081";
+const url = "http://localhost:8080";
 
 export const saveExpenses = async (formData) => {
   try {
@@ -32,7 +32,7 @@ export const loadExpenses = async () => {
 
 export const deleteExpenses = async (id) => {
   try {
-    await axios.delete(`http://localhost:8081/expence/delete/${id}`);
+    await axios.delete(`http://localhost:8080/expence/delete/${id}`);
   } catch (error) {
     console.error("Error deleting expence", error);
   }
@@ -40,7 +40,7 @@ export const deleteExpenses = async (id) => {
 // export const updateExpenses = async (formData,id) => {
 //   try {
 //      const result =  await axios.put(
-//           `http://localhost:8081/expence/update/${id}`,formData,
+//           `http://localhost:8080/expence/update/${id}`,formData,
 //         );
 //         console.log(formData,id)
 //         return result.data

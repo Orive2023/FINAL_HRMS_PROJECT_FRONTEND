@@ -36,7 +36,7 @@ const PurchaseOrderProfile = () => {
   }, []);
 
   const loadHoliday = async () => {
-    const result = await axios.get(`http://localhost:8094/purchaseOrder/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/purchaseOrder/get/${id}`);
     setHoliday(result.data);
   };
   const [menu, setMenu] = useState(false);

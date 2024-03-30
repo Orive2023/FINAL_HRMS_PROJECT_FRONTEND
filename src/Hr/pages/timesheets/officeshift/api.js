@@ -3,7 +3,7 @@ import axios from "axios";
 export const saveOfficeShift = async (formData) => {
   try {
     await axios.post(
-      "http://localhost:8084/officeshifts/create/officeShifts",
+      "http://localhost:8080/officeshifts/create/officeShifts",
       formData
     );
   } catch (error) {
@@ -13,7 +13,7 @@ export const saveOfficeShift = async (formData) => {
 
 export const deleteOfficeShift = async (id) => {
   try {
-    await axios.delete(`http://localhost:8084/officeshifts/delete/${id}`);
+    await axios.delete(`http://localhost:8080/officeshifts/delete/${id}`);
   } catch (error) {
     console.error("Error deleting Office Shift", error);
   }
@@ -22,7 +22,7 @@ export const deleteOfficeShift = async (id) => {
 export const loadOfficeShift = async () => {
   try {
     const result = await axios.get(
-      "http://localhost:8084/officeshifts/get/officeShifts",
+      "http://localhost:8080/officeshifts/get/officeShifts",
       {
         validateStatus: () => {
           return true;

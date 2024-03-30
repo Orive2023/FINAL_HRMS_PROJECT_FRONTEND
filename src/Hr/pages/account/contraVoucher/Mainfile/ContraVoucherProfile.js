@@ -30,7 +30,7 @@ const ContraVoucherProfile = () => {
 
   const loadcontraVoucher = async () => {
     const result = await axios.get(
-      `http://localhost:8093/contravoucher/get/${id}`
+      `http://localhost:8080/contravoucher/get/${id}`
     );
     setContraVoucher(result.data);
   };

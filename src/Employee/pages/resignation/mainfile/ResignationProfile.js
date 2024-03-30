@@ -26,7 +26,7 @@ const ResignationProfile = () => {
 
 	const loadresignation = async () => {
 		const result = await axios.get(
-			`http://localhost:8082/resignations/get/${id}`
+			`http://localhost:8080/resignations/get/${id}`
 		);
 		setresignation(result.data);
 	};

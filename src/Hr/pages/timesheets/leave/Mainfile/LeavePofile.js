@@ -30,7 +30,7 @@ const LeavePofile = () => {
 
 	const loadOfficeShift = async () => {
 		const result = await axios.get(
-			`http://localhost:8084/leaves/get/${id}`
+			`http://localhost:8080/leaves/get/${id}`
 		);
 		setOfficeShift(result.data);
 	};

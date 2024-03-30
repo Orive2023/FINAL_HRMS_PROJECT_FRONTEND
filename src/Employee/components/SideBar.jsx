@@ -28,40 +28,16 @@ import ResignationFile from './sidebarComponent/ResignationFile '
 import ComplaintFile from './sidebarComponent/ComplaintFile'
 import LeaveFile from './sidebarComponent/LeaveFile'
 import WorksheetsFile from "./sidebarComponent/WorksheetsFile";
-
-
-
-
-
 import { useNavigate } from "react-router-dom/dist";
-import useAuth from "../../Hr/hooks/useAuth";
 
 const SideBar = ({ menu }) => {
   const nav = useNavigate();
-  const {logout} = useAuth();
   const [empData, setEmpData] = useState([]);
-  // const loadEmployee = async () => {
-  //   try {
-  //     const result = await api.loadEmployee();
-  //     setEmpData(result.data);
-  //   } catch (error) {
-  //     console.error("Error loading employee data:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   loadEmployee();
-  // }, []);
-  
-  const handleLogout = () => {
-    nav('/');
-    logout()
-  };
 
   console.log(EmployeeDetails().employeeData[0]);
   return (
     <>
-      <div className="sidebar-btn-container">
+      <div className="sidebar-btn-container" style={{zIndex:'11'}}>
         <div className="sidebar-container">
           <DashboardFile />
           <AttendanceFile />
@@ -95,7 +71,7 @@ const SideBar = ({ menu }) => {
 
           {/* <Trainingfile /> */}
         </div>
-        <button id="logout-hrms-btn" onClick={handleLogout} >
+        <button id="logout-hrms-btn" onClick={()=>{localStorage.removeItem("AuthToken"); localStorage.removeItem("Role"); nav('/'); window.location.reload();}}>
         Logout<i class="bx bx-log-out"></i>
       </button>
       </div>

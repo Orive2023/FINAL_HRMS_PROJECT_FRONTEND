@@ -39,7 +39,7 @@ const ProjectProfile = () => {
   }, []);
 
   const loadHoliday = async () => {
-    const result = await axios.get(`http://localhost:8086/projects/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/projects/get/${id}`);
     setHoliday(result.data);
   };
   const [menu, setMenu] = useState(false);

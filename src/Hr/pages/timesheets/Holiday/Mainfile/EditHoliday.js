@@ -27,7 +27,7 @@ const EditHoliday = () => {
   }, []);
 
   const loadHoliday = async () => {
-    const result = await axios.get(`http://localhost:8084/holidays/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/holidays/get/${id}`);
     setHoliday(result.data);
   };
 
@@ -48,7 +48,7 @@ const EditHoliday = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8084/holidays/update/${id}`, holiday);
+    await axios.put(`http://localhost:8080/holidays/update/${id}`, holiday);
     navigate("/hr/timesheets/holiday");
   };
 

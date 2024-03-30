@@ -28,7 +28,7 @@ const EmployeeExitPofile = () => {
 	const [menu, setMenu] = useState(false);
 	const loademployeeExit = async () => {
 		const result = await axios.get(
-			`http://localhost:8082/employee_exit/get/${id}`
+			`http://localhost:8080/employee_exit/get/${id}`
 		);
 		setemployeeExit(result.data);
 	};

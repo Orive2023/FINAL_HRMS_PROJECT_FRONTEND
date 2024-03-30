@@ -23,7 +23,7 @@ const AdvanceProfile = () => {
   }, []);
 
   const loadHoliday = async () => {
-    const result = await axios.get(`http://localhost:8085/advancesalery/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/advancesalery/get/${id}`);
     setHoliday(result.data);
   };
   const [menu, setMenu] = useState(false);

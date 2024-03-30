@@ -22,7 +22,7 @@ const EditTicket = () => {
   useEffect(() => {
     loadTicket();
   }, []);
-  const url = "localhost:8088";
+  const url = "localhost:8080";
   const ip = "13.126.190.50:8088";
   const loadTicket = async () => {
     const result = await axios.get(`http://${url}/tickets/get/${id}`);

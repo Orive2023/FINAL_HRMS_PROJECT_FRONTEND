@@ -255,7 +255,7 @@ const Landingfile = () => {
           </div>
         </div>
         <div className="right">
-         <button id="orive-demo-login-btn" onClick={() => navigation("/login")}>LogIn</button>
+         <button id="orive-demo-login-btn" onClick={() => navigation("/")}>LogIn</button>
         </div>
       </div>
     </div>

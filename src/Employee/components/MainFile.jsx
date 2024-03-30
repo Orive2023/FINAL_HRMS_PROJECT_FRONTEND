@@ -18,9 +18,9 @@ import { jwtDecode } from "jwt-decode";
 // import useAuth from "../hooks/useAuth"
 const MainFile = ({name}) => {
   const token = localStorage.getItem("AuthToken");
-  const decoded = jwtDecode(String(token));
-  const usernameRec = decoded.preferred_username;
-  const userName = usernameRec.toUpperCase();
+  const decoded = token?jwtDecode(String(token)):"";
+  const usernameRec = decoded===""?"":decoded.preferred_username;
+  const username = usernameRec?usernameRec.toUpperCase():"";
   const navigation = useNavigate();
   console.log(name);
   const revenueData = {
@@ -242,7 +242,7 @@ const MainFile = ({name}) => {
                   {/* {empData.map((item, index) => { */}
                     {/* return ( */}
                       <div className="mb-4">
-                      <h4>Welcome {localStorage.getItem("UserName")}!</h4>
+                      <h4>Welcome {localStorage.getItem("FName")}{" "}{localStorage.getItem("LName")}!</h4>
 
                         <p>Your performance is looking good</p>
                       </div>

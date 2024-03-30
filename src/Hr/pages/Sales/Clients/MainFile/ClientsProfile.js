@@ -33,7 +33,7 @@ const ClientsProfile = () => {
   }, []);
 
   const loadClients = async () => {
-    const result = await axios.get(`http://localhost:8096/client/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/client/get/${id}`);
     setClients(result.data);
   };
   const [menu, setMenu] = useState(false);

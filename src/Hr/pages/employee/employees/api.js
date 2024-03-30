@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "localhost:8082";
+const url = "localhost:8080";
 const ip = "13.126.190.50:8082";
 
 export const saveEmployees = async (formData) => {
@@ -38,7 +38,7 @@ export const loademployees = async () => {
 export const fetchDesignation = async () => {
   try {
       const response = await axios.get(
-          "http://localhost:8081/designation/get/designation"
+          "http://localhost:8080/designation/get/designation"
         );
         return response.data
   } catch (error){

@@ -8,10 +8,10 @@ import logo from "../../../Hr/asset/Orive Logo 2.png";
 import { jwtDecode } from "jwt-decode";
 
 const Profile = () => {
-  const token = localStorage.getItem("AuthToken");
-  const decoded = jwtDecode(String(token));
-  const usernameRec = decoded.preferred_username;
-  const username = usernameRec.toUpperCase();
+const token = localStorage.getItem("AuthToken");
+const decoded = token?jwtDecode(String(token)):"";
+const usernameRec = decoded===""?"":decoded.preferred_username;
+const username = usernameRec?usernameRec.toUpperCase():"";
   const [employee, setEmployee] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Profile = () => {
   const ip = "13.126.190.50:8082";
 
   const loadEmployee = async () => {
-    const result = await axios.get(`http://localhost:8082/employee/byId/${username}`);
+    const result = await axios.get(`http://localhost:8080/employee/byId/${username}`);
     console.log(result.data)
     setEmployee(result.data[0]);
   };

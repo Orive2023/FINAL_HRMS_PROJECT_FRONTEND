@@ -24,7 +24,7 @@ const EditFinancialYear = () => {
   }, []);
 
   const loadFinancialYear = async () => {
-    const result = await axios.get(`http://localhost:8093/financialyear/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/financialyear/get/${id}`);
     setFinancial(result.data);
   };
 
@@ -48,7 +48,7 @@ const EditFinancialYear = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8093/financialyear/update/${id}`, financial);
+    await axios.put(`http://localhost:8080/financialyear/update/${id}`, financial);
     navigate("/hr/account/financial-year");
   };
 

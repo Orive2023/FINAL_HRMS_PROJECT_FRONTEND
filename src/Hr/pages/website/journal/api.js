@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const deleteJournal = async (id) => {
     try{
-        await axios.delete(`http://localhost:8097/journalsdetails/delete/${id}`)
+        await axios.delete(`http://localhost:8080/journalsdetails/delete/${id}`)
     } catch(error) {
         console.error("Error deleting location",error)
     }
@@ -12,7 +12,7 @@ export const deleteJournal = async (id) => {
 export const loadJournal = async () => {
     try {
        const result =  await axios.get(
-            "http://localhost:8097/journalsdetails/get/journalsdetails",
+            "http://localhost:8080/journalsdetails/get/journalsdetails",
             {
               validateStatus: () => {
                 return true;

@@ -30,10 +30,10 @@ import { IoStar } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const Performance = () => {
-  const token = localStorage.getItem("AuthToken");
-  const decoded = jwtDecode(String(token));
-  const usernameRec = decoded.preferred_username;
-  const username = usernameRec.toUpperCase();
+const token = localStorage.getItem("AuthToken");
+const decoded = token?jwtDecode(String(token)):"";
+const usernameRec = decoded===""?"":decoded.preferred_username;
+const username = usernameRec?usernameRec.toUpperCase():"";
   console.log("decoded", username);
 
   const [open, setOpen] = useState(false);
@@ -53,7 +53,7 @@ const Performance = () => {
 
   const loadPerformance = async () => {
     const result = await axios.get(
-      `http://localhost:8083/performanceappraisal/byId/${username}`
+      `http://localhost:8080/performanceappraisal/byId/${username}`
     );
     setPerformanceData(result.data[0]);
   };
@@ -225,7 +225,7 @@ const Performance = () => {
   const loadAward = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:8082/awards/employee/get/${username}`,
+        `http://localhost:8080/awards/employee/get/${username}`,
         {
           validateStatus: () => {
             return true;

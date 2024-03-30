@@ -20,7 +20,7 @@ const EditUnit = () => {
   }, []);
 
   const loadUnit = async () => {
-    const result = await axios.get(`http://localhost:8094/unit/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/unit/get/${id}`);
     setUnit(result.data);
   };
 
@@ -33,7 +33,7 @@ const EditUnit = () => {
 
   const updateUnit = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8094/unit/update/${id}`, unit);
+    await axios.put(`http://localhost:8080/unit/update/${id}`, unit);
     navigate("/hr/procurement/unit");
   };
 

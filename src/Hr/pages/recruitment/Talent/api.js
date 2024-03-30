@@ -3,7 +3,7 @@ import axios from 'axios';
 export const saveTalent = async (formData) => {
     try{
         await axios.post(
-            "http://localhost:8089/talents/createTalent",
+            "http://localhost:8080/talents/createTalent",
             formData
           );
     } catch(error) {
@@ -13,7 +13,7 @@ export const saveTalent = async (formData) => {
 
 export const deleteTalent = async (id) => {
     try{
-        await axios.delete(`http://localhost:8089/talents/delete/${id}`)
+        await axios.delete(`http://localhost:8080/talents/delete/${id}`)
     } catch(error) {
         console.error("Error deleting Talent",error)
     }
@@ -22,7 +22,7 @@ export const deleteTalent = async (id) => {
 export const loadTalent = async () => {
     try {
        const result =  await axios.get(
-            "http://localhost:8089/talents/getAll",
+            "http://localhost:8080/talents/getAll",
             {
               validateStatus: () => {
                 return true;

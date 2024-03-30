@@ -29,7 +29,7 @@ const EditContraVoucher = () => {
 
   const loadContraVoucher = async () => {
     const result = await axios.get(
-      `http://localhost:8093/contravoucher/get/${id}`
+      `http://localhost:8080/contravoucher/get/${id}`
     );
     setContraVoucher(result.data);
   };
@@ -52,7 +52,7 @@ const EditContraVoucher = () => {
   const handleUpdate = async () => {
     hideUpdateConfirmation();
     await axios.put(
-      `http://localhost:8093/contravoucher/update/${id}`,
+      `http://localhost:8080/contravoucher/update/${id}`,
       contraVoucher
     );
     navigate("/hr/account/contra-voucher");

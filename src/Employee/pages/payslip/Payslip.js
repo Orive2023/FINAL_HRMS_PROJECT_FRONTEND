@@ -27,14 +27,14 @@ const Payslip = () => {
 
   const fetchEmployee = async () => {
     const result = await axios.get(
-      `http://localhost:8082/employee/get/employee`
+      `http://localhost:8080/employee/get/employee`
     );
     setEmployee(result.data);
   };
 
   const getPayslipDetails = async () => {
     const result = await axios.get(
-      `http://localhost:8085/payslipgenerate/get/${id}`
+      `http://localhost:8080/payslipgenerate/get/${id}`
     );
     setPayslip(result.data);
   };
@@ -219,11 +219,11 @@ const Payslip = () => {
               >
                 <div>
                   <MdEmail />
-                  subhamparidamain@gmail.com
+                  orivesolutions@gmail.com
                 </div>
                 <div>
                   <FaPhone />
-                  +91 9443875824
+                  +91 9777798142
                 </div>
                 <div>
                   <AiOutlineGlobal />

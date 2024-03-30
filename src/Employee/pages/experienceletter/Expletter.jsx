@@ -26,10 +26,10 @@ import axios from "axios";
 const ExpLetterTable = ({ setRecDelete }) => {
   const [menu, setMenu] = useState(false);
   const [search, setSearch] = useState("");
-  const token = localStorage.getItem("AuthToken");
-  const decoded = jwtDecode(String(token));
-  const usernameRec = decoded.preferred_username;
-  const username = usernameRec.toUpperCase();
+const token = localStorage.getItem("AuthToken");
+const decoded = token?jwtDecode(String(token)):"";
+const usernameRec = decoded===""?"":decoded.preferred_username;
+const username = usernameRec?usernameRec.toUpperCase():"";
   const [getTable, setGetTable] = useState([]);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState(null);
@@ -71,7 +71,7 @@ const ExpLetterTable = ({ setRecDelete }) => {
 
   const getData = async () => {
     const result = await axios.get(
-      `http://localhost:8082/experienceletter/findexperienceletter/${username}`
+      `http://localhost:8080/experienceletter/findexperienceletter/${username}`
     );
     setGetTable(result.data);
   };
@@ -233,7 +233,7 @@ const ExpLetterTable = ({ setRecDelete }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8082/experienceletter/delete/${id}`);
+      await axios.delete(`http://localhost:8080/experienceletter/delete/${id}`);
     } catch (error) {
       console.error("Error deleting data", error);
     }

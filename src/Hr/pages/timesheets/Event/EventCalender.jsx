@@ -114,7 +114,7 @@ const EventCalender = () => {
 
   const handleSubmit = async () => {
     try{
-      axios.create("https://localhost:8092/event/create/event",
+      axios.create("https://localhost:8080/event/create/event",
         events);
   } catch(error) {
       console.error("saveEvent",error)

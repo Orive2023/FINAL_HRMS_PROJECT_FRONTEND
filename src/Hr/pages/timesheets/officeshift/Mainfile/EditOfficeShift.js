@@ -24,7 +24,7 @@ const Editshift = () => {
 
   const loadshift = async () => {
     const result = await axios.get(
-      `http://localhost:8084/officeshifts/get/${id}`
+      `http://localhost:8080/officeshifts/get/${id}`
     );
     setShift(result.data);
   };
@@ -46,7 +46,7 @@ const Editshift = () => {
   };
   const updateshift = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8084/officeshifts/update/${id}`, shift);
+    await axios.put(`http://localhost:8080/officeshifts/update/${id}`, shift);
     navigate("/hr/timesheets/officeshift");
   };
   const [menu, setMenu] = useState(false);

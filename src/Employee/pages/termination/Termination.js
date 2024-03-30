@@ -36,7 +36,7 @@ const Termination = () => {
 
 
     const loadTermination = async () => {
-        const response = await axios.get(`http://localhost:8082/terminations/findterminations/${username}`);
+        const response = await axios.get(`http://localhost:8080/terminations/findterminations/${username}`);
         setTermination(response.data);
       };
     

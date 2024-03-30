@@ -31,7 +31,7 @@ const LocationPofile = () => {
   }, []);
 
   const loadLocation = async () => {
-    const result = await axios.get(`http://localhost:8081/location/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/location/get/${id}`);
     setLocation(result.data);
   };
 

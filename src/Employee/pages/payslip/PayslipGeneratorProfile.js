@@ -32,10 +32,10 @@ const DepartmentTable = ({
 
 
   
-  const token = localStorage.getItem("AuthToken");
-  const decoded = jwtDecode(String(token));
-  const usernameRec = decoded.preferred_username;
-  const username = usernameRec.toUpperCase();
+const token = localStorage.getItem("AuthToken");
+const decoded = token?jwtDecode(String(token)):"";
+const usernameRec = decoded===""?"":decoded.preferred_username;
+const username = usernameRec?usernameRec.toUpperCase():"";
   // const username = localStorage.getItem("UserName")
   const [employee, setEmployee] = useState([]);
   const [search, setSearch] = useState("");
@@ -85,13 +85,13 @@ const DepartmentTable = ({
   
 
   const loadPayslipGenerator = async () => {
-    const result = await axios.get(`http://localhost:8085/payslipgenerate/get/paySlipGenerate`)
+    const result = await axios.get(`http://localhost:8080/payslipgenerate/get/paySlipGenerate`)
     setSalary(result);
   };
 
   const fetchEmployee = async () => {
     const result = await axios.get(
-      "http://localhost:8082/employee/get/employee"
+      "http://localhost:8080/employee/get/employee"
     );
     setEmployee(result);
   };

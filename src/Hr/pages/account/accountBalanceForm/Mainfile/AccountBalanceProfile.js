@@ -37,7 +37,7 @@ const AccountBalanceProfile = () => {
 
   const loadAccountBalance = async () => {
     try {
-      const result = await axios.get(`http://localhost:8093/accountbalance/get/${id}`);
+      const result = await axios.get(`http://localhost:8080/accountbalance/get/${id}`);
       setAccountBalance(result.data);
     } catch (error) {
       console.error("Error fetching account balance data: ", error);

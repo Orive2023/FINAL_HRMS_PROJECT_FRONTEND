@@ -29,10 +29,10 @@ const LoanFile = ({ setFormVisible }) => {
   const [search, setSearch] = useState("");
 
 
-  const token = localStorage.getItem("AuthToken");
-  const decoded = jwtDecode(String(token));
-  const usernameRec = decoded.preferred_username;
-  const username = usernameRec.toUpperCase();
+const token = localStorage.getItem("AuthToken");
+const decoded = token?jwtDecode(String(token)):"";
+const usernameRec = decoded===""?"":decoded.preferred_username;
+const username = usernameRec?usernameRec.toUpperCase():"";
   // const username = localStorage.getItem("UserName")
   const [employee, setEmployee] = useState([]);
 
@@ -42,7 +42,7 @@ const LoanFile = ({ setFormVisible }) => {
   const ip = "13.126.190.50:8082";
   const loadLoan = async () => {
     try {
-      const result = await axios.get(`http://localhost:8091/grantloan/get/grantloan`, {
+      const result = await axios.get(`http://localhost:8080/grantloan/get/grantloan`, {
         validateStatus: () => {
           return true;
         },

@@ -28,7 +28,7 @@ const ExpensesProfile = () => {
   }, []);
 
   const loadExpenses = async () => {
-    const result = await axios.get(`http://localhost:8081/expence/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/expence/get/${id}`);
     setExpenses(result.data);
   };
 

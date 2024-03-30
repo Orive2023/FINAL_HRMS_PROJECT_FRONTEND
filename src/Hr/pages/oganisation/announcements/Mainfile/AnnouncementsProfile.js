@@ -29,7 +29,7 @@ const AnnouncementsProfile = () => {
 
   const loadAnnouncements = async () => {
     const result = await axios.get(
-      `http://localhost:8081/announcement/get/${id}`
+      `http://localhost:8080/announcement/get/${id}`
     );
     setAnnouncements(result.data);
   };

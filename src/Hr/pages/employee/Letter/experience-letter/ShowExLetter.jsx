@@ -57,7 +57,7 @@ const ShowLetter = () => {
   const handleSave = async () => {
     setShowInvoice(false);
     await axios.post(
-      "http://localhost:8082/experienceletter/create/experienceletter",
+      "http://localhost:8080/experienceletter/create/experienceletter",
       formData
     );
   };
@@ -66,14 +66,14 @@ const ShowLetter = () => {
 
   const getData = async () => {
     const result = await axios.get(
-      "http://localhost:8082/experienceletter/get/experienceletter"
+      "http://localhost:8080/experienceletter/get/experienceletter"
     );
     setGetTable(result.data);
   };
 
   const fetchEmployee = async () => {
     try {
-      const response = await axios.get("http://localhost:8082/employee/get/employee");
+      const response = await axios.get("http://localhost:8080/employee/get/employee");
       setEmployee(response.data); // Update the employee state with fetched data
       return response.data;
     } catch (error) {

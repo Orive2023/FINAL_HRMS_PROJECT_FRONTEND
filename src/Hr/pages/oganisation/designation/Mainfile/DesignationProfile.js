@@ -25,7 +25,7 @@ const DesignationProfile = () => {
 
   const loadDesignation = async () => {
     const result = await axios.get(
-      `http://localhost:8081/designation/get/${id}`
+      `http://localhost:8080/designation/get/${id}`
     );
     setDesignation(result.data);
   };

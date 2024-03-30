@@ -3,7 +3,7 @@ import axios from 'axios';
 export const saveAttendance = async (formData) => {
     try{
         await axios.post(
-            "http://localhost:8084/attendance/create",
+            "http://localhost:8080/attendance/create",
             formData
           );
     } catch(error) {
@@ -13,7 +13,7 @@ export const saveAttendance = async (formData) => {
 
 export const deleteAttendance = async (id) => {
     try{
-        await axios.delete(`http://localhost:8084/attendance/delete/${id}`)
+        await axios.delete(`http://localhost:8080/attendance/delete/${id}`)
     } catch(error) {
         console.error("Error deleting attendance",error)
     }
@@ -22,7 +22,7 @@ export const deleteAttendance = async (id) => {
 export const loadAttendance = async () => {
     try {
        const result =  await axios.get(
-            "http://localhost:8084/attendance/get/attendance",
+            "http://localhost:8080/attendance/get/attendance",
             {
               validateStatus: () => {
                 return true;
@@ -38,7 +38,7 @@ export const loadAttendance = async () => {
 export const fetchEmployee = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8082/employee/get/employee"
+            "http://localhost:8080/employee/get/employee"
           );
           return response.data
     } catch (error){
@@ -49,7 +49,7 @@ export const fetchEmployee = async () => {
 export const fetchShift = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8084/officeshifts/get/officeShifts",
+            "http://localhost:8080/officeshifts/get/officeShifts",
             );
           return response.data
     } catch (error){

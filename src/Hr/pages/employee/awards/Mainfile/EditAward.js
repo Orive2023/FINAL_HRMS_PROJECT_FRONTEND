@@ -31,7 +31,7 @@ const EditAward = () => {
 	useEffect(() => {
 		loadAward();
 	}, []);
-	const url = "localhost:8082";
+	const url = "localhost:8080";
 	const ip = "13.126.190.50:8082";
 	const loadAward = async () => {
 		const result = await axios.get(

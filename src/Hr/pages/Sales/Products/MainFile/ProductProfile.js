@@ -28,7 +28,7 @@ const ProductProfile = () => {
   }, []);
 
   const loadproduct = async () => {
-    const result = await axios.get(`http://localhost:8096/revenue/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/revenue/get/${id}`);
     setProducts(result.data);
   };
   const [menu, setMenu] = useState(false);

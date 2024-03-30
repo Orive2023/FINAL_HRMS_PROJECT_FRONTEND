@@ -21,7 +21,7 @@ const HolidayProfile = () => {
   }, []);
 
   const loadHoliday = async () => {
-    const result = await axios.get(`http://localhost:8084/holidays/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/holidays/get/${id}`);
     setHoliday(result.data);
   };
   const [menu, setMenu] = useState(false);

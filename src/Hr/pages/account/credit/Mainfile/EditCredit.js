@@ -27,7 +27,7 @@ const EditCredit = () => {
   }, []);
 
   const loadCredit = async () => {
-    const result = await axios.get(`http://localhost:8093/creditvoucher/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/creditvoucher/get/${id}`);
     setCredit(result.data);
   };
 
@@ -41,7 +41,7 @@ const EditCredit = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8093/creditvoucher/update/${id}`, credit);
+    await axios.put(`http://localhost:8080/creditvoucher/update/${id}`, credit);
     navigate("/hr/account/credit");
   };
 

@@ -1,0 +1,194 @@
+.header {
+    background-color: rgba(242, 101, 34, 1);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    color: white;
+    height: 70px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+  
+  .register {
+    background-image: url('./Hr/asset/images/back.png');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95vh;
+    padding: 0 20vh;
+    position: relative;
+    min-height: 100vh; /* Add this line */
+  }
+  .register-section{
+    display: flex;
+    transform: scale(0.85);
+  }
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px 0 0 10px;
+    padding: 50px 10px;
+    background-color: #ffffff;
+  }
+  .register-form-beside {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0 10px 10px 0;
+    padding: 50px 10px;
+    background-image: url('./Hr/asset/images/side-back.png');
+    background-repeat: no-repeat;
+  }
+  .register-form-reg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 0 10px 10px 0;
+    height: 650px;
+    width: 450px;
+    background-color: #ffffff;
+  }
+  .register-form-beside-reg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px 0 0 10px;
+    height: 650px;
+    width: 450px;
+    background-image: url('./Hr/asset/images/side-back.png');
+    background-repeat: no-repeat;
+  }
+  .register-form-content {
+    /* display: flex;
+      flex-direction: column; */
+    /* justify-content: center; */
+    align-items: center;
+    padding: 40px;
+    position: relative;
+    min-height: 300px;
+  }
+  .register-form-header {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .register-input-fields {
+    padding: auto;
+    width: 100%;
+  }
+  #eye-id {
+    position: relative;
+  }
+  .eye {
+    position: absolute;
+    top: 40%;
+    right: 20px;
+    cursor: pointer;
+    color: rgba(82, 82, 82, 1);
+  }
+  .data-buttons {
+    width: 100%;
+    margin-top: 15px;
+  }
+  #input-btn-submit {
+    width: 100%;
+    height: 50px;
+    border-radius: 4px;
+    font-weight: 500;
+    background: #f26522;
+    color: #fff;
+    border: none;
+  }
+  .register-captcha {
+    margin-top: 20px;
+  }
+  .register-footer {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  @media(max-width:830px){
+    .register-form-beside{
+      display: none;
+    }
+    .register-form{
+      border-radius: 10px;
+    }
+    .register-form-beside-reg{
+      display: none;
+    }
+    .register-form-reg{
+      border-radius: 10px;
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .header{
+      width: 100%; 
+    }
+    .register {
+      background: white;
+    }
+    .register-form{
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: 90vh; 
+      width: 100%;
+    }
+    .register-footer{
+      margin-bottom: 100px;
+    }
+    .register-input-fields{
+      width: 100%;
+    }
+  }
+  @media (max-width: 400px) {
+    .register-form{
+      height: 100vh;
+      margin-top: 50px;
+    }
+    .register-section{
+      transform: scale(0.8);
+    }
+  }
+  @media (max-width: 300px) {
+    .header{
+      width: 350px;
+    }
+    .register-form{
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-left: 25px;
+      height: 700px;
+      width: 100%;
+    }
+  }
+  @media (max-width: 850px) {
+    .header{
+      width: 100%;
+    }
+    .register{
+      background-size: 100% 100%;
+      background-position: center;
+      height: 100vh;
+      padding: 0 10vh;
+    }
+  }
+  @media (max-width: 1000px) {
+    .header{
+      width: 100% !important;
+    }
+    .register{
+      background-size: 100% 100%;
+      background-position: center;
+      height: 100vh;
+      padding:0 20px;
+  }
+  }

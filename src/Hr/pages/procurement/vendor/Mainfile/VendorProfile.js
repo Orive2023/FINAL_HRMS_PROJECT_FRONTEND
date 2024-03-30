@@ -26,7 +26,7 @@ const VendorProfile = () => {
   }, []);
 
   const loadHoliday = async () => {
-    const result = await axios.get(`http://localhost:8094/vendor/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/vendor/get/${id}`);
     setHoliday(result.data);
   };
   const [menu, setMenu] = useState(false);

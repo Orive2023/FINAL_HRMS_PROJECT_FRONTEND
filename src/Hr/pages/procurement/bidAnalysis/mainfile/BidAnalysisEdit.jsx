@@ -24,7 +24,7 @@ const BidAnalysisEdit = () => {
 
   const loadBidAnalysis = async () => {
     const result = await axios.get(
-      `http://13.126.190.50:5000/bidAnalysis/get/${id}`
+      `http://localhost:8080/bidAnalysis/get/${id}`
     );
     setBidAnalysis(result.data);
   };
@@ -39,7 +39,7 @@ const BidAnalysisEdit = () => {
   const updateBidAnalysis = async (e) => {
     e.preventDefault();
     await axios.put(
-      `http://13.126.190.50:5000/bidAnalysis/update/${id}`,
+      `http://localhost:8080/bidAnalysis/update/${id}`,
       bidanalysis
     );
     navigate("/hr/procurement/bidAnalysis");

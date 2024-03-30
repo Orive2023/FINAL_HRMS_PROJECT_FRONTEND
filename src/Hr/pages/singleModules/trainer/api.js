@@ -3,7 +3,7 @@ import axios from 'axios';
 export const saveTrainer = async (formData) => {
     try{
         await axios.post(
-            "http://localhost:8092/trainerslist/create/trainerslist",
+            "http://localhost:8080/trainerslist/create/trainerslist",
             formData
           );
     } catch(error) {
@@ -13,7 +13,7 @@ export const saveTrainer = async (formData) => {
 
 export const deleteTrainer = async (trainerId) => {
     try{
-        await axios.delete(`http://localhost:8092/trainerslist/delete/${trainerId}`)
+        await axios.delete(`http://localhost:8080/trainerslist/delete/${trainerId}`)
     } catch(error) {
         console.error("Error deleting trainer",error)
     }
@@ -22,7 +22,7 @@ export const deleteTrainer = async (trainerId) => {
 export const loadTrainer = async () => {
     try {
        const result =  await axios.get(
-        "http://localhost:8092/trainerslist/get/trainerslist",
+        "http://localhost:8080/trainerslist/get/trainerslist",
             {
               validateStatus: () => {
                 return true;

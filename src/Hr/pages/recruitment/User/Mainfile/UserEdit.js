@@ -34,7 +34,7 @@
   
 //     const loadUser = async () => {
 //       const result = await axios.get(
-//         `http://13.126.190.50:8089/user/get/${id}`
+//         `localhost:8080/user/get/${id}`
 //       );
 //       setUser(result.data);
 //     };
@@ -48,7 +48,7 @@
 //     const updateUser = async (e) => {
 //       e.preventDefault();
 //       await axios.put(
-//         `http://13.126.190.50:8089/user/update/${id}`,
+//         `http://localhost:8080/user/update/${id}`,
 //         user
 //       );
 //       navigate("/hr/recruitment/user");

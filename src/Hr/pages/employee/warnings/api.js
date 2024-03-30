@@ -3,7 +3,7 @@ import axios from 'axios';
 export const saveWarning = async (formData) => {
     try{
         await axios.post(
-            "http://localhost:8082/warnings/create/warnings",
+            "http://localhost:8080/warnings/create/warnings",
             formData
           );
     } catch(error) {
@@ -13,7 +13,7 @@ export const saveWarning = async (formData) => {
 
 export const deleteWarning = async (id) => {
     try{
-        await axios.delete(`http://localhost:8082/warnings/delete/${id}`)
+        await axios.delete(`http://localhost:8080/warnings/delete/${id}`)
     } catch(error) {
         console.error("Error deleting project",error)
     }
@@ -22,7 +22,7 @@ export const deleteWarning = async (id) => {
 export const loadWarning = async () => {
     try {
        const result =  await axios.get(
-            "http://localhost:8082/warnings/get/warnings",
+            "http://localhost:8080/warnings/get/warnings",
             {
               validateStatus: () => {
                 return true;
@@ -38,7 +38,7 @@ export const loadWarning = async () => {
 export const fetchEmployee = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8082/employee/get/employee"
+            "http://localhost:8080/employee/get/employee"
           );
           return response.data
     } catch (error){

@@ -85,14 +85,14 @@ const PurchaseOrderForm = ({
   const [vendor, setVendor] = useState([]);
 
   const fetchVendor = async () => {
-    const data = await axios.get("http://localhost:8094/vendor/get/vendor");
+    const data = await axios.get("http://localhost:8080/vendor/get/vendor");
     setVendor(data.data);
   };
 
   const [list, setList] = useState([]);
 
   const fetchList = async () => {
-    const data = await axios.get("http://localhost:8094/purchaseorderlist/all");
+    const data = await axios.get("http://localhost:8080/purchaseorderlist/all");
     setList(data.data);
   };
 
@@ -194,7 +194,7 @@ const PurchaseOrderForm = ({
   const loadPurchase = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:8094/purchaseorder/${purchaseOrder}`
+        `http://localhost:8080/purchaseorder/${purchaseOrder}`
       );
       setPurchaseData(result.data);
     } catch (error) {
@@ -232,7 +232,7 @@ const PurchaseOrderForm = ({
 
   const saveItems = async (id) => {
     await axios.post(
-      `http://localhost:8094/purchaseOrder/create/purchaseOrder`,
+      `http://localhost:8080/purchaseOrder/create/purchaseOrder`,
       items,
       {
         headers: {

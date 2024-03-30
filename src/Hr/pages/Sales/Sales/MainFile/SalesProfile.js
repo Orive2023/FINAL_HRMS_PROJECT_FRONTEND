@@ -35,7 +35,7 @@ const SalesProfile = () => {
     }, []);
   
     const loadSales = async () => {
-      const result = await axios.get(`http://localhost:8096/sale/get/${id}`);
+      const result = await axios.get(`http://localhost:8080/sale/get/${id}`);
       setSales(result.data);
     };
     const [menu, setMenu] = useState(false);

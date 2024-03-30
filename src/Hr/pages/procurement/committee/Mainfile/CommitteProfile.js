@@ -23,7 +23,7 @@ const CommitteeProfile = () => {
 
   const loadCommittee = async () => {
     const result = await axios.get(
-      `http://13.126.190.50:5000/committees/get/${id}`
+      `http://localhost:8080/committees/get/${id}`
     );
     setCommittee(result.data);
   };

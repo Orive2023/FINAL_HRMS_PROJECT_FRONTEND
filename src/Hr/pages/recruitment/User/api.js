@@ -3,7 +3,7 @@ import axios from 'axios';
 export const saveUser = async (formData) => {
     try{
         await axios.post(
-            "http://localhost:8089/users/createUser",
+            "http://localhost:8080/users/createUser",
             formData
           );
     } catch(error) {
@@ -13,7 +13,7 @@ export const saveUser = async (formData) => {
 
 export const deleteUser = async (id) => {
     try{
-        await axios.delete(`http://localhost:8089/users/delete/${id}`)
+        await axios.delete(`http://localhost:8080/users/delete/${id}`)
     } catch(error) {
         console.error("Error deleting User",error)
     }
@@ -22,7 +22,7 @@ export const deleteUser = async (id) => {
 export const loadUser = async () => {
     try {
        const result =  await axios.get(
-            "http://localhost:8089/users/getAll",
+            "http://localhost:8080/users/getAll",
             {
               validateStatus: () => {
                 return true;

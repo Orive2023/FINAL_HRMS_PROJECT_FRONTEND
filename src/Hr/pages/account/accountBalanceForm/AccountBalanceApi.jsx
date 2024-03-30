@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8093"
+const url = "http://localhost:8080"
 
 export const saveAccountBalance = async (formData) => {
     try{
@@ -53,7 +53,7 @@ export const loadAccBalanceById = async (id) => {
 export const fetchEmployee = async () => {
   try {
       const response = await axios.get(
-          "http://localhost:8082/employee/get/employee"
+          "http://localhost:8080/employee/get/employee"
         );
         return response.data
   } catch (error){
@@ -64,7 +64,7 @@ export const fetchEmployee = async () => {
 export const fetchDepartment = async () => {
   try {
       const response = await axios.get(
-          "http://localhost:8081/department/get/department"
+          "http://localhost:8080/department/get/department"
         );
         return response.data
   } catch (error){
@@ -84,7 +84,7 @@ export const deleteAccountBalance = async (id) => {
 export  const updateAccountBalance = async (formData,id) => {
   try {
     const result =  await axios.put(
-      `http://localhost:8093/accountbalance/update/${id}`,formData,
+      `http://localhost:8080/accountbalance/update/${id}`,formData,
        );
        console.log(formData,id)
        return result.data

@@ -211,7 +211,7 @@ const JobVacancyTable = ({ setFormVisible, setToggle, toggle }) => {
   }, []);
 
   const loadTalent = async () => {
-    const response = await axios.get("http://localhost:8089/talents/getAll");
+    const response = await axios.get("http://localhost:8080/talents/getAll");
     setTalent(response.data);
   };
 

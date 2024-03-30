@@ -23,10 +23,10 @@ import {
 import { styled } from "@mui/system";
 
 const Transfer = () => {
-  const token = localStorage.getItem("AuthToken");
-  const decoded = jwtDecode(String(token));
-  const usernameRec = decoded.preferred_username;
-  const username = usernameRec.toUpperCase();
+const token = localStorage.getItem("AuthToken");
+const decoded = token?jwtDecode(String(token)):"";
+const usernameRec = decoded===""?"":decoded.preferred_username;
+const username = usernameRec?usernameRec.toUpperCase():"";
 
   const [transfer, setTransfer] = useState([]);
 
@@ -36,7 +36,7 @@ const Transfer = () => {
 
   const loadTransfer = async () => {
     const response = await axios.get(
-      `http://localhost:8082/transfers/findtransfer/${username}`
+      `http://localhost:8080/transfers/findtransfer/${username}`
     );
     setTransfer(response.data);
   };

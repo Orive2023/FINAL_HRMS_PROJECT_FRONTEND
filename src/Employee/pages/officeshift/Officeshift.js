@@ -37,7 +37,7 @@ const Officeshift = () => {
 
 
     const loadAward = async () => {
-        const response = await axios.get("http://localhost:8084/officeshifts/get/officeShifts");
+        const response = await axios.get("http://localhost:8080/officeshifts/get/officeShifts");
         setAward(response.data);
       };
     
@@ -282,7 +282,7 @@ const Officeshift = () => {
 
   const loadaward = async () => {
     const result = await axios.get(
-      "http://localhost:8084/officeshifts/get/officeShifts"
+      "http://localhost:8080/officeshifts/get/officeShifts"
     );
     setAward(result.data);
   };

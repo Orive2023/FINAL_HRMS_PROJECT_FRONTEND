@@ -43,6 +43,7 @@
     "react-router-dom": "^6.18.0",
     "react-script": "^2.0.5",
     "react-scripts": "^5.0.1",
+    "react-spinners": "^0.13.8",
     "react-sweetalert2": "^0.6.0",
     "react-to-print": "^2.15.1",
     "react-toastify": "^9.1.3",

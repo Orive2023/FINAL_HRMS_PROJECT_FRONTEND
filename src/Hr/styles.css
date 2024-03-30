@@ -360,7 +360,7 @@ html {
   top: 0;
   left: 0;
   display: block;
-  z-index: 99;
+  z-index: 2000000;
   margin-top: 10.4vh;
   height: 90vh;
   overflow: scroll;

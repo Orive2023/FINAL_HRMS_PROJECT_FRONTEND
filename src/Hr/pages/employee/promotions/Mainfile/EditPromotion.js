@@ -23,7 +23,7 @@ const EditPromotion = () => {
   useEffect(() => {
     loadpromotion();
   }, []);
-  const url = "localhost:8082";
+  const url = "localhost:8080";
   const ip = "13.126.190.50:8082";
   const loadpromotion = async () => {
     const result = await axios.get(`http://${url}/promotions/get/${id}`);

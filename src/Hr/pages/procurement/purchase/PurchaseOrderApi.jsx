@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8094";
+const url = "http://localhost:8080";
 
 export const savePurchase = async (formData) => {
   try {
@@ -66,7 +66,7 @@ export const deletePurchaseList = async (id) => {
 
 export const fetchUnit = async () => {
   try {
-    const response = await axios.get("http://localhost:8094/units/get/units");
+    const response = await axios.get("http://localhost:8080/units/get/units");
     return response.data;
   } catch (error) {
     console.error("Error fetching unit data", error);

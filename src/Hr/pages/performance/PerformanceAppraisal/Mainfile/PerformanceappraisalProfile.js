@@ -50,7 +50,7 @@ const PerformanceappraisalProfile = () => {
   }, []);
 
   const loadPerformances = async () => {
-    const result = await axios.get(`http://localhost:8083/performanceappraisal/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/performanceappraisal/get/${id}`);
     setPerformances(result.data);
   };
   const [menu, setMenu] = useState(false);

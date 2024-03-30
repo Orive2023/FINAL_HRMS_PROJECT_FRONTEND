@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = "localhost:8092";
+const url = "localhost:8080";
 export const saveAddbank = async (formData) => {
     try{
         await axios.post(
@@ -25,7 +25,7 @@ const accessToken = localStorage.getItem("AuthToken")
 export const loadAddbank = async () => {
     try {
        const result =  await axios.get(
-          `http://localhost:8092/addbank/get/addbank`, {
+          `http://localhost:8080/addbank/get/addbank`, {
             headers:{
               "Authorization":`Bearer ${accessToken}`
             }

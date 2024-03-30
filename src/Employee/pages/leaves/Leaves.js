@@ -81,7 +81,7 @@ const Leaves = () => {
   const navigation = useNavigate();
   const handleApply = async () => {
     try {
-      await axios.post("http://13.126.190.50:5000/leaves/create/leaves", formData);
+      await axios.post("http://localhost:8080/leaves/create/leaves", formData);
       navigation("/leaves");
     } catch (error) {
       console.error("saveLeave", error);
@@ -93,7 +93,7 @@ const Leaves = () => {
   const getLeave = async () => {
     try {
       const result = await axios.get(
-        "http://13.126.190.50:5000/leaves/get/leaves",
+        "http://localhost:8080/leaves/get/leaves",
         {
           validateStatus: () => {
             return true;
@@ -110,7 +110,7 @@ const Leaves = () => {
 
   const getEventData = () => {
     axios
-      .get("http://13.126.190.50:5000/event/get/event")
+      .get("http://localhost:8080/event/get/event")
       .then((result) => {
         setEventData(result.data);
       })

@@ -35,7 +35,7 @@ const RequestProfile = () => {
   }, []);
 
   const loadRequest = async () => {
-    const result = await axios.get(`http://localhost:8094/request/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/request/get/${id}`);
     setRequest(result.data);
   };
 

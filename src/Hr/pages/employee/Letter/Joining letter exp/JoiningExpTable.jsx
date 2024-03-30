@@ -221,7 +221,7 @@ const JoiningExpTable = ({
 
   const handleDelete = async (id) => {
     try{
-      await axios.delete(`http://localhost:8082/experiencejoiningletter/delete/${id}`)
+      await axios.delete(`http://localhost:8080/experiencejoiningletter/delete/${id}`)
   } catch(error) {
       console.error("Error deleting data",error)
   }

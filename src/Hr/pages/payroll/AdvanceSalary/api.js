@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "localhost:8085";
+const url = "localhost:8080";
 const ip = "13.126.190.50:8085";
 
 export const saveAdvanceSalary = async (formData) => {
@@ -42,7 +42,7 @@ export const loadAdvanceSalary = async () => {
 export const fetchCompanies = async () => {
     try {
         const response = await axios.get(
-            "http://13.126.190.50:8081/company/get/company"
+            "http://localhost:8080/company/get/company"
           );
           return response.data
     } catch (error){
@@ -54,7 +54,7 @@ export const fetchCompanies = async () => {
 export const fetchLocations = async () => {
     try {
         const response = await axios.get(
-          "http://13.126.190.50:8081/location/get/location"
+          "http://localhost:8080/location/get/location"
         );
        return response.data 
       } catch (error) {
@@ -65,7 +65,7 @@ export const fetchLocations = async () => {
 export const fetchEmployee = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8082/employee/get/employee"
+        "http://localhost:8080/employee/get/employee"
       );
       return response.data;
     } catch (error) {

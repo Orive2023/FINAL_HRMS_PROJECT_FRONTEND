@@ -65,7 +65,7 @@ const ShowInvoice = () => {
   const handleSave = async () => {
     setShowInvoice(false);
     await axios.post(
-      "http://localhost:8082/internjoiningletter/create/internjoiningletter",
+      "http://localhost:8080/internjoiningletter/create/internjoiningletter",
       formData
     );
   };
@@ -74,7 +74,7 @@ const ShowInvoice = () => {
 
   const getData = async () => {
     const result = await axios.get(
-      "http://localhost:8082/internjoiningletter/get/internjoiningletter"
+      "http://localhost:8080/internjoiningletter/get/internjoiningletter"
     );
     setGetTable(result.data);
   };

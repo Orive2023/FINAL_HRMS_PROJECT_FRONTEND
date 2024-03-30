@@ -3,7 +3,7 @@ import axios from 'axios';
 export const saveEmployeeExit = async (formData) => {
     try{
         await axios.post(
-            "http://localhost:8082/employee_exit/create/employee_exit",
+            "http://localhost:8080/employee_exit/create/employee_exit",
             formData
           );
     } catch(error) {
@@ -13,7 +13,7 @@ export const saveEmployeeExit = async (formData) => {
 
 export const deleteEmployeeExit = async (id) => {
     try{
-        await axios.delete(`http://localhost:8082/employee_exit/delete/${id}`)
+        await axios.delete(`http://localhost:8080/employee_exit/delete/${id}`)
     } catch(error) {
         console.error("Error deleting employeeExit",error)
     }
@@ -22,7 +22,7 @@ export const deleteEmployeeExit = async (id) => {
 export const loadEmployeeExit = async () => {
     try {
         const result = await axios.get(
-            "http://localhost:8082/employee_exit/get/employee_exit",
+            "http://localhost:8080/employee_exit/get/employee_exit",
             {
               validateStatus: () => {
                 return true;
@@ -38,7 +38,7 @@ export const loadEmployeeExit = async () => {
 export const fetchEmployee = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8082/employee/get/employee"
+            "http://localhost:8080/employee/get/employee"
           );
           return response.data
     } catch (error){

@@ -20,23 +20,16 @@ import Salesfile from "./sidebarComponent/Salesfile";
 import WebsiteFile from "./sidebarComponent/WebsiteFile";
 import Whatsapp from "./sidebarComponent/Whatsapp";
 import { useNavigate } from "react-router-dom/dist"; 
-import useAuth from "../hooks/useAuth";
 import { WhatsApp } from "@material-ui/icons";
 
 const SideBar = ({ menu }) => {
   const nav = useNavigate();
-  const {logout} = useAuth();
   const classBtnName = menu ? "mobile-sidebar-container" : "";
   const classSidebarName = menu ? "mobile-sidebar" : "";
 
-  const handleLogout = () => {
-    nav('/');
-    logout()
-  };
-
   return (
     <>
-      <div className={`sidebar-btn-container ${classBtnName}`}>
+      <div className={`sidebar-btn-container ${classBtnName}`} style={{zIndex:'11'}}>
         <div className={`sidebar-container ${classSidebarName}`}>
           <DashboardFile  />
           <Organisationfile  />
@@ -57,7 +50,7 @@ const SideBar = ({ menu }) => {
           <WebsiteFile/>
           <Whatsapp/>
         </div>
-        <button id="logout-hrms-btn" onClick={handleLogout} >
+        <button id="logout-hrms-btn" onClick={()=>{localStorage.removeItem("AuthToken"); localStorage.removeItem("Role");nav('/'); window.location.reload();}}>
           Logout<i class="bx bx-log-out"></i>
         </button>
       </div>

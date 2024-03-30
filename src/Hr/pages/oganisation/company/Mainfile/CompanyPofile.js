@@ -36,7 +36,7 @@ const CompanyPofile = () => {
   }, []);
 
   const loadCompany = async () => {
-    const result = await axios.get(`http://localhost:8081/company/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/company/get/${id}`);
     setCompany(result.data);
   };
 

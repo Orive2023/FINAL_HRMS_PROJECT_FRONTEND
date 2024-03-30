@@ -26,7 +26,7 @@ const EditSubType = () => {
 
   const loadSubType = async () => {
     const result = await axios.get(
-      `http://localhost:8093/subType/get/${id}`
+      `http://localhost:8080/subType/get/${id}`
     );
     setSubType(result.data);
   };
@@ -40,7 +40,7 @@ const EditSubType = () => {
   const updateSubType = async (e) => {
     e.preventDefault();
     await axios.put(
-      `http://localhost:8093/subType/update/${id}`,
+      `http://localhost:8080/subType/update/${id}`,
       subType
     );
     navigate("/hr/account/subType");

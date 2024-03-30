@@ -1,17 +1,18 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import Dashboard from "../../components/Dashboard";
 import LoginSignup from "../../components/LoginSignup";
 import CandidateView from "./Candidate/Mainfile/CandidateView";
 import InterviewView from "./Interview/Mainfile/InterviewView";
 import TalentView from "./Talent/Mainfile/TalentView";
 import UserView from "./User/Mainfile/UserView";
+import Login from "../../../Login";
 
 const routesData = [
-  { path: "/hr/recruitment/candidate", element: <CandidateView /> },
-  { path: "/hr/recruitment/interview", element: <InterviewView /> },
-  { path: "/hr/recruitment/talent", element: <TalentView /> },
-  { path: "/hr/recruitment/user", element: <UserView /> },
+  { path: "/hr/recruitment/candidate", element:localStorage.getItem("Role")==="ADMIN"? <CandidateView />:<Navigate to='/'/> },
+  { path: "/hr/recruitment/interview", element:localStorage.getItem("Role")==="ADMIN"? <InterviewView />:<Navigate to='/'/> },
+  { path: "/hr/recruitment/talent", element: localStorage.getItem("Role")==="ADMIN"?<TalentView />:<Navigate to='/'/> },
+  { path: "/hr/recruitment/user", element: localStorage.getItem("Role")==="ADMIN"?<UserView /> :<Navigate to='/'/>},
 
  
 ];

@@ -27,7 +27,7 @@ const CandidateProfile = () => {
 
   const loadCandidate = async () => {
     const result = await axios.get(
-      `http://13.126.190.50:5000/candidates/download/${id}`
+      `http://localhost:8080/candidates/download/${id}`
     );
     setCandidate(result.data);
   };

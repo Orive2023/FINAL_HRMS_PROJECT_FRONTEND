@@ -203,7 +203,7 @@ const CertificateTable = ({
 
   const handleDelete = async (id) => {
     try{
-      await axios.delete(`http://localhost:8082/internshipcertificate/delete/${id}`)
+      await axios.delete(`http://localhost:8080/internshipcertificate/delete/${id}`)
   } catch(error) {
       console.error("Error deleting data",error)
   }

@@ -22,7 +22,7 @@ const EditSalaryTemplate = () => {
     loadSalaryTemplate();
   }, []);
 
-  const url = "localhost:8085";
+  const url = "localhost:8080";
   const ip = "13.126.190.50:8085";
 
   const loadSalaryTemplate = async () => {

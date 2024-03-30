@@ -106,7 +106,7 @@ const JoiningExpTable = ({
 
   const getData = async () => {
     const result = await axios.get(
-      `http://localhost:8082/internjoiningletter/findInternJoiningLetter/${username}`
+      `http://localhost:8080/internjoiningletter/findInternJoiningLetter/${username}`
     );
     setGetTable(result.data);
   };
@@ -240,7 +240,7 @@ const JoiningExpTable = ({
 
   const handleDelete = async (id) => {
     try{
-      await axios.delete(`http://localhost:8082/internjoiningletter/delete/${id}`)
+      await axios.delete(`http://localhost:8080/internjoiningletter/delete/${id}`)
   } catch(error) {
       console.error("Error deleting data",error)
   }

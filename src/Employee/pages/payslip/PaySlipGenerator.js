@@ -26,21 +26,21 @@ import { MdOutlineFileDownload } from "react-icons/md";
 const PaySlipGenerator = () => {
   const [employee, setEmployee] = useState([]);
   const token = localStorage.getItem("AuthToken");
-  const decoded = jwtDecode(String(token));
-  const usernameRec = decoded.preferred_username;
-  const username = usernameRec.toUpperCase();
+  const decoded = token ? jwtDecode(String(token)) : "";
+  const usernameRec = decoded === "" ? "" : decoded.preferred_username;
+  const username = usernameRec ? usernameRec.toUpperCase() : "";
   // const username = localStorage.getItem("UserName")
   const [payroll, setPayroll] = useState([]);
 
   const loadPayroll = async () => {
     const response = await axios.get(
-      `http://localhost:8085/payslipgenerate/findpayslipgenerate/${username}`
+      `http://localhost:8080/payslipgenerate/findpayslipgenerate/${username}`
     );
     setPayroll(response.data);
   };
   const fetchEmployee = async () => {
     const result = await axios.get(
-      "http://localhost:8082/employee/get/employee"
+      "http://localhost:8080/employee/get/employee"
     );
     setEmployee(result);
   };

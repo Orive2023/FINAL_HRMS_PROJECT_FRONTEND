@@ -32,7 +32,7 @@ const TrainerProfile = () => {
   }, []);
 
   const loadLoan = async () => {
-    const result = await axios.get(`http://localhost:8092/trainerslist/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/trainerslist/get/${id}`);
     setLoan(result.data);
   };
   const [menu, setMenu] = useState(false);

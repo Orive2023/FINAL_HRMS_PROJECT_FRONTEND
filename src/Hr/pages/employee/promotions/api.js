@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = "localhost:8082";
+const url = "localhost:8080";
 const ip = "13.126.190.50:8082";
 
 export const savePromotion = async (formData) => {
@@ -42,7 +42,7 @@ export const loadPromotion = async () => {
 export const fetchEmployee = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8082/employee/get/employee"
+            "http://localhost:8080/employee/get/employee"
           );
           return response.data
     } catch (error){

@@ -1,21 +1,22 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import PerformanceIndicatorView from "./PerformanceIndicator/PerformanceIndicatorView";
 import PerformancesAppraisalView from "./PerformanceAppraisal/Mainfile/PerformancesAppraisalView";
 import PerformanceappraisalProfile from "./PerformanceAppraisal/Mainfile/PerformanceappraisalProfile";
+import Login from '../../../Login'
 
 const performanceRoutesData = [
   {
     path: "/hr/performance/Performance-Indicator",
-    element: <PerformanceIndicatorView />,
+    element: localStorage.getItem("Role")==="ADMIN"?<PerformanceIndicatorView />:<Navigate to='/'/>,
   },
   {
     path: "/hr/performance/Performance-Appraisal",
-    element: <PerformancesAppraisalView />,
+    element: localStorage.getItem("Role")==="ADMIN"?<PerformancesAppraisalView />:<Navigate to='/'/>,
   },
   {
     path: "/hr/performance/Performance-Appraisal-profile/:id",
-    element: <PerformanceappraisalProfile />,
+    element: localStorage.getItem("Role")==="ADMIN"?<PerformanceappraisalProfile />:<Navigate to='/'/>,
   },
 ];
 

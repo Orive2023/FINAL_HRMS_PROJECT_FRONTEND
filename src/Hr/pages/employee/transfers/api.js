@@ -1,5 +1,5 @@
 import axios from 'axios';
-const url = "localhost:8082";
+const url = "localhost:8080";
 const ip = "13.126.190.50:8082";
 export const saveTransfer = async (formData) => {
     try{
@@ -40,7 +40,7 @@ export const loadTransfer = async () => {
 export const fetchEmployee = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8082/employee/get/employee"
+            "http://localhost:8080/employee/get/employee"
           );
           return response.data
     } catch (error){
@@ -52,7 +52,7 @@ export const fetchEmployee = async () => {
 export const fetchLocations = async () => {
     try {
         const response = await axios.get(
-          "http://localhost:8081/location/get/location"
+          "http://localhost:8080/location/get/location"
         );
        return response.data 
       } catch (error) {
@@ -62,7 +62,7 @@ export const fetchLocations = async () => {
 export const fetchDepartment = async () => {
     try {
         const response = await axios.get(
-          "http://localhost:8081/department/get/department"
+          "http://localhost:8080/department/get/department"
         );
        return response.data 
       } catch (error) {

@@ -44,10 +44,10 @@ const Ticket = ({setFormVisible}) => {
 
  
 
-  const token = localStorage.getItem("AuthToken");
-  const decoded = jwtDecode(String(token));
-  const usernameRec = decoded.preferred_username;
-  const username = usernameRec.toUpperCase();
+const token = localStorage.getItem("AuthToken");
+const decoded = token?jwtDecode(String(token)):"";
+const usernameRec = decoded===""?"":decoded.preferred_username;
+const username = usernameRec?usernameRec.toUpperCase():"";
 
 // const username = localStorage.getItem("UserName")
   useEffect(() => {
@@ -56,7 +56,7 @@ const Ticket = ({setFormVisible}) => {
 
 
   const loadTickets = async () => {
-    const result = await axios.get(`http://localhost:8088/tickets/getticketdetails/${username}`);
+    const result = await axios.get(`http://localhost:8080/tickets/getticketdetails/${username}`);
     setTicketData(result.data);
   };
 
@@ -454,7 +454,7 @@ const Ticket = ({setFormVisible}) => {
   const saveTicket = async () => {
     try {
       await axios.post(
-        "http://localhost:8088/tickets/create/tickets",
+        "http://localhost:8080/tickets/create/tickets",
         formData
       );
     } catch (error) {

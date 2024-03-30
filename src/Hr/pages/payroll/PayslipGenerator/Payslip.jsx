@@ -26,12 +26,12 @@ const Payslip = () => {
   }, [])
 
   const fetchEmployee = async() => {
-    const result = await axios.get(`http://localhost:8082/employee/get/employee`);
+    const result = await axios.get(`http://localhost:8080/employee/get/employee`);
     setEmployee(result.data);
   }
   
   const getPayslipDetails = async () => {
-    const result = await axios.get(`http://localhost:8085/payslipgenerate/get/${id}`);
+    const result = await axios.get(`http://localhost:8080/payslipgenerate/get/${id}`);
     setPayslip(result.data);
   }
 
@@ -62,6 +62,20 @@ const Payslip = () => {
     })
   } 
   console.log("loop k bahar k bahar", empData);
+  const monthNames = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
 
   return (
     <div className="payslip-print">
@@ -72,7 +86,13 @@ const Payslip = () => {
           <img src={logo} alt="" height={80} />
         </div>
         <div className="text-center fw-bold fs-4" style={{ color: "black" }}>
-          PAYSLIP FOR THE MONTH OF JANUARY 2024
+          <span style={{textTransform: 'uppercase'}}>
+          PAYSLIP FOR THE MONTH OF{" "}
+          {(monthNames[
+            parseInt(String(payslip.createdDate).split("-")[1]) - 1
+          ])}
+          </span> {" "}
+          {[String(payslip.createdDate).split("-")[0]]}
         </div>
         <br />
         <div
@@ -187,11 +207,11 @@ const Payslip = () => {
               >
                 <div>
                   <MdEmail />
-                  subhamparidamain@gmail.com
+                  orivesolutions@gmail.com
                 </div>
                 <div>
                   <FaPhone />
-                  +91 9443875824
+                  +91 9777798142
                 </div>
                 <div>
                   <AiOutlineGlobal />

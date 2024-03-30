@@ -339,7 +339,7 @@ const MainFile = ({ name }) => {
               <div className="row clearfix">
                 <div className="col-lg-12" style={{ paddingTop: '30px' }}>
                   <div className="mb-4">
-                    <h4>Welcome {userName}!</h4>
+                    <h4>Welcome {localStorage.getItem("FName")}{" "}{localStorage.getItem("LName")}!</h4>
                   </div>
                 </div>
               </div>

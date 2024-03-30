@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8081"
+const url = "http://localhost:8080"
 
 export const saveDesignation = async (formData) => {
     try{
