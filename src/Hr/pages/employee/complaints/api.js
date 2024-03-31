@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const url = "localhost:8080";
+const url = "api.orivehrms.com";
 const ip = "13.126.190.50:8080";
 
 export const saveComplaint = async (formData) => {
     try{
         await axios.post(
-            `http://${url}/complaints/create/complaints`,
+            `https://${url}/complaints/create/complaints`,
             formData
           );
     } catch(error) {
@@ -16,7 +16,7 @@ export const saveComplaint = async (formData) => {
 
 export const deleteProject = async (id) => {
     try{
-        await axios.delete(`http://${url}/complaints/delete/${id}`)
+        await axios.delete(`https://${url}/complaints/delete/${id}`)
     } catch(error) {
         console.error("Error deleting project",error)
     }
@@ -25,7 +25,7 @@ export const deleteProject = async (id) => {
 export const loadComplaint = async () => {
     try {
        const result =  await axios.get(
-            `http://${url}/complaints/get/complaints`,
+            `https://${url}/complaints/get/complaints`,
             {
               validateStatus: () => {
                 return true;
@@ -42,7 +42,7 @@ export const loadComplaint = async () => {
 export const fetchEmployee = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8080/employee/get/employee"
+            "https://api.orivehrms.com/employee/get/employee"
           );
           return response.data
     } catch (error){

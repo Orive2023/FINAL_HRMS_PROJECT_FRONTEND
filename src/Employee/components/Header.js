@@ -79,7 +79,7 @@ const Header = ({ menu, setMenu }) => {
 
   const loadShift = async () => {
     await axios
-      .get("http://localhost:8084/officeshifts/get/officeShifts")
+      .get("https://api.orivehrms.com/officeshifts/get/officeShifts")
       .then((res) => setShift(res.data))
       .catch((err) => console.log(err));
   };
@@ -100,7 +100,7 @@ const Header = ({ menu, setMenu }) => {
     let seconds = currentTime.getSeconds().toString().padStart(2, "0");
     let formattedTime = hours + ":" + minutes + ":" + seconds;
 
-    await axios.post("http://localhost:8084/attendance/create", {
+    await axios.post("https://api.orivehrms.com/attendance/create", {
       officeClockIn: shift[0].officeClockIn,
       officeClockOut: shift[0].officeClockOut,
       employeeName: employee,
@@ -135,7 +135,7 @@ const Header = ({ menu, setMenu }) => {
     let formattedTime = hours + ":" + minutes + ":" + seconds;
 
     await axios.put(
-      `http://localhost:8084/attendance/update/Id/${username}/${todayDate}`,
+      `https://api.orivehrms.com/attendance/update/Id/${username}/${todayDate}`,
       {
         // clockOut: date.format(new Date(), "hh:mm:ss"),
         clockOut: formattedTime,
@@ -166,7 +166,7 @@ const Header = ({ menu, setMenu }) => {
 
   const fetchAttendance = async () => {
     const data = await axios.get(
-      "http://localhost:8084/attendance/get/attendance"
+      "https://api.orivehrms.com/attendance/get/attendance"
     );
     setAttendData(data.data);
   };

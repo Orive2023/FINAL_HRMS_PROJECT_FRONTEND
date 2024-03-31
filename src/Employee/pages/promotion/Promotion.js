@@ -36,7 +36,7 @@ const Promotion = () => {
 
 
     const loadPromotion = async () => {
-        const response = await axios.get(`http://localhost:8080/promotions/get/promotions`);
+        const response = await axios.get(`https://api.orivehrms.com/promotions/get/promotions`);
         setPromotion(response.data);
       };
     
@@ -283,7 +283,7 @@ const Promotion = () => {
 
   const loadpromotion = async () => {
     const result = await axios.get(
-      `http://localhost:8080/promotions/findpromotions/${username}`
+      `https://api.orivehrms.com/promotions/findpromotions/${username}`
     );
     setPromotion(result.data);
   };

@@ -21,7 +21,7 @@ const TransferProfile = () => {
     loadtransfer();
   }, []);
 
-  const url = "localhost:8080";
+  const url = "lapi.orivehrms.com";
   const ip = "13.126.190.50:8082";
 
   const loadtransfer = async () => {

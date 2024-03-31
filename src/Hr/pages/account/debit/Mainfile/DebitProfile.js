@@ -28,7 +28,7 @@ const DebitProfile = () => {
   }, []);
 
   const loadExpenses = async () => {
-    const result = await axios.get(`http://localhost:8080/debitvoucher/get/${id}`);
+    const result = await axios.get(`https://api.orivehrms.com/debitvoucher/get/${id}`);
     setExpenses(result.data);
   };
   const [menu, setMenu] = useState(false);

@@ -1,6 +1,6 @@
 import React from 'react'
 import {Route, Routes} from "react-router-dom"
-import EditSubType from './Mainfile/EditSubType';
+import EditSubType from './Mainfile/EditSubtype';
 
 const RouteSubType = () => {
   return (

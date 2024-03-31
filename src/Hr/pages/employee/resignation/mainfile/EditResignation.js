@@ -24,11 +24,11 @@ const EditResignation = () => {
     loadResignation();
   }, []);
 
-  const url = "localhost:8080";
+  const url = "api.orivehrms.com";
   const ip = "13.126.190.50:8082";
 
   const loadResignation = async () => {
-    const result = await axios.get(`http://${url}/resignations/get/${id}`);
+    const result = await axios.get(`https://${url}/resignations/get/${id}`);
     setResignation(result.data);
   };
 
@@ -56,7 +56,7 @@ const EditResignation = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://${url}/resignations/update/${id}`, resignation);
+    await axios.put(`https://${url}/resignations/update/${id}`, resignation);
     navigate("/hr/employee/resignation");
   };
 

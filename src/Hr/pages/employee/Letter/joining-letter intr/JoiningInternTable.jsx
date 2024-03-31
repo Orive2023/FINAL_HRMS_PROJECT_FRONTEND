@@ -221,7 +221,7 @@ const JoiningExpTable = ({
 
   const handleDelete = async (id) => {
     try{
-      await axios.delete(`http://localhost:8080/internjoiningletter/delete/${id}`)
+      await axios.delete(`https://api.orivehrms.com/internjoiningletter/delete/${id}`)
   } catch(error) {
       console.error("Error deleting data",error)
   }

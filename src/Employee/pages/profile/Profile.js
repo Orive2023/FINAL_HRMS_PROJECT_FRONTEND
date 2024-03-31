@@ -20,11 +20,11 @@ const username = usernameRec?usernameRec.toUpperCase():"";
 
   console.log(username)
 
-  const url = "localhost:8082";
+  const url = "api.orivehrms.com";
   const ip = "13.126.190.50:8082";
 
   const loadEmployee = async () => {
-    const result = await axios.get(`http://localhost:8080/employee/byId/${username}`);
+    const result = await axios.get(`https://api.orivehrms.com/employee/byId/${username}`);
     console.log(result.data)
     setEmployee(result.data[0]);
   };

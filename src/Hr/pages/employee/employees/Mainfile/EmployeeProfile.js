@@ -15,11 +15,11 @@ const EmployeeProfile = () => {
     loadEmployee();
   }, []);
 
-  const url = "localhost:8080";
+  const url = "api.orivehrms.com";
   const ip = "13.126.190.50:8082";
 
   const loadEmployee = async () => {
-    const result = await axios.get(`http://${url}/employee/byId/${id}`);
+    const result = await axios.get(`https://${url}/employee/byId/${id}`);
     setEmployee(result.data[0]);
   };
 

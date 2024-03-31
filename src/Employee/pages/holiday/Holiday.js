@@ -274,7 +274,7 @@ const Holiday = () => {
 
   const loadholiday = async () => {
     const result = await axios.get(
-      "http://localhost:8080/holidays/get/holidays"
+      "https://api.orivehrms.com/holidays/get/holidays"
     );
     setHoliday(result.data);
   };

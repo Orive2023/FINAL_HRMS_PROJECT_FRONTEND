@@ -18,9 +18,6 @@ import Collapse from "@mui/material/Collapse";
 import { Card } from "@mui/material";
 import { BiSolidHide } from "react-icons/bi";
 import CompanyLogoFile from "../../../../components/CompanyLogoFile";
-
-
-
 import * as api from "../api"
 import StatePromotion from "../StatePromotion";
 import PromotionTable from "../PromotionTable";

@@ -71,7 +71,7 @@ const username = usernameRec?usernameRec.toUpperCase():"";
 
   const getData = async () => {
     const result = await axios.get(
-      `http://localhost:8080/experienceletter/findexperienceletter/${username}`
+      `https://api.orivehrms.com/experienceletter/findexperienceletter/${username}`
     );
     setGetTable(result.data);
   };
@@ -233,7 +233,7 @@ const username = usernameRec?usernameRec.toUpperCase():"";
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8080/experienceletter/delete/${id}`);
+      await axios.delete(`https://api.orivehrms.com/experienceletter/delete/${id}`);
     } catch (error) {
       console.error("Error deleting data", error);
     }

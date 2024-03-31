@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 
-const url = "localhost:8082";
+const url = "api.orivehrms.com";
 const ip = "12.126.190.50:8082";
 const token = localStorage.getItem("AuthToken");
 const decoded = token?jwtDecode(String(token)):"";
@@ -11,7 +11,7 @@ const username = usernameRec?usernameRec.toUpperCase():"";
 export const saveLeave = async (formData) => {
     try{
         await axios.post(
-            "http://localhost:8080/leaves/create/leaves",
+            "https://api.orivehrms.com/leaves/create/leaves",
             formData
           );
     } catch(error) {
@@ -21,7 +21,7 @@ export const saveLeave = async (formData) => {
 
 export const deleteLeave= async (id) => {
     try{
-        await axios.delete(`http://localhost:8080/leaves/delete/${id}`)
+        await axios.delete(`https://api.orivehrms.com/leaves/delete/${id}`)
     } catch(error) {
         console.error("Error deleting Leave",error)
     }
@@ -30,7 +30,7 @@ export const deleteLeave= async (id) => {
 export const loadLeave = async () => {
     try {
        const result =  await axios.get(
-            `http://localhost:8080/leaves/employee/get/${username}`,
+            `https://api.orivehrms.com/leaves/employee/get/${username}`,
             {
               validateStatus: () => {
                 return true;
@@ -47,7 +47,7 @@ export const loadLeave = async () => {
 export const fetchEmployee = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8080/employee/get/employee"
+            "https://api.orivehrms.com/employee/get/employee"
           );
           return response.data
     } catch (error){

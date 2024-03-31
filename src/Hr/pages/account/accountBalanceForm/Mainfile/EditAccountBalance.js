@@ -25,7 +25,7 @@ const EditAccountBalance = () => {
 
   const loadAccountBalance = async () => {
     const result = await axios.get(
-      `http://localhost:8080/accountbalance/get/${id}`
+      `https://api.orivehrms.com/accountbalance/get/${id}`
     );
     setAccountBalance(result.data);
   };
@@ -47,7 +47,7 @@ const EditAccountBalance = () => {
 
   const updateAccountBalance = async () => {
     await axios.put(
-      `http://localhost:8080/accountbalance/update/${id}`,
+      `https://api.orivehrms.com/accountbalance/update/${id}`,
       accountBalance
     );
     navigate("/hr/account/account-balance");         

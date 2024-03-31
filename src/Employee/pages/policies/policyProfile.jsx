@@ -25,7 +25,7 @@ import React, {
   
     const loadExpenses = async () => {
       const result = await axios.get(
-        `http://localhost:8080/policies/get/${id}`
+        `https://api.orivehrms.com/policies/get/${id}`
       );
       setPolicies(result.data);
     };

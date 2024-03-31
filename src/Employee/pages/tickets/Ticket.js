@@ -56,7 +56,7 @@ const username = usernameRec?usernameRec.toUpperCase():"";
 
 
   const loadTickets = async () => {
-    const result = await axios.get(`http://localhost:8080/tickets/getticketdetails/${username}`);
+    const result = await axios.get(`https://api.orivehrms.com/tickets/getticketdetails/${username}`);
     setTicketData(result.data);
   };
 
@@ -454,7 +454,7 @@ const username = usernameRec?usernameRec.toUpperCase():"";
   const saveTicket = async () => {
     try {
       await axios.post(
-        "http://localhost:8080/tickets/create/tickets",
+        "https://api.orivehrms.com/tickets/create/tickets",
         formData
       );
     } catch (error) {

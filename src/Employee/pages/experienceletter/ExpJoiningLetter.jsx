@@ -101,7 +101,7 @@ const JoiningExpTable = ({
 
   const getData = async () => {
     const result = await axios.get(
-      `http://localhost:8080/experiencejoiningletter/findexperiencejoiningletter/${username}`
+      `https://api.orivehrms.com/experiencejoiningletter/findexperiencejoiningletter/${username}`
     );
     setGetTable(result.data);
   };
@@ -241,7 +241,7 @@ const JoiningExpTable = ({
 
   const handleDelete = async (id) => {
     try{
-      await axios.delete(`http://localhost:8080/experiencejoiningletter/delete/${id}`)
+      await axios.delete(`https://api.orivehrms.com/experiencejoiningletter/delete/${id}`)
   } catch(error) {
       console.error("Error deleting data",error)
   }

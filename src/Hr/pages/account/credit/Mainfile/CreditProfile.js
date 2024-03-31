@@ -29,7 +29,7 @@ const CreditProfile = () => {
   }, []);
 
   const loadCredit = async () => {
-    const result = await axios.get(`http://localhost:8080/creditvoucher/get/${id}`);
+    const result = await axios.get(`https://api.orivehrms.com/creditvoucher/get/${id}`);
     setCredit(result.data);
   };
   const [menu, setMenu] = useState(false);

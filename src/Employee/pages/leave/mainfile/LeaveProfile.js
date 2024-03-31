@@ -30,7 +30,7 @@ const LeaveProfile = () => {
 
 	const loadOfficeShift = async () => {
 		const result = await axios.get(
-			`http://localhost:8080/leaves/get/${id}`
+			`https://api.orivehrms.com/leaves/get/${id}`
 		);
 		setOfficeShift(result.data);
 	};

@@ -30,13 +30,13 @@ const Editemployee = () => {
     loademployee();
   }, []);
 
-  const url = "localhost:8080";
+  const url = "api.orivehrms.com";
   const ip = "13.126.190.50:8082";
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const [menu, setMenu] = useState(false);
   const loademployee = async () => {
-    const result = await axios.get(`http://${url}/employee/byId/${id}`);
+    const result = await axios.get(`https://${url}/employee/byId/${id}`);
     setemployee(result.data[0]);
   };
 
@@ -63,7 +63,7 @@ const Editemployee = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://${url}/employee/update/ID/${id}`, employee);
+    await axios.put(`https://${url}/employee/update/ID/${id}`, employee);
     navigate("/hr/employee/employee");
   };
 

@@ -254,7 +254,7 @@ const username = usernameRec?usernameRec.toUpperCase():"";
 
   const loadaward = async () => {
     const result = await axios.get(
-      `http://localhost:8080/awards/employee/get/${username}`
+      `https://api.orivehrms.com/awards/employee/get/${username}`
     );
     console.log(result)
     setAward(result.data);

@@ -27,7 +27,7 @@ const TerminationPofile = () => {
 
 	const loadTermination = async () => {
 		const result = await axios.get(
-			`http://localhost:8080/terminations/get/${id}`
+			`https://api.orivehrms.com/terminations/get/${id}`
 		);
 		setTermination(result.data);
 	};

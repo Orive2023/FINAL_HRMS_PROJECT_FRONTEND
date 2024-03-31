@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8080";
+const url = "https://api.orivehrms.com";
 
 export const saveDebit = async (formData) => {
   try {
@@ -44,7 +44,7 @@ export const deleteDebit = async (id) => {
 export const fetchsubType = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:8080/subType/get/subType"
+      "https://api.orivehrms.com/subType/get/subType"
     );
     return response.data;
   } catch (error) {

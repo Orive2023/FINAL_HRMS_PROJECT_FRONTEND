@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const url = "localhost:8080";
+const url = "api.orivehrms.com";
 const ip = "13.126.190.50:8082";
 
 export const saveEmployees = async (formData) => {
   try {
-    await axios.post(`http://${url}/employee/create/employee`, formData, {
+    await axios.post(`https://${url}/employee/create/employee`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -17,7 +17,7 @@ export const saveEmployees = async (formData) => {
 
 export const deleteEmployee = async (id) => {
   try {
-    await axios.delete(`http://${url}/employee/delete/ID/${id}`);
+    await axios.delete(`https://${url}/employee/delete/ID/${id}`);
   } catch (error) {
     console.error("Error deleting employee", error);
   }
@@ -25,7 +25,7 @@ export const deleteEmployee = async (id) => {
 
 export const loademployees = async () => {
   try {
-    const result = await axios.get(`http://${url}/employee/get/employee`, {
+    const result = await axios.get(`https://${url}/employee/get/employee`, {
       validateStatus: () => {
         return true;
       },
@@ -38,7 +38,7 @@ export const loademployees = async () => {
 export const fetchDesignation = async () => {
   try {
       const response = await axios.get(
-          "http://localhost:8080/designation/get/designation"
+          "https://api.orivehrms.com/designation/get/designation"
         );
         return response.data
   } catch (error){

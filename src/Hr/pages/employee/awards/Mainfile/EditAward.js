@@ -31,11 +31,11 @@ const EditAward = () => {
 	useEffect(() => {
 		loadAward();
 	}, []);
-	const url = "localhost:8080";
+	const url = "api.orivehrms.com";
 	const ip = "13.126.190.50:8082";
 	const loadAward = async () => {
 		const result = await axios.get(
-			`http://${url}/awards/get/${id}`
+			`https://${url}/awards/get/${id}`
 		);
 		setAward(result.data);
 	};
@@ -65,7 +65,7 @@ const EditAward = () => {
 	
 	  const handleUpdate = async () => {
 		hideUpdateConfirmation();
-		await axios.put(`http://${url}/awards/update/${id}`, award);
+		await axios.put(`https://${url}/awards/update/${id}`, award);
 		navigate("/hr/employee/awards");
 	  };
 

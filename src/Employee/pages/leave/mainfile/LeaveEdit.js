@@ -24,7 +24,7 @@ const LeaveEdit = () => {
   }, []);
 
   const loadLeave = async () => {
-    const result = await axios.get(`http://localhost:8080/leaves/get/${id}`);
+    const result = await axios.get(`https://api.orivehrms.com/leaves/get/${id}`);
     setLeave(result.data);
   };
 
@@ -45,7 +45,7 @@ const LeaveEdit = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8080/leaves/update/${id}`, leave);
+    await axios.put(`https://api.orivehrms.com/leaves/update/${id}`, leave);
     navigate("/leave");
   };
 

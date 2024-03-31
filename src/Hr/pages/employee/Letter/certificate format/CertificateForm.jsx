@@ -53,7 +53,7 @@ const ShowInvoice = () => {
   const handleSave = async () => {
     setShowInvoice(false);
     await axios.post(
-      "http://localhost:8080/internshipcertificate/create/internshipcertificate",
+      "https://api.orivehrms.com/internshipcertificate/create/internshipcertificate",
       formData
     );
   };
@@ -66,7 +66,7 @@ const ShowInvoice = () => {
 
   const getData = async () => {
     const result = await axios.get(
-      "http://localhost:8080/internshipcertificate/get/internshipcertificate"
+      "https://api.orivehrms.com/internshipcertificate/get/internshipcertificate"
     );
     setGetTable(result.data);
   };

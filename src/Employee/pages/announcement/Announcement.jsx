@@ -31,7 +31,7 @@ const Announcement = () => {
 
   const loadAnnouncement = async () => {
     const response = await axios.get(
-      "http://localhost:8080/announcement/get/announcement"
+      "https://api.orivehrms.com/announcement/get/announcement"
     );
     setAnnouncement(response.data);
   };

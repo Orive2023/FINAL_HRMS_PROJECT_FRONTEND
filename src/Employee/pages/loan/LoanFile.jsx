@@ -38,11 +38,11 @@ const username = usernameRec?usernameRec.toUpperCase():"";
 
 
 
-  const url = "localhost:8082";
+  const url = "api.orivehrms.com";
   const ip = "13.126.190.50:8082";
   const loadLoan = async () => {
     try {
-      const result = await axios.get(`http://localhost:8080/grantloan/get/grantloan`, {
+      const result = await axios.get(`https://api.orivehrms.com/grantloan/get/grantloan`, {
         validateStatus: () => {
           return true;
         },

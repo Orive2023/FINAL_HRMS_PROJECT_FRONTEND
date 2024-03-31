@@ -23,7 +23,7 @@ const EventCalender = () => {
 
   const getEventData = () => {
     axios
-      .get("http://13.126.190.50:5000/event/get/event")
+      .get("https://api.orivehrms.com/event/get/event")
       .then((result) => {
         setEvents(result.data);
       })

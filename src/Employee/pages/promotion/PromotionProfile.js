@@ -27,7 +27,7 @@ const PromotionProfile = () => {
 
 	const loadaward = async () => {
 		const result = await axios.get(
-			`http://localhost:8080/promotions/get/${id}`
+			`https://api.orivehrms.com/promotions/get/${id}`
 		);
 		setaward(result.data);
 	};

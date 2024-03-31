@@ -23,7 +23,7 @@ const TravelPofile = () => {
 
 	const loadtravel = async () => {
 		const result = await axios.get(
-			`http://localhost:8080/travel/get/${id}`
+			`https://api.orivehrms.com/travel/get/${id}`
 		);
 		settravel(result.data);
 	};

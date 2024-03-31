@@ -20,7 +20,7 @@ const Worksheets = () => {
   const loadWorksheet = async () => {
     try {
       const result = await axios.get(
-        "http://localhost:8080/worksheet/get/worksheet",
+        "https://api.orivehrms.com/worksheet/get/worksheet",
         {
           validateStatus: () => {
             return true;

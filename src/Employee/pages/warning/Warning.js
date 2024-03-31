@@ -33,7 +33,7 @@ const Warning = () => {
 
 
     const loadWarning = async () => {
-        const response = await axios.get(`http://localhost:8080/warnings/findwarnings/${username}`);
+        const response = await axios.get(`https://api.orivehrms.com/warnings/findwarnings/${username}`);
         setWarning(response.data);
       };
     

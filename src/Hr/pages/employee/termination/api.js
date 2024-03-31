@@ -3,7 +3,7 @@ import axios from 'axios';
 export const saveTermination = async (formData) => {
     try{
         await axios.post(
-            "http://localhost:8080/terminations/create/terminations",
+            "https://api.orivehrms.com/terminations/create/terminations",
             formData
           );
     } catch(error) {
@@ -13,7 +13,7 @@ export const saveTermination = async (formData) => {
 
 export const deleteTermination = async (id) => {
     try{
-        await axios.delete(`http://localhost:8080/terminations/delete/${id}`)
+        await axios.delete(`https://api.orivehrms.com/terminations/delete/${id}`)
     } catch(error) {
         console.error("Error deleting Termination",error)
     }
@@ -22,7 +22,7 @@ export const deleteTermination = async (id) => {
 export const loadTermination = async () => {
     try {
        const result =  await axios.get(
-        "http://localhost:8080/terminations/get/terminationsId",
+        "https://api.orivehrms.com/terminations/get/terminationsId",
             {
               validateStatus: () => {
                 return true;
@@ -39,7 +39,7 @@ export const loadTermination = async () => {
 export const fetchEmployee= async () => {
     try {
         const response = await axios.get(
-          "http://localhost:8080/employee/get/employee"
+          "https://api.orivehrms.com/employee/get/employee"
         );
        return response.data 
       } catch (error) {

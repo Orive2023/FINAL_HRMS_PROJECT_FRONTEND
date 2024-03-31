@@ -85,13 +85,13 @@ const username = usernameRec?usernameRec.toUpperCase():"";
   
 
   const loadPayslipGenerator = async () => {
-    const result = await axios.get(`http://localhost:8080/payslipgenerate/get/paySlipGenerate`)
+    const result = await axios.get(`https://api.orivehrms.com/payslipgenerate/get/paySlipGenerate`)
     setSalary(result);
   };
 
   const fetchEmployee = async () => {
     const result = await axios.get(
-      "http://localhost:8080/employee/get/employee"
+      "https://api.orivehrms.com/employee/get/employee"
     );
     setEmployee(result);
   };

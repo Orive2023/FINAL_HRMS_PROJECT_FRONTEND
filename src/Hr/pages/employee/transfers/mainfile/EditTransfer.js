@@ -26,11 +26,11 @@ const EditTransfer = () => {
     loadTransfer();
   }, []);
 
-  const url = "localhost:8080";
+  const url = "api.orivehrms.com";
   const ip = "13.126.190.50:8082";
 
   const loadTransfer = async () => {
-    const result = await axios.get(`http://${url}/transfers/get/${id}`);
+    const result = await axios.get(`https://${url}/transfers/get/${id}`);
     setTransfer(result.data);
   };
 
@@ -59,7 +59,7 @@ const EditTransfer = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://${url}/transfers/update/${id}`, transfer);
+    await axios.put(`https://${url}/transfers/update/${id}`, transfer);
     navigate("/hr/employee/transfer");
   };
   console.log("here",transfer);

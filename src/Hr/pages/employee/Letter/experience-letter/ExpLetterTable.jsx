@@ -222,7 +222,7 @@ const ExpLetterTable = ({
 
   const handleDelete = async (id) => {
     try{
-      await axios.delete(`http://localhost:8080/experienceletter/delete/${id}`)
+      await axios.delete(`https://api.orivehrms.com/experienceletter/delete/${id}`)
   } catch(error) {
       console.error("Error deleting data",error)
   }

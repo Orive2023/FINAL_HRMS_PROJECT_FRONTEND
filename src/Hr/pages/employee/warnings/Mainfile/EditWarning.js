@@ -36,7 +36,7 @@ const EditWarning = () => {
 	  const handleUpdate = async () => {
 		hideUpdateConfirmation();
 		await axios.put(
-			`http://localhost:8080/warnings/update/${id}`,
+			`https://api.orivehrms.com/warnings/update/${id}`,
 			warning
 		);
 		navigate("/hr/employee/warning");
@@ -48,7 +48,7 @@ const EditWarning = () => {
 
 	const loadwarning = async () => {
 		const result = await axios.get(
-			`http://localhost:8080/warnings/get/${id}`
+			`https://api.orivehrms.com/warnings/get/${id}`
 		);
 		setwarning(result.data);
 	};
@@ -62,7 +62,7 @@ const EditWarning = () => {
 	const updatewarning = async (e) => {
 		e.preventDefault();
 		await axios.put(
-			`http://localhost:8080/warnings/update/${id}`,
+			`https://api.orivehrms.com/warnings/update/${id}`,
 			warning
 		);
 		navigate("/hr/employee/warning");

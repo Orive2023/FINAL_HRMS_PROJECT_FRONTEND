@@ -1,10 +1,10 @@
 import axios from 'axios';
-const url = "localhost:8080";
+const url = "api.orivehrms.com";
 const ip = "12.126.190.50:8082";
 export const saveResignation = async (formData) => {
     try{
         await axios.post(
-            `http://${url}/resignations/create/resignation`,
+            `https://${url}/resignations/create/resignation`,
             formData
           );
     } catch(error) {
@@ -14,7 +14,7 @@ export const saveResignation = async (formData) => {
 
 export const deleteResignation = async (id) => {
     try{
-        await axios.delete(`http://${url}/resignations/delete/${id}`)
+        await axios.delete(`https://${url}/resignations/delete/${id}`)
     } catch(error) {
         console.error("Error deleting resignation",error)
     }
@@ -23,7 +23,7 @@ export const deleteResignation = async (id) => {
 export const loadResignation = async () => {
     try {
        const result =  await axios.get(
-            `http://${url}/resignations/get/resignations`,
+            `https://${url}/resignations/get/resignations`,
             {
               validateStatus: () => {
                 return true;
@@ -40,7 +40,7 @@ export const loadResignation = async () => {
 export const fetchEmployee = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8080/employee/get/employee"
+            "https://api.orivehrms.com/employee/get/employee"
           );
           return response.data
     } catch (error){

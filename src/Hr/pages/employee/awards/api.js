@@ -1,9 +1,9 @@
 import axios from "axios";
-const url = "localhost:8080";
+const url = "api.orivehrms.com";
 const ip = "13.126.190.50:8082";
 export const saveAward = async (formData) => {
   try {
-    await axios.post(`http://${url}/awards/create/awards`, formData);
+    await axios.post(`https://${url}/awards/create/awards`, formData);
   } catch (error) {
     console.error("saveAward", error);
   }
@@ -11,7 +11,7 @@ export const saveAward = async (formData) => {
 
 export const deleteAward = async (id) => {
   try {
-    await axios.delete(`http://${url}/awards/delete/${id}`);
+    await axios.delete(`https://${url}/awards/delete/${id}`);
   } catch (error) {
     console.error("Error deleting award", error);
   }
@@ -19,7 +19,7 @@ export const deleteAward = async (id) => {
 
 export const loadAward = async () => {
   try {
-    const result = await axios.get(`http://${url}/awards/get/awards`, {
+    const result = await axios.get(`https://${url}/awards/get/awards`, {
       validateStatus: () => {
         return true;
       },
@@ -33,7 +33,7 @@ export const loadAward = async () => {
 export const fetchEmployee = async () => {
   try {
       const response = await axios.get(
-          "http://localhost:8080/employee/get/employee"
+          "https://api.orivehrms.com/employee/get/employee"
         );
         return response.data
   } catch (error){

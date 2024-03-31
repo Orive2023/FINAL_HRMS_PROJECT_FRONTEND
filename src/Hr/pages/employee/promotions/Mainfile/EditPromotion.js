@@ -23,10 +23,10 @@ const EditPromotion = () => {
   useEffect(() => {
     loadpromotion();
   }, []);
-  const url = "localhost:8080";
+  const url = "api.orivehrms.com";
   const ip = "13.126.190.50:8082";
   const loadpromotion = async () => {
-    const result = await axios.get(`http://${url}/promotions/get/${id}`);
+    const result = await axios.get(`https://${url}/promotions/get/${id}`);
     setpromotion(result.data);
   };
 
@@ -52,7 +52,7 @@ const EditPromotion = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://${url}/promotions/update/${id}`, promotion);
+    await axios.put(`https://${url}/promotions/update/${id}`, promotion);
     navigate("/hr/employee/promotions");
   };
 

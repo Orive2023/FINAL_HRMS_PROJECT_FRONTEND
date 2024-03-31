@@ -3,7 +3,6 @@ import { useState } from "react";
 const StatePromotion = () => {
   const [formVisible, setFormVisible] = useState(false);
   const [toggle, setToggle] = useState(false);
-
   const [recDelete, setRecDelete] = useState("");
   const [dateError, setDateError] = useState(false);
   const [promotion, setPromotion] = useState([]);

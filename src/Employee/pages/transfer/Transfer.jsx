@@ -36,7 +36,7 @@ const username = usernameRec?usernameRec.toUpperCase():"";
 
   const loadTransfer = async () => {
     const response = await axios.get(
-      `http://localhost:8080/transfers/findtransfer/${username}`
+      `https://api.orivehrms.com/transfers/findtransfer/${username}`
     );
     setTransfer(response.data);
   };

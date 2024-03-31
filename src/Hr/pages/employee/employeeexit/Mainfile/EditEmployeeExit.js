@@ -28,7 +28,7 @@ const EditEmployeeExit = () => {
 	  const handleUpdate = async () => {
 		hideUpdateConfirmation();
 		await axios.put(
-			`http://localhost:8080/employee_exit/update/${id}`,
+			`https://api.orivehrms.com/employee_exit/update/${id}`,
 			employeeExit
 		);
 		navigate("/hr/employee/employee-exit");
@@ -42,7 +42,7 @@ const EditEmployeeExit = () => {
 
   const loademployeeExit = async () => {
     const result = await axios.get(
-      `http://localhost:8080/employee_exit/get/${id}`,employeeExit
+      `https://api.orivehrms.com/employee_exit/get/${id}`,employeeExit
     );
     setemployeeExit(result.data);
 	console.log(employeeExit);
@@ -58,7 +58,7 @@ const EditEmployeeExit = () => {
   const updateemployeeExit = async (e) => {
     e.preventDefault();
     await axios.put(
-      `http://localhost:8080/employee_exit/update/${id}`,
+      `https://api.orivehrms.com/employee_exit/update/${id}`,
       employeeExit
     );
     navigate("/hr/employee/employee-exit");

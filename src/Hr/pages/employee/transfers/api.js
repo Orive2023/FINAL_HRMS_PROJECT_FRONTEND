@@ -1,10 +1,10 @@
 import axios from 'axios';
-const url = "localhost:8080";
+const url = "api.orivehrms.com";
 const ip = "13.126.190.50:8082";
 export const saveTransfer = async (formData) => {
     try{
         await axios.post(
-            `http://${url}/transfers/create/transfers`,
+            `https://${url}/transfers/create/transfers`,
             formData
           );
     } catch(error) {
@@ -14,7 +14,7 @@ export const saveTransfer = async (formData) => {
 
 export const deleteTransfer = async (id) => {
     try{
-        await axios.delete(`http://${url}/transfers/delete/${id}`)
+        await axios.delete(`https://${url}/transfers/delete/${id}`)
     } catch(error) {
         console.error("Error deleting department",error)
     }
@@ -23,7 +23,7 @@ export const deleteTransfer = async (id) => {
 export const loadTransfer = async () => {
     try {
        const result =  await axios.get(
-            `http://${url}/transfers/get/transfers`,
+            `https://${url}/transfers/get/transfers`,
             {
               validateStatus: () => {
                 return true;
@@ -40,7 +40,7 @@ export const loadTransfer = async () => {
 export const fetchEmployee = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8080/employee/get/employee"
+            "https://api.orivehrms.com/employee/get/employee"
           );
           return response.data
     } catch (error){
@@ -52,7 +52,7 @@ export const fetchEmployee = async () => {
 export const fetchLocations = async () => {
     try {
         const response = await axios.get(
-          "http://localhost:8080/location/get/location"
+          "https://api.orivehrms.com/location/get/location"
         );
        return response.data 
       } catch (error) {
@@ -62,7 +62,7 @@ export const fetchLocations = async () => {
 export const fetchDepartment = async () => {
     try {
         const response = await axios.get(
-          "http://localhost:8080/department/get/department"
+          "https://api.orivehrms.com/department/get/department"
         );
        return response.data 
       } catch (error) {

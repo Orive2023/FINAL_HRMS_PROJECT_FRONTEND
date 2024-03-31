@@ -1,7 +1,7 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
-const url = "localhost:8080";
+const url = "api.orivehrms.com";
 const ip = "12.126.190.50:8082";
 const token = localStorage.getItem("AuthToken");
 const decoded = token?jwtDecode(String(token)):"";
@@ -43,7 +43,7 @@ export const loadResignation = async () => {
 export const fetchEmployee = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:8080/employee/get/employee"
+      "https://api.orivehrms.com/employee/get/employee"
     );
     return response.data;
   } catch (error) {

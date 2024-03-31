@@ -106,7 +106,7 @@ const MainFile = ({ name }) => {
   const [revenuePercent, setRevenuePercent] = useState([]);
   const getRevenue = async () => {
     const result = await axios.get(
-      "http://localhost:8096/revenue/netrevenuepercentage"
+      "https://api.orivehrms.com/revenue/netrevenuepercentage"
     );
     setRevenuePercent(result.data);
   };

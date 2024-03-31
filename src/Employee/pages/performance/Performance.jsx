@@ -53,7 +53,7 @@ const username = usernameRec?usernameRec.toUpperCase():"";
 
   const loadPerformance = async () => {
     const result = await axios.get(
-      `http://localhost:8080/performanceappraisal/byId/${username}`
+      `https://api.orivehrms.com/performanceappraisal/byId/${username}`
     );
     setPerformanceData(result.data[0]);
   };
@@ -225,7 +225,7 @@ const username = usernameRec?usernameRec.toUpperCase():"";
   const loadAward = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:8080/awards/employee/get/${username}`,
+        `https://api.orivehrms.com/awards/employee/get/${username}`,
         {
           validateStatus: () => {
             return true;

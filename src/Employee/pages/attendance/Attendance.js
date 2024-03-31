@@ -24,7 +24,7 @@ const username = usernameRec?usernameRec.toUpperCase():"";
   const getAttendance = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:8080/attendance/get/username/${username}`,
+        `https://api.orivehrms.com/attendance/get/username/${username}`,
         {
           validateStatus: () => {
             return true;

@@ -25,12 +25,12 @@ const EditTravel = () => {
     loadtravel();
   }, []);
 
-  const url = "localhost:8080";
+  const url = "api.orivehrms.com";
   const ip = "13.126.190.50:8082";
 
   const loadtravel = async () => {
     const result = await axios.get(
-      `http://${url}/travels/get/${id}`
+      `https://${url}/travels/get/${id}`
     );
     settravel(result.data);
   };
@@ -43,7 +43,7 @@ const EditTravel = () => {
   };
   const updatetravel = async (e) => {
     e.preventDefault();
-    await axios.put(`http://${url}/travels/update/${id}`, travel);
+    await axios.put(`https://${url}/travels/update/${id}`, travel);
     navigate("/hr/employee/travel");
   };
   const [menu, setMenu] = useState(false);
@@ -58,7 +58,7 @@ const EditTravel = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://${url}/travels/update/${id}`, travel);
+    await axios.put(`https://${url}/travels/update/${id}`, travel);
     navigate("/hr/employee/travel");
   };
 

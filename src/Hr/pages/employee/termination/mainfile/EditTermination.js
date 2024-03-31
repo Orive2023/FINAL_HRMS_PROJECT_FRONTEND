@@ -37,7 +37,7 @@ const EditTermination = () => {
 	  const handleUpdate = async () => {
 		hideUpdateConfirmation();
 		await axios.put(
-			`http://localhost:8080/terminations/update/${id}`,
+			`https://api.orivehrms.com/terminations/update/${id}`,
 			termination
 		);
 		navigate("/hr/employee/termination");
@@ -45,7 +45,7 @@ const EditTermination = () => {
 
   const loadTermination = async () => {
     const result = await axios.get(
-      `http://localhost:8080/terminations/get/${id}`
+      `https://api.orivehrms.com/terminations/get/${id}`
     );
     setTermination(result.data);
   };

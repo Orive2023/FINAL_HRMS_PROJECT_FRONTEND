@@ -34,13 +34,13 @@ const PaySlipGenerator = () => {
 
   const loadPayroll = async () => {
     const response = await axios.get(
-      `http://localhost:8080/payslipgenerate/findpayslipgenerate/${username}`
+      `https://api.orivehrms.com/payslipgenerate/findpayslipgenerate/${username}`
     );
     setPayroll(response.data);
   };
   const fetchEmployee = async () => {
     const result = await axios.get(
-      "http://localhost:8080/employee/get/employee"
+      "https://api.orivehrms.com/employee/get/employee"
     );
     setEmployee(result);
   };

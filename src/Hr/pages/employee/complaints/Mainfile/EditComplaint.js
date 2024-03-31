@@ -21,10 +21,10 @@ const EditComplaint = () => {
   useEffect(() => {
     loadcomplaint();
   }, []);
-  const url = "localhost:8080";
+  const url = "api.orivehrms.com";
   const ip = "13.126.190.50:8082";
   const loadcomplaint = async () => {
-    const result = await axios.get(`http://${url}/complaints/get/${id}`);
+    const result = await axios.get(`https://${url}/complaints/get/${id}`);
     setcomplaint(result.data);
   };
 
@@ -53,7 +53,7 @@ const EditComplaint = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://${url}/complaints/update/${id}`, complaint);
+    await axios.put(`https://${url}/complaints/update/${id}`, complaint);
     navigate("/hr/employee/complaints");
   };
 

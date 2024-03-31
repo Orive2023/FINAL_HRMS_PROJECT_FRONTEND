@@ -26,7 +26,7 @@ const ResignationPofile = () => {
 
 	const loadresignation = async () => {
 		const result = await axios.get(
-			`http://localhost:8080/resignations/get/${id}`
+			`https://api.orivehrms.com/resignations/get/${id}`
 		);
 		setresignation(result.data);
 	};

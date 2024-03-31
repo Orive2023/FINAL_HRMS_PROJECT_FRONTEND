@@ -29,7 +29,7 @@ const AnnouncementProfile = () => {
 
   const loadAnnouncements = async () => {
     const result = await axios.get(
-      `http://localhost:8080/announcement/get/${id}`
+      `https://api.orivehrms.com/announcement/get/${id}`
     );
     setAnnouncements(result.data);
   };

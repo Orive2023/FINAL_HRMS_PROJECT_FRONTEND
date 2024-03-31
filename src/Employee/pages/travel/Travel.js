@@ -36,7 +36,7 @@ const Travel = () => {
   
 
     const loadTravel = async () => {
-      const response = await axios.get("http://localhost:8080/travels/get/travels");
+      const response = await axios.get("https://api.orivehrms.com/travels/get/travels");
       setTravel(response.data);
     };
 
@@ -276,7 +276,7 @@ const Travel = () => {
 
   const loadtravel = async () => {
     const result = await axios.get(
-      `http://localhost:8080/travels/findtravels/${username}`
+      `https://api.orivehrms.com/travels/findtravels/${username}`
     );
     setTravel(result.data);
   };

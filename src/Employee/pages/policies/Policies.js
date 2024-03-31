@@ -31,7 +31,7 @@ const Policies = () => {
 
   const loadPolicies = async () => {
     const response = await axios.get(
-      "http://localhost:8080/policies/get/policies"
+      "https://api.orivehrms.com/policies/get/policies"
     );
     setPolicies(response.data);
   };

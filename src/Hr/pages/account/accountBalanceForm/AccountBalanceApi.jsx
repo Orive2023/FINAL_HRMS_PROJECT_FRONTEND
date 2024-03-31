@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8080"
+const url = "https://api.orivehrms.com"
 
 export const saveAccountBalance = async (formData) => {
     try{
@@ -53,7 +53,7 @@ export const loadAccBalanceById = async (id) => {
 export const fetchEmployee = async () => {
   try {
       const response = await axios.get(
-          "http://localhost:8080/employee/get/employee"
+          "https://api.orivehrms.com/employee/get/employee"
         );
         return response.data
   } catch (error){
@@ -64,7 +64,7 @@ export const fetchEmployee = async () => {
 export const fetchDepartment = async () => {
   try {
       const response = await axios.get(
-          "http://localhost:8080/department/get/department"
+          "https://api.orivehrms.com/department/get/department"
         );
         return response.data
   } catch (error){
@@ -84,7 +84,7 @@ export const deleteAccountBalance = async (id) => {
 export  const updateAccountBalance = async (formData,id) => {
   try {
     const result =  await axios.put(
-      `http://localhost:8080/accountbalance/update/${id}`,formData,
+      `https://api.orivehrms.com/accountbalance/update/${id}`,formData,
        );
        console.log(formData,id)
        return result.data

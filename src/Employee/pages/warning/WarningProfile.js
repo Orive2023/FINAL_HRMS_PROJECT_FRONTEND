@@ -28,7 +28,7 @@ const WarningProfile = () => {
 
 	const loadaward = async () => {
 		const result = await axios.get(
-			`http://localhost:8080/warnings/get/${id}`
+			`https://api.orivehrms.com/warnings/get/${id}`
 		);
 		setaward(result.data);
 	};
