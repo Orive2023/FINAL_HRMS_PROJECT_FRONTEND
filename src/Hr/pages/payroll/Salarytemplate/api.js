@@ -1,12 +1,12 @@
 import axios from "axios";
 
-const url = "localhost:8080";
+const url = "api.orivehrms.com";
 const ip = "13.126.190.50:8085";
 
 export const saveSalaryTemplate = async (formData) => {
   try {
     await axios.post(
-      `http://${url}/salaryTemplate/create/salaryTemplate`,
+      `https://${url}/salaryTemplate/create/salaryTemplate`,
       formData
     );
   } catch (error) {
@@ -16,7 +16,7 @@ export const saveSalaryTemplate = async (formData) => {
 
 export const deleteSalaryTemplate = async (id) => {
   try {
-    await axios.delete(`http://${url}/salaryTemplate/delete/${id}`);
+    await axios.delete(`https://${url}/salaryTemplate/delete/${id}`);
     loadSalaryTemplate();
   } catch (error) {
     console.error("Error deleting Payroll", error);
@@ -26,7 +26,7 @@ export const deleteSalaryTemplate = async (id) => {
 export const loadSalaryTemplate = async () => {
   try {
     const result = await axios.get(
-      `http://${url}/salaryTemplate/get/salaryTemplate`,
+      `https://${url}/salaryTemplate/get/salaryTemplate`,
       {
         validateStatus: () => {
           return true;
@@ -42,7 +42,7 @@ export const loadSalaryTemplate = async () => {
 export const fetchEmployee = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:8080/employee/get/employee"
+      "https://api.orivehrms.com/employee/get/employee"
     );
     return response.data;
   } catch (error) {

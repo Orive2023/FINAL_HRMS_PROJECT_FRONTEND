@@ -170,10 +170,7 @@ const RequestForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
       value: "",
       label: "Select Requesting Person",
     },
-    {
-      value: "Sarmistha Jena",
-      label: "Sarmistha Jena",
-    },
+    
     {
       value: "Pritam Behera",
       label: "Pritam Behera",

@@ -19,7 +19,7 @@ const EditCommittee = () => {
   }, []);
 
   const loadCommittee = async () => {
-    const result = await axios.get(`http://localhost:8080/committees/get/${id}`);
+    const result = await axios.get(`https://api.orivehrms.com/committees/get/${id}`);
    setCommittee(result.data);
   };
 
@@ -32,7 +32,7 @@ const EditCommittee = () => {
 
   const updateCommittee = async (e) => {
     e.preventDefault();
-    await axios.put(`http://localhost:8080/committees/update/${id}`, committee);
+    await axios.put(`https://api.orivehrms.com/committees/update/${id}`, committee);
     navigate("/hr/procurement/committee");
   };
 

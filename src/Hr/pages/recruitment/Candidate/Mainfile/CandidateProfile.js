@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link,useParams } from "react-router-dom";
 import axios from "axios";
-
+import Orive from "../../../../asset/Orive Logo 2.png";
 import Header from "../../../../components/Header";
 import SideBar from "../../../../components/SideBar";
 import CompanyLogoFile from "../../../../components/CompanyLogoFile";
@@ -27,7 +27,7 @@ const CandidateProfile = () => {
 
   const loadCandidate = async () => {
     const result = await axios.get(
-      `http://localhost:8080/candidates/download/${id}`
+      `https://api.orivehrms.com/candidates/download/${id}`
     );
     setCandidate(result.data);
   };
@@ -50,7 +50,7 @@ const CandidateProfile = () => {
                   <div className="card mb-4">
                     <div className="card-body text-center">
                       <img
-                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                        src={Orive}
                         alt="avatar"
                         className="rounded-circle img-fluid"
                         style={{ width: 150 }}

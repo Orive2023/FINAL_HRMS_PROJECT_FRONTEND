@@ -139,7 +139,7 @@ const ExpensesForm = ({
 
     setTotalAmount(updatedTotalAmount);
 
-    await axios.delete(`http://localhost:8080/expencelist/delete/${id}`);
+    await axios.delete(`https://api.orivehrms.com/expencelist/delete/${id}`);
   };
 
   const handleItemChange = (id, field, value) => {
@@ -391,7 +391,7 @@ const ExpensesForm = ({
 
   const handleAdd = async (id) => {
     setSaveDisable(false);
-    await axios.post("http://localhost:8080/expencelist/add", items[id - 1]);
+    await axios.post("https://api.orivehrms.com/expencelist/add", items[id - 1]);
   };
 
   const [increment, setIncrement] = useState(1);

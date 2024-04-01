@@ -52,7 +52,7 @@ const PayslipProfile = () => {
   }, []);
 
   const loadHoliday = async () => {
-    const result = await axios.get(`http://localhost:8080/payslipgenerate/get/${id}`);
+    const result = await axios.get(`https://api.orivehrms.com/payslipgenerate/get/${id}`);
     setHoliday(result.data);
   };
   const [menu, setMenu] = useState(false);

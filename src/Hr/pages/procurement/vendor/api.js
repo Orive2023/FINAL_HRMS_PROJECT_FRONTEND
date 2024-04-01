@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = `http://localhost:8080`
+const url = `https://api.orivehrms.com`
 
 export const saveVendor = async (formData) => {
     try{

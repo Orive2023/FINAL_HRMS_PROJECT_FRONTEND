@@ -30,7 +30,7 @@ const WorkSheetProfile = () => {
   }, []);
 
   const loadWorksheet = async () => {
-    const result = await axios.get(`http://localhost:8080/worksheet/get/${id}`);
+    const result = await axios.get(`https://api.orivehrms.com/worksheet/get/${id}`);
     setWorksheet(result.data);
   };
 

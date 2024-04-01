@@ -1,9 +1,9 @@
 import axios from 'axios';
-const url = "localhost:8080";
+const url = "api.orivehrms.com";
 export const saveAddbank = async (formData) => {
     try{
         await axios.post(
-            `http://${url}/addbank/create/bank`,
+            `https://${url}/addbank/create/bank`,
             formData
           );
     } catch(error) {
@@ -13,7 +13,7 @@ export const saveAddbank = async (formData) => {
 
 export const deleteBank = async (id) => {
     try{
-        await axios.delete(`http://${url}/addbank/delete/${id}`)
+        await axios.delete(`https://${url}/addbank/delete/${id}`)
     } catch(error) {
         console.error("Error deleting addbank",error)
     }
@@ -25,7 +25,7 @@ const accessToken = localStorage.getItem("AuthToken")
 export const loadAddbank = async () => {
     try {
        const result =  await axios.get(
-          `http://localhost:8080/addbank/get/addbank`, {
+          `https://api.orivehrms.com/addbank/get/addbank`, {
             headers:{
               "Authorization":`Bearer ${accessToken}`
             }
@@ -41,7 +41,7 @@ export const loadAddbank = async () => {
 export const loadBankById = async (id) => {
     try {
        const result =  await axios.get(
-            `http://${url}/addbank/get/${id}`,
+            `https://${url}/addbank/get/${id}`,
             {
               validateStatus: () => {
                 return true;
@@ -58,7 +58,7 @@ export const loadBankById = async (id) => {
 export const updateBank = async (formData, id) => {
     try {
         const result = await axios.patch(
-          `http://${url}/addbank/update/${id}`,
+          `https://${url}/addbank/update/${id}`,
           formData
         );
     

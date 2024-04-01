@@ -22,11 +22,11 @@ const EditSalaryTemplate = () => {
     loadSalaryTemplate();
   }, []);
 
-  const url = "localhost:8080";
+  const url = "api.orivehrms.com";
   const ip = "13.126.190.50:8085";
 
   const loadSalaryTemplate = async () => {
-    const result = await axios.get(`http://${url}/salaryTemplate/get/${id}`);
+    const result = await axios.get(`https://${url}/salaryTemplate/get/${id}`);
     setSalaryTemplate(result.data);
   };
 
@@ -58,7 +58,7 @@ const EditSalaryTemplate = () => {
   const handleUpdate = async () => {
     hideUpdateConfirmation();
     await axios.put(
-      `http://${url}/salaryTemplate/update/${id}`,
+      `https://${url}/salaryTemplate/update/${id}`,
       salaryTemplate
     );
     navigate("/hr/payroll/salary-template");

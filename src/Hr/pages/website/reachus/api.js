@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const deleteReachus = async (id) => {
     try{
-        await axios.delete(`http://localhost:8080/reachus/delete/${id}`)
+        await axios.delete(`https://api.orivehrms.com/reachus/delete/${id}`)
     } catch(error) {
         console.error("Error deleting reachus",error)
     }
@@ -12,7 +12,7 @@ export const deleteReachus = async (id) => {
 export const loadReachus = async () => {
     try {
        const result =  await axios.get(
-            "http://localhost:8080/reachus/get/reachus",
+            "https://api.orivehrms.com/reachus/get/reachus",
             {
               validateStatus: () => {
                 return true;

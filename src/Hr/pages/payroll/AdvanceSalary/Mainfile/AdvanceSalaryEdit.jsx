@@ -21,11 +21,11 @@ const EditAdvanceSalary = () => {
     loadAdvanceSalary();
   }, []);
 
-  const url = "localhost:8080";
+  const url = "api.orivehrms.com";
   const ip = "13.126.190.50:8085";
 
   const loadAdvanceSalary = async () => {
-    const result = await axios.get(`http://${url}/advancesalery/get/${id}`);
+    const result = await axios.get(`https://${url}/advancesalery/get/${id}`);
     setAdvanceSalary(result.data);
   };
 
@@ -53,7 +53,7 @@ const EditAdvanceSalary = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://${url}/advancesalery/update/${id}`, advancesalary);
+    await axios.put(`https://${url}/advancesalery/update/${id}`, advancesalary);
     navigate("/hr/payroll/advance-Salary");
   };
 

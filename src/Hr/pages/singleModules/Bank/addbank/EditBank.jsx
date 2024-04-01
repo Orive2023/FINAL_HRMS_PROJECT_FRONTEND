@@ -25,11 +25,11 @@ const EditBank = () => {
     loadLoan();
   }, []);
 
-  const url = "localhost:8080";
+  const url = "api.orivehrms.com";
   // const ip = "13.126.190.50:8092";
 
   const loadLoan = async () => {
-    const result = await axios.get(`http://${url}/addbank/get/${id}`);
+    const result = await axios.get(`https://${url}/addbank/get/${id}`);
     setLoan(result.data);
   };
 
@@ -56,7 +56,7 @@ const EditBank = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://${url}/addbank/update/${id}`, loan);
+    await axios.put(`https://${url}/addbank/update/${id}`, loan);
     navigate("/hr/bank/add-bank");
   };
   return (

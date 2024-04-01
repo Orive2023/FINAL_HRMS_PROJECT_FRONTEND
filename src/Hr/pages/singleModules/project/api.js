@@ -3,7 +3,7 @@ import axios from "axios";
 export const saveProject = async (formData) => {
   try {
     await axios.post(
-      "http://localhost:8080/projects/create/projects",
+      "https://api.orivehrms.com/projects/create/projects",
 
       formData
     );
@@ -14,7 +14,7 @@ export const saveProject = async (formData) => {
 
 export const deleteProject = async (id) => {
   try {
-    await axios.delete(`http://localhost:8080/projects/delete/${id}`);
+    await axios.delete(`https://api.orivehrms.com/projects/delete/${id}`);
   } catch (error) {
     console.error("Error deleting project", error);
   }
@@ -23,7 +23,7 @@ export const deleteProject = async (id) => {
 export const loadProject = async () => {
   try {
     const result = await axios.get(
-      "http://localhost:8080/projects/get/projects",
+      "https://api.orivehrms.com/projects/get/projects",
       {
         validateStatus: () => {
           return true;
@@ -39,7 +39,7 @@ export const loadProject = async () => {
 export const fetchCompanies = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:8080/company/get/company"
+      "https://api.orivehrms.com/company/get/company"
     );
     return response.data;
   } catch (error) {
@@ -50,7 +50,7 @@ export const fetchCompanies = async () => {
 export const fetchEmployee = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:8080/employee/get/employee"
+      "https://api.orivehrms.com/employee/get/employee"
     );
     return response.data;
   } catch (error) {

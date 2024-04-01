@@ -26,7 +26,7 @@ const OfficeShiftPofile = () => {
 
 	const loadOfficeShift = async () => {
 		const result = await axios.get(
-			`http://localhost:8080/officeshifts/get/${id}`
+			`https://api.orivehrms.com/officeshifts/get/${id}`
 		);
 		setOfficeShift(result.data);
 	};

@@ -23,7 +23,7 @@ const EditExpenses = () => {
   }, []);
 
   const loadExpenses = async () => {
-    const result = await axios.get(`http://localhost:8080/expence/get/${id}`);
+    const result = await axios.get(`https://api.orivehrms.com/expence/get/${id}`);
     setExpenses(result.data);
   };
 
@@ -44,13 +44,13 @@ const EditExpenses = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8080/expence/update/${id}`, expenses);
+    await axios.put(`https://api.orivehrms.com/expence/update/${id}`, expenses);
     navigate("/hr/organisation/expenses");
   };
 
   // const updateExpenses = async (e) => {
   //   e.preventDefault();
-  //   await axios.put(`http://localhost:8080/expence/update/${id}`, expenses);
+  //   await axios.put(`https://api.orivehrms.com/expence/update/${id}`, expenses);
   //   navigate("/hr/organisation/expenses");
   // };
   const [menu, setMenu] = useState(false);

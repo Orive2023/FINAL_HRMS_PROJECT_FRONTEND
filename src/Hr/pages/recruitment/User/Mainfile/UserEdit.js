@@ -48,7 +48,7 @@
 //     const updateUser = async (e) => {
 //       e.preventDefault();
 //       await axios.put(
-//         `http://localhost:8080/user/update/${id}`,
+//         `https://api.orivehrms.com/user/update/${id}`,
 //         user
 //       );
 //       navigate("/hr/recruitment/user");

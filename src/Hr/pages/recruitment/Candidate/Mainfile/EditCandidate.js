@@ -40,7 +40,7 @@ const EditCandidate = () => {
 
 	const loadCandidate = async () => {
 		const result = await axios.get(
-            `http://localhost:8080/candidates/download/${id}`
+            `https://api.orivehrms.com/candidates/download/${id}`
 		);
 		setCandidate(result.data);
 	};

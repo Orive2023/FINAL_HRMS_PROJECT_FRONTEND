@@ -76,7 +76,7 @@ const AddBankView = () => {
   const saveAddbank = async (e) => {
     e.preventDefault();
     await axios.post(
-      "http://localhost:8080/addbank/create/addbank",
+      "https://api.orivehrms.com/addbank/create/addbank",
       formData
     );
     // navigate("/view-addbank");
@@ -96,7 +96,7 @@ const AddBankView = () => {
 
   const loadAddbank = async () => {
     const result = await axios.get(
-      "http://localhost:8080/addbank/get/addbank",
+      "https://api.orivehrms.com/addbank/get/addbank",
       {
         validateStatus: () => {
           return true;
@@ -108,7 +108,7 @@ const AddBankView = () => {
 
   const handleDelete = async (id) => {
     console.log(id);
-    await axios.delete(`http://localhost:8080/addbank/delete/${id}`);
+    await axios.delete(`https://api.orivehrms.com/addbank/delete/${id}`);
     loadAddbank();
   };
 

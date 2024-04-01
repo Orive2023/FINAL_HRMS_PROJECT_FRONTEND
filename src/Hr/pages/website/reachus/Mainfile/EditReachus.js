@@ -32,7 +32,7 @@ const EditLocation = () => {
 
   const loadLocation = async () => {
     const result = await axios.get(
-      `http://localhost:8080/location/get/${id}`
+      `https://api.orivehrms.com/location/get/${id}`
     );
     setLocation(result.data);
   };
@@ -46,7 +46,7 @@ const EditLocation = () => {
   const updateLocation = async (e) => {
     e.preventDefault();
     await axios.put(
-      `http://localhost:8080/location/update/${id}`,
+      `https://api.orivehrms.com/location/update/${id}`,
       location
     );
     navigate("/hr/organisation/location");

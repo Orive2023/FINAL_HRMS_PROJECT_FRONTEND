@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8080"
+const url = "https://api.orivehrms.com"
 
 export const saveRequest = async (formData) => {
     try{
@@ -42,7 +42,7 @@ export const loadRequest = async () => {
 export const fetchUnit = async () => {
   try {
      const result =  await axios.get(
-          `http://localhost:8080/units/get/units`,
+          `https://api.orivehrms.com/units/get/units`,
           {
             validateStatus: () => {
               return true;

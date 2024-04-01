@@ -24,7 +24,7 @@ const BidAnalysisEdit = () => {
 
   const loadBidAnalysis = async () => {
     const result = await axios.get(
-      `http://localhost:8080/bidAnalysis/get/${id}`
+      `https://api.orivehrms.com/bidAnalysis/get/${id}`
     );
     setBidAnalysis(result.data);
   };
@@ -39,7 +39,7 @@ const BidAnalysisEdit = () => {
   const updateBidAnalysis = async (e) => {
     e.preventDefault();
     await axios.put(
-      `http://localhost:8080/bidAnalysis/update/${id}`,
+      `https://api.orivehrms.com/bidAnalysis/update/${id}`,
       bidanalysis
     );
     navigate("/hr/procurement/bidAnalysis");

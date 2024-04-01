@@ -25,7 +25,7 @@ const EditPolicies = () => {
   }, []);
 
   const loadPolicies = async () => {
-    const result = await axios.get(`http://localhost:8080/policies/get/${id}`);
+    const result = await axios.get(`https://api.orivehrms.com/policies/get/${id}`);
     setPolicies(result.data);
   };
 
@@ -49,7 +49,7 @@ const EditPolicies = () => {
  
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8080/policies/update/${id}`, policies);
+    await axios.put(`https://api.orivehrms.com/policies/update/${id}`, policies);
     navigate("/hr/organisation/policies");
   };
   const [menu, setMenu] = useState(false);

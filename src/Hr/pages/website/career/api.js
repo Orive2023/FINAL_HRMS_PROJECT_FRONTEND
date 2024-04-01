@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const deleteCareer = async (id) => {
     try{
-        await axios.delete(`http://localhost:8080/careersgetjobAlerts/delete/${id}`)
+        await axios.delete(`https://api.orivehrms.com/careersgetjobAlerts/delete/${id}`)
     } catch(error) {
         console.error("Error deleting location",error)
     }
@@ -12,7 +12,7 @@ export const deleteCareer = async (id) => {
 export const loadCareer = async () => {
     try {
        const result =  await axios.get(
-            "http://localhost:8080/careersgetjobAlerts/get/careersgetjobAlerts",
+            "https://api.orivehrms.com/careersgetjobAlerts/get/careersgetjobAlerts",
             {
               validateStatus: () => {
                 return true;

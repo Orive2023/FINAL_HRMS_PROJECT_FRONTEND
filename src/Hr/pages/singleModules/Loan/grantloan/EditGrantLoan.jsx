@@ -31,7 +31,7 @@ const EditLoan = () => {
   }, []);
 
   const loadLoan = async () => {
-    const result = await axios.get(`http://localhost:8080/grantloan/get/${id}`);
+    const result = await axios.get(`https://api.orivehrms.com/grantloan/get/${id}`);
     setLoan(result.data);
   };
 
@@ -55,7 +55,7 @@ const EditLoan = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8080/grantloan/update/${id}`, loan);
+    await axios.put(`https://api.orivehrms.com/grantloan/update/${id}`, loan);
     navigate("/hr/loan/grant-loan");
   };
 

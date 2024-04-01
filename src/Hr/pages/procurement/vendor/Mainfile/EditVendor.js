@@ -27,7 +27,7 @@ const EditVendor = () => {
 
   const loadVendorById = async () => {
     try {
-      const result = await axios.get(`http://localhost:8080/vendor/get/${id}`);
+      const result = await axios.get(`https://api.orivehrms.com/vendor/get/${id}`);
       setVendor(result.data);
     } catch (error) {
       console.error("Error loading vendor:", error);
@@ -52,7 +52,7 @@ const EditVendor = () => {
   const handleUpdate = async () => {
     try {
       hideUpdateConfirmation();
-      await axios.put(`http://localhost:8080/vendor/update/${id}`, vendor);
+      await axios.put(`https://api.orivehrms.com/vendor/update/${id}`, vendor);
       navigate("/hr/procurement/vendor");
     } catch (error) {
       console.error("Error updating vendor:", error);

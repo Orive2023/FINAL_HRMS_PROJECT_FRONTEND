@@ -3,7 +3,7 @@ import axios from "axios";
 export const saveWorksheet = async (formData) => {
   try {
     await axios.post(
-      "http://localhost:8080/worksheet/create/worksheet",
+      "https://api.orivehrms.com/worksheet/create/worksheet",
       formData
     );
   } catch (error) {
@@ -13,7 +13,7 @@ export const saveWorksheet = async (formData) => {
 
 export const deleteWorksheet = async (id) => {
   try {
-    await axios.delete(`http://localhost:8080/worksheet/delete/${id}`);
+    await axios.delete(`https://api.orivehrms.com/worksheet/delete/${id}`);
   } catch (error) {
     console.error("Error deleting Worksheet", error);
   }
@@ -22,7 +22,7 @@ export const deleteWorksheet = async (id) => {
 export const loadWorksheet = async () => {
   try {
     const result = await axios.get(
-      "http://localhost:8080/worksheet/get/worksheet",
+      "https://api.orivehrms.com/worksheet/get/worksheet",
       {
         validateStatus: () => {
           return true;
@@ -38,7 +38,7 @@ export const loadWorksheet = async () => {
 export const fetchProjects = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:8080/projects/get/projects"
+      "https://api.orivehrms.com/projects/get/projects"
     );
     return response.data;
   } catch (error) {
@@ -49,7 +49,7 @@ export const fetchProjects = async () => {
 export const fetchEmployee = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:8080/employee/get/employee"
+      "https://api.orivehrms.com/employee/get/employee"
     );
     return response.data;
   } catch (error) {

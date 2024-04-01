@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const url = "localhost:8080";
+const url = "api.orivehrms.com";
 const ip = "13.126.190.50:8085";
 
 export const savePayslipGenerator = async (formData) => {
     try{
         await axios.post(
-            `http://${url}/payslipgenerate/create/paySlipGenerate`,
+            `https://${url}/payslipgenerate/create/paySlipGenerate`,
             formData
           );
     } catch(error) {
@@ -16,7 +16,7 @@ export const savePayslipGenerator = async (formData) => {
 
 export const deletePayslipGenerator = async (id) => {
     try{
-        await axios.delete(`http://${url}/payslipgenerate/delete/${id}`)
+        await axios.delete(`https://${url}/payslipgenerate/delete/${id}`)
         loadPayslipGenerator();
     } catch(error) {
         console.error("Error deleting payslip",error)
@@ -26,7 +26,7 @@ export const deletePayslipGenerator = async (id) => {
 export const loadPayslipGenerator = async () => {
     try {
        const result =  await axios.get(
-            `http://${url}/payslipgenerate/get/paySlipGenerate`,
+            `https://${url}/payslipgenerate/get/paySlipGenerate`,
             {
               validateStatus: () => {
                 return true;
@@ -42,7 +42,7 @@ export const loadPayslipGenerator = async () => {
 export const fetchEmployee = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/employee/get/employee"
+        "https://localhost:8080/employee/get/employee"
       );
       return response.data;
     } catch (error) {

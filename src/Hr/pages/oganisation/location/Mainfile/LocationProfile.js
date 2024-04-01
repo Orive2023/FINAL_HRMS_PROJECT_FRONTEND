@@ -31,7 +31,7 @@ const LocationPofile = () => {
   }, []);
 
   const loadLocation = async () => {
-    const result = await axios.get(`http://localhost:8080/location/get/${id}`);
+    const result = await axios.get(`https://api.orivehrms.com/location/get/${id}`);
     setLocation(result.data);
   };
 

@@ -27,7 +27,7 @@ const DepartmentProfile = () => {
 
   const loadDepartment = async () => {
     const result = await axios.get(
-      `http://localhost:8080/department/get/${id}`
+      `https://api.orivehrms.com/department/get/${id}`
     );
     setDepartment(result.data);
   };

@@ -3,7 +3,7 @@ import axios from "axios";
 export const saveSales = async (formData) => {
   try {
     await axios.post(
-      "http://localhost:8080/sale/create/Sale",
+      "https://api.orivehrms.com/sale/create/Sale",
 
       formData
     );
@@ -14,7 +14,7 @@ export const saveSales = async (formData) => {
 
 export const deleteSales = async (id) => {
   try {
-    await axios.delete(`http://localhost:8080/sale/delete/${id}`);
+    await axios.delete(`https://api.orivehrms.com/sale/delete/${id}`);
   } catch (error) {
     console.error("Error deleting sale", error);
   }
@@ -23,7 +23,7 @@ export const deleteSales = async (id) => {
 export const loadSales = async () => {
   try {
     const result = await axios.get(
-      "http://localhost:8080/sale/get/Sale",
+      "https://api.orivehrms.com/sale/get/Sale",
       {
         validateStatus: () => {
           return true;

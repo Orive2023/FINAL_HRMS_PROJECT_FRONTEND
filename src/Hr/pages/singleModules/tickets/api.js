@@ -1,10 +1,10 @@
 import axios from "axios";
-const url = "localhost:8080";
+const url = "api.orivehrms.com";
 const ip = "13.126.190.50:8088"
 export const saveTicket = async (formData) => {
   try {
     await axios.post(
-      `http://${url}/tickets/create/tickets`,
+      `https://${url}/tickets/create/tickets`,
       formData
     );
   } catch (error) {
@@ -14,7 +14,7 @@ export const saveTicket = async (formData) => {
 
 export const deleteTicket = async (id) => {
   try {
-    await axios.delete(`http://${url}/tickets/delete/${id}`);
+    await axios.delete(`https://${url}/tickets/delete/${id}`);
   } catch (error) {
     console.error("Error deleting ticket", error);
   }
@@ -23,7 +23,7 @@ export const deleteTicket = async (id) => {
 export const loadTicket = async () => {
   try {
     const result = await axios.get(
-      `http://${url}/tickets/get/tickets`,
+      `https://${url}/tickets/get/tickets`,
       {
         validateStatus: () => {
           return true;
@@ -39,7 +39,7 @@ export const loadTicket = async () => {
 export const fetchEmployee = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:8080/employee/get/employee"
+      "https://api.orivehrms.com/employee/get/employee"
     );
     return response.data;
   } catch (error) {
@@ -51,7 +51,7 @@ export const fetchEmployee = async () => {
 export const fetchProject = async () => {
   try {
     const response = await axios.get(
-      "http://localhost:8080/projects/get/projects"
+      "https://api.orivehrms.com/projects/get/projects"
     );
     return response.data;
   } catch (error) {

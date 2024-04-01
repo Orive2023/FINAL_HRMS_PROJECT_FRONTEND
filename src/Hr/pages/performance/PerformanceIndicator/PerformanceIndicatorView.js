@@ -161,7 +161,7 @@ const PerformanceIndicatorView = () => {
   const savePerformance = async (e) => {
     e.preventDefault();
     await axios.post(
-      "http://localhost:8080/performance/create/performance",
+      "https://api.orivehrms.com/performance/create/performance",
       formData
     );
     navigate("/performance");
@@ -185,7 +185,7 @@ const PerformanceIndicatorView = () => {
 
   const loadPerformance = async () => {
     const result = await axios.get(
-      "http://localhost:8080/performance/get/performance",
+      "https://api.orivehrms.com/performance/get/performance",
       {
         validateStatus: () => {
           return true;
@@ -198,7 +198,7 @@ const PerformanceIndicatorView = () => {
 
   const handleDelete = async (id) => {
     console.log(id);
-    await axios.delete(`http://localhost:8080/performance/delete/${id}`);
+    await axios.delete(`https://api.orivehrms.com/performance/delete/${id}`);
     loadPerformance();
   };
 

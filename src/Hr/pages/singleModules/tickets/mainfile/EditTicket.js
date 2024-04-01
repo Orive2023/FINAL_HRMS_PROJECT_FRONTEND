@@ -22,10 +22,10 @@ const EditTicket = () => {
   useEffect(() => {
     loadTicket();
   }, []);
-  const url = "localhost:8080";
+  const url = "api.orivehrms.com";
   const ip = "13.126.190.50:8088";
   const loadTicket = async () => {
-    const result = await axios.get(`http://${url}/tickets/get/${id}`);
+    const result = await axios.get(`https://${url}/tickets/get/${id}`);
     setTicket(result.data);
   };
 
@@ -56,7 +56,7 @@ const EditTicket = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://${url}/tickets/update/${id}`, ticket);
+    await axios.put(`https://${url}/tickets/update/${id}`, ticket);
     navigate("/hr/ticket");
   };
 

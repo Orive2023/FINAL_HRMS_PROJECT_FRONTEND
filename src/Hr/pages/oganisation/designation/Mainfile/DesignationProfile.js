@@ -25,7 +25,7 @@ const DesignationProfile = () => {
 
   const loadDesignation = async () => {
     const result = await axios.get(
-      `http://localhost:8080/designation/get/${id}`
+      `https://api.orivehrms.com/designation/get/${id}`
     );
     setDesignation(result.data);
   };

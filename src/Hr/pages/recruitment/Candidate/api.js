@@ -3,7 +3,7 @@ import axios from 'axios';
 export const saveCandidate = async (formData) => {
     try{
         await axios.post(
-            "http://localhost:8080/candidates/create/candidates",
+            "https://api.orivehrms.com/candidates/create/candidates",
             formData,
             {
                 headers: {
@@ -21,7 +21,7 @@ export const saveCandidate = async (formData) => {
 export const loadCandidate = async (id) => {
     try {
        const result =  await axios.get(
-       `http://localhost:8080/candidates/getAllCandidate`,
+       `https://api.orivehrms.com/candidates/getAllCandidate`,
             {
               validateStatus: () => {
                 return true;

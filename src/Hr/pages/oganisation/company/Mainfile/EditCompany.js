@@ -30,7 +30,7 @@ const EditCompany = () => {
   }, []);
 
   const loadCompanyById = async () => {
-    const result = await axios.get(`http://localhost:8080/company/get/${id}`);
+    const result = await axios.get(`https://api.orivehrms.com/company/get/${id}`);
     setCompany(result.data);
   };
 
@@ -53,7 +53,7 @@ const EditCompany = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8080/company/update/${id}`, company);
+    await axios.put(`https://api.orivehrms.com/company/update/${id}`, company);
     navigate("/hr/organisation/company");
   };
 

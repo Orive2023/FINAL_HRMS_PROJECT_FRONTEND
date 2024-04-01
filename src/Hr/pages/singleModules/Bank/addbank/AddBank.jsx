@@ -63,7 +63,7 @@ console.log(accessToken)
   const loadAddbank = async () => {
     try {
       const result = await axios.get(
-        'http://localhost:8080/addbank/get/addbank', 
+        'https://api.orivehrms.com/addbank/get/addbank', 
         {
           headers: {'Authorization': `Bearer ${accessToken}`,
           "Access-Control-Allow-Origin" : "*", 

@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const url = "localhost:8080";
+const url = "api.orivehrms.com";
 const ip = "13.126.190.50:8085";
 
 export const saveAdvanceSalary = async (formData) => {
     try{
         await axios.post(
-            `http://${url}/advancesalery/create/advancesalery`,
+            `https://${url}/advancesalery/create/advancesalery`,
             formData
           );
     } catch(error) {
@@ -16,7 +16,7 @@ export const saveAdvanceSalary = async (formData) => {
 
 export const deleteAdvanceSalary = async (id) => {
     try{
-        await axios.delete(`http://${url}/advancesalery/delete/${id}`)
+        await axios.delete(`https://${url}/advancesalery/delete/${id}`)
     } catch(error) {
         console.error("Error deleting Advance Salary",error)
     }
@@ -25,7 +25,7 @@ export const deleteAdvanceSalary = async (id) => {
 export const loadAdvanceSalary = async () => {
     try {
        const result =  await axios.get(
-            `http://${url}/advancesalery/get/advancesalery`,
+            `https://${url}/advancesalery/get/advancesalery`,
             {
               validateStatus: () => {
                 return true;
@@ -42,7 +42,7 @@ export const loadAdvanceSalary = async () => {
 export const fetchCompanies = async () => {
     try {
         const response = await axios.get(
-            "http://localhost:8080/company/get/company"
+            "https://api.orivehrms.com/company/get/company"
           );
           return response.data
     } catch (error){
@@ -54,7 +54,7 @@ export const fetchCompanies = async () => {
 export const fetchLocations = async () => {
     try {
         const response = await axios.get(
-          "http://localhost:8080/location/get/location"
+          "https://api.orivehrms.com/location/get/location"
         );
        return response.data 
       } catch (error) {
@@ -65,7 +65,7 @@ export const fetchLocations = async () => {
 export const fetchEmployee = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:8080/employee/get/employee"
+        "https://api.orivehrms.com/employee/get/employee"
       );
       return response.data;
     } catch (error) {

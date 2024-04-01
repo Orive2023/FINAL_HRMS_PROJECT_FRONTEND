@@ -30,7 +30,7 @@ const EditTrainer = ({ formData, setFormData }) => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation()
-    await axios.put(`http://localhost:8080/trainerslist/update/${id}`, trainer)
+    await axios.put(`https://api.orivehrms.com/trainerslist/update/${id}`, trainer)
     navigate('/hr/trainer')
   }
   useEffect(() => {
@@ -39,7 +39,7 @@ const EditTrainer = ({ formData, setFormData }) => {
 
   const loadTrainer = async () => {
     const result = await axios.get(
-      `http://localhost:8080/trainerslist/get/${id}`,
+      `https://api.orivehrms.com/trainerslist/get/${id}`,
     )
     setTrainer(result.data)
   }
@@ -53,7 +53,7 @@ const EditTrainer = ({ formData, setFormData }) => {
 
   // const updateTrainer = async (e) => {
   //   e.preventDefault();
-  //   await axios.put(http://localhost:8080/trainerslist/update/${id}, trainer);
+  //   await axios.put(https://api.orivehrms.com/trainerslist/update/${id}, trainer);
   //   navigate("/hr/trainer");
   // };
   const [menu, setMenu] = useState(false)

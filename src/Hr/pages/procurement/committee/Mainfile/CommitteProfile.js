@@ -23,7 +23,7 @@ const CommitteeProfile = () => {
 
   const loadCommittee = async () => {
     const result = await axios.get(
-      `http://localhost:8080/committees/get/${id}`
+      `https://api.orivehrms.com/committees/get/${id}`
     );
     setCommittee(result.data);
   };

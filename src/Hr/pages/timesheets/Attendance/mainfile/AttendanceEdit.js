@@ -45,7 +45,7 @@ const AttendanceEdit = () => {
 
   const loadAttendance = async () => {
     const result = await axios.get(
-      `http://localhost:8080/attendance/get/${id}`
+      `https://api.orivehrms.com/attendance/get/${id}`
     );
     setAttendance(result.data);
   };
@@ -68,7 +68,7 @@ const AttendanceEdit = () => {
   const handleUpdate = async () => {
     hideUpdateConfirmation();
     await axios.put(
-      `http://localhost:8080/attendance/update/${id}`,
+      `https://api.orivehrms.com/attendance/update/${id}`,
       attendance
     );
     navigate("/hr/timesheets/attendance");

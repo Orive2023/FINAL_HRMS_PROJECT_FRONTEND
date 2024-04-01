@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:8080"
+const url = "https://api.orivehrms.com"
 
 export const savePerformances = async (formData) => {
     try{
@@ -40,7 +40,7 @@ export const deleteAppraisal = async (id) => {
 export const fetchEmployee = async () => {
   try {
       const response = await axios.get(
-          "http://localhost:8080/employee/get/employee"
+          "https://api.orivehrms.com/employee/get/employee"
         );
         return response.data
   } catch (error){
@@ -52,7 +52,7 @@ export const fetchEmployee = async () => {
 export const fetchDepartment = async () => {
   try {
       const response = await axios.get(
-          "http://localhost:8080/department/get/department"
+          "https://api.orivehrms.com/department/get/department"
         );
         return response.data
   } catch (error){

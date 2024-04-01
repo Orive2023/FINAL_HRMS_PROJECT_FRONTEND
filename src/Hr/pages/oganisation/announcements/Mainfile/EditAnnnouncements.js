@@ -27,7 +27,7 @@ const EditAnnnouncements = () => {
 
   const loadAnnouncement = async () => {
     const result = await axios.get(
-      `http://localhost:8080/announcement/get/${id}`
+      `https://api.orivehrms.com/announcement/get/${id}`
     );
     setAnnouncement(result.data);
   };
@@ -42,7 +42,7 @@ const EditAnnnouncements = () => {
   const updateAnnouncement = async (e) => {
     e.preventDefault();
     await axios.put(
-      `http://localhost:8080/announcement/update/${id}`,
+      `https://api.orivehrms.com/announcement/update/${id}`,
       announcement 
     );
     navigate("/hr/organisation/announcements");
@@ -59,7 +59,7 @@ const EditAnnnouncements = () => {
  
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put( `http://localhost:8080/announcement/update/${id}`, announcement);
+    await axios.put( `https://api.orivehrms.com/announcement/update/${id}`, announcement);
     navigate("/hr/organisation/announcements");
   };
   const [menu, setMenu] = useState(false);

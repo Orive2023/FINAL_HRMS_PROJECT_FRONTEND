@@ -38,7 +38,7 @@ import React, {
   
     const loadTalent = async () => {
       const result = await axios.get(
-        `http://localhost:8080/talent/get/${id}`
+        `https://api.orivehrms.com/talent/get/${id}`
       );
       setTalent(result.data);
     };
@@ -52,7 +52,7 @@ import React, {
     const updateTalent = async (e) => {
       e.preventDefault();
       await axios.put(
-        `http://localhost:8080/talent/update/${id}`,
+        `https://api.orivehrms.com/talent/update/${id}`,
         talent
       );
       navigate("/hr/recruitment/talent");

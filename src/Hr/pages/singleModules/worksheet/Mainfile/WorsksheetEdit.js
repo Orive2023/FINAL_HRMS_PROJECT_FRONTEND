@@ -24,7 +24,7 @@ const  EditWorksheet = () => {
   }, []);
 
   const loadWorksheet = async () => {
-    const result = await axios.get(`http://localhost:8080/worksheet/get/${id}`);
+    const result = await axios.get(`https://api.orivehrms.com/worksheet/get/${id}`);
     setWorksheet(result.data);
   };
 
@@ -47,7 +47,7 @@ const  EditWorksheet = () => {
 
   const handleUpdate = async () => {
     hideUpdateConfirmation();
-    await axios.put(`http://localhost:8080/worksheet/update/${id}`, worksheet);
+    await axios.put(`https://api.orivehrms.com/worksheet/update/${id}`, worksheet);
     navigate("/hr/worksheets");
   };
 

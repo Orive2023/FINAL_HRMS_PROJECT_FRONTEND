@@ -27,7 +27,7 @@ const RequestEdit = () => {
   }, []);
 
   const loadRequest = async () => {
-      const result = await axios.get(`http://localhost:8080/request/get/${id}`);
+      const result = await axios.get(`https://api.orivehrms.com/request/get/${id}`);
       setRequest(result.data);
    
   };
@@ -49,7 +49,7 @@ const RequestEdit = () => {
 
   const handleUpdate = async () => {
       hideUpdateConfirmation();
-      await axios.put(`http://localhost:8080/request/update/${id}`, request);
+      await axios.put(`https://api.orivehrms.com/request/update/${id}`, request);
       navigation("/hr/procurement/request");
      
     

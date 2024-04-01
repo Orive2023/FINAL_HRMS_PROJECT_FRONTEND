@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const deleteLanding = async (id) => {
     try{
-        await axios.delete(`http://localhost:8080/landingpagepopup/delete/${id}`)
+        await axios.delete(`https://api.orivehrms.com/landingpagepopup/delete/${id}`)
     } catch(error) {
         console.error("Error deleting  landing",error)
     }
@@ -11,7 +11,7 @@ export const deleteLanding = async (id) => {
 export const loadLanding = async () => {
     try {
        const result =  await axios.get(
-            "http://localhost:8080/landingpagepopup/get/landingpagepopup",
+            "https://api.orivehrms.com/landingpagepopup/get/landingpagepopup",
             {
               validateStatus: () => {
                 return true;
