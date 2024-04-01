@@ -32,7 +32,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/auth/authenticate",
+        "https://api.orivehrms.com/api/v1/auth/authenticate",
         formData
       );
       console.log("Login successful", response.data);
