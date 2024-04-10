@@ -26,7 +26,8 @@ const Travel = () => {
     const token = localStorage.getItem("AuthToken");
     const decoded = jwtDecode(String(token));
     const usernameRec = decoded.preferred_username;
-    const username = usernameRec.toUpperCase();
+    // const username = usernameRec.toUpperCase();
+    const username = decoded.username
 
   
     const [travel, setTravel] = useState([]);

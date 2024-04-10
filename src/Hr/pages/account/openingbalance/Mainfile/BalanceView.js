@@ -130,7 +130,7 @@ const BalanceView = () => {
                 </div>
               </Card>
             </Collapse>
-            <BalanceTable Balance={balance} setRecDelete={setRecDelete}/>
+            <BalanceTable balance={balance} setRecDelete={setRecDelete}/>
             <div></div>
           </section>
         </div>

@@ -27,7 +27,8 @@ const Officeshift = () => {
     const token = localStorage.getItem("AuthToken");
     const decoded = jwtDecode(String(token));
     const usernameRec = decoded.preferred_username;
-    const username = usernameRec.toUpperCase();
+    // const username = usernameRec.toUpperCase();
+    const username = decoded.username;
   
     const [award, setAward] = useState([]);
   
@@ -281,10 +282,14 @@ const Officeshift = () => {
   }, []);
 
   const loadaward = async () => {
-    const result = await axios.get(
-      "https://api.orivehrms.com/officeshifts/get/officeShifts"
-    );
-    setAward(result.data);
+    try {
+      const result = await axios.get(
+        "https://api.orivehrms.com/officeshifts/get/officeShifts"
+      );
+      setAward(result.data);
+    } catch (error) {
+      console.error("Load award failed", error); 
+    }
   };
 
   const [menu, setMenu] = useState(false);

@@ -92,7 +92,7 @@ const BidAnalysisForm = ({
 
     setTotalAmount(updatedTotalAmount);
 
-    await axios.delete(`http://localhost:8080/companylist/delete/${id}`);
+    await axios.delete(`https://localhost:8080/companylist/delete/${id}`);
     loadBid();
   };
 
@@ -158,7 +158,7 @@ const BidAnalysisForm = ({
   // const loadBid = async () => {
   //   try {
   //     const result = await axios.get(
-  //       `http://localhost:8080/quotationlist/${bidAllData.length + 1}`
+  //       `https://localhost:8080/quotationlist/${bidAllData.length + 1}`
   //     );
   //     setCompany(result.data);
   //   } catch (error) {
@@ -168,7 +168,7 @@ const BidAnalysisForm = ({
   const loadBid = async () => {
     try {
       const result = await axios.get(
-        `http://localhost:8080/companylist/${bidAllData.length + 1}`
+        `https://localhost:8080/companylist/${bidAllData.length + 1}`
       );
       setCompany(result.data);
     } catch (error) {
@@ -227,7 +227,7 @@ const BidAnalysisForm = ({
   //     ...listData,
   //     total: quantPriceValue,
   //   });
-  //   await axios.post("http://localhost:8080/quotationlist/add", {
+  //   await axios.post("https://localhost:8080/quotationlist/add", {
   //     ...listData,
   //     total: quantPriceValue,
   //     quotationId: bidAllData.length + 1,
@@ -250,7 +250,7 @@ const BidAnalysisForm = ({
       ...listData,
       total: quantPriceValue,
     });
-    await axios.post("http://localhost:8080/companylist/add", {
+    await axios.post("https://localhost:8080/companylist/add", {
       ...listData,
       total: quantPriceValue,
       bidAnalysisId: bidAllData.length + 1,
@@ -281,7 +281,7 @@ const BidAnalysisForm = ({
   const handleComAdd = async (id) => {
     setSaveDisable(false);
     await axios.post(
-      "http://localhost:8080/committeelist/create/committeelist",
+      "https://localhost:8080/committeelist/create/committeelist",
       quotationData,
       {
         headers: {
@@ -303,7 +303,7 @@ const BidAnalysisForm = ({
 
     setTotalAmount(updatedTotalAmount);
 
-    await axios.delete(`http://localhost:8080/committeelist/delete/${id}`);
+    await axios.delete(`https://localhost:8080/committeelist/delete/${id}`);
   };
 
   const handleQuotationChange = (e) => {

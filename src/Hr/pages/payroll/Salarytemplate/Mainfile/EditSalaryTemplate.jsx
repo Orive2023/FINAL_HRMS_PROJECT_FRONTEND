@@ -39,7 +39,7 @@ const EditSalaryTemplate = () => {
   // const updateSalaryTemplate = async (e) => {
   //   e.preventDefault();
   //   await axios.put(
-  //     `http://${url}/salaryTemplate/update/${id}`,
+  //     `https://${url}/salaryTemplate/update/${id}`,
   //     salaryTemplate
   //   );
   //   navigate("/hr/payroll/salary-template");

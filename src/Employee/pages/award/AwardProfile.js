@@ -28,10 +28,14 @@ const AwardProfile = () => {
 	}, []);
 
 	const loadaward = async () => {
-		const result = await axios.get(
-			`https://api.orivehrms.com/awards/get/${id}`
-		);
-		setaward(result.data);
+		try {
+			const result = await axios.get(
+				`https://api.orivehrms.com/awards/get/${id}`
+			);
+			setaward(result.data);
+		} catch (error) {
+			console.log("load award failed", error);
+		}
 	};
 
 	const [menu, setMenu] = useState(false);

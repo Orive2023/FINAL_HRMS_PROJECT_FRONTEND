@@ -33,7 +33,7 @@ const Performance = () => {
 const token = localStorage.getItem("AuthToken");
 const decoded = token?jwtDecode(String(token)):"";
 const usernameRec = decoded===""?"":decoded.preferred_username;
-const username = usernameRec?usernameRec.toUpperCase():"";
+const username = decoded.username;
   console.log("decoded", username);
 
   const [open, setOpen] = useState(false);
@@ -52,10 +52,14 @@ const username = usernameRec?usernameRec.toUpperCase():"";
   const [performanceData, setPerformanceData] = useState([]);
 
   const loadPerformance = async () => {
-    const result = await axios.get(
-      `https://api.orivehrms.com/performanceappraisal/byId/${username}`
-    );
-    setPerformanceData(result.data[0]);
+    try {
+      const result = await axios.get(
+        `https://api.orivehrms.com/performanceappraisal/byId/${username}`
+      );
+      setPerformanceData(result.data[0]);
+    } catch (error) {
+      console.error("Load performance data failed", error)
+    }
   };
   console.log("appri", performanceData);
   useEffect(() => {

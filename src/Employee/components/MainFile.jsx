@@ -20,7 +20,7 @@ const MainFile = ({name}) => {
   const token = localStorage.getItem("AuthToken");
   const decoded = token?jwtDecode(String(token)):"";
   const usernameRec = decoded===""?"":decoded.preferred_username;
-  const username = usernameRec?usernameRec.toUpperCase():"";
+  const username = decoded.username;
   const navigation = useNavigate();
   console.log(name);
   const revenueData = {
@@ -322,7 +322,7 @@ const MainFile = ({name}) => {
                             color: "grey",
                           }}
                         >
-                          98.56%
+                          {/* 98.56% */}
                         </span>
                       </div>
                     </div>
@@ -385,7 +385,7 @@ const MainFile = ({name}) => {
                             color: "grey",
                           }}
                         >
-                          100%
+                          {/* 100% */}
                         </span>
                       </div>
                     </div>
@@ -431,7 +431,7 @@ const MainFile = ({name}) => {
                             color: "grey",
                           }}
                         >
-                          05
+                          {/* 05 */}
                         </span>
                       </div>
                     </div>
@@ -477,7 +477,7 @@ const MainFile = ({name}) => {
                             color: "grey",
                           }}
                         >
-                          4h 28m
+                          {/* 4h 28m */}
                         </span>
                       </div>
                     </div>

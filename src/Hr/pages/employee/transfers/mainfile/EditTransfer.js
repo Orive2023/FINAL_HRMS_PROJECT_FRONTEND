@@ -42,7 +42,7 @@ const EditTransfer = () => {
   };
   // const updateTransfer = async (e) => {
   //   e.preventDefault();
-  //   await axios.put(`http://${url}/transfers/update/${id}`, transfer);
+  //   await axios.put(`https://${url}/transfers/update/${id}`, transfer);
   //   navigate("/hr/employee/transfer");
   // };
   const [menu, setMenu] = useState(false);

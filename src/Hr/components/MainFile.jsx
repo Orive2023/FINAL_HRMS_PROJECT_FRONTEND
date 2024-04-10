@@ -19,8 +19,12 @@ const MainFile = ({ name }) => {
  
 
   const loadProject = async () => {
-    const result = await api.loadProject();
+    try {
+      const result = await api.loadProject();
     setProject(result);
+    } catch (error) {
+      console.error("Load project failed", error);
+    }
   };
 
   useEffect(() => {
@@ -105,10 +109,14 @@ const MainFile = ({ name }) => {
 
   const [revenuePercent, setRevenuePercent] = useState([]);
   const getRevenue = async () => {
-    const result = await axios.get(
-      "https://api.orivehrms.com/revenue/netrevenuepercentage"
-    );
-    setRevenuePercent(result.data);
+    try {
+      const result = await axios.get(
+        "https://api.orivehrms.com/revenue/netrevenuepercentage"
+      );
+      setRevenuePercent(result.data);
+    } catch (error) {
+      console.error("Get revenue failed", error); 
+    }
   };
 
   useEffect(() => {

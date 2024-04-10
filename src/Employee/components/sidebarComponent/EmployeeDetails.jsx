@@ -3,7 +3,7 @@
 // export const loadEmployee = async () => {
 //   try {
 //     const result = await axios.get(
-//       `http://localhost:8082/employee/byId/${11}`,
+//       `https://localhost:8082/employee/byId/${11}`,
 //       {
 //         validateStatus: () => {
 //           return true;
@@ -23,7 +23,7 @@ const EmployeeDetails = () => {
   const [employeeData, setEmployeeData] = useState([]);
   const loadEmployee = async () => {
     try {
-      const result = await axios.get(`http://localhost:8082/employee/byId/11`, {
+      const result = await axios.get(`https://localhost:8082/employee/byId/11`, {
         validateStatus: () => {
           return true;
         },

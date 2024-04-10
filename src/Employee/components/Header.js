@@ -22,7 +22,10 @@ const Header = ({ menu, setMenu }) => {
   const token = localStorage.getItem("AuthToken");
   const decoded = token ? jwtDecode(String(token)) : "";
   const usernameRec = decoded === "" ? "" : decoded.preferred_username;
-  const username = usernameRec ? usernameRec.toUpperCase() : "";
+  const username = decoded.username;
+  console.log("ysername", username);
+  const firstName = decoded.firstname; 
+  const lastName = decoded.lastname;
 
   const nav = useNavigate();
 
@@ -51,7 +54,7 @@ const Header = ({ menu, setMenu }) => {
     }
   };
 
-  const employee = localStorage.getItem("UserName");
+  const employee = `${firstName} ${lastName}`;
 
   const now = new Date();
   let todayDate = date.format(now, "YYYY-MM-DD");
@@ -181,6 +184,7 @@ const Header = ({ menu, setMenu }) => {
     let formattedDate = `${year}-${month}-${day}`;
 
     attendData.map((elem) => {
+      console.log("map", elem);
       if ((formattedDate === elem.date) && username===elem.username) {
         setIsButtonDisabled(true);
         if (elem.clockOut !== "00:00:00") {

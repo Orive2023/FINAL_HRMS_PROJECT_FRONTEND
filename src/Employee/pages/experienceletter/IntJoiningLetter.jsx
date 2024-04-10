@@ -32,7 +32,8 @@ const JoiningExpTable = ({
     const token = localStorage.getItem("AuthToken");
     const decoded = jwtDecode(String(token));
     const usernameRec = decoded.preferred_username;
-    const username = usernameRec.toUpperCase();
+    // const username = usernameRec.toUpperCase();
+    const username = decoded.username
   const [search, setSearch] = useState("");
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState(null);
@@ -105,10 +106,14 @@ const JoiningExpTable = ({
   const [getTable, setGetTable] = useState([]);
 
   const getData = async () => {
-    const result = await axios.get(
-      `https://api.orivehrms.com/internjoiningletter/findInternJoiningLetter/${username}`
-    );
-    setGetTable(result.data);
+    try {
+      const result = await axios.get(
+        `https://api.orivehrms.com/internjoiningletter/findInternJoiningLetter/${username}`
+      );
+      setGetTable(result.data);
+    } catch (error) {
+      console.error("get data failed",error);
+    }
   };
 
   useEffect(() => {

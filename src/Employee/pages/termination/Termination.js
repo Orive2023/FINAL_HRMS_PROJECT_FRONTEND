@@ -27,7 +27,8 @@ const Termination = () => {
     const token = localStorage.getItem("AuthToken");
     const decoded = jwtDecode(String(token));
     const usernameRec = decoded.preferred_username;
-    const username = usernameRec.toUpperCase();
+    // const username = usernameRec.toUpperCase();
+    const username = decoded.username
   
     const [termination, setTermination] = useState([]);
     // const username = localStorage.getItem("UserName")
@@ -36,8 +37,12 @@ const Termination = () => {
 
 
     const loadTermination = async () => {
-        const response = await axios.get(`https://api.orivehrms.com/terminations/findterminations/${username}`);
+        try {
+          const response = await axios.get(`https://api.orivehrms.com/terminations/findterminations/${username}`);
         setTermination(response.data);
+        } catch (error) {
+          console.error("Load termination failed", error);
+        }
       };
     
       console.log("poli", termination);

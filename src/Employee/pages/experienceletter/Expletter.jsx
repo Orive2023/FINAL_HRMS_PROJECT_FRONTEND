@@ -29,7 +29,7 @@ const ExpLetterTable = ({ setRecDelete }) => {
 const token = localStorage.getItem("AuthToken");
 const decoded = token?jwtDecode(String(token)):"";
 const usernameRec = decoded===""?"":decoded.preferred_username;
-const username = usernameRec?usernameRec.toUpperCase():"";
+const username = decoded.username;
   const [getTable, setGetTable] = useState([]);
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [deleteItemId, setDeleteItemId] = useState(null);

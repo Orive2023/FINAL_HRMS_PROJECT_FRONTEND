@@ -26,7 +26,7 @@ const Award = () => {
 const token = localStorage.getItem("AuthToken");
 const decoded = token?jwtDecode(String(token)):"";
 const usernameRec = decoded===""?"":decoded.preferred_username;
-const username = usernameRec?usernameRec.toUpperCase():"";
+const username = decoded.username;
   const [award, setAward] = useState([]);
 
   const [search, setSearch] = useState("");
@@ -253,11 +253,14 @@ const username = usernameRec?usernameRec.toUpperCase():"";
   }, []);
 
   const loadaward = async () => {
-    const result = await axios.get(
-      `https://api.orivehrms.com/awards/employee/get/${username}`
-    );
-    console.log(result)
-    setAward(result.data);
+    try {
+      const result = await axios.get(
+        `https://api.orivehrms.com/awards/employee/get/${username}`
+      );
+      setAward(result.data);
+    } catch (error) {
+      console.error("Load award failed", error)
+    }
   };
 
   const [menu, setMenu] = useState(false);

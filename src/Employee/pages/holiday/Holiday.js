@@ -27,7 +27,8 @@ const Holiday = () => {
     const token = localStorage.getItem("AuthToken");
     const decoded = jwtDecode(String(token));
     const usernameRec = decoded.preferred_username;
-    const username = usernameRec.toUpperCase();
+    // const username = usernameRec.toUpperCase();
+    const username = decoded.username
   
     const [holiday, setHoliday] = useState([]);
   
@@ -273,10 +274,14 @@ const Holiday = () => {
   }, []);
 
   const loadholiday = async () => {
-    const result = await axios.get(
-      "https://api.orivehrms.com/holidays/get/holidays"
-    );
-    setHoliday(result.data);
+    try {
+      const result = await axios.get(
+        "https://api.orivehrms.com/holidays/get/holidays"
+      );
+      setHoliday(result.data);
+    } catch (error) {
+      console.log("Load holiday", error);
+    }
   };
 
   const [menu, setMenu] = useState(false);

@@ -37,7 +37,7 @@ const EditAdvanceSalary = () => {
   };
   // const updateAdvanceSalary = async (e) => {
   //   e.preventDefault();
-  //   await axios.put(`http://${url}/advancesalery/update/${id}`, advancesalary);
+  //   await axios.put(`https://${url}/advancesalery/update/${id}`, advancesalary);
   //   navigate("/hr/payroll/advance-Salary");
   // };
 

@@ -37,7 +37,7 @@ const EditComplaint = () => {
   // const updatecomplaint = async (e) => {
   //   e.preventDefault();
   //   await axios.put(
-  //     `http://${url}/complaints/update/${id}`,
+  //     `https://${url}/complaints/update/${id}`,
   //     complaint
   //   );
   //   navigate("/hr/employee/complaints");

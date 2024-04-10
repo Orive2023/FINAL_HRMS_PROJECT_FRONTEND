@@ -6,7 +6,7 @@ const ip = "12.126.190.50:8082";
 const token = localStorage.getItem("AuthToken");
 const decoded = token?jwtDecode(String(token)):"";
 const usernameRec = decoded===""?"":decoded.preferred_username;
-const username = usernameRec?usernameRec.toUpperCase():"";
+const username = decoded.username;
 
 export const saveLeave = async (formData) => {
     try{

@@ -7,12 +7,13 @@ const ip = "13.126.190.50:8082";
 const token = localStorage.getItem("AuthToken");
 const decoded = token?jwtDecode(String(token)):"";
 const usernameRec = decoded===""?"":decoded.preferred_username;
-const username = usernameRec?usernameRec.toUpperCase():"";
+// const username = decoded.username;
+const username = decoded.username;
 
 export const saveComplaint = async (formData) => {
     try{
         await axios.post(
-            `http://${url}/complaints/create/complaints`,
+            `https://${url}/complaints/create/complaints`,
             formData
           );
     } catch(error) {
@@ -22,7 +23,7 @@ export const saveComplaint = async (formData) => {
 
 export const deleteProject = async (id) => {
     try{
-        await axios.delete(`http://${url}/complaints/delete/${id}`)
+        await axios.delete(`https://${url}/complaints/delete/${id}`)
     } catch(error) {
         console.error("Error deleting project",error)
     }
@@ -31,7 +32,7 @@ export const deleteProject = async (id) => {
 export const loadComplaint = async () => {
     try {
        const result =  await axios.get(
-            `http://${url}/complaints/findcomplaints/${username}`,
+            `https://${url}/complaints/findcomplaints/${username}`,
             {
               validateStatus: () => {
                 return true;

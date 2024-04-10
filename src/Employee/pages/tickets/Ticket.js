@@ -47,7 +47,7 @@ const Ticket = ({setFormVisible}) => {
 const token = localStorage.getItem("AuthToken");
 const decoded = token?jwtDecode(String(token)):"";
 const usernameRec = decoded===""?"":decoded.preferred_username;
-const username = usernameRec?usernameRec.toUpperCase():"";
+const username = decoded.username;
 
 // const username = localStorage.getItem("UserName")
   useEffect(() => {
@@ -56,8 +56,12 @@ const username = usernameRec?usernameRec.toUpperCase():"";
 
 
   const loadTickets = async () => {
-    const result = await axios.get(`https://api.orivehrms.com/tickets/getticketdetails/${username}`);
-    setTicketData(result.data);
+    try {
+      const result = await axios.get(`https://api.orivehrms.com/tickets/getticketdetails/${username}`);
+      setTicketData(result.data);
+    } catch (error) {
+      console.error("TicketLoad Failed", error);
+    }
   };
 
 

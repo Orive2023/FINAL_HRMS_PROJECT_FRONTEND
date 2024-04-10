@@ -49,7 +49,7 @@ const EditAward = () => {
 	// const updateAward = async (e) => {
 	// 	e.preventDefault();
 	// 	await axios.put(
-	// 		`http://${url}/awards/update/${id}`,
+	// 		`https://${url}/awards/update/${id}`,
 	// 		award
 	// 	);
 	// 	navigate("/hr/employee/awards");

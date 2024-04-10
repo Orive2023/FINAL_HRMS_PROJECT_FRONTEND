@@ -38,7 +38,7 @@ const EditTicket = () => {
   // const updateTicket = async (e) => {
   //   e.preventDefault();
   //   await axios.put(
-  //     http://${url}/tickets/update/${id},
+  //     https://${url}/tickets/update/${id},
   //     ticket
   //   );
   //   navigate("/hr/ticket");

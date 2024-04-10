@@ -37,7 +37,7 @@ const EditPromotion = () => {
     });
   };
 //   const updatepromotion = async (e) => {
-//     await axios.put(`http://${url}/promotions/update/${id}`, promotion);
+//     await axios.put(`https://${url}/promotions/update/${id}`, promotion);
 //     navigate("/hr/employee/promotions");
 //   };
   const [menu, setMenu] = useState(false);

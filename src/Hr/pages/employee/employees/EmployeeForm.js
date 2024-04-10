@@ -89,7 +89,7 @@ const EmployeeForm = ({ formData, setFormData, setFormVisible, setToggle }) => {
 
   const handleNext = async (e) => {
     //formRef.current.reportValidity()
-    // await axios.post("http://13.126.190.50:5000/employee/create/employee",formData);
+    // await axios.post("https://13.126.190.50:5000/employee/create/employee",formData);
     setActiveStep((prevStep) => prevStep + 1);
     //   if (formData.accountNumber === '' || formData.bankName === 'Choose' || formData.ifscNumber === '' || formData.branchName === '') {
     //     alert('Please fill out all fields');

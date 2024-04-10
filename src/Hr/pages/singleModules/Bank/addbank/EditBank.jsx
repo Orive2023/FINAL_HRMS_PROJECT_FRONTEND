@@ -41,7 +41,7 @@ const EditBank = () => {
   };
   // const updateLoan = async (e) => {
   //   e.preventDefault();
-  //   await axios.put(http://${url}/addbank/update/${id}, loan);
+  //   await axios.put(https://${url}/addbank/update/${id}, loan);
   //   navigate("/hr/bank/add-bank");
   // };
   const [menu, setMenu] = useState(false);

@@ -49,7 +49,7 @@ const Editemployee = () => {
 
   // const updateemployee = async (e) => {
   //   e.preventDefault();
-  //   await axios.put(http://${url}/employee/update/ID/${id}, employee);
+  //   await axios.put(https://${url}/employee/update/ID/${id}, employee);
   //   navigate("/hr/employee/employee");
   // };
 

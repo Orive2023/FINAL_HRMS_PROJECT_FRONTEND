@@ -40,7 +40,7 @@ const EditResignation = () => {
   };
   // const updateResignation = async (e) => {
   //   e.preventDefault();
-  //   await axios.put(`http://${url}/resignations/update/${id}`, resignation);
+  //   await axios.put(`https://${url}/resignations/update/${id}`, resignation);
   //   navigate("/hr/employee/resignation");
   // };
 

@@ -201,7 +201,7 @@
 //   const getProject = async () => {
 //     try {
 //       const result = await axios.get(
-//         `http://localhost:8086/projects/get/${username}`
+//         `https://localhost:8086/projects/get/${username}`
 //       );
 
 //       console.log(result);
@@ -241,7 +241,7 @@
 
 //   const updateProject = async (e) => {
 //     await axios.post(
-//       `http://localhost:8086/projects/create/projects`,
+//       `https://localhost:8086/projects/create/projects`,
 //       formData
 //     );
 
@@ -266,7 +266,7 @@
 //   const loadProjectData = async () => {
 //     try {
 //       const result = await axios.get(
-//         "http://localhost:8084/projects/get/projects",
+//         "https://localhost:8084/projects/get/projects",
 //         {
 //           validateStatus: () => {
 //             return true;

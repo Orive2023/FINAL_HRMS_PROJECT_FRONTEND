@@ -32,7 +32,7 @@ const LoanFile = ({ setFormVisible }) => {
 const token = localStorage.getItem("AuthToken");
 const decoded = token?jwtDecode(String(token)):"";
 const usernameRec = decoded===""?"":decoded.preferred_username;
-const username = usernameRec?usernameRec.toUpperCase():"";
+const username = decoded.username;
   // const username = localStorage.getItem("UserName")
   const [employee, setEmployee] = useState([]);
 

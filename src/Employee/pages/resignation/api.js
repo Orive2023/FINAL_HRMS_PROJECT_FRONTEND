@@ -6,11 +6,12 @@ const ip = "12.126.190.50:8082";
 const token = localStorage.getItem("AuthToken");
 const decoded = token?jwtDecode(String(token)):"";
 const usernameRec = decoded===""?"":decoded.preferred_username;
-const username = usernameRec?usernameRec.toUpperCase():"";
+// const username = decoded.username;
+const username = decoded.username;
 
 export const saveResignation = async (formData) => {
   try {
-    await axios.post(`http://${url}/resignations/create/resignation`, formData);
+    await axios.post(`https://${url}/resignations/create/resignation`, formData);
   } catch (error) {
     console.error("saveResignation", error);
   }
@@ -18,7 +19,7 @@ export const saveResignation = async (formData) => {
 
 export const deleteResignation = async (id) => {
   try {
-    await axios.delete(`http://${url}/resignations/delete/${id}`);
+    await axios.delete(`https://${url}/resignations/delete/${id}`);
   } catch (error) {
     console.error("Error deleting resignation", error);
   }
@@ -27,7 +28,7 @@ export const deleteResignation = async (id) => {
 export const loadResignation = async () => {
   try {
     const result = await axios.get(
-      `http://${url}/resignations/findresignation/${username}`,
+      `https://${url}/resignations/findresignation/${username}`,
       {
         validateStatus: () => {
           return true;

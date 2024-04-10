@@ -26,17 +26,25 @@ const Payslip = () => {
   }, []);
 
   const fetchEmployee = async () => {
-    const result = await axios.get(
-      `https://api.orivehrms.com/employee/get/employee`
-    );
-    setEmployee(result.data);
+    try {
+      const result = await axios.get(
+        `https://api.orivehrms.com/employee/get/employee`
+      );
+      setEmployee(result.data);
+    } catch (error) {
+      console.error("Fetch employee failed", error);
+    }
   };
 
   const getPayslipDetails = async () => {
-    const result = await axios.get(
-      `https://api.orivehrms.com/payslipgenerate/get/${id}`
-    );
-    setPayslip(result.data);
+    try {
+      const result = await axios.get(
+        `https://api.orivehrms.com/payslipgenerate/get/${id}`
+      );
+      setPayslip(result.data);
+    } catch (error) {
+      console.error("Get payslip failed", error);
+    }
   };
 
   const monthNames = [

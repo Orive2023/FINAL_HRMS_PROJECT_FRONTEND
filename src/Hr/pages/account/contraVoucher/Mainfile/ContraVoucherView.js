@@ -36,14 +36,22 @@ const ContraVoucherView = () => {
   }, []);
 
   const loadContraVoucher = async () => {
-    const result = await ContraVoucherApi.loadContraVoucher();
-    console.log("rec", result);
-    setContraVoucher(result);
+    try {
+      const result = await ContraVoucherApi.loadContraVoucher();
+      console.log("rec", result);
+      setContraVoucher(result);
+    } catch (error) {
+      console.error("Load contraVoucher failed", error);
+    }
   };
 
   const handleDelete = async () => {
-    await ContraVoucherApi.deleteContraVoucher(recDelete);
+    try {
+      await ContraVoucherApi.deleteContraVoucher(recDelete);
     loadContraVoucher();
+    } catch (error) {
+      console.error("Delete contraVoucher failed", error);
+    }
   };
 
   console.log(contraVoucher);

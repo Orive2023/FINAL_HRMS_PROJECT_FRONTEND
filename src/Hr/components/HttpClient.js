@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const httpClient = axios.create({
+const httpsClient = axios.create({
    
 });
-export default {httpClient}
+export default {httpsClient}

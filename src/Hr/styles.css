@@ -3289,8 +3289,8 @@ body {
 }
 .fe-zoom-out:before {
   content: "\ea06";
-} /*!* Font Awesome 4.7.0 by @davegandy - http://fontawesome.io - @fontawesome
-* License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)*/
+} /*!* Font Awesome 4.7.0 by @davegandy - https://fontawesome.io - @fontawesome
+* License - https://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)*/
 @font-face {
   font-family: fontawesome;
   src: url(https://nsdbytes.com/template/epic/assets/fonts/fontawesome-webfont.eot?v=4.7.0);
@@ -9996,7 +9996,7 @@ a.card-tabs-item.active {
 }
 .avatar-placeholder {
   background: #808488
-    url('data:image/svg+xml;charset=utf8,<svg xmlns="http://www.w3.org/2000/svg" width="134" height="134" viewBox="0 0 134 134"><path fill="#4D5052" d="M65.92 66.34h2.16c14.802.42 30.928 6.062 29.283 20.35l-1.618 13.32c-.844 6.815-5.208 7.828-13.972 7.866H52.23c-8.764-.038-13.13-1.05-13.973-7.865l-1.62-13.32C34.994 72.4 51.12 66.76 65.92 66.34zM49.432 43.934c0-9.82 7.99-17.81 17.807-17.81 9.82 0 17.81 7.99 17.81 17.81 0 9.82-7.99 17.807-17.81 17.807-9.82 0-17.808-7.987-17.808-17.806z"/></svg>')
+    url('data:image/svg+xml;charset=utf8,<svg xmlns="https://www.w3.org/2000/svg" width="134" height="134" viewBox="0 0 134 134"><path fill="#4D5052" d="M65.92 66.34h2.16c14.802.42 30.928 6.062 29.283 20.35l-1.618 13.32c-.844 6.815-5.208 7.828-13.972 7.866H52.23c-8.764-.038-13.13-1.05-13.973-7.865l-1.62-13.32C34.994 72.4 51.12 66.76 65.92 66.34zM49.432 43.934c0-9.82 7.99-17.81 17.807-17.81 9.82 0 17.81 7.99 17.81 17.81 0 9.82-7.99 17.807-17.81 17.807-9.82 0-17.808-7.987-17.808-17.806z"/></svg>')
     no-repeat center/80%;
 }
 .avatar-list {
@@ -10587,7 +10587,7 @@ textarea[cols] {
 .state-valid {
   padding-right: 2rem;
   background: str-replace(
-      url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='#21ba45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'><polyline points='20 6 9 17 4 12'></polyline></svg>"),
+      url("data:image/svg+xml;charset=utf8,<svg xmlns='https://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='#21ba45' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-check'><polyline points='20 6 9 17 4 12'></polyline></svg>"),
       "#",
       "%23"
     )
@@ -10596,7 +10596,7 @@ textarea[cols] {
 .state-invalid {
   padding-right: 2rem;
   background: str-replace(
-      url("data:image/svg+xml;charset=utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='#db2828' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg>"),
+      url("data:image/svg+xml;charset=utf8,<svg xmlns='https://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='#db2828' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='feather feather-x'><line x1='18' y1='6' x2='6' y2='18'></line><line x1='6' y1='6' x2='18' y2='18'></line></svg>"),
       "#",
       "%23"
     )
